@@ -1,0 +1,77 @@
+/**
+ * @providesModule Colors
+ */
+export const colors = {
+  // placeholder: '#9D9D9D',
+  white: '#FFFFFF',
+  primary: '#3A3E90', //'#2962ff', //'#20D994', //'#5586FF,'
+  barbg:'#FFF1ED',
+  lightGray: '#FFFFFFB2',
+  placeholder: '#9CA3AF',
+  // placeholder: '#dddddd',
+  border: '#DBDBDB',
+  borderColor:"#dddddd",
+  inputBackground:"#f9fafb",
+  background:"#EBECEF",
+  profilebackground:"#F3F4F6",
+  black: '#000000',
+  textColor:'#404040',
+  textColorSecondary:'#8C8C8C',
+  orange:'#FF7F74',
+  homegreen: '#56CE33',
+  acceptcolor: '#02A650',
+  homecard1: '#00ACDD11',
+  subteXTcOLOR:'#6B7280',
+  grey700:'#374151',
+  blackgrey:'#111827',
+  titleTextColor:'#1F1F1F',
+  homecard2: '#D31E1E12',
+  light: '#ACAFB5',
+  grey:'#111827',
+  starbg:'#F8F8F8',
+  blurred: '#f6f6f6',
+  reddish: '#f2f0f0',
+  disabled: '#EBEBE4',
+  lightGreen: '#e0f4d7',
+  rail:'#12264A',
+  red: '#ff0707',
+  inputText:'#9CA3AF',
+  subText:'#9CA3AF',
+  // grey: '#707070',
+  gray: '#ECECEC',
+  green: '#65CD3C',
+  lightred: '#f5a4a4',
+  transparent: 'transparent',
+  yellow: '#ffd79c',
+  blueHalf: 'rgba(2,59,150,0.23)',
+  secondary: '#434343', //'#F2F2F2',
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
+  bluecolor: '#00ACDD',
+  helixPrimary: '#102A88',
+  helixBackground: '#F5F7FF',
+};
+export const darkTheme = {
+  border: '#E8E8E8',
+  black: '#000000',
+  white: '#ffffff',
+  transparent: 'transparent',
+  primary: '#0F6EF4', //'#5586FF'
+  secondary: '#F2F2F2', //'#F2F2F2',
+};
+export const lightTheme = {
+  border: '#E8E8E8',
+  black: '#ffffff',
+  white: '#000000',
+  transparent: 'transparent',
+  primary: '#0F6EF4', //'#5586FF'
+  secondary: '#F2F2F2', //'#F2F2F2',
+};

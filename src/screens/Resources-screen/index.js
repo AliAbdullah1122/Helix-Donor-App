@@ -32,6 +32,7 @@ const ResourcesScreen = props => {
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [expandedCard, setExpandedCard] = useState(null); // Track which card is expanded
   const navigation = useNavigation();
   const email = props?.route?.params?.email || 'jessica@mail.com';
 
@@ -76,6 +77,13 @@ const ResourcesScreen = props => {
       description:
         'Resources on safe procreation naturally including STD and disease testing.',
       icon: IMG.ResourcesShiled,
+    },
+    {
+      id: 'legal_resources',
+      title: 'Legal Resources',
+      description:
+        'Guidelines on co-parenting contracts, donor rights, and local surrogacy laws.',
+      icon: IMG.ResourcesShiled, // Using shield as placeholder, can be updated later
     },
   ];
 
@@ -172,27 +180,568 @@ const ResourcesScreen = props => {
         <View style={styles.resourcesContainer}>
           {resources.map(item => {
             const IconComponent = item.icon;
+            const isExpanded = expandedCard === item.id;
+            
             return (
               <View key={item.id} style={styles.resourceCard}>
-                <View style={styles.resourceInnerCard}>
-                  <View style={styles.resourceIconContainer}>
-                    <IconComponent width={mvs(60)} height={mvs(60)} />
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={() => {
+                    setExpandedCard(isExpanded ? null : item.id);
+                  }}>
+                  <View style={styles.resourceInnerCard}>
+                    <View style={styles.resourceHeaderRow}>
+                      <View style={styles.resourceIconContainer}>
+                        <IconComponent width={mvs(60)} height={mvs(60)} />
+                      </View>
+                      <View style={styles.resourceTextContainer}>
+                        <Medium
+                          label={item.title}
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                        />
+                        <Regular
+                          label={item.description}
+                          fontSize={mvs(14)}
+                          color={"#8C8C8C" || '#6D6D6D'}
+                          style={{marginTop: mvs(6)}}
+                          // numberOfLines={isExpanded ? undefined : 3}
+                          numberOfLines={10}
+                        />
+                      </View>
+                      {/* <Icon
+                        name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                        size={mvs(20)}
+                        color={colors.textColor || '#404040'}
+                        style={styles.expandIcon}
+                      /> */}
+                    </View>
+                    
+                    {/* Expanded Content - Inside White Container */}
+                    {isExpanded && (
+                      <View style={styles.expandedContent}>
+                    {item.id === 'ivf' && (
+                      <>
+                        <Regular
+                          label="Connect with your local Service provider for laboratory Insemination & Egg extraction."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                          numberOfLines={10}
+                        />
+                        
+                        <Regular
+                          label="IVF is a process where an egg is combined with sperm outside the body, in a laboratory ('in vitro'). The resulting embryo is then monitored and transferred to the uterus. It is the most effective form of assisted reproductive technology."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        
+                        <Bold
+                          label="Key Facts:"
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.keyFactsTitle}
+                            numberOfLines={10}
+                        />
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Success Rate:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Varies by age (approx. 20-50% per cycle)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Timeline:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" One cycle typically takes 2-3 weeks."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Cost:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Average $12,000 - $30,000 per cycle (varies by region)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <PrimaryButton
+                          containerStyle={styles.searchButton}
+                          loading={false}
+                          onPress={() => {
+                            // Handle search for clinics
+                          }}
+                          title="Search for IVF Clinics Near Me"
+                        />
+                        
+                        <Regular
+                          label="Source: CDC / ASRM"
+                          fontSize={mvs(12)}
+                          color={"#8C8C8C"}
+                            numberOfLines={10}
+                          style={styles.sourceText}
+                        />
+                      </>
+                    )}
+                    
+                    {item.id === 'iui' && (
+                      <>
+                        <Regular
+                          label="IUI involves placing sperm directly inside the uterus to facilitate fertilization."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        
+                        <Regular
+                          label="It increases the number of sperm that reach the fallopian tubes."
+                          fontSize={mvs(14)}
+                            numberOfLines={10}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                        />
+                        
+                        <Regular
+                          label="This can be performed clinically or using at-home insemination kits."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        
+                        <Bold
+                          label="Key Facts:"
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.keyFactsTitle}
+                            numberOfLines={10}
+                        />
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Clinical IUI:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Performed by a doctor; may use fertility drugs."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="At-Home IUI:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Self-insemination using sterile kits (needle-free)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Cost:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Significantly lower than IVF ($300 – $1,000)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <PrimaryButton
+                          containerStyle={styles.searchButton}
+                          loading={false}
+                          onPress={() => {
+                            // Handle search for clinics
+                          }}
+                          title="Find IUI Clinics & At-Home Kits"
+                        />
+                        
+                        <Regular
+                          label="Source: CDC / ASRM"
+                          fontSize={mvs(12)}
+                            numberOfLines={10}
+                          color={"#8C8C8C"}
+                          style={styles.sourceText}
+                        />
+                      </>
+                    )}
+                    
+                    {item.id === 'mrt_ifg' && (
+                      <>
+                        <Regular
+                          label={'Mitochondrial Replacement Therapy (MRT) is a specialized form of IVF often called "three-person IVF."'}
+                          fontSize={mvs(14)}
+                            numberOfLines={10}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                        />
+                        
+                        <Regular
+                          label="It replaces the mitochondrial DNA in an egg to prevent the transmission of genetic mitochondrial diseases or improve egg quality in older patients."
+                          fontSize={mvs(14)}
+                            numberOfLines={10}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                        />
+                        
+                        <Bold
+                          label="Key Facts:"
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.keyFactsTitle}
+                        />
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Status:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Highly specialized; available in limited regions (e.g., UK, parts of Europe)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Purpose:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Treating mitochondrial disease and advanced age infertility."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Availability:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Restricted to specific research centers and clinics."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <PrimaryButton
+                          containerStyle={styles.searchButton}
+                          loading={false}
+                          onPress={() => {
+                            // Handle search for clinics
+                          }}
+                          title="Locate Advanced Fertility Centers"
+                        />
+                        
+                        <Regular
+                          label="Source: NCBI (National Institutes of Health)"
+                          fontSize={mvs(12)}
+                            numberOfLines={10}
+                          color={"#8C8C8C"}
+                          style={styles.sourceText}
+                        />
+                      </>
+                    )}
+                    
+                    {item.id === 'genetic_testing' && (
+                      <>
+                        <Regular
+                          label="Determine your risk of passing on genetic conditions to your child."
+                          fontSize={mvs(14)}
+                            numberOfLines={10}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                        />
+                        
+                        <Regular
+                          label="Our partner, iGenomix, offers comprehensive screening for over 600 hereditary disorders."
+                          fontSize={mvs(14)}
+                            numberOfLines={10}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                        />
+                        
+                        <Bold
+                          label="Key Facts:"
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.keyFactsTitle}
+                        />
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Screening:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Comprehensive testing for over 600 hereditary disorders."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Partner:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" iGenomix provides professional genetic screening services."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Testing:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Recessive autosomal testing available through iGenomix."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <PrimaryButton
+                          containerStyle={styles.searchButton}
+                          loading={false}
+                          onPress={() => {
+                            // Handle order kit
+                          }}
+                          title="Order iGenomix Kit"
+                        />
+                        
+                        <Regular
+                          label="Partner: iGenomix"
+                          fontSize={mvs(12)}
+                            numberOfLines={10}
+                          color={"#8C8C8C"}
+                          style={styles.sourceText}
+                        />
+                      </>
+                    )}
+                    
+                    {item.id === 'procreation_safety' && (
+                      <>
+                        <Regular
+                          label="Ensuring a healthy pregnancy starts before conception."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        
+                        <Regular
+                          label="Whether you are using a donor or a partner, it is vital to screen for infectious diseases (STIs) and understand your genetic compatibility."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        
+                        <Bold
+                          label="Key Facts:"
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.keyFactsTitle}
+                        />
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="STI Screening:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Test for HIV, Hepatitis B/C, Syphilis, Gonorrhea, and Chlamydia."
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                              numberOfLines={10}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Vaccinations:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Ensure Rubella and Varicella immunity before pregnancy."
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                              numberOfLines={10}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Folic Acid:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                              numberOfLines={10}
+                          />
+                          <Regular
+                            label=" 400mcg daily is recommended to prevent birth defects."
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                              numberOfLines={10}
+                          />
+                        </View>
+                        
+                        <PrimaryButton
+                          containerStyle={styles.searchButton}
+                          loading={false}
+                          onPress={() => {
+                            // Handle search for testing centers
+                          }}
+                          title="Find STI Testing Centers Near Me"
+                        />
+                        
+                        <Regular
+                          label="Source: CDC"
+                          fontSize={mvs(12)}
+                            numberOfLines={10}
+                          color={"#8C8C8C"}
+                          style={styles.sourceText}
+                        />
+                      </>
+                    )}
+                    
+                    {item.id === 'legal_resources' && (
+                      <>
+                        <Regular
+                          label="Helix does not provide legal advice. Laws regarding gamete donation, surrogacy, and compensation vary by country. It is your responsibility to verify local requirements."
+                          fontSize={mvs(14)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        
+                        <Bold
+                          label="Key Facts:"
+                            numberOfLines={10}
+                          fontSize={mvs(16)}
+                          color={colors.textColor || '#404040'}
+                          style={styles.keyFactsTitle}
+                        />
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Contracts are Vital:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Never exchange money or genetic material without a clinical contract."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Parental Rights:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Without a legal agreement, genetic donors may be considered legal parents and liable for child support."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <View style={styles.keyFactItem}>
+                          <Bold
+                            label="Surrogacy Laws:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                          />
+                          <Regular
+                            label=" Commercial surrogacy is illegal in some regions. Verify your local laws before proceeding."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColor || '#404040'}
+                          />
+                        </View>
+                        
+                        <PrimaryButton
+                          containerStyle={styles.searchButton}
+                          loading={false}
+                          onPress={() => {
+                            // Handle search for attorneys
+                          }}
+                          title="Find Family Law Attorneys"
+                        />
+                        
+                        <Regular
+                          label="Source: CDC"
+                          fontSize={mvs(12)}
+                          color={"#8C8C8C"}
+                          style={styles.sourceText}
+                        />
+                      </>
+                    )}
+                      </View>
+                    )}
                   </View>
-                  <View style={styles.resourceTextContainer}>
-                    <Medium
-                      label={item.title}
-                      fontSize={mvs(16)}
-                      color={colors.textColor || '#404040'}
-                    />
-                    <Regular
-                      label={item.description}
-                      fontSize={mvs(14)}
-                      color={"#8C8C8C" || '#6D6D6D'}
-                      style={{marginTop: mvs(6)}}
-                      numberOfLines={3}
-                    />
-                  </View>
-                </View>
+                </TouchableOpacity>
               </View>
             );
           })}

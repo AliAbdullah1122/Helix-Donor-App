@@ -58,7 +58,7 @@ const PlaceofferCheckoutScreen = props => {
             onPress={() => navigation.goBack()}>
             <Icon name="chevron-back-outline" size={mvs(24)} color={"#8C8C8C"} />
           </TouchableOpacity>
-          <Bold
+          <Medium
             label="Checkout"
             fontSize={mvs(18)}
             color={colors.textColor}
@@ -67,19 +67,117 @@ const PlaceofferCheckoutScreen = props => {
           <View style={{width: mvs(24)}} />
         </View>
 
-     
+        {/* ORDER SUMMARY Section */}
+        <View style={styles.orderSummarySection}>
+          <Medium
+            label="ORDER SUMMARY"
+            fontSize={mvs(14)}
+            color={colors.primary}
+            style={styles.sectionTitle}
+          />
+          <Row style={styles.orderRow}>
+            <Regular
+              label="Helix Premium Weekly"
+              fontSize={mvs(14)}
+              color={colors.textColor}
+            />
+            <Regular
+              label="$29.99 / week"
+              fontSize={mvs(14)}
+              color={colors.textColor}
+            />
+          </Row>
+          <View style={styles.separator} />
+          <Row style={styles.orderRow}>
+            <Bold
+              label="Total"
+              fontSize={mvs(14)}
+              color={colors.textColor}
+            />
+            <Bold
+              label="$29.99 / week"
+              fontSize={mvs(14)}
+              color={colors.textColor}
+            />
+          </Row>
+        </View>
 
-      
+        {/* PAYMENT METHOD Section */}
+        <View style={styles.paymentMethodSection}>
+          <Bold
+            label="PAYMENT METHOD"
+            fontSize={mvs(14)}
+            color={colors.primary}
+            style={styles.sectionTitle}
+          />
+          
+          {/* Google Pay and Apple Pay Buttons */}
+          <Row style={styles.paymentButtonsRow}>
+            <TouchableOpacity style={styles.paymentButton}>
+              <Row style={styles.paymentButtonContent}>
+                {IMG.google && (
+                  <Image
+                    source={IMG.google}
+                    resizeMode="contain"
+                    style={styles.paymentIcon}
+                  />
+                )}
+                {!IMG.google && (
+                  <Bold label="G" fontSize={mvs(20)} color={colors.textColor} />
+                )}
+                <Regular
+                  label="Pay"
+                  fontSize={mvs(14)}
+                  color={colors.textColor}
+                  style={{marginLeft: mvs(8)}}
+                />
+              </Row>
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.paymentButton}>
+              <Row style={styles.paymentButtonContent}>
+                {IMG.apple && (
+                  <Image
+                    source={IMG.apple}
+                    resizeMode="contain"
+                    style={styles.paymentIcon}
+                  />
+                )}
+                {!IMG.apple && (
+                  <Icon name="logo-apple" size={mvs(20)} color={colors.textColor} />
+                )}
+                <Regular
+                  label="Pay"
+                  fontSize={mvs(14)}
+                  color={colors.textColor}
+                  style={{marginLeft: mvs(8)}}
+                />
+              </Row>
+            </TouchableOpacity>
+          </Row>
+
+          {/* Credit Card Button */}
+          <TouchableOpacity style={{...styles.creditCardButton,marginTop:mvs(20)}}>
+            <Row style={styles.creditCardRow}>
+              <Medium
+                label="Credit Card (Ending in 4242)"
+                fontSize={mvs(14)}
+                color={colors.white}
+              />
+              <Icon style={{marginLeft:mvs(10)}} name="chevron-down" size={mvs(20)} color={colors.white} />
+            </Row>
+          </TouchableOpacity>
+        </View>
       
       </ScrollView>
 
-      {/* Action Buttons */}
-           <View style={styles.actionButtonsContainer}>
+      {/* Pay Button */}
+      <View style={{...styles.actionButtonsContainer,width:"90%",alignSelf:'center'}}>
         <TouchableOpacity 
-          style={styles.placeOfferButton}
+          style={styles.payButton}
           onPress={handlePlaceOffer}>
           <Medium
-            label="Proceed"
+            label="Pay $29.99"
             fontSize={mvs(16)}
             color={colors.white}
           />

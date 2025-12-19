@@ -40,13 +40,15 @@ const styles = StyleSheet.create({
     // elevation: 3,
   },
   resourceInnerCard: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent:"center",
     paddingVertical: mvs(25),
     paddingHorizontal: mvs(18),
     borderRadius: mvs(20),
     backgroundColor: colors.white,
+  },
+  resourceHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   resourceIconContainer: {
     width: mvs(44),
@@ -56,10 +58,41 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: mvs(12),
-    marginTop:mvs(10)
+    marginTop: mvs(10),
   },
   resourceTextContainer: {
     flex: 1,
+  },
+  expandIcon: {
+    marginLeft: mvs(8),
+    marginTop: mvs(10),
+  },
+  expandedContent: {
+    width: '100%',
+    paddingTop: mvs(20),
+    paddingBottom: mvs(24),
+  },
+  expandedText: {
+    marginBottom: mvs(16),
+    lineHeight: mvs(20),
+  },
+  keyFactsTitle: {
+    marginTop: mvs(8),
+    marginBottom: mvs(12),
+  },
+  keyFactItem: {
+    flexDirection: 'row',
+    marginBottom: mvs(8),
+    flexWrap: 'wrap',
+  },
+  searchButton: {
+    borderRadius: mvs(40),
+    marginTop: mvs(24),
+    marginBottom: mvs(16),
+    backgroundColor: colors.primary,
+  },
+  sourceText: {
+    marginTop: mvs(8),
   },
   modalContainer: {
     width: '90%',

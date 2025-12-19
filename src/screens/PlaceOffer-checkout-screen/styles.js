@@ -5,8 +5,8 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,
-    paddingHorizontal: mvs(20),
+    backgroundColor: colors.lightGray || '#F5F5F5',
+    // paddingHorizontal: mvs(10),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -376,6 +376,77 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     width: '55%',
+  },
+  orderSummarySection: {
+    backgroundColor: colors.white,
+    borderRadius: mvs(12),
+    padding: mvs(16),
+    marginTop: mvs(20),
+    marginBottom: mvs(20),
+  },
+  paymentMethodSection: {
+    backgroundColor: colors.white,
+    borderRadius: mvs(12),
+    padding: mvs(16),
+    marginBottom: mvs(20),
+  },
+  sectionTitle: {
+    marginBottom: mvs(16),
+  },
+  orderRow: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: mvs(12),
+  },
+  separator: {
+    height: 1,
+    backgroundColor: colors.borderColor || '#E0E0E0',
+    marginVertical: mvs(12),
+  },
+  paymentButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: mvs(12),
+    // gap: mvs(12),
+  },
+  paymentButton: {
+    // flex: 1,
+    backgroundColor: "#D9D9D9" || '#F5F5F5',
+    borderRadius: mvs(40),
+    paddingVertical: mvs(10),
+    width:'47%',
+    // paddingHorizontal: mvs(12),
+    borderWidth: 1,
+    borderColor: colors.borderColor || '#E0E0E0',
+  },
+  paymentButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paymentIcon: {
+    width: mvs(18),
+    height: mvs(18),
+  },
+  creditCardButton: {
+    backgroundColor: colors.primary,
+    borderRadius: mvs(40),
+    paddingVertical: mvs(14),
+    width:"100%",
+    alignItems:'center',
+    paddingHorizontal: mvs(16),
+  },
+  creditCardRow: {
+    justifyContent: 'centern',
+    alignItems: 'center',
+  },
+  payButton: {
+    backgroundColor: colors.primary,
+    borderRadius: mvs(40),
+    paddingVertical: mvs(16),
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
 });
 

@@ -133,6 +133,8 @@ import ManageSusbcriptionScreen from 'screens/Mnage-subscription-screen';
 import SettingsScreen from 'screens/Setting-screen';
 import BlockedContactsScreen from 'screens/Blocked-Contacts-screen';
 import MainNotificationScreen from 'screens/MainNotification-screen';
+import MainInboxScreen from 'screens/MainInbox-screen';
+import ArchiveChatScreen from 'screens/Archive-caht-screen';
 
 
 
@@ -148,8 +150,8 @@ export const RootNavigator = () => {
         barStyle={'dark-content'}
       />
       <Stack.Navigator
-        //  initialRouteName="ChatMainScreen"
-         initialRouteName="ResourcesScreen"
+         initialRouteName="ChatMainScreen"
+        //  initialRouteName="PlaceofferCheckoutScreen"
         //  initialRouteName="QRScreen"
         //  initialRouteName="ReviewFromAdminScreen"
         // initialRouteName="UserTab"
@@ -284,6 +286,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
           <Stack.Screen name="BlockedContactsScreen" component={BlockedContactsScreen} />
           <Stack.Screen name="MainNotificationScreen" component={MainNotificationScreen} />
+          <Stack.Screen name="MainInboxScreen" component={MainInboxScreen} />
+          <Stack.Screen name="ArchiveChatScreen" component={ArchiveChatScreen} />
 
         </Stack.Group>
         <Stack.Group>

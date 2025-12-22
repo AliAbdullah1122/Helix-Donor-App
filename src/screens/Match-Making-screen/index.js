@@ -143,7 +143,7 @@ const MatchMakingScreen = props => {
         <TouchableOpacity
           style={styles.closeButton}
           onPress={() => navigation.goBack()}>
-          <Icon name="close" size={mvs(20)} color={colors.white} />
+          <Icon name="close" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
 
         {/* Header */}
@@ -206,7 +206,7 @@ const MatchMakingScreen = props => {
       </ScrollView>
 
       {/* Terms Modal (logic kept, UI unchanged) */}
-      <View style={{marginBottom:mvs(30)}}>
+      <View style={{marginBottom:mvs(40)}}>
         <Regular
           label={'Messaging is unlocked and free.'}
           fontSize={mvs(14)}

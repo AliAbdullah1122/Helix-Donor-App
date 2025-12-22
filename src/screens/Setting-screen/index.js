@@ -33,6 +33,7 @@ const SettingsScreen = props => {
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] = React.useState(false);
 
   const handleBlockedContacts = () => {
+
     // In real app, navigate to blocked contacts
   };
 
@@ -97,7 +98,8 @@ const SettingsScreen = props => {
         
         <TouchableOpacity
           style={styles.optionRow}
-          onPress={handleBlockedContacts}
+          // onPress={handleBlockedContacts}
+          onPress={()=>navigate("BlockedContactsScreen")}
           activeOpacity={0.7}>
           <Regular
             label="Blocked Contacts"
@@ -143,7 +145,8 @@ const SettingsScreen = props => {
 
         <TouchableOpacity
           style={styles.optionRow}
-          onPress={handleResources}
+          // onPress={handleResources}
+          onPress={()=>navigate("ResourcesScreen")}
           activeOpacity={0.7}>
           <Regular
             label="Resources"

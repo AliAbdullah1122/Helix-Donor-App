@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: mvs(20),
+    // marginTop: mvs(20),
     marginBottom: mvs(20),
   },
   headerTitle: {

@@ -34,6 +34,12 @@ const PhysicalAtttributeScreen = props => {
   const [otpValue, setOtpValue] = React.useState('');
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [selectedGender, setSelectedGender] = React.useState('Male');
+  const [selectedHeight, setSelectedHeight] = React.useState(null);
+  const [selectedBodyBuild, setSelectedBodyBuild] = React.useState(null);
+  const [selectedHairColor, setSelectedHairColor] = React.useState(null);
+  const [selectedEyeColor, setSelectedEyeColor] = React.useState(null);
+  const [selectedRace, setSelectedRace] = React.useState(null);
+  const [selectedOrientation, setSelectedOrientation] = React.useState(null);
     const navigation = useNavigation();
 
   const initialValues = {
@@ -150,7 +156,7 @@ const PhysicalAtttributeScreen = props => {
         <View style={{paddingHorizontal:mvs(10)}}>
         <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
         </View>
-        <View style={{marginHorizontal:mvs(20)}}>
+        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
 
          <Regular label={'Step 2 / 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
@@ -190,18 +196,11 @@ const PhysicalAtttributeScreen = props => {
 
 
                       <InputWithIcon
-
                     placeholder={'Select One'}
                     label='Height'
-                     items={heightOptions}
-                    // isRequired
-                    // error={touched?.method ? t(errors.method) : ''}
-                    // onChangeText={id => setFieldValue('method', id)}
-                    // onBlur={handleChange('vehicle_make')}
-                    // value={values?.method}
-                    // id={values?.method}
-                    // items={Nationality}
-                    
+                    items={heightOptions}
+                    onChangeText={(id) => setSelectedHeight(id)}
+                    id={selectedHeight}
                     /> 
                     <PrimaryInput
                     // isFulName
@@ -216,67 +215,41 @@ const PhysicalAtttributeScreen = props => {
                       // containerStyle={styles.input}
                     />
                       <InputWithIcon
-
                     placeholder={'Select One'}
                     label='Body Build'
-                     items={bodyBuildOptions}
-                    // isRequired
-                    // error={touched?.method ? t(errors.method) : ''}
-                    // onChangeText={id => setFieldValue('method', id)}
-                    // onBlur={handleChange('vehicle_make')}
-                    // value={values?.method}
-                    // id={values?.method}
-                    // items={Nationality}
-                    
+                    items={bodyBuildOptions}
+                    onChangeText={(id) => setSelectedBodyBuild(id)}
+                    id={selectedBodyBuild}
                     /> 
                       <InputWithIcon
-
                     placeholder={'Select One'}
                     label='Hair Color'
-                     items={hairColorOptions}
-                    // isRequired
-                    // error={touched?.method ? t(errors.method) : ''}
-                    // onChangeText={id => setFieldValue('method', id)}
-                    // onBlur={handleChange('vehicle_make')}
-                    // value={values?.method}
-                    // id={values?.method}
-                    // items={Nationality}
-                    
+                    items={hairColorOptions}
+                    onChangeText={(id) => setSelectedHairColor(id)}
+                    id={selectedHairColor}
                     /> 
                       <InputWithIcon
                     placeholder={'Select One'}
                     label='Eye Color'
                     items={eyeColorOptions}
+                    onChangeText={(id) => setSelectedEyeColor(id)}
+                    id={selectedEyeColor}
                     /> 
                    
                       <InputWithIcon
-
                     placeholder={'Select One'}
                     label='Race'
-                     items={eyeColorOptions}
-                    // isRequired
-                    // error={touched?.method ? t(errors.method) : ''}
-                    // onChangeText={id => setFieldValue('method', id)}
-                    // onBlur={handleChange('vehicle_make')}
-                    // value={values?.method}
-                    // id={values?.method}
-                    // items={Nationality}
-                    
+                    items={raceOptions}
+                    onChangeText={(id) => setSelectedRace(id)}
+                    id={selectedRace}
                     /> 
                    
                       <InputWithIcon
-
                     placeholder={'Select One'}
                     label='Orientation'
-                     items={eyeColorOptions}
-                    // isRequired
-                    // error={touched?.method ? t(errors.method) : ''}
-                    // onChangeText={id => setFieldValue('method', id)}
-                    // onBlur={handleChange('vehicle_make')}
-                    // value={values?.method}
-                    // id={values?.method}
-                    // items={Nationality}
-                    
+                    items={orientationOptions}
+                    onChangeText={(id) => setSelectedOrientation(id)}
+                    id={selectedOrientation}
                     /> 
                    
                   
@@ -295,7 +268,7 @@ const PhysicalAtttributeScreen = props => {
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
-        <View style={{marginHorizontal:mvs(20), marginBottom: mvs(10)}}>
+        <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
               <Row>
              <PrimaryButton
                             containerStyle={{

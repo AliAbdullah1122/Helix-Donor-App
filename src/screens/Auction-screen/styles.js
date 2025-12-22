@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: mvs(20),
+    marginTop: mvs(0),
     marginBottom: mvs(20),
   },
   headerTitle: {
@@ -258,6 +258,7 @@ const styles = StyleSheet.create({
   actionButtonsContainer: {
     gap: mvs(12),
     marginTop: mvs(38),
+    marginBottom: mvs(30),
     // alignSelf:'center',
   },
   placeOfferButton: {

@@ -63,7 +63,7 @@ const MainProfileScreen = () => {
       
       <Row style={styles.topOverlayRow}>
         <View />
-        <TouchableOpacity style={styles.settingsButton} onPress={() => navigate('Home')}>
+        <TouchableOpacity style={styles.settingsButton} onPress={() => navigate('SettingsScreen')}>
           <IMG.SettingsProfile width={mvs(30)} height={mvs(30)} />
         </TouchableOpacity>
       </Row>
@@ -88,7 +88,7 @@ const MainProfileScreen = () => {
 
       {/* Edit Profile Button overlaid on image */}
       <View style={styles.editButtonContainer}>
-        <TouchableOpacity style={styles.editProfileButton}>
+        <TouchableOpacity  onPress={()=> navigate("AccountRoleScreen")} style={styles.editProfileButton}>
           <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
           <Medium
             label="Edit Profile"
@@ -292,7 +292,9 @@ const MainProfileScreen = () => {
             onPress={() => setAboutExpanded(prev => !prev)}>
             <Row style={styles.sectionHeader}>
               <Row style={{alignItems: 'center'}}>
+              
                 <IMG.ProfileUser width={mvs(16)} height={mvs(16)} />
+          
                 <Bold
                   label="ABOUT"
                   fontSize={mvs(14)}
@@ -300,7 +302,9 @@ const MainProfileScreen = () => {
                   style={{marginLeft: mvs(8)}}
                 />
               </Row>
+                <TouchableOpacity onPress={()=>navigate("AboutScreen")}>
               <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+              </TouchableOpacity>
             </Row>
           </TouchableOpacity>
           {aboutExpanded && (
@@ -314,6 +318,7 @@ const MainProfileScreen = () => {
               <Regular
                 label="Creative director living in Austin with my golden retriever, Leo. I've built a life I love and I'm ready and excited to take the next step to become a mother. Looking for a kind, responsible co-parenting partner to share in the adventure of raising a child."
                 fontSize={mvs(14)}
+                numberOfLines={10}
                 color={colors.primary}
               />
               <View
@@ -383,7 +388,9 @@ const MainProfileScreen = () => {
                   style={{marginLeft: mvs(8)}}
                 />
               </Row>
+              <TouchableOpacity onPress={()=>navigate("UploadPhotoScreen")}>
               <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+              </TouchableOpacity>
             </Row>
           </TouchableOpacity>
           {photosExpanded && (
@@ -417,7 +424,9 @@ const MainProfileScreen = () => {
                   style={{marginLeft: mvs(8)}}
                 />
               </Row>
+              <TouchableOpacity onPress={()=>navigate("PhysicalAttributeEditScreen")}>
               <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+              </TouchableOpacity>
             </Row>
           </TouchableOpacity>
           {physicalExpanded && (
@@ -652,7 +661,9 @@ const MainProfileScreen = () => {
                   style={{marginLeft: mvs(8)}}
                 />
               </Row>
+              <TouchableOpacity onPress={()=>navigate("EducationCareerScreen")}>
               <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+              </TouchableOpacity>
             </Row>
           </TouchableOpacity>
           {educationExpanded && (
@@ -735,7 +746,9 @@ const MainProfileScreen = () => {
               style={{marginLeft: mvs(8)}}
             />
           </Row>
+          <TouchableOpacity onPress={()=>navigate("HealthSummaryScreen")}>
               <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+              </TouchableOpacity>
             </Row>
           </TouchableOpacity>
           {healthExpanded && (
@@ -886,7 +899,9 @@ const MainProfileScreen = () => {
                   style={{marginLeft: mvs(8)}}
                 />
               </Row>
+              <TouchableOpacity onPress={()=>navigate("GeneticProfileScreen")}>
               <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+              </TouchableOpacity>
             </Row>
           </TouchableOpacity>
           {geneticExpanded && (
@@ -1028,6 +1043,7 @@ const MainProfileScreen = () => {
                 />
               </Row>
               <TouchableOpacity
+              onPress={()=> navigate("ManageSusbcriptionScreen")}
                 activeOpacity={0.9}
                 style={{
                   marginTop: mvs(12),
@@ -1064,7 +1080,7 @@ const styles = StyleSheet.create({
   },
   topOverlayRow: {
     position: 'absolute',
-    top: mvs(50),
+    top: mvs(30),
     left: mvs(20),
     right: mvs(20),
     justifyContent: 'flex-end',
@@ -1072,9 +1088,10 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   settingsButton: {
-    padding: mvs(8),
+    // padding: mvs(8),
     // backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: mvs(8),
+
   },
   nameLocationContainer: {
     position: 'absolute',

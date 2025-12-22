@@ -20,6 +20,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {PrimaryButton} from 'components/atoms/buttons';
+import { navigate } from 'navigation/navigation-ref';
 
 const ChatMainScreen = () => {
   const [searchText, setSearchText] = useState('');
@@ -139,7 +140,7 @@ const ChatMainScreen = () => {
             setSwipedMessageId(null);
           }
         }}>
-        <View style={styles.messageCard}>
+        <TouchableOpacity onPress={()=>navigate("MainInboxScreen")} style={styles.messageCard}>
           <Row style={styles.messageRow}>
             <View style={styles.messageAvatarContainer}>
               <View style={styles.messageAvatarWrapper}>
@@ -183,7 +184,7 @@ const ChatMainScreen = () => {
               </Row>
             </View>
           </Row>
-        </View>
+        </TouchableOpacity>
       </Swipeable>
     );
   };
@@ -540,7 +541,9 @@ const ChatMainScreen = () => {
             {/* Messages / Archived header */}
             <Row style={styles.messagesHeaderRow}>
               <Bold label="Messages" fontSize={mvs(18)} color={colors.black} />
+              <TouchableOpacity onPress={()=>navigate("ArchiveChatScreen")}>
               <Row style={styles.archivedRow}>
+
                 <IMG.chatArchive width={mvs(18)} height={mvs(18)} />
                 <Medium
                   label="Archived"
@@ -549,6 +552,7 @@ const ChatMainScreen = () => {
                   style={{marginLeft: mvs(4)}}
                 />
               </Row>
+              </TouchableOpacity>
             </Row>
 
             {/* Messages list */}
@@ -1096,7 +1100,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     paddingHorizontal: mvs(20),
-    paddingTop: mvs(18),
+    paddingTop: mvs(20),
     paddingBottom: mvs(12),
     backgroundColor: colors.white,
   },

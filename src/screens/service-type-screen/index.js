@@ -40,9 +40,9 @@ const ServiceTypeScreen = props => {
   const handleServiceToggle = (serviceId) => {
     setSelectedServices(prev => {
       if (prev.includes(serviceId)) {
-        return prev.filter(id => id !== serviceId);
+        return [];
       } else {
-        return [...prev, serviceId];
+        return [serviceId];
       }
     });
   };
@@ -69,7 +69,9 @@ const ServiceTypeScreen = props => {
         </TouchableOpacity> */}
 
         {/* Heading */}
-        <View style={{marginTop:mvs(50)}}>
+        <View 
+        style={{marginTop:mvs(40)}}
+        >
         <Medium
           label="What are you looking for?"
           fontSize={mvs(24)}

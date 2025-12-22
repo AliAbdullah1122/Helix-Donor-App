@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 type Props = {
   userInfo: any;
+  subscribed: any;
   language: string;
   location?: {
     latitude: number;
@@ -16,6 +17,7 @@ type Props = {
 const initialState: Props = {
   userInfo: null,
   language: 'en',
+  subscribed: false,
   location: undefined,
   notifications: [],
   countries: [],
@@ -55,6 +57,9 @@ export const userSlice = createSlice({
       return initialState;
     },
 
+    setSubscribed: (state, action) => {
+      state.subscribed = action.payload;
+    },
     // demoAsync: (state, action) => {
     //   state.userInfo = action.payload
     // },
@@ -70,6 +75,7 @@ export const {
   setNotifications,
   setVehcileTypes,
   setCountries,
+  setSubscribed,
   // demoAsync
 } = userSlice.actions;
 

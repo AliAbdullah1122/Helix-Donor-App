@@ -215,7 +215,11 @@ const PlacePrivateOfferScreen = props => {
           {/* Done Button */}
           <TouchableOpacity 
             style={styles.submitModalDismissButton}
-            onPress={() => setShowSubmitModal(false)}>
+            // onPress={() => setShowSubmitModal(false)}
+            onPress={() => {setShowSubmitModal(false)
+            navigate("Drawer")
+            }}
+            >
             <Medium
               label="Done"
               fontSize={mvs(16)}

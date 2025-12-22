@@ -34,7 +34,8 @@ const PlaceIncreaseOfferScreen = props => {
 
   const handlePlaceOffer = () => {
     if (isButtonEnabled) {
-      setShowSubmitModal(true);
+      // setShowSubmitModal(true);
+      navigate("PlaceofferCheckoutScreen")
     }
   };
 

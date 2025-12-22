@@ -25,6 +25,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
 const ProfileDetailsHomeScreen = ({route}) => {
+
+  const item = route?.params?.item;
+
+  console.log(item);
   // Sample profile data
   const profiles = useMemo(
     () => [
@@ -39,6 +43,8 @@ const ProfileDetailsHomeScreen = ({route}) => {
         image: IMG.HomeImageOng, // PNG image
         badge: 'Xytex',
         price: '$800.00 USD',
+        mutualMatch: false,
+        Subscription: false,
       },
       {
         id: 2,
@@ -51,12 +57,30 @@ const ProfileDetailsHomeScreen = ({route}) => {
         image: IMG.HomeImageOng, // PNG image
         badge: 'New',
         price: '$800.00 USD',
+        mutualMatch: false,
+        Subscription: true,
+      },
+      {
+              id: 3,
+              name: 'Lyon',
+              age: 29,
+              location: 'New York, New York',
+              flag: '🇺🇸',
+              donorType: 'Donor (Offering: Sperm)',
+              options: 'Private Donor',
+              image: IMG.HomeImageOng, // PNG image
+              badge: 'New',
+              price: "$800.00 USD",
+                   mutualMatch: true,
+              Subscription: true,
       },
     ],
     [],
   );
 
-  const profile = profiles[0];
+  const profile = item || {};
+  console.log("object",item)
+  // const profile = profiles[0];
   const images = useMemo(
     () => [
       profile.image,
@@ -104,14 +128,52 @@ const ProfileDetailsHomeScreen = ({route}) => {
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={handleImageScrollEnd}>
-          {images.map((img, index) => (
+          {/* {images.map((img, index) => (
             <Image
               key={index}
+              // source={img}
               source={img}
               style={styles.mainImage}
               resizeMode="cover"
             />
-          ))}
+            
+          ))} */}
+          {images.map((img, index) => (
+  <View key={index} style={styles.mainImage}>
+    {typeof img === 'function' ? (
+      // SVG component case
+      (() => {
+        const SvgIcon = img;
+        return <SvgIcon width="100%" height="100%" />;
+      })()
+    ) : img?.uri ? (
+      // Normal image
+      <Image
+        source={img}
+        style={StyleSheet.absoluteFill}
+        resizeMode="cover"
+      />
+    ) : (
+      // Fallback SVG
+      <IMG.SearchImage2 width="100%" height="100%" />
+    )}
+  </View>
+))}
+
+          {/* {images.map((img, index) => (
+  <View key={index} style={styles.mainImage}>
+    {img ? (
+      <Image
+        source={img}
+        style={StyleSheet.absoluteFill}
+        resizeMode="cover"
+      />
+    ) : (
+      <PlaceholderSvg width="100%" height="100%" />
+    )}
+  </View>
+))} */}
+
         </ScrollView>
 
         {/* Darken bottom of image like design */}
@@ -312,7 +374,7 @@ const ProfileDetailsHomeScreen = ({route}) => {
           />
         </Row>
         <Row style={styles.bidBuyButtonsContainer}>
-          <TouchableOpacity style={styles.bidBuyButton}>
+          <TouchableOpacity   onPress={() => {navigate("PrivateOfferScreen")}} style={styles.bidBuyButton}>
             <Row style={{alignItems: 'center', justifyContent: 'center'}}>
               {/* <IMG.HomeCardCross width={mvs(20)} height={mvs(20)} /> */}
               <Regular
@@ -323,7 +385,7 @@ const ProfileDetailsHomeScreen = ({route}) => {
               />
             </Row>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.bidBuyButton}>
+          <TouchableOpacity onPress={() => {navigate("AuctionScreen")}} style={styles.bidBuyButton}>
             <Row style={{alignItems: 'center', justifyContent: 'center'}}>
               {/* <IMG.ResourcesDna width={mvs(20)} height={mvs(20)} /> */}
               <Regular
@@ -1368,7 +1430,19 @@ const ProfileDetailsHomeScreen = ({route}) => {
           <TouchableOpacity>
             <IMG.HomeCardIcon width={mvs(122)} height={mvs(112)} />
           </TouchableOpacity>
-          <TouchableOpacity>
+  <TouchableOpacity
+          onPress={() => {
+                          if(item.mutualMatch){
+                            
+                            navigate("MainInboxScreen")
+                          } else {
+                            if (item?.Subscription) {
+                              navigate("MainInboxScreen")
+                            } else {
+                              navigate("PremiumUnlockChatScreen")
+                            }
+                          }
+                        }}>
             <IMG.HomeCardMessage width={mvs(54)} height={mvs(54)} />
           </TouchableOpacity>
         </Row>

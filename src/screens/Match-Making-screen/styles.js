@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     // marginBottom: mvs(16),
   },
   headerSection: {
-    marginTop: mvs(80),
+    marginTop: mvs(20),
     alignItems: 'center',
   },
   sparkleRow: {

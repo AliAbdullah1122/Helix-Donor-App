@@ -11,7 +11,7 @@ import {
   TextInput,
   PermissionsAndroid,
 } from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {mvs} from 'config/metrices';
 import {colors} from 'config/colors';
 import * as IMG from 'assets/images';
@@ -36,95 +36,224 @@ const SearchScreenTap = () => {
   const [searchText, setSearchText] = useState('');
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
 
-  const [region, setRegion] = useState({
-    latitude: 40.7128,
-    longitude: -74.006,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.1,
-  });
+  // const [region, setRegion] = useState({
+  //   latitude: 40.7128,
+  //   longitude: -74.006,
+  //   latitudeDelta: 0.1,
+  //   longitudeDelta: 0.1,
+  // });
 
+    const initialRegion = useMemo(
+      () => ({
+        latitude: 40.7128,
+        longitude: -74.006,
+        latitudeDelta: 0.08,
+        longitudeDelta: 0.08,
+      }),
+      [],
+    );
   // Map markers with profile data
-  const mapMarkers = useMemo(
+  // const mapMarkers = useMemo(
+  //   () => [
+  //     {
+  //       id: 1,
+  //       coordinate: {
+  //         latitude: 40.7128,
+  //         longitude: -74.006,
+  //       },
+  //       profileImage: IMG.SearchImage1,
+  //       pinImage: IMG.SearchUserpin,
+  //     },
+  //     {
+  //       id: 2,
+  //       coordinate: {
+  //         latitude: 40.7589,
+  //         longitude: -73.9851,
+  //       },
+  //       profileImage: IMG.SearchImage2,
+  //       pinImage: IMG.SearchUserpin2,
+  //       isCluster: true,
+  //       clusterImages: [IMG.SearchImage2, IMG.SearchImage3, IMG.SearchImage1],
+  //     },
+  //   ],
+  //   [],
+  // );
+const mapMarkers = useMemo(
     () => [
       {
         id: 1,
-        coordinate: {
-          latitude: 40.7128,
-          longitude: -74.006,
-        },
-        profileImage: IMG.SearchImage1,
-        pinImage: IMG.SearchUserpin,
+        coordinate: {latitude: 40.7128, longitude: -74.006},
+        profileImage: IMG.MapUser1,
       },
-      {
-        id: 2,
-        coordinate: {
-          latitude: 40.7589,
-          longitude: -73.9851,
-        },
-        profileImage: IMG.SearchImage2,
-        pinImage: IMG.SearchUserpin2,
-        isCluster: true,
-        clusterImages: [IMG.SearchImage2, IMG.SearchImage3, IMG.SearchImage1],
-      },
+      // {
+      //   id: 2,
+      //   coordinate: {latitude: 40.7589, longitude: -73.9851},
+      //   profileImage: IMG.MapMoreUser,
+      // },
     ],
     [],
   );
-
   // Members nearby data
-  const membersNearby = useMemo(
-    () => [
-      {id: 1, image: IMG.SearchImage1},
-      {id: 2, image: IMG.SearchImage2, isOnline: true},
-      {id: 3, image: IMG.SearchImage3},
-      {id: 4, image: IMG.SearchImage1},
-      {id: 5, image: IMG.SearchImage2},
-    ],
-    [],
-  );
+  // const membersNearby = useMemo(
+  //   () => [
+  //     {id: 1, image: IMG.SearchImage1},
+  //     {id: 2, image: IMG.SearchImage2, isOnline: true},
+  //     {id: 3, image: IMG.SearchImage3},
+  //     {id: 4, image: IMG.SearchImage1},
+  //     {id: 5, image: IMG.SearchImage2},
+  //   ],
+  //   [],
+  // );
 
-  const renderMarker = marker => {
-    if (marker.isCluster) {
-      const PinImageComponent = marker.pinImage;
-      return (
-        <Marker key={marker.id} coordinate={marker.coordinate} anchor={{x: 0.5, y: 1}}>
-          <View style={styles.markerContainer}>
-            <View style={styles.clusterContainer}>
-              {marker.clusterImages.map((img, idx) => {
-                const ImageComponent = img;
-                return (
-                  <View
-                    key={idx}
-                    style={[
-                      styles.clusterImageWrapper,
-                      {
-                        left: idx * 18,
-                        zIndex: marker.clusterImages.length - idx,
-                      },
-                    ]}>
-                    <ImageComponent width={mvs(50)} height={mvs(50)} />
-                  </View>
-                );
-              })}
-            </View>
-            <View style={styles.pinLine} />
-            <PinImageComponent width={mvs(20)} height={mvs(20)} />
-          </View>
-        </Marker>
-      );
-    }
+  const membersNearby = [
+    {
+      id: 1,
+      name: 'Nathan',
+      age: 32,
+      location: 'Denver, Colorado',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Sperm)',
+      options: 'Private Donor, Donor + Co-Parenting',
+      image: IMG.SearchImage1, // image from membersNearbyBase
+      badge: 'Xytex',
+      price: "$800.00 USD",
+      mutualMatch: false,
+      Subscription: false,
+      isOnline: false, // from membersNearbyBase (default false)
+    },
+    {
+      id: 2,
+      name: 'Sarah',
+      age: 28,
+      location: 'New York, New York',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Eggs)',
+      options: 'Private Donor',
+      image: IMG.SearchImage2, // image from membersNearbyBase
+      badge: 'New',
+      price: "$800.00 USD",
+      mutualMatch: false,
+      Subscription: true,
+      isOnline: true, // from membersNearbyBase
+    },
+    {
+      id: 3,
+      name: 'Lyon',
+      age: 29,
+      location: 'New York, New York',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Sperm)',
+      options: 'Private Donor',
+      image: IMG.SearchImage3, // image from membersNearbyBase
+      badge: 'New',
+      price: "$800.00 USD",
+      mutualMatch: true,
+      Subscription: true,
+      isOnline: false, // default
+    },
+    {
+      id: 4,
+      name: 'Harry', // no profile in profiles array for id 4, keep default values
+      age: null,
+      location: null,
+      flag: null,
+      donorType: null,
+      options: null,
+      image: IMG.SearchImage1, // from membersNearbyBase
+      badge: null,
+      price: null,
+      mutualMatch: false,
+      Subscription: false,
+      isOnline: false,
+    },
+    {
+      id: 5,
+      name: 'Liam', // no profile in profiles array for id 5
+      age: null,
+      location: null,
+      flag: null,
+      donorType: null,
+      options: null,
+      image: IMG.SearchImage2, // from membersNearbyBase
+      badge: null,
+      price: null,
+      mutualMatch: false,
+      Subscription: false,
+      isOnline: false,
+    },
+  ];
+  // const renderMarker = marker => {
+  //   if (marker.isCluster) {
+  //     const PinImageComponent = marker.pinImage;
+  //     return (
+  //       <Marker key={marker.id} coordinate={marker.coordinate} anchor={{x: 0.5, y: 1}}>
+  //         <View style={styles.markerContainer}>
+  //           <View style={styles.clusterContainer}>
+  //             {marker.clusterImages.map((img, idx) => {
+  //               const ImageComponent = img;
+  //               return (
+  //                 <View
+  //                   key={idx}
+  //                   style={[
+  //                     styles.clusterImageWrapper,
+  //                     {
+  //                       left: idx * 18,
+  //                       zIndex: marker.clusterImages.length - idx,
+  //                     },
+  //                   ]}>
+  //                   <ImageComponent width={mvs(50)} height={mvs(50)} />
+  //                 </View>
+  //               );
+  //             })}
+  //           </View>
+  //           <View style={styles.pinLine} />
+  //           <PinImageComponent width={mvs(20)} height={mvs(20)} />
+  //         </View>
+  //       </Marker>
+  //     );
+  //   }
 
-    const ProfileImageComponent = marker.profileImage;
-    const PinImageComponent = marker.pinImage;
-    return (
-      <Marker key={marker.id} coordinate={marker.coordinate} anchor={{x: 0.5, y: 1}}>
-        <View style={styles.markerContainer}>
-          <ProfileImageComponent width={mvs(50)} height={mvs(50)} />
-          <View style={styles.pinLine} />
-          <PinImageComponent width={mvs(20)} height={mvs(20)} />
-        </View>
-      </Marker>
-    );
-  };
+  //   const ProfileImageComponent = marker.profileImage;
+  //   const PinImageComponent = marker.pinImage;
+  //   return (
+  //     <Marker key={marker.id} coordinate={marker.coordinate} anchor={{x: 0.5, y: 1}}>
+  //       <View style={styles.markerContainer}>
+  //         <ProfileImageComponent width={mvs(50)} height={mvs(50)} />
+  //         <View style={styles.pinLine} />
+  //         <PinImageComponent width={mvs(20)} height={mvs(20)} />
+  //       </View>
+  //     </Marker>
+  //   );
+  // };
+
+
+
+
+
+  // const renderMarker = marker => (
+  //     <Marker
+  //       key={marker.id}
+  //       coordinate={marker.coordinate}
+  //        anchor={{x: 0.5, y: 0.9}}
+  //       tracksViewChanges={false}
+  //       onPress={() => navigate('SearchScreenTap')}>
+  //       <View style={styles.markerContainer}>
+  //         <Image source={marker.profileImage} style={styles.profileImage} />
+  //         <View style={styles.pinLine} />
+  //         <View style={styles.pinDot} />
+  //       </View>
+  //     </Marker>
+  //   );
+  const renderMarker = marker => (
+  <Marker
+    key={marker.id}
+    coordinate={marker.coordinate}
+    image={marker.profileImage}   // 🔥 MUST BE PNG
+    anchor={{x: 0.5, y: 1}}
+    tracksViewChanges={false}
+    onPress={() => navigate('SearchScreenTap')}
+  />
+);
 
   const renderMemberCard = ({item}) => {
     const ImageComponent = item.image;
@@ -146,19 +275,12 @@ const SearchScreenTap = () => {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
     checkLocationPermission();
-    
-    // Listen for app state changes (when user returns from settings)
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      if (nextAppState === 'active') {
-        checkLocationPermission();
-      }
+    const sub = AppState.addEventListener('change', s => {
+      if (s === 'active') checkLocationPermission();
     });
-
-    return () => {
-      subscription?.remove();
-    };
+    return () => sub.remove();
   }, []);
 
   useFocusEffect(
@@ -169,21 +291,17 @@ const SearchScreenTap = () => {
 
   const checkLocationPermission = async () => {
     try {
-      let hasPermission = false;
-
+      let granted = false;
       if (Platform.OS === 'android') {
-        const result = await PermissionsAndroid.check(
+        granted = await PermissionsAndroid.check(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
-        hasPermission = result;
       } else {
         const status = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
-        hasPermission = status === RESULTS.GRANTED;
+        granted = status === RESULTS.GRANTED;
       }
-
-      setHasLocationAccess(hasPermission);
-    } catch (error) {
-      console.log('Error checking location permission:', error);
+      setHasLocationAccess(granted);
+    } catch {
       setHasLocationAccess(false);
     }
   };
@@ -214,7 +332,7 @@ const SearchScreenTap = () => {
       {!!hasLocationAccess ? (
         <>
           <View style={styles.mapContainer}>
-            <MapView
+            {/* <MapView
               style={styles.map}
               region={region}
               onRegionChangeComplete={setRegion}
@@ -225,8 +343,15 @@ const SearchScreenTap = () => {
               zoomEnabled
               scrollEnabled>
               {mapMarkers.map(renderMarker)}
-            </MapView>
-            
+            </MapView> */}
+              <MapView
+            provider={PROVIDER_GOOGLE}
+            style={StyleSheet.absoluteFillObject}
+            initialRegion={initialRegion}
+            rotateEnabled={false}
+            pitchEnabled={false}>
+            {mapMarkers.map(renderMarker)}
+          </MapView>
             {/* Location Indicator - Outside MapView */}
             <View style={styles.locationIndicator}>
               <IMG.searchNavigate width={mvs(16)} height={mvs(16)} />
@@ -494,6 +619,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: mvs(8),
     lineHeight: mvs(20),
+  },
+    pinLine: {
+    width: 1,
+    height: mvs(12),
+    backgroundColor: '#999999',
   },
   locationPromptButton: {
     backgroundColor: colors.primary,

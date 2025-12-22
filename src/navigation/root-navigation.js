@@ -150,7 +150,7 @@ export const RootNavigator = () => {
         barStyle={'dark-content'}
       />
       <Stack.Navigator
-         initialRouteName="ChatMainScreen"
+         initialRouteName="Drawer"
         //  initialRouteName="PlaceofferCheckoutScreen"
         //  initialRouteName="QRScreen"
         //  initialRouteName="ReviewFromAdminScreen"

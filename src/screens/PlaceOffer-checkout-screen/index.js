@@ -33,9 +33,10 @@ const PlaceofferCheckoutScreen = props => {
   const isButtonEnabled = offerValue.trim() !== '' && isOfferValid;
 
   const handlePlaceOffer = () => {
-    if (isButtonEnabled) {
-      setShowSubmitModal(true);
-    }
+    // if (isButtonEnabled) {
+    //   setShowSubmitModal(true);
+    // }
+    navigate("ResourcesScreen")
   };
 
   const handleBuyNow = () => {

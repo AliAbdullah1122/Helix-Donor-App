@@ -15,7 +15,9 @@ import * as IMG from 'assets/images';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
-
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setSubscribed } from 'store/reducers/user-reducer';
 const plans = [
   {
     id: '1',
@@ -77,6 +79,8 @@ const features = [
 ];
 
 const PremiumUnlockFilterScreen = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [selectedPlan, setSelectedPlan] = useState('1');
 
   const selectedPlanData = plans.find(plan => plan.id === selectedPlan);
@@ -94,7 +98,8 @@ const PremiumUnlockFilterScreen = () => {
           color={"#404040"}
           style={styles.headerTitle}
         />
-        <TouchableOpacity style={styles.closeBtn}>
+        {/* <TouchableOpacity style={styles.closeBtn}> */}
+        <TouchableOpacity style={styles.closeBtn} onPress={() => { navigation.goBack() }}>
           <Text style={styles.closeText}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -109,13 +114,13 @@ const PremiumUnlockFilterScreen = () => {
           </View>
           <View style={styles.titleTextWrapper}>
             <Medium
-              label="Don't Wait to Match"
+              label="Find Your Perfect Match"
               fontSize={mvs(24)}
               color={colors.black}
               style={styles.titleText}
             />
             <Regular
-              label="Unlock Direct Messaging to slide into anyone's DMs instantly."
+             label="Unlock advanced filters like Height, Education, and Genetic History."
               fontSize={mvs(13)}
               numberOfLines={10}
               color={colors.subteXTcOLOR}
@@ -225,7 +230,11 @@ const PremiumUnlockFilterScreen = () => {
       </View>
 
         {/* Subscribe Button */}
-        <TouchableOpacity style={styles.subscribeBtn}>
+        {/* <TouchableOpacity 
+        style={styles.subscribeBtn}> */}
+        <TouchableOpacity style={styles.subscribeBtn} onPress={() => {
+          dispatch(setSubscribed(true));
+          navigation.goBack() }}>
           <Bold
             label={subscribeText}
             fontSize={mvs(15)}

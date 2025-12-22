@@ -21,6 +21,7 @@ const AuctionScreen = props => {
 
   const handlePlaceOffer = () => {
     // Add your place offer logic here
+    navigate("PlaceNormalOfferScreen")
   };
 
   const handleBuyNow = () => {

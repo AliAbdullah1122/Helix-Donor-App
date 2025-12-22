@@ -20,6 +20,7 @@ const PrivateOfferScreen = props => {
   const navigation = useNavigation();
 
   const handlePlaceOffer = () => {
+    navigate("PlacePrivateOfferScreen")
     // Add your place offer logic here
   };
 

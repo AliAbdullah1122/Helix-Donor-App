@@ -368,3 +368,5 @@ export {default as SwipeArchive} from './SwipeArchive.svg';
 export {default as SwipeAbleBlock} from './SwipeAbleBlock.svg';
 export {default as swipeableDeleet} from './swipeableDeleet.svg';
 export {default as SwipenewDot} from './SwipenewDot.svg';
+export {default as MapUser1} from './MapUser1.png';
+export {default as MapMoreUser} from './MapMoreUser.png';

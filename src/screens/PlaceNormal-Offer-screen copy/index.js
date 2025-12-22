@@ -22,7 +22,8 @@ const PlaceNormalOfferScreen = props => {
   const navigation = useNavigation();
 
   const handlePlaceOffer = () => {
-    setShowSubmitModal(true);
+    navigate("PlaceIncreaseOfferScreen")
+    // setShowSubmitModal(true);
   };
 
   const handleBuyNow = () => {
@@ -216,7 +217,8 @@ const PlaceNormalOfferScreen = props => {
           {/* Done Button */}
           <TouchableOpacity 
             style={styles.submitModalDismissButton}
-            onPress={() => setShowSubmitModal(false)}>
+            onPress={() => {setShowSubmitModal(false); navigate("Drawer")} }
+            >
             <Medium
               label="Done"
               fontSize={mvs(16)}

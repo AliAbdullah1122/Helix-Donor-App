@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -17,10 +17,13 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { navigate } from 'navigation/navigation-ref';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
 const SearchFilterScreen = () => {
+const navigation = useNavigation();
   const [intentExpanded, setIntentExpanded] = useState(false);
   const [basicsExpanded, setBasicsExpanded] = useState(false);
   const [physicalExpanded, setPhysicalExpanded] = useState(false);
@@ -56,6 +59,29 @@ const SearchFilterScreen = () => {
   const [heightUnlocked, setHeightUnlocked] = useState(false);
   const [eyeColorUnlocked, setEyeColorUnlocked] = useState(false);
   const [geneticUnlocked, setGeneticUnlocked] = useState(false);
+
+
+  const reduxState = useSelector(state => state);
+console.log('Redux State:', reduxState);
+
+const subscribed = useSelector(state => state.user.subscribed);
+console.log('Subscribed:', subscribed);
+
+  console.log('Subscribed:', subscribed);
+  useEffect(() => {
+  if (subscribed) {
+    setEducationUnlocked(true);
+    setHeightUnlocked(true);
+    setEyeColorUnlocked(true);
+    setGeneticUnlocked(true);
+  } else {
+    // optional: lock again if unsubscribed
+    setEducationUnlocked(false);
+    setHeightUnlocked(false);
+    setEyeColorUnlocked(false);
+    setGeneticUnlocked(false);
+  }
+}, [subscribed]);
 
   const toggleGoal = value => {
     if (selectedGoals.includes(value)) {
@@ -155,7 +181,10 @@ const SearchFilterScreen = () => {
       <Row style={styles.headerRow}>
         <View />
         <Bold label="Filter" fontSize={mvs(18)} color={colors.black} />
-        <TouchableOpacity onPress={() => navigate('SearchScreen')}>
+        <TouchableOpacity
+        //  onPress={() => navigate('SearchScreen')}
+    onPress={() => navigation.goBack()}
+         >
           <Icon name="close" size={mvs(22)} color={colors.black} />
         </TouchableOpacity>
       </Row>
@@ -354,7 +383,9 @@ const SearchFilterScreen = () => {
                 )}
               </View>
               {!educationUnlocked && (
-                <TouchableOpacity style={styles.unlockButton} onPress={() => setEducationUnlocked(true)}>
+                
+                // <TouchableOpacity style={styles.unlockButton} onPress={() => setEducationUnlocked(true)}>
+                <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
                     label="Unlock"
                     fontSize={mvs(14)}
@@ -384,7 +415,8 @@ const SearchFilterScreen = () => {
               </View>
 
               {/* Occupation */}
-              <TouchableOpacity style={styles.navigationRow}>
+              {/* <TouchableOpacity style={styles.navigationRow}> */}
+              <TouchableOpacity style={styles.navigationRow} onPress={() => navigate('SearchOccupationScreen')}>
                 <Medium
                   label="Occupation (2 Selected)"
                   fontSize={mvs(14)}
@@ -457,7 +489,8 @@ const SearchFilterScreen = () => {
                 />
               </View>
               {!heightUnlocked && (
-                <TouchableOpacity style={styles.unlockButton} onPress={() => setHeightUnlocked(true)}>
+                // <TouchableOpacity style={styles.unlockButton} onPress={() => setHeightUnlocked(true)}>
+                <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
                     label="Unlock"
                     fontSize={mvs(14)}
@@ -553,7 +586,8 @@ const SearchFilterScreen = () => {
                 )}
               </View>
               {!eyeColorUnlocked && (
-                <TouchableOpacity style={styles.unlockButton} onPress={() => setEyeColorUnlocked(true)}>
+                // <TouchableOpacity style={styles.unlockButton} onPress={() => setEyeColorUnlocked(true)}>
+                <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
                     label="Unlock"
                     fontSize={mvs(14)}
@@ -608,7 +642,8 @@ const SearchFilterScreen = () => {
           {ancestryExpanded && (
             <View style={styles.cardBody}>
               {/* Race / Ethnicity */}
-              <TouchableOpacity style={styles.navigationRow}>
+              {/* <TouchableOpacity style={styles.navigationRow}> */}
+              <TouchableOpacity style={styles.navigationRow} onPress={() => navigate('SearchEthnicityScreen')}>
                 <Medium
                   label="Race / Ethnicity (2 Selected)"
                   fontSize={mvs(14)}
@@ -618,7 +653,8 @@ const SearchFilterScreen = () => {
               </TouchableOpacity>
 
               {/* Nationality */}
-              <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}>
+              {/* <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}> */}
+              <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]} onPress={() => navigate('SearchNationlaityScreen')}>
                 <Medium
                   label="Nationality (2 Selected)"
                   fontSize={mvs(14)}
@@ -648,7 +684,8 @@ const SearchFilterScreen = () => {
               </View>
 
               {/* Religion */}
-              <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}>
+              {/* <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}> */}
+              <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]} onPress={() => navigate('SearchReligionScreen')}>
                 <Medium
                   label="Religion (2 Selected)"
                   fontSize={mvs(14)}
@@ -795,7 +832,8 @@ const SearchFilterScreen = () => {
               </View>
 
               {/* Genetic Conditions Filter */}
-              <TouchableOpacity style={[styles.geneticFilterButton, {marginTop: mvs(16)}]}>
+              {/* <TouchableOpacity style={[styles.geneticFilterButton, {marginTop: mvs(16)}]}> */}
+              <TouchableOpacity style={[styles.geneticFilterButton, {marginTop: mvs(16)}]} onPress={()=> navigate('SearchGeneticScreen')}>
                 <Regular
                   label={`Genetic Conditions Filter (${selectedGeneticConditions.length})`}
                   fontSize={mvs(14)}
@@ -832,7 +870,8 @@ const SearchFilterScreen = () => {
               )}
 
               {!geneticUnlocked && (
-                <TouchableOpacity style={styles.unlockButton} onPress={() => setGeneticUnlocked(true)}>
+                // <TouchableOpacity style={styles.unlockButton} onPress={() => setGeneticUnlocked(true)}>
+                <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
                     label="Unlock"
                     fontSize={mvs(14)}
@@ -1160,7 +1199,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: mvs(20),
+    bottom: mvs(40),
     paddingHorizontal: mvs(16),
     justifyContent: 'space-between',
     alignItems: 'center',

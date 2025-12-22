@@ -64,14 +64,19 @@ const RoleSelectionScreen = props => {
   const handleRoleToggle = (roleId) => {
     setSelectedRoles(prev => {
       if (prev.includes(roleId)) {
-        return prev.filter(id => id !== roleId);
+        return [];
       } else {
-        return [...prev, roleId];
+        return [roleId];
       }
     });
   };
 
   const handleContinue = () => {
+    // navigate("DriverRegistrationPart1Screen")
+      if (serviceType === 'surrogacy') {
+    navigate('GameteSelectionScreen');
+    return;
+  }
     // donor flow: if "I'm Looking for a Donor" is selected, go to GameteSelectionScreen
     if (serviceType !== 'surrogacy' && selectedRoles.includes('looking-for-donor')) {
       navigate('GameteSelectionScreen');
@@ -99,7 +104,7 @@ const RoleSelectionScreen = props => {
         </TouchableOpacity> */}
 
         {/* Heading */}
-        <View style={{marginTop:mvs(50)}}>
+        <View style={{marginTop:mvs(40)}}>
         <Medium
           label={serviceType === 'surrogacy' ? "What are you looking for?" : "What best describes you?"}
           fontSize={mvs(24)}

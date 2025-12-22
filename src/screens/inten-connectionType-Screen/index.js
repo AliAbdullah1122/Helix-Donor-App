@@ -106,7 +106,7 @@ const IntentConnectiontypeScreen = props => {
         </TouchableOpacity> */}
 
         {/* Heading */}
-        <View style={{marginTop:mvs(50)}}>
+        <View style={{marginTop:mvs(40)}}>
         <Medium
           label="What kind of procreation pairing would you like to be?"
           fontSize={mvs(24)}

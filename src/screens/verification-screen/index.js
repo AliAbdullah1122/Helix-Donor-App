@@ -116,11 +116,18 @@ const navigation = useNavigation();
         
 
         </Row>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        {/* <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
 
          <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
-       
+        */}
+
+          <View style={{paddingHorizontal:mvs(10)}}>
+                         <Medium  color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
+                         </View>
+                         <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+                          <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
+                         </View>
         <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
         <Medium
           label={'Verify Your Identity?'}
@@ -183,7 +190,7 @@ const navigation = useNavigation();
         />
       </View>
 
-      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(10)}}>
+      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
         <Row>
        <PrimaryButton
                       containerStyle={{

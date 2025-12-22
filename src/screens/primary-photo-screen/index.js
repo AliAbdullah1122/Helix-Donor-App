@@ -236,7 +236,7 @@ const PrimaryPhotoScreen = props => {
         />
       </View>
 
-      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(10)}}>
+      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
         <Row>
        <PrimaryButton
                       containerStyle={{

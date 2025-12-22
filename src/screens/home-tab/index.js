@@ -38,6 +38,8 @@ const HomeTab = () => {
         image: IMG.HomeImageOng, // PNG image
         badge: 'Xytex',
         price:"$800.00 USD",
+        mutualMatch: false,
+        Subscription: false,
       },
       {
         id: 2,
@@ -51,6 +53,22 @@ const HomeTab = () => {
         badge: 'New',
         price:"$800.00 USD",
 
+    mutualMatch: false,
+        Subscription: true,
+      },
+      {
+        id: 3,
+        name: 'Lyon',
+        age: 29,
+        location: 'New York, New York',
+        flag: '🇺🇸',
+        donorType: 'Donor (Offering: Sperm)',
+        options: 'Private Donor',
+        image: IMG.HomeImageOng, // PNG image
+        badge: 'New',
+        price: "$800.00 USD",
+             mutualMatch: true,
+        Subscription: true,
       },
     ],
     [],
@@ -58,7 +76,10 @@ const HomeTab = () => {
 
   const renderProfileCard = useCallback(({item}) => {
     return (
-      <TouchableOpacity onPress={()=>navigate("ProfileDetailsHomeScreen")} style={styles.profileCardContainer}>
+      // <TouchableOpacity onPress={()=>navigate("ProfileDetailsHomeScreen")} style={styles.profileCardContainer}>
+      <TouchableOpacity onPress={() =>
+        navigate("ProfileDetailsHomeScreen", { item })
+      } style={styles.profileCardContainer}>
         {/* Profile Card */}
         <View style={styles.profileCard}>
           {/* Profile Image */}
@@ -132,7 +153,10 @@ const HomeTab = () => {
 
               {/* Bid Now and Buy Now Buttons */}
               <Row style={styles.bidBuyButtonsContainer}>
-                <TouchableOpacity style={styles.bidBuyButton}>
+                {/* <TouchableOpacity style={styles.bidBuyButton}> */}
+                <TouchableOpacity style={styles.bidBuyButton}
+                onPress={() => {navigate("PrivateOfferScreen")}}
+                >
                   <Row style={{alignItems: 'center', justifyContent: 'center'}}>
                     {/* <IMG.HomeCardCross width={mvs(20)} height={mvs(20)} /> */}
                     <Regular
@@ -143,7 +167,8 @@ const HomeTab = () => {
                     />
                   </Row>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.bidBuyButton}>
+                {/* <TouchableOpacity style={styles.bidBuyButton}> */}
+                <TouchableOpacity style={styles.bidBuyButton} onPress={() => {navigate("AuctionScreen")}}>
                   <Row style={{alignItems: 'center', justifyContent: 'center'}}>
                     {/* <IMG.ResourcesDna width={mvs(20)} height={mvs(20)} /> */}
                     <Regular
@@ -169,11 +194,24 @@ const HomeTab = () => {
               <IMG.HomeCardCross width={mvs(54)} height={mvs(54)} />
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={()=>navigate("MatchMakingScreen")}
             //  style={styles.actionButtonPrimary}
              >
               <IMG.HomeCardIcon width={mvs(120)} height={mvs(120)} />
             </TouchableOpacity>
             <TouchableOpacity 
+            onPress={() => {
+                if(item.mutualMatch){
+                  
+                  navigate("MainInboxScreen")
+                } else {
+                  if (item?.Subscription) {
+                    navigate("MainInboxScreen")
+                  } else {
+                    navigate("PremiumUnlockChatScreen")
+                  }
+                }
+              }}
             // style={styles.actionButton}
             >
               <IMG.HomeCardMessage width={mvs(54)} height={mvs(54)} />
@@ -192,10 +230,10 @@ const HomeTab = () => {
         <Row style={styles.headerRow}>
           <IMG.HomeLogo width={mvs(100)} height={mvs(30)} />
           <Row style={{alignItems: 'center'}}>
-            <TouchableOpacity style={{marginRight: mvs(16)}}>
+            <TouchableOpacity onPress={()=>navigate("MainNotificationScreen")} style={{marginRight: mvs(16)}}>
               <IMG.Homenotification width={mvs(24)} height={mvs(24)} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigate("SearchFilterScreen")}>
               <IMG.HomeFilter width={mvs(24)} height={mvs(24)} />
             </TouchableOpacity>
           </Row>
@@ -285,7 +323,7 @@ export default HomeTab;
 const styles = StyleSheet.create({
   headerContainer: {
     paddingHorizontal: mvs(20),
-    paddingTop: mvs(15),
+    paddingTop: mvs(20),
     paddingBottom: mvs(10),
     backgroundColor: colors.white,
   },

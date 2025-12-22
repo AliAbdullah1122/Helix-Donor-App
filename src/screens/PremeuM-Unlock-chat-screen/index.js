@@ -15,6 +15,7 @@ import * as IMG from 'assets/images';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
+import { useNavigation } from '@react-navigation/native';
 
 const plans = [
   {
@@ -76,7 +77,9 @@ const features = [
   },
 ];
 
+
 const PremiumUnlockChatScreen = () => {
+  const navigation = useNavigation();
   const [selectedPlan, setSelectedPlan] = useState('1');
 
   const selectedPlanData = plans.find(plan => plan.id === selectedPlan);
@@ -94,7 +97,7 @@ const PremiumUnlockChatScreen = () => {
           color={"#404040"}
           style={styles.headerTitle}
         />
-        <TouchableOpacity style={styles.closeBtn}>
+       <TouchableOpacity onPress={() => navigation.goBack()} style={styles.closeBtn}>
           <Text style={styles.closeText}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -225,7 +228,8 @@ const PremiumUnlockChatScreen = () => {
       </View>
 
         {/* Subscribe Button */}
-        <TouchableOpacity style={styles.subscribeBtn}>
+        {/* <TouchableOpacity style={styles.subscribeBtn}> */}
+        <TouchableOpacity onPress={() => {navigate("MainInboxScreen")}} style={styles.subscribeBtn}>
           <Bold
             label={subscribeText}
             fontSize={mvs(15)}

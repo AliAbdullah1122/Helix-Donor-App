@@ -1476,7 +1476,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     paddingHorizontal: mvs(20),
-    paddingTop: mvs(18),
+    paddingTop: mvs(20),
     paddingBottom: mvs(12),
     backgroundColor: colors.white,
   },

@@ -99,10 +99,16 @@ const DriverRegistrationPart1Screen = props => {
         
 
         </Row>
-        <View style={{marginHorizontal:mvs(20)}}>
+        {/* <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
 
          <Regular label={'Step 1 / 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
-         </View>
+         </View> */}
+          <View style={{paddingHorizontal:mvs(10)}}>
+                 <Medium  color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
+                 </View>
+                 <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+                  <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
+                 </View>
        
         <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
         <Medium
@@ -187,7 +193,7 @@ const DriverRegistrationPart1Screen = props => {
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
-      <View style={{marginHorizontal:mvs(20)}}>
+      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
        <PrimaryButton
                       containerStyle={{
                         borderRadius: mvs(50),

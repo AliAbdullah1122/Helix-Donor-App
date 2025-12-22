@@ -34,6 +34,8 @@ const BackgroundLifeStyleScreen = props => {
   const [otpValue, setOtpValue] = React.useState('');
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [selectedGender, setSelectedGender] = React.useState('Male');
+  const [selectedNationality, setSelectedNationality] = React.useState(null);
+  const [selectedDiet, setSelectedDiet] = React.useState(null);
     const navigation = useNavigation();
 
   const initialValues = {
@@ -150,7 +152,7 @@ const BackgroundLifeStyleScreen = props => {
         <View style={{paddingHorizontal:mvs(10)}}>
         <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
         </View>
-        <View style={{marginHorizontal:mvs(20)}}>
+        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
 
          <Regular label={'Step 2 / 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
@@ -215,23 +217,18 @@ const BackgroundLifeStyleScreen = props => {
                       // containerStyle={styles.input}
                     />
                       <InputWithIcon
-
                     placeholder={'Select One'}
                     label='Nationality'
-                     items={hairColorOptions}
-                    // isRequired
-                    // error={touched?.method ? t(errors.method) : ''}
-                    // onChangeText={id => setFieldValue('method', id)}
-                    // onBlur={handleChange('vehicle_make')}
-                    // value={values?.method}
-                    // id={values?.method}
-                    // items={Nationality}
-                    
+                    items={Nationality}
+                    onChangeText={(id) => setSelectedNationality(id)}
+                    id={selectedNationality}
                     /> 
                       <InputWithIcon
                     placeholder={'Select One'}
                     label='Diet'
                     items={eyeColorOptions}
+                    onChangeText={(id) => setSelectedDiet(id)}
+                    id={selectedDiet}
                     /> 
                    
                      
@@ -252,7 +249,7 @@ const BackgroundLifeStyleScreen = props => {
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
-        <View style={{marginHorizontal:mvs(20), marginBottom: mvs(10)}}>
+        <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
               <Row>
              <PrimaryButton
                             containerStyle={{

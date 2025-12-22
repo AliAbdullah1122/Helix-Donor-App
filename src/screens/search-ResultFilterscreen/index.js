@@ -388,8 +388,8 @@ const SearchResultFilterScreen = () => {
           style={styles.resultsCount}
         />
 
-        {hasResults ? (
-          <>
+        {!hasResults ? (
+          <View >
             {/* Profile Cards */}
             <FlatList
               data={profiles}
@@ -424,7 +424,7 @@ const SearchResultFilterScreen = () => {
                 renderItem={renderMatchCard}
               />
             </View>
-          </>
+          </View>
         ) : (
           <View style={styles.emptyStateContainer}>
             <IMG.Nosearch width={mvs(80)} height={mvs(80)} />
@@ -594,7 +594,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     paddingHorizontal: mvs(20),
-    paddingTop: mvs(50),
+    paddingTop: mvs(20),
     paddingBottom: mvs(12),
     backgroundColor: colors.white,
   },
@@ -662,12 +662,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(20),
     paddingBottom: mvs(20),
     // backgroundColor: colors.white,
+    marginBottom:mvs(30)
   },
   matchesHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: mvs(12),
+    // marginBottom: mvs(12),
   },
   matchesList: {
     paddingRight: mvs(20),

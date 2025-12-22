@@ -76,21 +76,21 @@ const AccountRoleScreen = props => {
 
   const handleFormSubmit = async (values,{ resetForm }) => {
     try {
-      setLoading(true); 
-      const apiBody = {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        password: values.password,
-      };
-      console.log('API Body:', apiBody);
-      const response = await signUpForm(apiBody);
-      if (response.success) { 
-        console.log('API Response:', response);
-        resetForm(); 
-        setOtpModalVisible(true); 
-      }
-      console.log('response', response);
+      // setLoading(true); 
+      // const apiBody = {
+      //   firstName: values.firstName,
+      //   lastName: values.lastName,
+      //   email: values.email,
+      //   password: values.password,
+      // };
+      // console.log('API Body:', apiBody);
+      // const response = await signUpForm(apiBody);
+      // if (response.success) { 
+      //   console.log('API Response:', response);
+      //   resetForm(); 
+      //   setOtpModalVisible(true); 
+      // }
+      // console.log('response', response);
     } catch (error) {
       console.log('error=>', error);
     } finally {
@@ -295,7 +295,7 @@ const AccountRoleScreen = props => {
                         color={colors.textColorSecondary}
                         style={styles.sectionTitle}
                       />
-                      <TouchableOpacity style={styles.recordAudioRow}>
+                    <TouchableOpacity style={styles.recordAudioRow} onPress={() => navigate('RecordAudioScreen')}>
                         <Regular
                           label="Record Audio"
                           fontSize={mvs(14)}
@@ -448,11 +448,12 @@ const AccountRoleScreen = props => {
               </Formik>
       </ScrollView>
       {/* Save Changes Button */}
-      <View style={{paddingHorizontal: mvs(20), paddingBottom: mvs(20)}}>
+      <View style={{paddingHorizontal: mvs(20), paddingBottom: mvs(40)}}>
              <PrimaryButton
           containerStyle={styles.saveButton}
                             loading={loading}
-          onPress={handleFormSubmit}
+          // onPress={handleFormSubmit}
+          onPress={() => navigation.goBack()}
           title="Save Changes"
         />
                           </View>

@@ -304,18 +304,37 @@ const membersNearby = [
 //       </View>
 //     </Marker>
 //   );
+// const renderMarker = marker => (
+//   <Marker
+//     key={marker.id}
+//     coordinate={marker.coordinate}
+//     image={marker.profileImage}   // 🔥 MUST BE PNG
+//     anchor={{x: 0.5, y: 1}}
+//     tracksViewChanges={false}
+//     onPress={() => navigate('SearchScreenTap')}
+//   />
+  
+  
+// );
 const renderMarker = marker => (
   <Marker
     key={marker.id}
     coordinate={marker.coordinate}
-    image={marker.profileImage}   // 🔥 MUST BE PNG
-    anchor={{x: 0.5, y: 1}}
-    tracksViewChanges={false}
+    anchor={{ x: 0.5, y: 1 }}
     onPress={() => navigate('SearchScreenTap')}
-  />
-  
-  
+  >
+    <View style={styles.markerContainer}>
+      <Image
+        source={marker.profileImage}
+        style={styles.markerProfileImage}
+         resizeMode="contain"
+      />
+      <View style={styles.pinLine} />
+      <View style={styles.pinDot} />
+    </View>
+  </Marker>
 );
+
 
   const renderMemberCard = ({item}) => {
     const ImageComponent = item.image;
@@ -547,7 +566,8 @@ const renderMarker = marker => (
             </MapView> */}
             <MapView
             provider={PROVIDER_GOOGLE}
-            style={StyleSheet.absoluteFillObject}
+            style={{ flex: 1 }}
+            // style={StyleSheet.absoluteFillObject}
             initialRegion={initialRegion}
             rotateEnabled={false}
             pitchEnabled={false}>
@@ -670,7 +690,7 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     flex: 1,
-    position: 'relative',
+    // position: 'relative',
     backgroundColor: '#f5f5f5',
   },
   map: {
@@ -679,6 +699,7 @@ const styles = StyleSheet.create({
   markerContainer: {
     alignItems: 'center',
     justifyContent: 'flex-start',
+    // backgroundColor:"red"
   },
   profileImage: {
     width: mvs(50),
@@ -795,6 +816,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.white,
   },
+  markerProfileImage: {
+  width: mvs(94),        // 🔥 BIGGER
+  height: mvs(70),
+  resizeMode:'contain'
+  // borderRadius: mvs(35),
+  // borderWidth: 3,
+  // borderColor: colors.white,
+  // backgroundColor: colors.white,
+},
+
   memberImageSvg: {
     borderRadius: mvs(35),
     borderWidth: 2,

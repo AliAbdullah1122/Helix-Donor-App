@@ -244,15 +244,50 @@ const mapMarkers = useMemo(
   //       </View>
   //     </Marker>
   //   );
-  const renderMarker = marker => (
+//   const renderMarker = marker => (
+//   <Marker
+//     key={marker.id}
+//     coordinate={marker.coordinate}
+//     image={marker.profileImage}   // 🔥 MUST BE PNG
+//     anchor={{x: 0.5, y: 1}}
+//     tracksViewChanges={false}
+//     onPress={() => navigate('SearchScreenTap')}
+//   />
+// );
+const renderMarker = marker => (
   <Marker
     key={marker.id}
     coordinate={marker.coordinate}
-    image={marker.profileImage}   // 🔥 MUST BE PNG
     anchor={{x: 0.5, y: 1}}
     tracksViewChanges={false}
-    onPress={() => navigate('SearchScreenTap')}
-  />
+    // onPress={() => navigate('SearchScreenTap')}
+  >
+    <View style={{alignItems: 'center'}}>
+      <Image
+        source={marker.profileImage}
+        resizeMode="contain"
+        style={{
+          width: mvs(120),
+          height: mvs(80),
+        }}
+      />
+      <View
+        style={{
+          width: 2,
+          height: 14,
+          backgroundColor: '#999',
+        }}
+      />
+      <View
+        style={{
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          backgroundColor: colors.primary,
+        }}
+      />
+    </View>
+  </Marker>
 );
 
   const renderMemberCard = ({item}) => {
@@ -346,7 +381,8 @@ const mapMarkers = useMemo(
             </MapView> */}
               <MapView
             provider={PROVIDER_GOOGLE}
-            style={StyleSheet.absoluteFillObject}
+            // style={StyleSheet.absoluteFillObject}
+             style={{ flex: 1 }}
             initialRegion={initialRegion}
             rotateEnabled={false}
             pitchEnabled={false}>
@@ -464,7 +500,7 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     flex: 1,
-    position: 'relative',
+    // position: 'relative',
     backgroundColor: '#f5f5f5',
   },
   map: {
@@ -482,6 +518,14 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     overflow: 'hidden',
   },
+   markerProfileImage: {
+  width: mvs(120),        // 🔥 BIGGER
+  height: mvs(70),
+  borderRadius: mvs(35),
+  // borderWidth: 3,
+  // borderColor: colors.white,
+  // backgroundColor: colors.white,
+},
   clusterContainer: {
     flexDirection: 'row',
     alignItems: 'center',

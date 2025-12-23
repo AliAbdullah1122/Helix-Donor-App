@@ -57,7 +57,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
 
     if (response?.status === true) {
       resetForm();
-      navigate("Drawer");
+      navigate("TabBar");
       return;
     }
 

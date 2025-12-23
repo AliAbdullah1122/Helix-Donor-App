@@ -217,7 +217,7 @@ const PlacePrivateOfferScreen = props => {
             style={styles.submitModalDismissButton}
             // onPress={() => setShowSubmitModal(false)}
             onPress={() => {setShowSubmitModal(false)
-            navigate("Drawer")
+            navigate("TabBar")
             }}
             >
             <Medium

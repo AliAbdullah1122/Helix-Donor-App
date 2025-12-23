@@ -217,7 +217,7 @@ const PlaceNormalOfferScreen = props => {
           {/* Done Button */}
           <TouchableOpacity 
             style={styles.submitModalDismissButton}
-            onPress={() => {setShowSubmitModal(false); navigate("Drawer")} }
+            onPress={() => {setShowSubmitModal(false); navigate("TabBar")} }
             >
             <Medium
               label="Done"

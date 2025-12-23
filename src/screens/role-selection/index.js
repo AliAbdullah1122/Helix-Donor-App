@@ -111,6 +111,12 @@ const RoleSelectionScreen = props => {
           color={colors.textColor}
           style={styles.heading}
         />
+         <Regular
+                  // label="Select all that apply."
+                  fontSize={mvs(14)}
+                  color={colors.textColor}
+                  style={{...styles.heading,marginTop:mvs(10)}}
+                />
         </View>
 
         {/* Role Options */}

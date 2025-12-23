@@ -794,7 +794,7 @@ const RestrictScreen = () => {
   </TouchableOpacity>
 ) : currentStep === 3 ? (
   <TouchableOpacity
-    onPress={() => navigate('Drawer')}
+    onPress={() => navigate('TabBar')}
     style={{
       borderWidth: 1,
       borderColor: colors.primary,

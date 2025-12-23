@@ -16,7 +16,7 @@ const MpinScreen = ({navigation}) => {
     } else if (value === '➡') {
       if (pin.length === 4) {
         Alert.alert('Success', 'MPIN Set Successfully!', [
-          {text: 'OK', onPress: () => navigate('Drawer')},
+          {text: 'OK', onPress: () => navigate('TabBar')},
         ]);
       } else {
         Alert.alert('Error', 'Enter a 4-digit MPIN');

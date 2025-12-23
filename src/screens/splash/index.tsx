@@ -24,7 +24,7 @@ const Splash = (props: props) => {
             if (data) {
               const user = JSON.parse(data);
               console.log('user', user);
-              screen = 'Drawer';
+              screen = 'TabBar';
             }
             
           });

@@ -135,6 +135,7 @@ import BlockedContactsScreen from 'screens/Blocked-Contacts-screen';
 import MainNotificationScreen from 'screens/MainNotification-screen';
 import MainInboxScreen from 'screens/MainInbox-screen';
 import ArchiveChatScreen from 'screens/Archive-caht-screen';
+import { TabBar } from './curvedtabs';
 
 
 
@@ -150,7 +151,7 @@ export const RootNavigator = () => {
         barStyle={'dark-content'}
       />
       <Stack.Navigator
-         initialRouteName="Drawer"
+         initialRouteName="Splash"
         //  initialRouteName="PlaceofferCheckoutScreen"
         //  initialRouteName="QRScreen"
         //  initialRouteName="ReviewFromAdminScreen"
@@ -292,7 +293,8 @@ export const RootNavigator = () => {
         </Stack.Group>
         <Stack.Group>
         </Stack.Group>
-        <Stack.Screen name="Drawer" component={DrawerNavigation} />
+        {/* <Stack.Screen name="Drawer" component={DrawerNavigation} /> */}
+        <Stack.Screen name="TabBar" component={TabBar} />
       </Stack.Navigator>
     </View>
   );

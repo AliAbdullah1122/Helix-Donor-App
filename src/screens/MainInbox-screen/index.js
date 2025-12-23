@@ -1789,7 +1789,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    marginLeft: mvs(12),
+    marginLeft: mvs(20),
   },
   chatHeaderAvatar: {
     width: mvs(40),

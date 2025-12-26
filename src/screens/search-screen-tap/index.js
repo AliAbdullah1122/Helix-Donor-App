@@ -324,44 +324,53 @@ const renderMarker = marker => (
     }, []),
   );
 
-  const checkLocationPermission = async () => {
-    try {
-      let granted = false;
-      if (Platform.OS === 'android') {
-        granted = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        );
-      } else {
-        const status = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
-        granted = status === RESULTS.GRANTED;
-      }
+  // const checkLocationPermission = async () => {
+  //   try {
+  //     let granted = false;
+  //     if (Platform.OS === 'android') {
+  //       granted = await PermissionsAndroid.check(
+  //         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  //       );
+  //     } else {
+  //       const status = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+  //       granted = status === RESULTS.GRANTED;
+  //     }
+  //     setHasLocationAccess(granted);
+  //   } catch {
+  //     setHasLocationAccess(false);
+  //   }
+  // };
+ const checkLocationPermission = async () => {
+  try {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
       setHasLocationAccess(granted);
-    } catch {
-      setHasLocationAccess(false);
-    }
-  };
+    } else {
+      const status = await check(
+        PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+      );
 
+      if (status === RESULTS.DENIED) {
+        const req = await request(
+          PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+        );
+        setHasLocationAccess(req === RESULTS.GRANTED);
+      } else {
+        setHasLocationAccess(status === RESULTS.GRANTED);
+      }
+    }
+  } catch (e) {
+    setHasLocationAccess(false);
+  }
+};
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <StatusBar translucent={false} backgroundColor={colors.white} barStyle="white-content" />
 
       {/* Search Input */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchInputContainer}>
-          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search by Ancestry, etc."
-            placeholderTextColor="#8C8C8C"
-            value={searchText}
-            onChangeText={setSearchText}
-          />
-          <View style={styles.searchDivider} />
-          <TouchableOpacity onPress={()=>navigate("SearchFilterScreen")}>
-            <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
-          </TouchableOpacity>
-        </View>
-      </View>
+     
 
       {/* Map Section or Location Access Prompt */}
       {!!hasLocationAccess ? (
@@ -380,14 +389,32 @@ const renderMarker = marker => (
               {mapMarkers.map(renderMarker)}
             </MapView> */}
               <MapView
-            provider={PROVIDER_GOOGLE}
-            // style={StyleSheet.absoluteFillObject}
-             style={{ flex: 1 }}
-            initialRegion={initialRegion}
-            rotateEnabled={false}
-            pitchEnabled={false}>
-            {mapMarkers.map(renderMarker)}
-          </MapView>
+    style={{ flex: 1 }}
+    provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
+    initialRegion={initialRegion}
+    rotateEnabled={false}
+    pitchEnabled={false}
+    showsUserLocation={true}
+    showsMyLocationButton={Platform.OS === 'android'}
+  >
+    {mapMarkers.map(renderMarker)}
+  </MapView>
+   <View style={styles.searchContainer}>
+        <View style={styles.searchInputContainer}>
+          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search by Ancestry, etc."
+            placeholderTextColor="#8C8C8C"
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+          <View style={styles.searchDivider} />
+          <TouchableOpacity onPress={()=>navigate("SearchFilterScreen")}>
+            <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
+          </TouchableOpacity>
+        </View>
+      </View>
             {/* Location Indicator - Outside MapView */}
             <View style={styles.locationIndicator}>
               <IMG.searchNavigate width={mvs(16)} height={mvs(16)} />
@@ -466,20 +493,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  // searchContainer: {
+  //   paddingHorizontal: mvs(20),
+  //   paddingTop: mvs(50),
+  //   paddingBottom: mvs(12),
+  //   backgroundColor: colors.white,
+  //   zIndex: 10,
+  // },
   searchContainer: {
-    paddingHorizontal: mvs(20),
-    paddingTop: mvs(50),
-    paddingBottom: mvs(12),
-    backgroundColor: colors.white,
-    zIndex: 10,
-  },
+  position: 'absolute',
+  top: mvs(20),
+  left: mvs(20),
+  right: mvs(20),
+  zIndex: 20,
+}
+,
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.white,
     borderRadius: mvs(40),
     paddingHorizontal: mvs(16),
-    paddingVertical: mvs(2),
+    // paddingVertical: mvs(2),
+        height:mvs(46),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -501,7 +537,7 @@ const styles = StyleSheet.create({
   mapContainer: {
     flex: 1,
     // position: 'relative',
-    backgroundColor: '#f5f5f5',
+    // backgroundColor: '#f5f5f5',
   },
   map: {
     flex: 1,

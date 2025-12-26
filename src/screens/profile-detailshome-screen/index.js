@@ -155,7 +155,22 @@ const ProfileDetailsHomeScreen = ({route}) => {
       />
     ) : (
       // Fallback SVG
-      <IMG.SearchImage2 width="100%" height="100%" />
+      // <IMG.SearchImage2 width="100%" height="100%" />
+       <Image
+              source={profile.image}
+              // style={styles.backgroundImage}
+              style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: SCREEN_WIDTH,
+    height: Dimensions.get('window').height,
+  }}
+              resizeMode="cover"
+            />
+      
     )}
   </View>
 ))}

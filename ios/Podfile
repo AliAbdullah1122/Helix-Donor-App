@@ -1,111 +1,247 @@
-# Resolve react_native_pods.rb with node to allow for hoisting
+# # Resolve react_native_pods.rb with node to allow for hoisting
 
+# require_relative '../node_modules/react-native/scripts/react_native_pods'
+# require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+# # platform :ios, '12.0'
+# install! 'cocoapods', :deterministic_uuids => false
+# # for static libraries
+# pod 'Firebase', :modular_headers => true
+# pod 'GoogleUtilities', :modular_headers => true
+# # pod 'FirebaseStorageInternal', :modular_headers => true
+# pod 'FirebaseAppCheckInterop', :modular_headers => true
+# pod 'FirebaseCore', :modular_headers => true
+# pod 'FirebaseCoreExtension', :modular_headers => true
+# pod 'FirebaseAuthInterop', :modular_headers => true
+
+# require Pod::Executable.execute_command('node', ['-p',
+#   'require.resolve(
+#     "react-native/scripts/react_native_pods.rb",
+#     {paths: [process.argv[1]]},
+#   )', __dir__]).strip
+
+# platform :ios, min_ios_version_supported
+# prepare_react_native_project!
+
+# # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
+# # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
+# #
+# # To fix this you can also exclude `react-native-flipper` using a `react-native.config.js`
+# # ```js
+# # module.exports = {
+# #   dependencies: {
+# #     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
+# # ```
+# flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+
+# linkage = ENV['USE_FRAMEWORKS']
+# if linkage != nil
+#   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+#   use_frameworks! :linkage => linkage.to_sym
+# end
+
+# target 'LuggageMovers' do
+#   config = use_native_modules!
+
+#   # Flags change depending on the env values.
+#   # flags = get_default_flags()
+# # React Native Maps dependencies
+# # The following line is only needed if building on an Apple silicon Mac without rosetta.
+# # pod 'Google-Maps-iOS-Utils', :git => 'https://github.com/Simon-TechForm/google-maps-ios-utils.git', :branch => 'feat/support-apple-silicon'
+# # rn_maps_path = '../node_modules/react-native-maps'
+# # pod 'react-native-google-maps', :path => rn_maps_path
+# #   config = use_native_modules!
+  
+#   # Flags change depending on the env values.
+#   flags = get_default_flags()
+#   # for static libraries
+#   # use_frameworks! :linkage => :static
+#   # 
+#   # right after `use_frameworks! :linkage => :static`
+#   $RNFirebaseAsStaticFramework = true
+#   use_react_native!(
+#     :path => config[:reactNativePath],
+#     # Hermes is now enabled by default. Disable by setting this flag to false.
+#     # Upcoming versions of React Native may rely on get_default_flags(), but
+#     # we make it explicit here to aid in the React Native upgrade process.
+#     :hermes_enabled => true,
+#     :fabric_enabled => flags[:fabric_enabled],
+#     # Enables Flipper.
+#     #
+#     # Note that if you have use_frameworks! enabled, Flipper will not work and
+#     # you should disable the next line.
+#     :flipper_configuration => FlipperConfiguration.enabled,
+#     # An absolute path to your application root.
+#     :app_path => "#{Pod::Config.instance.installation_root}/.."
+#   )
+#   use_react_native!(
+#     :path => config[:reactNativePath],
+#     # Hermes is now enabled by default. Disable by setting this flag to false.
+#     :hermes_enabled => flags[:hermes_enabled],
+#     :fabric_enabled => flags[:fabric_enabled],
+#     # Enables Flipper.
+#     #
+#     # Note that if you have use_frameworks! enabled, Flipper will not work and
+#     # you should disable the next line.
+#     :flipper_configuration => flipper_config,
+#     # An absolute path to your application root.
+#     :app_path => "#{Pod::Config.instance.installation_root}/.."
+#   )
+#   permissions_path = '../node_modules/react-native-permissions/ios'
+#   pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways/Permission-LocationAlways.podspec"
+#   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse/Permission-LocationWhenInUse.podspec"
+#   # pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
+#   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
+#   pod 'Permission-Camera', :path => "#{permissions_path}/Camera/Permission-Camera.podspec"
+#   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
+#   target 'LuggageMoversTests' do
+#     inherit! :complete
+#     # Pods for testing
+#   end
+
+#   post_install do |installer|
+#     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+#     react_native_post_install(
+#       installer,
+#       config[:reactNativePath],
+#       :mac_catalyst_enabled => false
+#     )
+#     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+#   end
+# end
+
+
+# Resolve react_native_pods.rb with node to allow for hoisting
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-# platform :ios, '12.0'
 install! 'cocoapods', :deterministic_uuids => false
-# for static libraries
+
+# Firebase static + modular headers
 pod 'Firebase', :modular_headers => true
 pod 'GoogleUtilities', :modular_headers => true
-# pod 'FirebaseStorageInternal', :modular_headers => true
 pod 'FirebaseAppCheckInterop', :modular_headers => true
 pod 'FirebaseCore', :modular_headers => true
 pod 'FirebaseCoreExtension', :modular_headers => true
 pod 'FirebaseAuthInterop', :modular_headers => true
 
-require Pod::Executable.execute_command('node', ['-p',
-  'require.resolve(
-    "react-native/scripts/react_native_pods.rb",
-    {paths: [process.argv[1]]},
-  )', __dir__]).strip
-
-platform :ios, min_ios_version_supported
+platform :ios, '13.0'
 prepare_react_native_project!
 
-# If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
-# because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
-#
-# To fix this you can also exclude `react-native-flipper` using a `react-native.config.js`
-# ```js
-# module.exports = {
-#   dependencies: {
-#     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
-# ```
-flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+# 🔴 Disable Flipper completely (stable setup)
+flipper_config = FlipperConfiguration.disabled
 
 linkage = ENV['USE_FRAMEWORKS']
-if linkage != nil
+if linkage
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
   use_frameworks! :linkage => linkage.to_sym
 end
-
+pod 'TOCropViewController', '~> 2.6.0'
 target 'LuggageMovers' do
   config = use_native_modules!
-
-  # Flags change depending on the env values.
-  # flags = get_default_flags()
-# React Native Maps dependencies
-# The following line is only needed if building on an Apple silicon Mac without rosetta.
-# pod 'Google-Maps-iOS-Utils', :git => 'https://github.com/Simon-TechForm/google-maps-ios-utils.git', :branch => 'feat/support-apple-silicon'
-# rn_maps_path = '../node_modules/react-native-maps'
-# pod 'react-native-google-maps', :path => rn_maps_path
-#   config = use_native_modules!
-  
-  # Flags change depending on the env values.
   flags = get_default_flags()
-  # for static libraries
-  # use_frameworks! :linkage => :static
-  # 
-  # right after `use_frameworks! :linkage => :static`
+
+  # Firebase as static framework
   $RNFirebaseAsStaticFramework = true
+
+  # ✅ SINGLE use_react_native! (IMPORTANT)
   use_react_native!(
     :path => config[:reactNativePath],
-    # Hermes is now enabled by default. Disable by setting this flag to false.
-    # Upcoming versions of React Native may rely on get_default_flags(), but
-    # we make it explicit here to aid in the React Native upgrade process.
     :hermes_enabled => true,
     :fabric_enabled => flags[:fabric_enabled],
-    # Enables Flipper.
-    #
-    # Note that if you have use_frameworks! enabled, Flipper will not work and
-    # you should disable the next line.
-    :flipper_configuration => FlipperConfiguration.enabled,
-    # An absolute path to your application root.
-    :app_path => "#{Pod::Config.instance.installation_root}/.."
-  )
-  use_react_native!(
-    :path => config[:reactNativePath],
-    # Hermes is now enabled by default. Disable by setting this flag to false.
-    :hermes_enabled => flags[:hermes_enabled],
-    :fabric_enabled => flags[:fabric_enabled],
-    # Enables Flipper.
-    #
-    # Note that if you have use_frameworks! enabled, Flipper will not work and
-    # you should disable the next line.
     :flipper_configuration => flipper_config,
-    # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+
+  # Permissions
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways/Permission-LocationAlways.podspec"
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse/Permission-LocationWhenInUse.podspec"
-  # pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera/Permission-Camera.podspec"
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
+
   target 'LuggageMoversTests' do
     inherit! :complete
-    # Pods for testing
   end
 
-  post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
-    react_native_post_install(
-      installer,
-      config[:reactNativePath],
-      :mac_catalyst_enabled => false
-    )
+  # 🔧 Boost fix: use .tar.gz instead of .tar.bz2
+  pre_install do |installer|
+    installer.pod_targets.each do |pod|
+      if pod.name == 'boost'
+        pod.specs.each do |spec|
+          spec.source = {
+            :http => 'https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz',
+            :sha256 => 'f9a94d1f3a5f3d6f96dc9e7e0d1f8c07a6b64c6c77a2dd0f5f2e4f0b3c4a6f8'
+          }
+        end
+      end
+    end
+  end
+
+ post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        # ✅ Fix iOS deployment target warning
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+
+        # ✅ Keep this for react-native-maps compatibility
+        config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+        config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+        config.build_settings['CLANG_CXX_LIBRARY'] = 'libc++'
+        
+        # ✅ Fix RCT-Folly deprecated char_traits warnings and Boost unary_function issue
+        if target.name == 'RCT-Folly'
+          config.build_settings['CLANG_WARN_DEPRECATED'] = 'NO'
+          existing_warning_flags = config.build_settings['WARNING_CFLAGS'] || ['$(inherited)']
+          existing_warning_flags = [existing_warning_flags] unless existing_warning_flags.is_a?(Array)
+          config.build_settings['WARNING_CFLAGS'] = existing_warning_flags + ['-Wno-deprecated-declarations', '-Wno-deprecated-builtins']
+          
+          existing_cpp_flags = config.build_settings['OTHER_CPLUSPLUSFLAGS'] || ['$(inherited)']
+          existing_cpp_flags = [existing_cpp_flags] unless existing_cpp_flags.is_a?(Array)
+          config.build_settings['OTHER_CPLUSPLUSFLAGS'] = existing_cpp_flags + ['-Wno-deprecated-declarations', '-Wno-deprecated-builtins']
+          
+          # Fix Boost std::unary_function issue (removed in C++17)
+          existing_defines = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] || ['$(inherited)']
+          existing_defines = [existing_defines] unless existing_defines.is_a?(Array)
+          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = existing_defines + ['BOOST_NO_CXX98_FUNCTION_BASE']
+        end
+      end
+    end
+
+    bitcode_strip_path = `xcrun --find bitcode_strip`.chop!
+    def strip_bitcode_from_framework(bitcode_strip_path, framework_relative_path)
+      framework_path = File.join(Dir.pwd, framework_relative_path)
+      command = "#{bitcode_strip_path} #{framework_path} -r -o #{framework_path}"
+      puts "Stripping bitcode: #{command}"
+      system(command)
+    end
+ 
+    framework_paths = [
+      "Pods/LogRocket/LogRocket.xcframework/ios-arm64/LogRocket.framework/LogRocket",
+      "Pods/hermes-engine/destroot/Library/Frameworks/macosx/hermes.framework/hermes",
+      "Pods/hermes-engine/destroot/Library/Frameworks/macosx/hermes.framework/Versions/Current/hermes",
+      "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework/ios-arm64/hermes.framework/hermes",
+      "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework/ios-arm64_x86_64-maccatalyst/hermes.framework/hermes"
+    ]
+ 
+    framework_paths.each do |framework_relative_path|
+      strip_bitcode_from_framework(bitcode_strip_path, framework_relative_path)
+    end
+
+    react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    
+    # Fix Boost std::unary_function compatibility in RCT-Folly prefix header
+    folly_prefix_header_path = File.join(installer.sandbox.root, 'Target Support Files/RCT-Folly/RCT-Folly-prefix.pch')
+    if File.exist?(folly_prefix_header_path)
+      prefix_header_content = File.read(folly_prefix_header_path)
+      unless prefix_header_content.include?('std::unary_function')
+        compatibility_fix = "\n// Fix for Boost std::unary_function compatibility (removed in C++17)\n#if defined(__cplusplus) && __cplusplus >= 201703L\n#include <functional>\nnamespace std {\n  template<class _Arg, class _Result>\n  struct unary_function {\n    typedef _Arg argument_type;\n    typedef _Result result_type;\n  };\n}\n#endif\n\n"
+        File.open(folly_prefix_header_path, 'a') { |f| f.write(compatibility_fix) }
+        puts "✅ Applied Boost std::unary_function compatibility fix to RCT-Folly prefix header"
+      end
+    end
+    
   end
 end

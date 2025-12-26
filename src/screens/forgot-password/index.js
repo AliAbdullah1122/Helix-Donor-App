@@ -12,7 +12,6 @@ import {
   StatusBar,
   TouchableOpacity, // Import Alert for user feedback
 } from 'react-native';
-import LottieView from 'lottie-react-native';
 import PrimaryInput from 'components/atoms/inputs';
 import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import i18n from 'translation'; // Assuming you use i18n for localization

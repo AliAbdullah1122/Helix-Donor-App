@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Movers Club</string>
+	<string>HelixDonor</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -41,11 +41,11 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Movers Club would like to use music player</string>
+	<string>Helix Donor would like to use music player</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Movers Club would like to save photos from the app to your gallery</string>
+	<string>Helix Donor would like to save photos from the app to your gallery</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Movers Club needs access to your contacts to contact with customer.</string>
+	<string>Helix Donor needs access to your contacts to contact with customer.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location allows you to view your delievery point</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -55,11 +55,11 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location allows you to view your delievery point</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Movers Club would like to use microphone</string>
+	<string>Helix Donor would like to use microphone</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Movers Club would like to save photos from the app to your gallery</string>
+	<string>Helix Donor would like to save photos from the app to your gallery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Movers Club would like to save photos from the app to your gallery</string>
+	<string>Helix Donor would like to save photos from the app to your gallery</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Bold.ttf</string>

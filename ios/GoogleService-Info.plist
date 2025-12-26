@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCg6qyOjWipTQbvGqJ-HxfkBogg77KwmKg</string>
+	<string>AIzaSyCd2OLgSttkmm3ga63hukrfTaLlJjpL8Mo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1057985438576</string>
+	<string>337986433732</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.LuggageMovers</string>
+	<string>org.reactjs.native.example.helixDonor</string>
 	<key>PROJECT_ID</key>
-	<string>luggage-customer</string>
+	<string>helixdonor-312a3</string>
 	<key>STORAGE_BUCKET</key>
-	<string>luggage-customer.appspot.com</string>
+	<string>helixdonor-312a3.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,8 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1057985438576:ios:2eead188c590b284daa5b5</string>
-	<key>DATABASE_URL</key>
-	<string>https://luggage-customer-default-rtdb.firebaseio.com</string>
+	<string>1:337986433732:ios:dabfaeb97d136345590f91</string>
 </dict>
 </plist>

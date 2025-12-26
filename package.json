@@ -48,7 +48,6 @@
     "formik": "^2.2.9",
     "i18next": "^21.9.2",
     "lodash": "^4.17.21",
-    "lottie-react-native": "^6.1.2",
     "moment": "^2.29.4",
     "openai": "^4.103.0",
     "react": "18.2.0",

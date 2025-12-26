@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Medium from 'typography/medium-text';
 import {mvs} from 'config/metrices';
 import {OtpInput} from 'components/atoms/otp-input';
-import LottieView from 'lottie-react-native';
+
 import {onVerifyOtp} from 'services/api/auth-api-actions';
 import {useAppDispatch} from 'hooks/use-store';
 import {UTILS} from 'utils';
@@ -87,7 +87,7 @@ const SignUpModal = ({
           <TouchableOpacity onPress={() => onClose()} style={styles.cross}>
             <CrossModal height={mvs(30)} width={mvs(30)} />
           </TouchableOpacity>
-          <LottieView
+          {/* <LottieView
             source={OTPAnimation}
             autoPlay={true}
             loop={true}
@@ -97,7 +97,7 @@ const SignUpModal = ({
               alignSelf: 'center',
               marginBottom: mvs(10),
             }}
-          />
+          /> */}
           <Medium
             numberOfLines={2}
             label={t('verfication_OTP')}

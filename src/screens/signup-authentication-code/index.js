@@ -14,7 +14,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
+
 import PrimaryInput from 'components/atoms/inputs';
 import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import i18n from 'translation';

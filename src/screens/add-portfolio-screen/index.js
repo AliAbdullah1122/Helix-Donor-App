@@ -17,7 +17,6 @@ import {
   ScrollView,
   I18nManager,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
 import PrimaryInput, {
   InputWithIconComplainTypeSelection,
   TextAreaInput,

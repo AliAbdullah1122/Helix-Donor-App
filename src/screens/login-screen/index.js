@@ -81,7 +81,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
           <Image
             source={IMG.HelixWrittenLogo}
             resizeMode="contain"
-            style={{width: mvs(140), height: mvs(37)}}
+            style={{width: mvs(140), height: mvs(35)}}
           />
         </View>
         
@@ -161,7 +161,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
               label={'or continue with'}
               color={"#404040"}
               fontSize={mvs(12)}
-              style={{marginHorizontal: mvs(12)}}
+              style={{marginHorizontal: mvs(12),fontWeight:"400"}}
             />
             <View style={styles.divider} />
           </View>
@@ -173,7 +173,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
                 resizeMode="contain"
                 style={styles.socialIcon}
               />
-              <Regular label={'Google'} color={colors.black} fontSize={mvs(14)} style={{marginLeft: mvs(8)}} />
+              <Medium label={'Google'} color={colors.vibrantColor} fontSize={mvs(16)} style={{marginLeft: mvs(8)}} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton}>
               <Image
@@ -181,7 +181,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
                 resizeMode="contain"
                 style={styles.socialIcon}
               />
-              <Regular label={'Apple'} color={colors.black} fontSize={mvs(14)} style={{marginLeft: mvs(8)}} />
+              <Medium label={'Apple'} color={colors.vibrantColor} fontSize={mvs(16)} style={{marginLeft: mvs(8)}} />
             </TouchableOpacity>
           </Row>
         </View>
@@ -193,23 +193,25 @@ const handleFormSubmit = async (values, {resetForm}) => {
             style={{textAlign: 'left'}}
             numberOfLines={2}
           >
-            <Regular label={'By continuing you agree to our '} color={"#8C8C8C"} fontSize={mvs(12)} />
+            <Regular label={'By continuing you agree to our '} color={"#8C8C8C"} fontSize={mvs(12)} style={{fontWeight:"400"}} />
             <Regular
               label={'Terms and Conditions'}
-              color={colors.black}
+              // color={colors.black}
+              // color={colors.black}
+              color={'#404040'}
               fontSize={mvs(12)}
-              style={{textDecorationLine: 'underline'}}
+              style={{textDecorationLine: 'underline',fontWeight:"400"}}
               onPress={() => {}}
             />
-            <Regular label={' and our '} color={'#8C8C8C'} fontSize={mvs(12)} />
+            <Regular label={' and our '} color={'#8C8C8C'} fontSize={mvs(12)} style={{fontWeight:"400"}}  />
             <Regular
               label={'Privacy Policy'}
               color={colors.black}
               fontSize={mvs(12)}
-              style={{textDecorationLine: 'underline'}}
+              style={{textDecorationLine: 'underline',fontWeight:"400"}}
               onPress={() => {}}
             />
-            <Regular label={'.'} color={'#8C8C8C'} fontSize={mvs(12)} />
+            <Regular label={'.'} color={'#8C8C8C'} fontSize={mvs(12)} style={{fontWeight:"400"}} />
           </Regular>
         </View>
       </ScrollView>

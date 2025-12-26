@@ -17,6 +17,8 @@ type props = {
   visible?: boolean;
   onBackdropPress?: (() => void) | undefined;
   onBackButtonPress?: (() => void) | undefined;
+  backdropOpacity?: number;      // ✅ ADD
+  backdropColor?: string;
 };
 export const ModalWrapper = (props: props) => {
   const {
@@ -26,10 +28,14 @@ export const ModalWrapper = (props: props) => {
     visible = false,
     onBackdropPress = () => {},
     onBackButtonPress = () => {},
+    backdropOpacity = 0.6,        // ✅ DEFAULT LOW BLUR
+    backdropColor = '#989798',
   } = props;
   return (
     <Modal
       onBackdropPress={onBackdropPress}
+      backdropOpacity={backdropOpacity}   // 🔑 KEY LINE
+      backdropColor={backdropColor}
       onBackButtonPress={onBackButtonPress}
       isVisible={visible}
       style={[styles.contentContainerStyle]}>

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   optionsContainer: {
     marginTop: mvs(100),
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
     flex: 1,
     gap: mvs(16),
     marginBottom: mvs(40),
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(16),
   },
   serviceCardOuter: {
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
     padding: mvs(10),
     height: mvs(123),
   },
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   serviceCardInner: {
     backgroundColor: colors.white,
     borderRadius: mvs(9),
-    padding: mvs(16),
+    padding: mvs(15),
     height: '100%',
     width: '100%',
   },
@@ -70,27 +70,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   serviceTitle: {
-    marginBottom: mvs(8),
+    marginBottom: mvs(6),
     color: '#404040',
+        fontWeight:"400"
   },
   serviceDescription: {
     lineHeight: mvs(20),
     color: '#8C8C8C',
   },
   continueButton: {
-    borderRadius: mvs(28),
+    borderRadius: mvs(24),
     width: '48%',
-    height: mvs(45),
-    backgroundColor: colors.helixPrimary,
+    height: mvs(43),
+    backgroundColor: colors.primary,
     marginTop: mvs(20),
   },
  BackButton: {
-    borderRadius: mvs(28),
+    borderRadius: mvs(24),
     width: '48%',
-    height: mvs(45),
+    height: mvs(43),
     backgroundColor: colors.transparent,
     marginTop: mvs(20),
-    borderWidth:1,
+    borderWidth:1.5,
     borderColor:colors.primary
   },
 });

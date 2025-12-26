@@ -48,7 +48,7 @@ const Splash = (props: props) => {
       <Image
         source={IMG.helixLogo}
         resizeMode="contain"
-        style={{width: mvs(200), height: mvs(80)}}
+        style={{width: mvs(262), height: mvs(102)}}
       />
     </View>
   );

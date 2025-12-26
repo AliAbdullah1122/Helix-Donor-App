@@ -41,14 +41,14 @@ const IntentConnectiontypeScreen = props => {
       iconType: 'svg',
       iconPosition: 'left',
     },
-    {
-      id: 'surrogacy',
-      title: 'Surrogacy Services',
+    // {
+    //   id: 'surrogacy',
+    //   title: 'Surrogacy Services',
 
-      icon: IMG.sperm,
-      iconType: 'svg',
-      iconPosition: 'left',
-    },
+    //   icon: IMG.sperm,
+    //   iconType: 'svg',
+    //   iconPosition: 'left',
+    // },
     {
       id: 'donor',
       title: 'Private Donor + Relationship',
@@ -114,10 +114,10 @@ const IntentConnectiontypeScreen = props => {
           style={styles.heading}
           numberOfLines={10}
         />
-        <Regular
+        <Medium
           label="Select all that apply."
           fontSize={mvs(14)}
-          color={colors.textColor}
+          color={colors.textColorSecondary}
           style={{...styles.heading,marginTop:mvs(10)}}
         />
         </View>
@@ -196,7 +196,7 @@ const IntentConnectiontypeScreen = props => {
 
         {/* Continue Button */}
         <Row>
-        <PrimaryButton
+        {/* <PrimaryButton
           containerStyle={styles.BackButton}
          onPress={() => navigation.goBack()}
           title={'Back'}
@@ -208,8 +208,17 @@ const IntentConnectiontypeScreen = props => {
           // onPress={() => {
           //   const selectedService = selectedServices[0]; // Get first selected service
           //   navigate("RoleSelectionScreen", { serviceType: selectedService });
-          // }}
-          title={'Continue'}
+          // }} */}
+          <PrimaryButton
+            containerStyle={styles.BackButton}
+            onPress={() => navigation.goBack()}
+            title={'Back'}
+            textStyle={{ color: colors.primary }}
+          />
+          <PrimaryButton
+            containerStyle={styles.continueButton}
+            onPress={() => navigate("DriverRegistrationPart1Screen")}
+            title={'Continue'}
         />
         </Row>
       </ScrollView>

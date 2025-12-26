@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StatusBar, Text, Image} from 'react-native';
 import * as IMG from 'assets/images';
 import {colors} from 'config/colors';
@@ -7,12 +7,28 @@ import {navigate} from 'navigation/navigation-ref';
 import styles from './styles';
 
 const HelixWelcomeScreen = () => {
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate('Login');
+  //   }, 1500);
+  //   return () => clearTimeout(timer);
+  // }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('Login');
-    }, 1500);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
+    const [color, setColor] = useState("#121679");
+
+    useEffect(() => {
+    const timer = setTimeout(() => {
+      setColor("#3A3E90");
+    }, 1500); // 3 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
 
   return (
     <View style={styles.container}>
@@ -21,7 +37,7 @@ const HelixWelcomeScreen = () => {
         <Text style={styles.title}>Welcome to Helix Donor</Text>
       </View>
       <View style={styles.middle}>
-        <View style={styles.logoBlock}>
+<View style={[styles.logoBlock,{backgroundColor: color}]}>
           <Image
             source={IMG.helixLogo}
             resizeMode="contain"

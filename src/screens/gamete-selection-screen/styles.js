@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     // marginBottom: mvs(32),
     // marginTop:mvs(40),
     color: '#404040',
+    fontWeight:'500'
   },
   optionsContainer: {
     marginTop: mvs(100),
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     padding: mvs(16),
     height: '100%',
     width: '100%',
+    justifyContent:"center"
   },
   serviceCardContent: {
     flexDirection: 'row',
@@ -63,8 +65,10 @@ const styles = StyleSheet.create({
     marginLeft: mvs(16),
   },
   serviceIcon: {
-    width: mvs(60),
-    height: mvs(60),
+    width: mvs(45),
+    height: mvs(45),
+    // width: mvs(60),
+    // height: mvs(60),
   },
   serviceTextContainer: {
     flex: 1,
@@ -72,25 +76,26 @@ const styles = StyleSheet.create({
   serviceTitle: {
     marginBottom: mvs(8),
     color: '#404040',
+    fontWeight:"400"
   },
   serviceDescription: {
     lineHeight: mvs(20),
     color: '#8C8C8C',
   },
   continueButton: {
-    borderRadius: mvs(28),
+    borderRadius: mvs(24),
     width: '48%',
-    height: mvs(45),
-    backgroundColor: colors.helixPrimary,
+    height: mvs(43),
+    backgroundColor: colors.primary,
     marginTop: mvs(20),
   },
  BackButton: {
-    borderRadius: mvs(28),
-    width: '48%',
-    height: mvs(45),
+    borderRadius: mvs(24),
+    width: '50%',
+    height: mvs(43),
     backgroundColor: colors.transparent,
     marginTop: mvs(20),
-    borderWidth:1,
+    borderWidth:1.5,
     borderColor:colors.primary
   },
 });

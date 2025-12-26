@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,12 +11,15 @@ const styles = StyleSheet.create({
   top: {
     flex: 2,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   title: {
-    fontSize: mvs(24),
+    fontSize: mvs(28),
     fontWeight: '700',
+    fontFamily:fonts.bold,
     color: colors.black,
+    letterSpacing:0,
+    marginTop:mvs(50)
   },
   middle: {
     flex: 3,
@@ -25,13 +29,13 @@ const styles = StyleSheet.create({
   logoBlock: {
     width: '100%',
     height: mvs(220),
-    backgroundColor: colors.helixPrimary,
+    // backgroundColor: colors.helixPrimary,
     justifyContent: 'center',
     alignItems: 'center',
   },
   helixLogo: {
-    width: mvs(200),
-    height: mvs(80),
+    width: mvs(259),
+    height: mvs(64),
   },
   bottom: {
     flex: 2,
@@ -40,8 +44,12 @@ const styles = StyleSheet.create({
     paddingTop: mvs(24),
   },
   tagline: {
-    fontSize: mvs(18),
+    fontSize: mvs(24),
     color: colors.black,
+    fontFamily:fonts.medium,
+    fontWeight:"500",
+    letterSpacing:0
+
   },
 });
 

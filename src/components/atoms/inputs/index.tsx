@@ -421,7 +421,8 @@ isCountry,
     <Image
       source={IMG.alertcircle}
       resizeMode="contain"
-      style={{ height: mvs(18), width: mvs(18) }}
+      style={{ height: mvs(12), width: mvs(12) }}
+      // style={{ height: mvs(18), width: mvs(18) }}
     />
   ) : null}
           <Regular
@@ -1090,11 +1091,13 @@ messageContainer: {
   textContainerStyle: {backgroundColor: colors.white},
 textInput: {
   color: colors.inputText,
-  fontSize: mvs(16),
+  fontSize: mvs(14),
+  // fontSize: mvs(16),
   marginLeft:mvs(8),
   fontWeight:'400',
       fontFamily: fonts.regular,
-    letterSpacing: 0.2,
+    letterSpacing: 0,
+    // letterSpacing: 0.2,
   flex: 1,
   padding: mvs(0),
   maxHeight: mvs(120), // Optional: set a maximum height
@@ -1126,10 +1129,13 @@ textInput: {
     // alignSelf: 'flex-start',
     color: "#FF5F57",
     // backgroundColor: 'red',
-    fontSize: mvs(10),
+    fontSize: mvs(12),
+    // fontSize: mvs(10),
     // marginBottom: mvs(5),
     // textAlign:'center',
-    height: mvs(15),
+    height: mvs(12),
+    fontWeight:"400",
+    // height: mvs(15),
 
     marginHorizontal: mvs(5),
   },

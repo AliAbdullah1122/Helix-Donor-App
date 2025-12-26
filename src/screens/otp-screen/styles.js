@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     // marginBottom: mvs(24),
     paddingHorizontal: mvs(20),
+    fontWeight:"400"
   },
   otpContainer: {
     alignItems: 'center',
@@ -51,24 +52,26 @@ const styles = StyleSheet.create({
   },
   errorText: {
     flex: 0,
+     fontWeight:"400"
   },
   codeFieldRoot: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   cellRoot: {
-    width: mvs(50),
-    height: mvs(50),
+    width: mvs(46),
+    height: mvs(46),
     marginHorizontal: mvs(4),
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: colors.borderColor || '#E0E0E0',
+    borderColor: "#18181B0F" || '#E0E0E0',
     borderWidth: 1,
-    borderRadius: mvs(50),
+    borderRadius: mvs(24),
     backgroundColor: colors.white,
   },
   cellText: {
     textAlign: 'center',
+    fontWeight:"400"
   },
   focusCell: {
     borderColor: colors.helixPrimary,
@@ -97,11 +100,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   resendLink: {
-    // textDecorationLine: 'underline',
+    textDecorationLine: 'underline',
     marginLeft: mvs(4),
   },
   timerText: {
     textAlign: 'right',
+    fontWeight:"400"
   },
   backToLoginContainer: {
     alignItems: 'center',
@@ -114,40 +118,45 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: '90%',
-    maxHeight: '90%',
+    maxHeight: '95%',
     borderRadius: mvs(20),
     backgroundColor: colors.white,
     padding: 0,
+    marginTop:0,
+    justifyContent:"flex-start"
   },
   modalContent: {
     padding: mvs(24),
     paddingBottom: mvs(30),
+    paddingHorizontal:mvs(20),
+    paddingVertical:mvs(10)
   },
   modalIconContainer: {
     alignItems: 'center',
-    marginBottom: mvs(24),
+    marginBottom: mvs(15),
   },
   modalIcon: {
-    width: mvs(80),
-    height: mvs(80),
+    width: mvs(60),
+    height: mvs(60),
   },
   sectionTitle: {
-    marginBottom: mvs(12),
-    marginTop: mvs(8),
+    marginBottom: mvs(6),
+    // marginTop: mvs(8),
   },
   sectionText: {
-    marginBottom: mvs(12),
+    marginBottom: mvs(6),
     lineHeight: mvs(20),
+    fontWeight:"300"
   },
   modalDivider: {
     height: 1,
     backgroundColor: '#E0E0E0',
-    marginVertical: mvs(20),
+    marginVertical: mvs(10),
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginTop: mvs(16),
+    marginTop: mvs(10),
     marginBottom: mvs(24),
     width: '100%',
     flexWrap: 'wrap',
@@ -155,8 +164,8 @@ const styles = StyleSheet.create({
   checkbox: {
     width: mvs(20),
     height: mvs(20),
-    borderWidth: 2,
-    borderColor: colors.helixPrimary,
+    borderWidth: 1.5,
+    borderColor: colors.primary,
     borderRadius: mvs(4),
     marginRight: mvs(12),
     marginTop: mvs(2),
@@ -177,12 +186,12 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   agreeButton: {
-    borderRadius: mvs(28),
+    borderRadius: mvs(24),
     width: '70%',
     height: mvs(43),
     marginTop: mvs(0),
     alignSelf:"center",
-    backgroundColor: colors.helixPrimary,
+    backgroundColor: colors.primary,
   },
 });
 

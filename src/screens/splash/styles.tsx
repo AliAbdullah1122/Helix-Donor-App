@@ -5,7 +5,7 @@ import {mvs} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.helixPrimary,
+    backgroundColor: colors.splashColor,
     alignItems: 'center',
     justifyContent: 'center',
   },

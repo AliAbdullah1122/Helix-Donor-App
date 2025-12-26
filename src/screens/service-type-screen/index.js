@@ -78,10 +78,10 @@ const ServiceTypeScreen = props => {
           color={colors.textColor}
           style={styles.heading}
         />
-        <Regular
+        <Medium
           label="Select all that apply."
           fontSize={mvs(14)}
-          color={colors.textColor}
+          color={colors.textColorSecondary}
           style={{...styles.heading,marginTop:mvs(10)}}
         />
         </View>
@@ -142,7 +142,7 @@ const ServiceTypeScreen = props => {
                         </View>
                       )}
                       <View style={styles.serviceTextContainer}>
-                        <Medium
+                        <Regular
                           label={option.title}
                           fontSize={mvs(16)}
                           color={colors.textColor}

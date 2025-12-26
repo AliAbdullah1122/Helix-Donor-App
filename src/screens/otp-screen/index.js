@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import {Checkbox} from 'components/atoms/checkbox';
 import { useNavigation } from '@react-navigation/native';
+import Light from 'typography/light-text';
 
 
 const CELL_COUNT = 6;
@@ -94,7 +95,11 @@ const OtpScreen = props => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
+      {/* <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" /> */}
+      <StatusBar
+        backgroundColor={showModal ? "rgba(152, 151, 152, 0.9)" : colors.helixBackground}
+        barStyle="dark-content"
+      />
       
       <ScrollView 
         contentContainerStyle={styles.scrollContainer} 
@@ -119,7 +124,8 @@ const OtpScreen = props => {
           color={"#404040"}
           style={styles.title}
         />
-        <View style={{borderWidth:0.7,borderColor:"#E6E8FF",width:"95%",alignSelf:'center'}}>
+        {/* <View style={{borderWidth:0.7,borderColor:"#E6E8FF",width:"95%",alignSelf:'center'}}> */}
+        <View style={{ borderWidth: 1, borderColor: "#D9D9D9", width: "97%", alignSelf: 'center' }}>
 
         </View>
 
@@ -154,8 +160,8 @@ const OtpScreen = props => {
                 ]}>
                 {symbol ? (
                   <Regular
-                    fontSize={mvs(16)}
-                    color={colors.black}
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
                     style={styles.cellText}>
                     {symbol}
                   </Regular>
@@ -165,8 +171,8 @@ const OtpScreen = props => {
                   </Text>
                 ) : (
                   <Regular
-                    fontSize={mvs(16)}
-                    color={colors.subText || '#8C8C8C'}
+                    fontSize={mvs(14)}
+                    color={colors.placeholder || '#8C8C8C'}
                     style={styles.cellText}>
                     1
                   </Regular>
@@ -181,7 +187,7 @@ const OtpScreen = props => {
           <View style={styles.errorContainer}>
             <View style={styles.errorIconContainer}>
               {/* <Icon name="alert-circle" size={mvs(14)} color="#FFFFFF" /> */}
-              <Image source={IMG.alertcircle} resizeMode='contain' style={{height:mvs(18),width:mvs(18)}}/>
+              <Image source={IMG.alertcircle} resizeMode='contain' style={{height:mvs(16),width:mvs(16)}}/>
             </View>
             <Regular
               label={error}
@@ -204,7 +210,7 @@ const OtpScreen = props => {
               label={'Didn\'t get the OTP?'}
               fontSize={mvs(14)}
               color={"#404040"}
-              style={{marginBottom:mvs(10)}}
+              style={{marginBottom:mvs(10),fontWeight:"400"}}
             />
         <View style={styles.footerContainer}>
           <View style={styles.resendContainer}>
@@ -218,7 +224,7 @@ const OtpScreen = props => {
               />
             </TouchableOpacity>
           </View>
-          <Medium
+          <Regular
             label={`Request again in ${formatTime(timeLeft)}`}
             fontSize={mvs(14)}
             color={"#404040"}
@@ -248,7 +254,10 @@ const OtpScreen = props => {
         visible={showModal}
         onBackdropPress={() => setShowModal(false)}
         onBackButtonPress={() => setShowModal(false)}
-        style={styles.modalContainer}>
+       backdropOpacity={0.9}
+  backdropColor="#989798"
+  style={[styles.modalContainer, { marginTop: mvs(Platform.OS === 'ios' ? 0 : StatusBar.currentHeight - 60) }]}
+>
         <ScrollView 
           contentContainerStyle={styles.modalContent}
           showsVerticalScrollIndicator={false}>
@@ -270,7 +279,7 @@ const OtpScreen = props => {
             style={styles.sectionTitle}
           />
           
-          <Regular
+          <Light
             label={'Despite technology keeping us more connected than ever, millions of people in search for a partner to start a family are finding it harder than ever, feeling disconnected and disheartened by the process. Meanwhile birth rates are declining and the dream of having a child is fading for many.'}
             fontSize={mvs(14)}
             color={"#404040"}
@@ -278,7 +287,7 @@ const OtpScreen = props => {
             numberOfLines={10}
           />
           
-          <Regular
+          <Light
             label={'This is where Helix can help.'}
             fontSize={mvs(14)}
             color={"#404040"}
@@ -286,7 +295,7 @@ const OtpScreen = props => {
             numberOfLines={10}
           />
           
-          <Regular
+          <Light
             label={'Our mission is to expand procreation options globally. We provide a dedicated platform to connect you with like-minded individuals who share your goal of having a child.'}
             fontSize={mvs(14)}
   color={"#404040"}
@@ -294,7 +303,7 @@ const OtpScreen = props => {
             numberOfLines={10}
           />
           
-          <Regular
+          <Light
             label={'Helix is here to help you not just date, but procreate.'}
             fontSize={mvs(14)}
             color={"#404040"}
@@ -302,7 +311,7 @@ const OtpScreen = props => {
             numberOfLines={10}
           />
           
-          <Regular
+          <Light
             label={'Signed Team Helix'}
             fontSize={mvs(14)}
            color={"#404040"}
@@ -321,7 +330,7 @@ const OtpScreen = props => {
             style={styles.sectionTitle}
           />
           
-          <Regular
+          <Light
             label={'Helix is a technology platform and matching database, allowing users to connect with the like-minded goal of procreation in mind.'}
             fontSize={mvs(14)}
             color={"#404040"}
@@ -329,7 +338,7 @@ const OtpScreen = props => {
             numberOfLines={10}
           />
           
-          <Regular
+          <Light
             label={'We kindly request that all users engage in their own due diligence before proceeding with any next steps.'}
             fontSize={mvs(14)}
            color={"#404040"}
@@ -357,7 +366,7 @@ const OtpScreen = props => {
                 <Regular
                   label={'Terms and Conditions'}
                   fontSize={mvs(12)}
-                  color={colors.helixPrimary}
+                  color={colors.primary}
                   style={{textDecorationLine: 'underline'}}
                   onPress={() => {}}
                 />
@@ -365,7 +374,7 @@ const OtpScreen = props => {
                 <Regular
                   label={'Privacy Policy'}
                   fontSize={mvs(12)}
-                  color={colors.helixPrimary}
+                  color={colors.primary}
                   style={{textDecorationLine: 'underline'}}
                   onPress={() => {}}
                 />
@@ -378,6 +387,7 @@ const OtpScreen = props => {
           <PrimaryButton
             containerStyle={styles.agreeButton}
             loading={false}
+            textStyle={{fontSize:mvs(16)}}
             onPress={handleAgree}
             title={'Agree'}
             disabled={!agreed}

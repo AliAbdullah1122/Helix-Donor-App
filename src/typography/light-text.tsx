@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.light,
     fontSize: mvs(15),
+    letterSpacing:0,
+    fontWeight:"500",
     color: colors.black, //default color
   },
 });

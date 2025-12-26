@@ -177,7 +177,8 @@ const navigation = useNavigation();
                       onChangeText={handleChange('firstName')}
                       onBlur={handleBlur('firstName')}
                       value={values.firstName}
-                      containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
+                      // containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
+                      containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start',paddingTop:mvs(10)}]}
                     />
                     
                     

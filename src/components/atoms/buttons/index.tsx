@@ -131,9 +131,11 @@ const styles = StyleSheet.create({
   },
   primaryText: {
     color: colors.white,
-    letterSpacing: 0.2,
+    letterSpacing: 0,
+    // letterSpacing: 0.2,
     fontWeight: '500',
     fontFamily: fonts.medium,
+    fontSize:mvs(16),
   },
   iconText: {
     color: colors.white,

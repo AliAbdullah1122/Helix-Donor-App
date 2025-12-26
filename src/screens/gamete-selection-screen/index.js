@@ -75,12 +75,12 @@ const GameteSelectionScreen = props => {
           color={colors.textColor}
           style={styles.heading}
         />
-        <Regular
+        {/* <Regular
           label="Select all that apply."
           fontSize={mvs(14)}
           color={colors.textColor}
           style={{...styles.heading,marginTop:mvs(10)}}
-        />
+        /> */}
         </View>
 
         {/* Service Options */}
@@ -116,8 +116,10 @@ const GameteSelectionScreen = props => {
                             />
                           ) : (
                             <option.icon 
-                              height={mvs(60)} 
-                              width={mvs(60)}
+                              height={mvs(45)} 
+                              width={mvs(45)}
+                              // height={mvs(60)} 
+                              // width={mvs(60)}
                             />
                           )}
                         </View>
@@ -132,14 +134,15 @@ const GameteSelectionScreen = props => {
                             />
                           ) : (
                             <option.icon 
-                              height={mvs(60)} 
-                              width={mvs(60)}
+                              // height={mvs(60)} 
+                              // width={mvs(60)}
+                                height={mvs(45)} 
                             />
                           )}
                         </View>
                       )}
                       <View style={styles.serviceTextContainer}>
-                        <Medium
+                        <Regular
                           label={option.title}
                           fontSize={mvs(16)}
                           color={colors.textColor}
@@ -163,7 +166,7 @@ const GameteSelectionScreen = props => {
 
         {/* Continue Button */}
         <Row>
-        <PrimaryButton
+        {/* <PrimaryButton
           containerStyle={styles.BackButton}
          onPress={() => navigation.goBack()}
           title={'Back'}
@@ -173,7 +176,21 @@ const GameteSelectionScreen = props => {
           containerStyle={styles.continueButton}
          onPress={()=>navigate("IntentConnectiontypeScreen")}
           title={'Continue'}
-        />
+        /> */}
+        <PrimaryButton
+            containerStyle={styles.BackButton}
+            onPress={() => navigation.goBack()}
+            title={'Back'}
+            textStyle={{ color: colors.primary }}
+          />
+          <PrimaryButton
+            containerStyle={styles.continueButton}
+            onPress={() => {
+              const selectedService = selectedServices[0]; // Get first selected service
+              navigate("IntentConnectiontypeScreen");
+            }}
+              title={'Continue'}
+        /> 
         </Row>
       </ScrollView>
     </View>

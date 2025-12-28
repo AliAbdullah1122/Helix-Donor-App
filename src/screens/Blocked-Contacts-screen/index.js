@@ -4,7 +4,7 @@ import {mvs} from 'config/metrices';
 import {Formik} from 'formik';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Modal} from 'react-native';
+import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Modal, Platform} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
@@ -26,6 +26,7 @@ import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const BlockedContactsScreen = props => {
   const navigation = useNavigation();
@@ -45,7 +46,8 @@ const BlockedContactsScreen = props => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
+       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+               <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       
       {/* Header */}
       <Row style={styles.header}>

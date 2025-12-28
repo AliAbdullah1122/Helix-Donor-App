@@ -18,6 +18,8 @@ import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import { navigate } from 'navigation/navigation-ref';
+import { Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 100;
@@ -426,7 +428,8 @@ const HomeTab = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#f4f4ff" }}>
-      <StatusBar backgroundColor={"#f4f4ff"} barStyle="dark-content" />
+    <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+         <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* HEADER */}
       <View style={styles.headerContainer}>

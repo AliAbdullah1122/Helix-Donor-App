@@ -11,6 +11,8 @@ import styles from './styles';
 import {colors} from 'config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Medium from 'typography/medium-text';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const GenderIdentityScreen = props => {
   const [selectedGender, setSelectedGender] = useState('man');
@@ -42,6 +44,7 @@ const GenderIdentityScreen = props => {
 
   return (
     <View style={styles.container}>
+                  <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 

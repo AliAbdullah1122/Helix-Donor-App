@@ -22,6 +22,8 @@ import { useSelector } from 'react-redux';
 import AgeRangeSlider from 'components/atoms/AgeRangeSlider/AgeRangeSlider';
 import WeightRangeSlider from 'components/atoms/WeightRangeSlider/WeightRangeSlider';
 import HeightRangeSlider from 'components/atoms/HeightRangeSlider/HeightRangeSlider';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -182,6 +184,8 @@ const SearchFilterScreen = () => {
 
   return (
     <View style={styles.container}>
+
+              <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Header */}

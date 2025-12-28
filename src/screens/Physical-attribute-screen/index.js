@@ -11,6 +11,7 @@ import {
   ScrollView,
   Alert,
   Text,
+  Platform,
 } from 'react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
@@ -32,6 +33,8 @@ import { useNavigation } from '@react-navigation/native';
 import HairColorDropdown from 'components/atoms/HairColorDropdown/HairColorDropdown';
 import Feather from 'react-native-vector-icons/Feather';
 import EyeColorChips from 'components/atoms/EyeColorDropdown/EyeColorDropdown';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 const PhysicalAtttributeScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -152,6 +155,8 @@ const PhysicalAtttributeScreen = props => {
   ];
   return (
     <View style={styles.container}>
+       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+               <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>

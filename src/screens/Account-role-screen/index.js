@@ -12,6 +12,7 @@ import {
   Alert,
   StatusBar,
   Modal,
+  Platform,
 } from 'react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
@@ -31,6 +32,7 @@ import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AccountRoleScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -197,6 +199,7 @@ const AccountRoleScreen = props => {
   };
   return (
     <View style={styles.container}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
       
       {/* Header */}

@@ -20,6 +20,8 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const ArchiveChatScreen = () => {
   const navigation = useNavigation();
@@ -186,6 +188,7 @@ const ArchiveChatScreen = () => {
 
   return (
     <View style={styles.container}>
+          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Header */}

@@ -4,7 +4,7 @@ import {mvs} from 'config/metrices';
 import {Formik} from 'formik';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput} from 'react-native';
+import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, Platform} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
@@ -27,6 +27,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ExactToggle from 'components/atoms/toggle';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const GeneticGatewayScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -151,6 +152,7 @@ const navigation = useNavigation();
   };
   return (
     <View style={styles.container}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>

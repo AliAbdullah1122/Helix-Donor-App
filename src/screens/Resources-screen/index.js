@@ -3,7 +3,7 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
 import {navigate} from 'navigation/navigation-ref';
 import React, {useState, useEffect} from 'react';
-import {TouchableOpacity, View, ScrollView, StatusBar, Text, Image} from 'react-native';
+import {TouchableOpacity, View, ScrollView, StatusBar, Text, Image, Platform} from 'react-native';
 import styles from './styles';
 import {colors} from 'config/colors';
 import Regular from 'typography/regular-text';
@@ -20,6 +20,7 @@ import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import {Checkbox} from 'components/atoms/checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { Row } from 'components/atoms/row';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const CELL_COUNT = 6;
@@ -141,6 +142,7 @@ const ResourcesScreen = props => {
 
   return (
     <View style={styles.container}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 

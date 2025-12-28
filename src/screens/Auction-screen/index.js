@@ -3,7 +3,7 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
 import {navigate} from 'navigation/navigation-ref';
 import React, {useState} from 'react';
-import {TouchableOpacity, View, ScrollView, StatusBar, Text, Image, TextInput} from 'react-native';
+import {TouchableOpacity, View, ScrollView, StatusBar, Text, Image, TextInput, Platform} from 'react-native';
 import styles from './styles';
 import {colors} from 'config/colors';
 import Regular from 'typography/regular-text';
@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AuctionScreen = props => {
   const [offerValue, setOfferValue] = useState('');
@@ -30,6 +31,7 @@ const AuctionScreen = props => {
 
   return (
     <View style={styles.container}>
+       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       
       <ScrollView 

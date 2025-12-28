@@ -13,6 +13,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Medium from 'typography/medium-text';
 import { Row } from 'components/atoms/row';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const GameteSelectionScreen = props => {
   const [selectedServices, setSelectedServices] = useState([]);
@@ -53,6 +55,7 @@ const GameteSelectionScreen = props => {
 
   return (
     <View style={styles.container}>
+      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 

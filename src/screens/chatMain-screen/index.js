@@ -21,6 +21,8 @@ import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {PrimaryButton} from 'components/atoms/buttons';
 import { navigate } from 'navigation/navigation-ref';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const ChatMainScreen = () => {
   const [searchText, setSearchText] = useState('');
@@ -110,7 +112,7 @@ const ChatMainScreen = () => {
             <IMG.chatMainHeart width={mvs(31)} height={mvs(28)} />
           </View>
         )}
-        {item.isOnline && <View style={styles.connectionOnlineDot} />}
+        {/* {item.isOnline && <View style={styles.connectionOnlineDot} />} */}
       </View>
     );
   };
@@ -346,6 +348,7 @@ const ChatMainScreen = () => {
   if (showEmptyConnections) {
     return (
       <View style={styles.container}>
+     
         <StatusBar backgroundColor="#F5F5F9" barStyle="dark-content" />
         <View style={styles.emptyConnectionsContainer}>
           <View style={styles.sectionHeader}>
@@ -394,6 +397,7 @@ const ChatMainScreen = () => {
 
   return (
     <View style={styles.container}>
+          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Guidelines Modal */}
@@ -1102,7 +1106,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(12),
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
   },
   searchRow: {
     alignItems: 'center',
@@ -1115,6 +1119,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: mvs(26),
     paddingHorizontal: mvs(16),
+    height:mvs(46),
     // paddingVertical: mvs(2),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},

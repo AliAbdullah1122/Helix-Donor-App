@@ -1,9 +1,14 @@
 import * as IMG from 'assets/images';
-import { PrimaryButton } from 'components/atoms/buttons';
-import { mvs } from 'config/metrices';
-import { navigate } from 'navigation/navigation-ref';
-import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, View, ScrollView, StatusBar, Text, Image } from 'react-native';
+// import { PrimaryButton } from 'components/atoms/buttons';
+// import { mvs } from 'config/metrices';
+// import { navigate } from 'navigation/navigation-ref';
+// import React, { useState, useEffect } from 'react';
+// import { TouchableOpacity, View, ScrollView, StatusBar, Text, Image } from 'react-native';
+import {PrimaryButton} from 'components/atoms/buttons';
+import {mvs} from 'config/metrices';
+import {navigate} from 'navigation/navigation-ref';
+import React, {useState, useEffect} from 'react';
+import {TouchableOpacity, View, ScrollView, StatusBar, Text, Image, Platform} from 'react-native';
 import styles from './styles';
 import { colors } from 'config/colors';
 import Regular from 'typography/regular-text';
@@ -20,6 +25,7 @@ import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import { Checkbox } from 'components/atoms/checkbox';
 import { useNavigation } from '@react-navigation/native';
 import Light from 'typography/light-text';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const CELL_COUNT = 6;
@@ -96,6 +102,7 @@ const OtpScreen = props => {
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" /> */}
+            <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar
         backgroundColor={showModal ? "rgba(152, 151, 152, 0.9)" : colors.helixBackground}
         barStyle="dark-content"
@@ -254,11 +261,11 @@ const OtpScreen = props => {
         visible={showModal}
         onBackdropPress={() => setShowModal(false)}
         onBackButtonPress={() => setShowModal(false)}
-        backdropOpacity={0.9}
-        backdropColor="#989798"
-        style={[styles.modalContainer, { marginTop: mvs(Platform.OS === 'ios' ? 0 : StatusBar.currentHeight - 60) }]}
-      >
-        <ScrollView
+       backdropOpacity={0.9}
+  backdropColor="#989798"
+  style={[styles.modalContainer, { marginTop: mvs(Platform.OS === 'ios' ? mvs(50) : StatusBar.currentHeight - 60) }]}
+>
+        <ScrollView 
           contentContainerStyle={styles.modalContent}
           showsVerticalScrollIndicator={false}>
 

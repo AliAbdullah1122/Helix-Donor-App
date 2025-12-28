@@ -25,6 +25,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MainInboxScreen = () => {
   const navigation = useNavigation();
@@ -990,6 +991,7 @@ const MainInboxScreen = () => {
 
   return (
     <View style={styles.container}>
+       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {!hasChatStarted ? (

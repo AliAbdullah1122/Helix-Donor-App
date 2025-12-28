@@ -26,6 +26,8 @@ import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const PhysicalAttributeEditScreen = props => {
   const navigation = useNavigation();
@@ -75,6 +77,7 @@ const PhysicalAttributeEditScreen = props => {
   };
   return (
     <View style={styles.container}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
       
       {/* Header */}

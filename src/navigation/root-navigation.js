@@ -144,7 +144,7 @@ const Stack = createNativeStackNavigator();
 export const RootNavigator = () => {
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{flex: 0, backgroundColor: colors.primary}} />
+      {/* <SafeAreaView style={{flex: 0, backgroundColor: colors.primary}} /> */}
       <StatusBar
         translucent={false}
         backgroundColor={colors.white}
@@ -152,8 +152,8 @@ export const RootNavigator = () => {
       />
       <Stack.Navigator
         //  initialRouteName="Splash"
-        //  initialRouteName="MainProfileScreen"
-         initialRouteName="DriverRegistrationPart1Screen"
+         initialRouteName="Splash"
+        //  initialRouteName="Splash"
         //  initialRouteName="ReviewFromAdminScreen"
         // initialRouteName="Drawer"
         // initialRouteName="UserTab"

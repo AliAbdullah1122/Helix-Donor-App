@@ -7,6 +7,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+       backgroundColor:colors.helixBackground,
     // backgroundColor: colors.primary,
   },
   scrollContainer: {

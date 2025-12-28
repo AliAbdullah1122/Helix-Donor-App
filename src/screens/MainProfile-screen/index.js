@@ -18,6 +18,8 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import {navigate} from 'navigation/navigation-ref';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
@@ -31,7 +33,7 @@ const MainProfileScreen = () => {
         age: 36,
         location: 'Austin, Texas',
         flag: '🇺🇸',
-        image: IMG.HomeImageOng, // PNG image
+        image: IMG.HomeImagetwo, // PNG image
       },
     ],
     [],
@@ -50,6 +52,7 @@ const MainProfileScreen = () => {
 
   return (
     <View style={{flex: 1}}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor="transparent" barStyle="light-content" translucent />
 
       {/* Full Background Image */}
@@ -89,7 +92,7 @@ const MainProfileScreen = () => {
       {/* Edit Profile Button overlaid on image */}
       <View style={styles.editButtonContainer}>
         <TouchableOpacity  onPress={()=> navigate("AccountRoleScreen")} style={styles.editProfileButton}>
-          <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+          <IMG.EditNewImage width={mvs(16)} height={mvs(16)} />
           <Medium
             label="Edit Profile"
             fontSize={mvs(14)}
@@ -108,7 +111,9 @@ const MainProfileScreen = () => {
         <View style={styles.infoSheet}>
             <Row style={styles.infoTopRow}>
               <Regular label={"5' 6\""} fontSize={mvs(14)} color={colors.white} />
+              <View style={{width:"45%",alignSelf:'center',justifyContent:'center',alignItems:'center', borderLeftWidth:0.4,borderRightWidth:0.4,borderLeftColor:colors.white,borderRightColor:colors.white}}>
             <Regular label={'154lbs'} fontSize={mvs(14)} color={colors.white} />
+            </View>
             <Regular label={'0+'} fontSize={mvs(14)} color={colors.white} />
             </Row>
           <View
@@ -138,12 +143,14 @@ const MainProfileScreen = () => {
                   label={'Hair Color'}
                   fontSize={mvs(14)}
                   color={colors.white}
+                    style={{marginTop: mvs(4),textAlign:"right"}}
                 />
                 <Regular
                   label={'Brown'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{marginTop: mvs(4)}}
+  style={{marginTop: mvs(4),textAlign:"right"}}
+
                 />
               </View>
             </Row>
@@ -163,24 +170,26 @@ const MainProfileScreen = () => {
                   fontSize={mvs(14)}
                   color={colors.white}
                 />
-                <Regular
-                  label={'MBA'}
-                  fontSize={mvs(14)}
-                  color={colors.white}
-                  style={{marginTop: mvs(4)}}
-                />
-              </View>
-              <View style={styles.infoColumn}>
                 <Medium
                   label={'Occupation'}
                   fontSize={mvs(14)}
                   color={colors.white}
+                    style={{marginTop: mvs(4)}}
+                />
+              </View>
+              <View style={styles.infoColumn}>
+               
+                 <Regular
+                  label={'MBA'}
+                  fontSize={mvs(14)}
+                  color={colors.white}
+                  style={{marginTop: mvs(4),textAlign:"right"}}
                 />
                 <Regular
                   label={'Finance Manager'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{marginTop: mvs(4)}}
+               style={{marginTop: mvs(4),textAlign:"right"}}
                 />
               </View>
             </Row>
@@ -200,24 +209,26 @@ const MainProfileScreen = () => {
                   fontSize={mvs(14)}
                   color={colors.white}
                 />
+                 <Medium
+                  label={'Ethnicity'}
+                  fontSize={mvs(14)}
+                  color={colors.white}
+                       style={{marginTop: mvs(4)}}
+                />
+               
+              </View>
+              <View style={styles.infoColumn}>
                 <Regular
                   label={'Caucasian'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{marginTop: mvs(4)}}
-                />
-              </View>
-              <View style={styles.infoColumn}>
-                <Medium
-                  label={'Ethnicity'}
-                  fontSize={mvs(14)}
-                  color={colors.white}
+           style={{marginTop: mvs(4),textAlign:"right"}}
                 />
                 <Regular
                   label={'American'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{marginTop: mvs(4)}}
+                  style={{marginTop: mvs(4),textAlign:"right"}}
                 />
               </View>
             </Row>
@@ -237,37 +248,53 @@ const MainProfileScreen = () => {
                 fontSize={mvs(14)}
                 color={colors.white}
               />
-              <Regular
-                label={'Looking for a Donor'}
-                fontSize={mvs(14)}
-                color={colors.white}
-                style={{marginTop: mvs(4)}}
-              />
-            </View>
-            <View style={styles.infoColumn}>
-              <Medium
+               <Medium
                 label={"I'm Seeking"}
                 fontSize={mvs(14)}
                 color={colors.white}
+                   style={{marginTop: mvs(4)}}
               />
+              <Medium
+                label={'My Goal'}
+                fontSize={mvs(14)}
+                color={colors.white}
+                   style={{marginTop: mvs(4)}}
+              />
+            
+            </View>
+            <View style={styles.infoColumn}>
+                <Regular
+                label={'Looking for a Donor'}
+                fontSize={mvs(14)}
+                color={colors.white}
+  style={{marginTop: mvs(4),textAlign:"right"}}
+              />
+             
               <Regular
                 label={'Sperm'}
                 fontSize={mvs(14)}
                 color={colors.white}
-                style={{marginTop: mvs(4)}}
+           style={{marginTop: mvs(4),textAlign:"right"}}
+              />
+                <Regular
+                label={'Private Donor, Co-Parenting'}
+                fontSize={mvs(14)}
+                color={colors.white}
+                numberOfLines={10}
+                style={{marginTop: mvs(4), textAlign:"right"}}
               />
             </View>
           </Row>
           <View
             style={{
               marginTop: mvs(6),
-              borderBottomWidth: 0.4,
-              borderBottomColor: colors.white,
+              // borderBottomWidth: 0.4,
+              // borderBottomColor: colors.white,
               height: mvs(1),
               width: '100%',
             }}
           />
-          <Row style={styles.infoRow}>
+          {/* <Row style={styles.infoRow}>
             <View style={styles.infoColumn}>
               <Medium
                 label={'My Goal'}
@@ -281,7 +308,7 @@ const MainProfileScreen = () => {
                 style={{marginTop: mvs(4)}}
               />
             </View>
-          </Row>
+          </Row> */}
         </View>
 
         {/* White expandable cards */}
@@ -1080,7 +1107,7 @@ const styles = StyleSheet.create({
   },
   topOverlayRow: {
     position: 'absolute',
-    top: mvs(30),
+    top: mvs(70),
     left: mvs(20),
     right: mvs(20),
     justifyContent: 'flex-end',
@@ -1148,7 +1175,7 @@ const styles = StyleSheet.create({
     marginTop: mvs(12),
   },
   infoColumn: {
-    // flex: 1,
+    flex: 1,
   },
   sectionCard: {
     backgroundColor: colors.white,

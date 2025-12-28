@@ -206,7 +206,7 @@ elevation: 4,
     width:"100%",
     height: mvs(43),
     marginTop: mvs(16),
-    backgroundColor: colors.helixPrimary,
+    backgroundColor: colors.primary,
   },
   emailInputContainer: {
     borderRadius: mvs(24),

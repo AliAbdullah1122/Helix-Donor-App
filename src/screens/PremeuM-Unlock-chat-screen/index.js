@@ -17,6 +17,8 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import { useNavigation } from '@react-navigation/native';
 import fonts from 'assets/fonts';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 import { navigate } from 'navigation/navigation-ref';
 
 const plans = [
@@ -88,7 +90,8 @@ const PremiumUnlockChatScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
+      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+      <StatusBar barStyle="dark-content"  />
 
       {/* Header */}
       <View style={styles.header}>
@@ -234,7 +237,7 @@ const PremiumUnlockChatScreen = () => {
 
         {/* Subscribe Button */}
         {/* <TouchableOpacity style={styles.subscribeBtn}> */}
-        <TouchableOpacity onPress={() => {navigate("MainInboxScreen")}} style={styles.subscribeBtn}>
+        <TouchableOpacity onPress={() => navigate("MainInboxScreen")} style={styles.subscribeBtn}>
           <Bold
             label={subscribeText}
             fontSize={mvs(15)}

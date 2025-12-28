@@ -9,6 +9,7 @@ import {
   StatusBar,
   Dimensions,
   Platform,
+  Pressable,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { BlurView } from '@react-native-community/blur';
@@ -21,12 +22,14 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import { navigate } from 'navigation/navigation-ref';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const ProfileDetailsHomeScreen = ({ route }) => {
 
   const item = route?.params?.item;
+  const insets = useSafeAreaInsets();
 
   console.log(item);
   // Sample profile data
@@ -106,24 +109,55 @@ const ProfileDetailsHomeScreen = ({ route }) => {
   const [healthExpanded, setHealthExpanded] = useState(true);
   const [geneticExpanded, setGeneticExpanded] = useState(true);
 
+
+  const scrollRef = React.useRef(null);
+// const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+// const goToImage = (index) => {
+//   scrollRef.current?.scrollTo({
+//     x: index * SCREEN_WIDTH,
+//     animated: true,
+//   });
+// };
+
+
   const handleImageScrollEnd = event => {
     const index = Math.round(event.nativeEvent.contentOffset.x / SCREEN_WIDTH);
     setCurrentImageIndex(index);
   };
+const goToImage = index => {
+  setCurrentImageIndex(index); // 👈 immediate UI update
+
+  scrollRef.current?.scrollTo({
+    x: index * SCREEN_WIDTH,
+    animated: true,
+  });
+};
 
   const renderProfileCard = useCallback(() => null, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.primary }}>
+    // <View style={{ flex: 1, backgroundColor: colors.primary }}>
+    <View style={{flex: 1, backgroundColor: colors.primary}}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar
-        backgroundColor="transparent"
+        // backgroundColor="transparent"
+        backgroundColor={'transparent'}
         barStyle="light-content"
         translucent
       />
-
+{/* <ScrollView contentContainerStyle={{flexGrow:1}}> */}
+<ScrollView
+  showsVerticalScrollIndicator={false}
+  contentContainerStyle={{
+     paddingBottom: Platform.OS === 'ios' ? mvs(2350) : mvs(2550) 
+    //  paddingBottom: mvs(90) + insets.bottom,
+     }}
+>
       {/* Top Image Carousel with Progress */}
       <View style={styles.topImageWrapper}>
         <ScrollView
+        ref={scrollRef}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
@@ -139,7 +173,19 @@ const ProfileDetailsHomeScreen = ({ route }) => {
             
           ))} */}
           {images.map((img, index) => (
-            <View key={index} style={styles.mainImage}>
+            <Pressable 
+             key={index} 
+             style={styles.mainImage}
+             onPress={() => {
+      const nextIndex =
+        index === images.length - 1 ? 0 : index + 1;
+
+      scrollRef.current?.scrollTo({
+        x: nextIndex * SCREEN_WIDTH,
+        animated: true,
+      });
+    }}
+             >
               {typeof img === 'function' ? (
                 // SVG component case
                 (() => {
@@ -174,7 +220,7 @@ const ProfileDetailsHomeScreen = ({ route }) => {
                 />
 
               )}
-            </View>
+            </Pressable>
           ))}
 
           {/* {images.map((img, index) => (
@@ -518,10 +564,11 @@ const ProfileDetailsHomeScreen = ({ route }) => {
             />
           </View>
         ) : (
-          <ScrollView
-            style={styles.detailsScroll}
-            contentContainerStyle={styles.detailsScrollContent}
-            showsVerticalScrollIndicator={false}>
+          <View
+            // style={styles.detailsScroll}
+            // contentContainerStyle={styles.detailsScrollContent}
+            // showsVerticalScrollIndicator={false}>
+            style={styles.detailsScrollContent}>
             {/* Blue summary card at top of scroll */}
             <View style={styles.infoSheet}>
               <Row style={styles.infoTopRow}>
@@ -1463,7 +1510,7 @@ const ProfileDetailsHomeScreen = ({ route }) => {
                 <IMG.HomeCardMessage width={mvs(54)} height={mvs(54)} />
               </TouchableOpacity>
             </Row>
-          </ScrollView>
+          </View>
         )}
 
         {/* Bottom floating action buttons when blur is ON */}
@@ -1481,6 +1528,7 @@ const ProfileDetailsHomeScreen = ({ route }) => {
           </Row>
         )}
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -1544,7 +1592,7 @@ const styles = StyleSheet.create({
     marginTop: mvs(20),
     justifyContent: 'space-between',
     gap: mvs(12),
-    // marginBottom:mvs(50)
+    marginBottom:mvs(20)
     // width: '100%',
   },
   bidBuyButton: {

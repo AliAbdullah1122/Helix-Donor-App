@@ -9,6 +9,7 @@ import {
   ScrollView,
   StatusBar,
   Image,
+  Platform,
 } from 'react-native';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
@@ -18,6 +19,7 @@ import {colors} from 'config/colors';
 import {Row} from 'components/atoms/row';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const UploadPhotoScreen = props => {
   const navigation = useNavigation();
@@ -43,6 +45,7 @@ const UploadPhotoScreen = props => {
 
   return (
     <View style={styles.container}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
       
       {/* Header */}

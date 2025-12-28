@@ -27,6 +27,8 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const DriverRegistrationPart1Screen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -87,6 +89,7 @@ const DriverRegistrationPart1Screen = props => {
   const Nationality = [{id: 'Pakistan'}, {id: 'United Kingdom'}, {id: 'France'}, {id: 'America'}];
   return (
     <View style={styles.container}>
+      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>

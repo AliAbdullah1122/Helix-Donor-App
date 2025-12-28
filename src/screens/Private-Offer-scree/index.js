@@ -13,6 +13,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const PrivateOfferScreen = props => {
   const [offerValue, setOfferValue] = useState('');
@@ -30,6 +32,7 @@ const PrivateOfferScreen = props => {
 
   return (
     <View style={styles.container}>
+       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       
       <ScrollView 

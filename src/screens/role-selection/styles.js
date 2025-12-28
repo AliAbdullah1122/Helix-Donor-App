@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(28),
     width: '48%',
     height: mvs(45),
-    backgroundColor: colors.helixPrimary,
+    backgroundColor: colors.primary,
     marginTop: mvs(20),
   },
  BackButton: {

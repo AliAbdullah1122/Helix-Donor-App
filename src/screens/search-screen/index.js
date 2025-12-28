@@ -29,6 +29,7 @@ import {
   RESULTS,
 } from 'react-native-permissions';
 import {useFocusEffect} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
@@ -76,15 +77,32 @@ const SearchScreen = () => {
     [],
   );
 
+  const combinedSearchData = useMemo(() => {
+  return [
+    ...allSuggestions,
+    ...recentSearches,
+    ...suggestedSearches,
+  ];
+}, [allSuggestions, recentSearches, suggestedSearches]);
+
+
   // Filtered suggestions based on search text
+  // const filteredSuggestions = useMemo(() => {
+  //   if (!searchText.trim()) {
+  //     return [];
+  //   }
+  //   return allSuggestions.filter(item =>
+  //     item.toLowerCase().includes(searchText.toLowerCase())
+  //   );
+  // }, [searchText, allSuggestions]);
   const filteredSuggestions = useMemo(() => {
-    if (!searchText.trim()) {
-      return [];
-    }
-    return allSuggestions.filter(item =>
-      item.toLowerCase().includes(searchText.toLowerCase())
-    );
-  }, [searchText, allSuggestions]);
+  if (!searchText.trim()) return [];
+
+  return combinedSearchData.filter(item =>
+    item.toLowerCase().includes(searchText.toLowerCase()),
+  );
+}, [searchText, combinedSearchData]);
+
 
   // const [region, setRegion] = useState({
   //   latitude: 40.7128,
@@ -463,6 +481,7 @@ const renderMarker = marker => (
 
   return (
     <View style={styles.container}>
+          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-120): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Search Input */}
@@ -484,16 +503,17 @@ const renderMarker = marker => (
               scrollEnabled>
               {mapMarkers.map(renderMarker)}
             </MapView> */}
-            {/* <MapView
-            provider={PROVIDER_GOOGLE}
+            <MapView
+            // provider={PROVIDER_GOOGLE}
+             provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
             style={{ flex: 1 }}
             // style={StyleSheet.absoluteFillObject}
             initialRegion={initialRegion}
             rotateEnabled={false}
             pitchEnabled={false}>
             {mapMarkers.map(renderMarker)}
-          </MapView> */}
-          <MapView
+          </MapView>
+          {/* <MapView
     style={{ flex: 1 }}
     provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
     initialRegion={initialRegion}
@@ -503,7 +523,7 @@ const renderMarker = marker => (
     showsMyLocationButton={Platform.OS === 'android'}
   >
     {mapMarkers.map(renderMarker)}
-  </MapView>
+  </MapView> */}
              <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
           <Icon name="search" size={mvs(20)} color="#8C8C8C" />
@@ -533,7 +553,7 @@ const renderMarker = marker => (
         {(isSearchFocused || searchText.length > 0) && (
           <View style={styles.searchSuggestionsCard}>
             {/* Filtered Suggestions - Show when user types */}
-            {searchText.length > 0 && filteredSuggestions.length > 0 && (
+            {/* {searchText.length > 0 && filteredSuggestions.length > 0 && (
               <>
                 <View style={styles.suggestionsSection}>
                   <Regular
@@ -556,7 +576,39 @@ const renderMarker = marker => (
                   ))}
                 </View>
               </>
-            )}
+            )} */}
+            {searchText.length > 0 && (
+  <View style={styles.suggestionsSection}>
+    <Regular
+      label="Search Results"
+      fontSize={mvs(14)}
+      color="#8C8C8C"
+      style={styles.sectionTitle}
+    />
+
+    {filteredSuggestions.length > 0 ? (
+      filteredSuggestions.map((item, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.suggestionItem}
+          onPress={() => setSearchText(item)}>
+          <Regular
+            label={item}
+            fontSize={mvs(14)}
+            color="#333333"
+          />
+        </TouchableOpacity>
+      ))
+    ) : (
+      <Regular
+        label="No results found"
+        fontSize={mvs(14)}
+        color="#8C8C8C"
+      />
+    )}
+  </View>
+)}
+
 
             {/* Suggested Searches - Show when search is empty or focused */}
             {searchText.length === 0 && (
@@ -698,7 +750,7 @@ const styles = StyleSheet.create({
   // },
   searchContainer: {
   position: 'absolute',
-  top: mvs(20),
+  top: Platform.OS==='ios'? mvs(100):mvs(20),
   left: mvs(20),
   right: mvs(20),
   zIndex: 20,
@@ -794,19 +846,19 @@ const styles = StyleSheet.create({
   },
   locationIndicator: {
     position: 'absolute',
-    top: mvs(20),
+    top:Platform.OS==='ios'? mvs(155):mvs(70),
     left: mvs(20),
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     paddingHorizontal: mvs(12),
     paddingVertical: mvs(8),
     borderRadius: mvs(20),
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    // shadowColor: '#000',
+    // shadowOffset: {width: 0, height: 2},
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
+    // elevation: 3,
     zIndex: 10,
   },
   membersSection: {
@@ -819,7 +871,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: mvs(20),
     paddingTop: mvs(8),
     paddingBottom: mvs(20),
-    maxHeight: mvs(280),
+    maxHeight: mvs(300),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: -2},
     shadowOpacity: 0.1,
@@ -828,9 +880,10 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   membersHandle: {
-    width: mvs(40),
+    width: mvs(72),
+    marginVertical:mvs(10),
     height: mvs(4),
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#404040',
     borderRadius: mvs(2),
     alignSelf: 'center',
     marginBottom: mvs(12),

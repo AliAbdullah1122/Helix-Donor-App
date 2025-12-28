@@ -382,3 +382,4 @@ export {default as SwipenewDot} from './SwipenewDot.svg';
 export {default as MapUser1} from './MapUser1.png';
 export {default as MapMoreUser} from './MapMoreUser.png';
 export {default as HelixLogoSplash} from './HelixLogoSplash.png';
+export {default as EditNewImage} from './EditNewImage.svg';

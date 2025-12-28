@@ -14,6 +14,8 @@ import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import { Row } from 'components/atoms/row';
 import Medium from 'typography/medium-text';
 import Bold from 'typography/bold-text';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([
@@ -101,6 +103,7 @@ const Notifications = () => {
 
   return (
     <View style={{flex:1,backgroundColor:colors.white}}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
         <Header1x2x title='Notifications'/>
     <View style={styles.container}>
 

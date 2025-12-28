@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(28),
     width: '100%',
     height: mvs(50),
-    backgroundColor: colors.helixPrimary,
+    backgroundColor: colors.primary,
     marginTop: mvs(20),
   },
 });

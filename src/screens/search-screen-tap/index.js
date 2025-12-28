@@ -29,6 +29,7 @@ import {
   RESULTS,
 } from 'react-native-permissions';
 import {useFocusEffect} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
@@ -367,7 +368,8 @@ const renderMarker = marker => (
 };
   return (
     <View style={styles.container}>
-      <StatusBar translucent={false} backgroundColor={colors.white} barStyle="white-content" />
+          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-120): 0}} />
+      <StatusBar  backgroundColor={colors.white} barStyle="white-content" />
 
       {/* Search Input */}
      
@@ -502,7 +504,7 @@ const styles = StyleSheet.create({
   // },
   searchContainer: {
   position: 'absolute',
-  top: mvs(20),
+  top: mvs(100),
   left: mvs(20),
   right: mvs(20),
   zIndex: 20,
@@ -595,11 +597,11 @@ const styles = StyleSheet.create({
   },
   locationIndicator: {
     position: 'absolute',
-    top: mvs(20),
+    top: mvs(160),
     left: mvs(20),
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     paddingHorizontal: mvs(12),
     paddingVertical: mvs(8),
     borderRadius: mvs(20),
@@ -620,7 +622,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: mvs(20),
     paddingTop: mvs(8),
     paddingBottom: mvs(20),
-    maxHeight: mvs(280),
+    maxHeight: mvs(300),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: -2},
     shadowOpacity: 0.1,
@@ -629,9 +631,10 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   membersHandle: {
-    width: mvs(40),
+    width: mvs(72),
     height: mvs(4),
-    backgroundColor: '#D9D9D9',
+    marginVertical:mvs(10),
+    backgroundColor: '#404040',
     borderRadius: mvs(2),
     alignSelf: 'center',
     marginBottom: mvs(12),

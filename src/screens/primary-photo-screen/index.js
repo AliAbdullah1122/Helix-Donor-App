@@ -10,6 +10,7 @@ import {
   Image,
   ScrollView,
   Alert,
+  Platform,
 } from 'react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
@@ -29,6 +30,7 @@ import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PrimaryPhotoScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -110,6 +112,7 @@ const PrimaryPhotoScreen = props => {
   };
   return (
     <View style={styles.container}>
+      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>

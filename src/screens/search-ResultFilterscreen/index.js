@@ -19,6 +19,8 @@ import Regular from 'typography/regular-text';
 import {navigate} from 'navigation/navigation-ref';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
@@ -336,6 +338,7 @@ const getBadgeIcon = (badge) => {
 
   return (
     <View style={styles.container}>
+          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Search Input */}

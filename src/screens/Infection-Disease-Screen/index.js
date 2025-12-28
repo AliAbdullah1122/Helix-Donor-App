@@ -25,6 +25,8 @@ import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const InfectionDiseaseScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -114,6 +116,7 @@ const navigation = useNavigation();
   const Nationality = [{id: 'Pakistan'}, {id: 'United Kingdom'}, {id: 'France'}, {id: 'America'}];
   return (
     <View style={styles.container}>
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>

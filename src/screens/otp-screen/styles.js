@@ -5,7 +5,8 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fbfbfe",
+    // backgroundColor: "#fbfbfe",
+    backgroundColor:colors.helixBackground,
     paddingHorizontal: mvs(20),
   },
   scrollContainer: {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     height: mvs(43),
     marginTop: mvs(25),
     // marginBottom: mvs(16),
-    backgroundColor: colors.helixPrimary,
+    backgroundColor: colors.primary,
   },
   footerContainer: {
     flexDirection: 'row',
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: '90%',
-    maxHeight: '95%',
+    maxHeight: Platform.OS==='ios'? '90%' :'95%',
     borderRadius: mvs(20),
     backgroundColor: colors.white,
     padding: 0,

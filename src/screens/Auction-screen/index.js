@@ -195,6 +195,7 @@ const AuctionScreen = props => {
               label="Place Your Offer"
               fontSize={mvs(16)}
               color={colors.white}
+              style={{fontWeight: '500'}}
             />
           </TouchableOpacity>
           

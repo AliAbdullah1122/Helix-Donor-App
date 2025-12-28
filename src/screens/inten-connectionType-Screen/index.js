@@ -37,7 +37,7 @@ const IntentConnectiontypeScreen = props => {
     {
       id: 'donor',
       title: 'Private Donor + Co-Parenting',
-      icon: IMG.Egg,
+      icon: IMG.handshake,
       iconType: 'svg',
       iconPosition: 'left',
     },

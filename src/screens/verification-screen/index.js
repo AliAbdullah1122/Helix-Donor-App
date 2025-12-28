@@ -183,10 +183,11 @@ const navigation = useNavigation();
 
       <View style={{marginHorizontal: mvs(20), marginBottom: mvs(40)}}>
         <Regular
-          label={'Your contact details are strictly confidential.'}
-          fontSize={mvs(12)}
+          label={'Your ID is encrypted and used for verification only.'}
+          fontSize={mvs(14)}
           color={'#8C8C8C'}
-          style={{textAlign: 'center', marginTop: mvs(10)}}
+          style={{textAlign: 'center'}}
+          // numberOfLines={3}
         />
       </View>
 

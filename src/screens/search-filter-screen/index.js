@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -8,10 +8,10 @@ import {
   Dimensions,
 } from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import * as IMG from 'assets/images';
-import {Row} from 'components/atoms/row';
+import { Row } from 'components/atoms/row';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
@@ -19,11 +19,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { navigate } from 'navigation/navigation-ref';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import AgeRangeSlider from 'components/atoms/AgeRangeSlider/AgeRangeSlider';
+import WeightRangeSlider from 'components/atoms/WeightRangeSlider/WeightRangeSlider';
+import HeightRangeSlider from 'components/atoms/HeightRangeSlider/HeightRangeSlider';
 
-const {width: SCREEN_WIDTH} = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const SearchFilterScreen = () => {
-const navigation = useNavigation();
+  const navigation = useNavigation();
   const [intentExpanded, setIntentExpanded] = useState(false);
   const [basicsExpanded, setBasicsExpanded] = useState(false);
   const [physicalExpanded, setPhysicalExpanded] = useState(false);
@@ -59,29 +62,33 @@ const navigation = useNavigation();
   const [heightUnlocked, setHeightUnlocked] = useState(false);
   const [eyeColorUnlocked, setEyeColorUnlocked] = useState(false);
   const [geneticUnlocked, setGeneticUnlocked] = useState(false);
-
-
+  const [minAge, setMinAge] = useState(22);
+  const [maxAge, setMaxAge] = useState(30);
+  const [minWeight, setMinWeight] = useState(155);
+  const [maxWeight, setMaxWeight] = useState(160);
+  const [minHeight, setMinHeight] = useState(60); // 5'0"
+  const [maxHeight, setMaxHeight] = useState(66); // 5'6"
   const reduxState = useSelector(state => state);
-console.log('Redux State:', reduxState);
+  console.log('Redux State:', reduxState);
 
-const subscribed = useSelector(state => state.user.subscribed);
-console.log('Subscribed:', subscribed);
+  const subscribed = useSelector(state => state.user.subscribed);
+  console.log('Subscribed:', subscribed);
 
   console.log('Subscribed:', subscribed);
   useEffect(() => {
-  if (subscribed) {
-    setEducationUnlocked(true);
-    setHeightUnlocked(true);
-    setEyeColorUnlocked(true);
-    setGeneticUnlocked(true);
-  } else {
-    // optional: lock again if unsubscribed
-    setEducationUnlocked(false);
-    setHeightUnlocked(false);
-    setEyeColorUnlocked(false);
-    setGeneticUnlocked(false);
-  }
-}, [subscribed]);
+    if (subscribed) {
+      setEducationUnlocked(true);
+      setHeightUnlocked(true);
+      setEyeColorUnlocked(true);
+      setGeneticUnlocked(true);
+    } else {
+      // optional: lock again if unsubscribed
+      setEducationUnlocked(false);
+      setHeightUnlocked(false);
+      setEyeColorUnlocked(false);
+      setGeneticUnlocked(false);
+    }
+  }, [subscribed]);
 
   const toggleGoal = value => {
     if (selectedGoals.includes(value)) {
@@ -182,28 +189,28 @@ console.log('Subscribed:', subscribed);
         <View />
         <Bold label="Filter" fontSize={mvs(18)} color={colors.black} />
         <TouchableOpacity
-        //  onPress={() => navigate('SearchScreen')}
-    onPress={() => navigation.goBack()}
-         >
+          //  onPress={() => navigate('SearchScreen')}
+          onPress={() => navigation.goBack()}
+        >
           <Icon name="close" size={mvs(22)} color={colors.black} />
         </TouchableOpacity>
       </Row>
 
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={{paddingBottom: mvs(120)}}>
+        contentContainerStyle={{ paddingBottom: mvs(120) }}>
         {/* Intent & Goals card */}
         <View style={styles.card}>
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setIntentExpanded(!intentExpanded)}>
-            <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.Filtergoal width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="INTENT & GOALS"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -218,7 +225,7 @@ console.log('Subscribed:', subscribed);
               <Medium
                 label="Their Goal is"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
               />
               <View style={styles.chipRow}>
                 {['Co-Parenting', 'Private Donor', 'Donor + Relationship', 'Donor + Marriage'].map(
@@ -236,8 +243,8 @@ console.log('Subscribed:', subscribed);
               <Medium
                 label="I'm Seeking"
                 fontSize={mvs(14)}
-                color={colors.black}
-                style={{marginTop: mvs(16)}}
+                color={colors.primary}
+                style={{ marginTop: mvs(16) }}
               />
               <Row style={styles.seekingRow}>
                 {['Sperm', 'Egg'].map((item, index) => (
@@ -259,13 +266,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setBasicsExpanded(!basicsExpanded)}>
-             <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterBasis width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="BASICS"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -278,12 +285,13 @@ console.log('Subscribed:', subscribed);
           {basicsExpanded && (
             <View style={styles.cardBody}>
               {/* Age Range */}
-              <Medium
+              <Regular
                 label="Age Range"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
+                style={{ fontWeight: "400" }}
               />
-              <View style={styles.sliderWrapper}>
+              {/* <View style={styles.sliderWrapper}>
                 <Row style={styles.sliderLabels}>
                   <Regular
                     label={ageRange[0].toString()}
@@ -310,10 +318,24 @@ console.log('Subscribed:', subscribed);
                   markerStyle={styles.sliderMarker}
                   containerStyle={styles.sliderContainer}
                 />
-              </View>
+              </View> */}
+              <View>
 
+                {/* Slider */}
+                <AgeRangeSlider
+                  min={10}
+                  max={60}
+                  low={minAge}
+                  high={maxAge}
+                  onChange={(low, high) => {
+                    setMinAge(low);
+                    setMaxAge(high);
+                  }}
+                />
+
+              </View>
               {/* Location */}
-              <Row style={{marginTop: mvs(20), justifyContent: 'space-between'}}>
+              <Row style={{ marginTop: mvs(20), justifyContent: 'space-between' }}>
                 <Medium
                   label="Location"
                   fontSize={mvs(14)}
@@ -346,7 +368,7 @@ console.log('Subscribed:', subscribed);
                 label="Marital Status"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(20)}}
+                style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
                 {['Single', 'Married', 'Divorced', 'Any'].map(item => (
@@ -360,13 +382,13 @@ console.log('Subscribed:', subscribed);
               </View>
 
               {/* Education */}
-              <Row style={{marginTop: mvs(20), alignItems: 'center'}}>
+              <Row style={{ marginTop: mvs(20), alignItems: 'center' }}>
                 <Medium
                   label="Education"
                   fontSize={mvs(14)}
                   color={colors.black}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{marginLeft: mvs(8)}} />
+                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <View style={styles.chipRow}>
@@ -383,7 +405,7 @@ console.log('Subscribed:', subscribed);
                 )}
               </View>
               {!educationUnlocked && (
-                
+
                 // <TouchableOpacity style={styles.unlockButton} onPress={() => setEducationUnlocked(true)}>
                 <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
@@ -399,7 +421,7 @@ console.log('Subscribed:', subscribed);
                 label="Diet"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(20)}}
+                style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
                 {['Omnivore', 'Pescatarian', 'Vegetarian', 'Vegan', 'Kosher', 'Halal', 'Gluten-Free'].map(
@@ -433,13 +455,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setPhysicalExpanded(!physicalExpanded)}>
-          <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterPhysical width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="PHYSICAL ATTRIBUTES"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -451,16 +473,16 @@ console.log('Subscribed:', subscribed);
           {physicalExpanded && (
             <View style={styles.cardBody}>
               {/* Height */}
-              <Row style={{alignItems: 'center'}}>
+              <Row style={{ alignItems: 'center' }}>
                 <Medium
                   label="Height"
                   fontSize={mvs(14)}
                   color={colors.black}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{marginLeft: mvs(8)}} />
+                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
                 {/* <View style={styles.lockDot} /> */}
               </Row>
-              <View style={styles.sliderWrapper}>
+              {/* <View style={styles.sliderWrapper}>
                 <Row style={styles.sliderLabels}>
                   <Regular
                     label={formatHeight(heightRange[0])}
@@ -487,7 +509,17 @@ console.log('Subscribed:', subscribed);
                   markerStyle={styles.sliderMarker}
                   containerStyle={styles.sliderContainer}
                 />
-              </View>
+              </View> */}
+              <HeightRangeSlider
+                min={60} // 5'0"
+                max={80} // 6'6"
+                low={minHeight}
+                high={maxHeight}
+                onChange={(low, high) => {
+                  setMinHeight(low);
+                  setMaxHeight(high);
+                }}
+              />
               {!heightUnlocked && (
                 // <TouchableOpacity style={styles.unlockButton} onPress={() => setHeightUnlocked(true)}>
                 <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
@@ -504,9 +536,9 @@ console.log('Subscribed:', subscribed);
                 label="Weight"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(20)}}
+                style={{ marginTop: mvs(10) }}
               />
-              <View style={styles.sliderWrapper}>
+              {/* <View style={styles.sliderWrapper}>
                 <Row style={styles.sliderLabels}>
                   <Regular
                     label={weightRange[0].toString()}
@@ -533,8 +565,23 @@ console.log('Subscribed:', subscribed);
                   markerStyle={styles.sliderMarker}
                   containerStyle={styles.sliderContainer}
                 />
+              </View> */}
+              <View>
+
+                {/* Slider */}
+                <WeightRangeSlider
+                  min={150}
+                  max={175}
+                  low={minWeight}
+                  high={maxWeight}
+                  onChange={(low, high) => {
+                    setMinWeight(low);
+                    setMaxWeight(high);
+                  }}
+                />
+
               </View>
-              <Row style={{justifyContent: 'flex-end', marginTop: mvs(4)}}>
+              <Row style={{ justifyContent: 'flex-end', marginTop: mvs(4) }}>
                 <Regular
                   label={`${weightRange[0]} - ${weightRange[1]} lbs`}
                   fontSize={mvs(12)}
@@ -547,10 +594,10 @@ console.log('Subscribed:', subscribed);
                 label="Hair Color"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(20)}}
+                style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
-                {['Black', 'Blonde', 'Brown', 'Red', 'Auburn'].map(
+                {['Auburn','Black', 'Blonde', 'Brown', 'Red'].map(
                   item => (
                     <FilterChip
                       key={item}
@@ -563,17 +610,17 @@ console.log('Subscribed:', subscribed);
               </View>
 
               {/* Eye Color */}
-              <Row style={{marginTop: mvs(20), alignItems: 'center'}}>
+              <Row style={{ marginTop: mvs(20), alignItems: 'center' }}>
                 <Medium
                   label="Eye Color"
                   fontSize={mvs(14)}
                   color={colors.black}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{marginLeft: mvs(8)}} />
+                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <View style={styles.chipRow}>
-                {['Black', 'Green', 'Brown', 'Hazel', 'Blue'].map(
+                {['Blue','Black', 'Green', 'Brown', 'Hazel'].map(
                   item => (
                     <FilterChip
                       key={item}
@@ -601,10 +648,10 @@ console.log('Subscribed:', subscribed);
                 label="Build"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(20)}}
+                style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
-                {['Athletic', 'Average', 'Curvy', 'Slim', 'Large'].map(
+                {['Slim','Athletic', 'Average', 'Curvy',  'Large'].map(
                   item => (
                     <FilterChip
                       key={item}
@@ -624,13 +671,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setAncestryExpanded(!ancestryExpanded)}>
-             <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterAncestors width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="ANCESTRY & BACKGROUND"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -654,7 +701,7 @@ console.log('Subscribed:', subscribed);
 
               {/* Nationality */}
               {/* <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}> */}
-              <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]} onPress={() => navigate('SearchNationlaityScreen')}>
+              <TouchableOpacity style={[styles.navigationRow, { marginTop: mvs(16) }]} onPress={() => navigate('SearchNationlaityScreen')}>
                 <Medium
                   label="Nationality (2 Selected)"
                   fontSize={mvs(14)}
@@ -668,7 +715,7 @@ console.log('Subscribed:', subscribed);
                 label="Jewish Ancestry"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(16)}}
+                style={{ marginTop: mvs(16) }}
               />
               <View style={styles.chipRow}>
                 {['Yes', 'No', 'Any'].map(
@@ -685,7 +732,7 @@ console.log('Subscribed:', subscribed);
 
               {/* Religion */}
               {/* <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}> */}
-              <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]} onPress={() => navigate('SearchReligionScreen')}>
+              <TouchableOpacity style={[styles.navigationRow, { marginTop: mvs(16) }]} onPress={() => navigate('SearchReligionScreen')}>
                 <Medium
                   label="Religion (2 Selected)"
                   fontSize={mvs(14)}
@@ -702,13 +749,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setMedicalExpanded(!medicalExpanded)}>
-              <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterMedical width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="MEDICAL HEALTH"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -743,7 +790,7 @@ console.log('Subscribed:', subscribed);
                 label="CMV Status"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginTop: mvs(20)}}
+                style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
                 {['Positive', 'Negative', 'Any'].map(
@@ -766,13 +813,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setGeneticExpanded(!geneticExpanded)}>
-              <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterGenetic width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="GENETIC HEALTH"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -784,20 +831,20 @@ console.log('Subscribed:', subscribed);
           {geneticExpanded && (
             <View style={styles.cardBody}>
               {/* Exclusion Mode */}
-              <Row style={{alignItems: 'center'}}>
+              <Row style={{ alignItems: 'center' }}>
                 <Medium
                   label="EXCLUSION MODE"
                   fontSize={mvs(14)}
                   color={colors.black}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{marginLeft: mvs(8)}} />
+                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <Regular
                 label="Donors who are carriers of the conditions selected below will be REMOVED from your search results."
                 fontSize={mvs(12)}
                 color="#8C8C8C"
-                style={{marginTop: mvs(8), lineHeight: mvs(18)}}
+                style={{ marginTop: mvs(8), lineHeight: mvs(18) }}
               />
 
               {/* Checkboxes */}
@@ -806,13 +853,13 @@ console.log('Subscribed:', subscribed);
                   style={styles.checkbox}
                   onPress={() => setGeneticVerified(!geneticVerified)}>
                   <View style={[styles.checkboxBox, geneticVerified && styles.checkboxChecked]}>
-                    {geneticVerified && <Icon name="checkmark" size={mvs(14)} color={colors.white} />}
+                    {geneticVerified && <Icon name="checkmark" size={mvs(14)} color={colors.primary} />}
                   </View>
                   <Regular
                     label="Show only iGenomix Verified Donors"
                     fontSize={mvs(14)}
                     color={colors.black}
-                    style={{marginLeft: mvs(12), flex: 1}}
+                    style={{ marginLeft: mvs(12), flex: 1 }}
                   />
                 </TouchableOpacity>
 
@@ -820,26 +867,26 @@ console.log('Subscribed:', subscribed);
                   style={styles.checkbox}
                   onPress={() => setGeneticNonCarrier(!geneticNonCarrier)}>
                   <View style={[styles.checkboxBox, geneticNonCarrier && styles.checkboxChecked]}>
-                    {geneticNonCarrier && <Icon name="checkmark" size={mvs(14)} color={colors.white} />}
+                    {geneticNonCarrier && <Icon name="checkmark" size={mvs(14)} color={colors.primary} />}
                   </View>
                   <Regular
                     label="Show only Non-Carrier Donors"
                     fontSize={mvs(14)}
                     color={colors.black}
-                    style={{marginLeft: mvs(12), flex: 1}}
+                    style={{ marginLeft: mvs(12), flex: 1 }}
                   />
                 </TouchableOpacity>
               </View>
 
               {/* Genetic Conditions Filter */}
               {/* <TouchableOpacity style={[styles.geneticFilterButton, {marginTop: mvs(16)}]}> */}
-              <TouchableOpacity style={[styles.geneticFilterButton, {marginTop: mvs(16)}]} onPress={()=> navigate('SearchGeneticScreen')}>
+              <TouchableOpacity style={[styles.geneticFilterButton, { marginTop: mvs(16) }]} onPress={() => navigate('SearchGeneticScreen')}>
                 <Regular
                   label={`Genetic Conditions Filter (${selectedGeneticConditions.length})`}
                   fontSize={mvs(14)}
-                  color="#8C8C8C"
+                  color={colors.white}
                 />
-                <Icon name="chevron-forward" size={mvs(18)} color={colors.black} />
+                {/* <Icon name="chevron-forward" size={mvs(18)} color={colors.black} /> */}
               </TouchableOpacity>
 
               {/* Selected Conditions */}
@@ -849,7 +896,7 @@ console.log('Subscribed:', subscribed);
                     label="Selected:"
                     fontSize={mvs(14)}
                     color={colors.black}
-                    style={{marginTop: mvs(16)}}
+                    style={{ marginTop: mvs(16) }}
                   />
                   <View style={styles.chipRow}>
                     {selectedGeneticConditions.map((item, index) => (
@@ -888,13 +935,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setVialExpanded(!vialExpanded)}>
-              <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterVial width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="VIAL TYPE"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -926,13 +973,13 @@ console.log('Subscribed:', subscribed);
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setDonorTypeExpanded(!donorTypeExpanded)}>
-               <Row style={{alignItems: 'center',justifyContent:"flex-start", flex: 1}}>
+            <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
               <IMG.FilterDonorType width={mvs(20)} height={mvs(20)} />
               <Medium
                 label="DONOR TYPE & AVAILABILITY"
                 fontSize={mvs(14)}
                 color={colors.black}
-                style={{marginLeft: mvs(8)}}
+                style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
@@ -959,30 +1006,30 @@ console.log('Subscribed:', subscribed);
                   checked={xyClassicLimited}
                   onPress={() => setXyClassicLimited(!xyClassicLimited)}
                 />
-                <CheckboxItem label="Current Available Inventory" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Audio File Available" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Retired Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Has Children" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Legacy50 Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Colorado Compliant" checked={false} onPress={() => {}} />
-                <CheckboxItem label="xyLimited Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="xyGene Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Non-Carrier Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="xySelect Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Exclusive Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Child Photo Available" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Adult Photo Available" checked={false} onPress={() => {}} />
-                <CheckboxItem label="xyAnonymous" checked={false} onPress={() => {}} />
-                <CheckboxItem label="xyIdentity Disclosure" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Keirsey Profile Available" checked={false} onPress={() => {}} />
-                <CheckboxItem label="ART Vials Available" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Reported Pregnancy" checked={false} onPress={() => {}} />
-                <CheckboxItem label="New Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Canadian Compliant" checked={false} onPress={() => {}} />
-                <CheckboxItem label="UK Compliant" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Only Donors with Photos" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Additional Sibling Only Donors" checked={false} onPress={() => {}} />
-                <CheckboxItem label="Not Additional Children Only Donors" checked={false} onPress={() => {}} />
+                <CheckboxItem label="Current Available Inventory" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Audio File Available" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Retired Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Has Children" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Legacy50 Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Colorado Compliant" checked={false} onPress={() => { }} />
+                <CheckboxItem label="xyLimited Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="xyGene Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Non-Carrier Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="xySelect Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Exclusive Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Child Photo Available" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Adult Photo Available" checked={false} onPress={() => { }} />
+                <CheckboxItem label="xyAnonymous" checked={false} onPress={() => { }} />
+                <CheckboxItem label="xyIdentity Disclosure" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Keirsey Profile Available" checked={false} onPress={() => { }} />
+                <CheckboxItem label="ART Vials Available" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Reported Pregnancy" checked={false} onPress={() => { }} />
+                <CheckboxItem label="New Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Canadian Compliant" checked={false} onPress={() => { }} />
+                <CheckboxItem label="UK Compliant" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Only Donors with Photos" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Additional Sibling Only Donors" checked={false} onPress={() => { }} />
+                <CheckboxItem label="Not Additional Children Only Donors" checked={false} onPress={() => { }} />
               </View>
             </View>
           )}
@@ -998,7 +1045,7 @@ console.log('Subscribed:', subscribed);
             color={colors.primary}
           />
         </TouchableOpacity>
-        <TouchableOpacity  onPress={()=>navigate("SearchResultFilterScreen")} style={styles.applyButton}>
+        <TouchableOpacity onPress={() => navigate("SearchResultFilterScreen")} style={styles.applyButton}>
           <Medium label="Show 12" fontSize={mvs(14)} color={colors.white} />
         </TouchableOpacity>
       </Row>
@@ -1006,23 +1053,23 @@ console.log('Subscribed:', subscribed);
   );
 };
 
-const CheckboxItem = ({label, checked, onPress}) => {
+const CheckboxItem = ({ label, checked, onPress }) => {
   return (
     <TouchableOpacity style={styles.checkbox} onPress={onPress}>
       <View style={[styles.checkboxBox, checked && styles.checkboxChecked]}>
-        {checked && <Icon name="checkmark" size={mvs(14)} color={colors.white} />}
+        {checked && <Icon name="checkmark" size={mvs(14)} color={colors.primary} />}
       </View>
       <Regular
         label={label}
         fontSize={mvs(14)}
         color={colors.black}
-        style={{marginLeft: mvs(12), flex: 1}}
+        style={{ marginLeft: mvs(12), flex: 1 }}
       />
     </TouchableOpacity>
   );
 };
 
-const FilterChip = ({label, selected, onPress, isLocked = false}) => {
+const FilterChip = ({ label, selected, onPress, isLocked = false }) => {
   const handlePress = e => {
     e.stopPropagation();
     onPress();
@@ -1052,7 +1099,7 @@ const FilterChip = ({label, selected, onPress, isLocked = false}) => {
         <TouchableOpacity
           onPress={handleRemove}
           style={styles.chipClose}
-          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
           <Icon name="close" size={mvs(14)} color={colors.white} />
         </TouchableOpacity>
       )}
@@ -1084,7 +1131,7 @@ const styles = StyleSheet.create({
     marginBottom: mvs(16),
     overflow: 'hidden',
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 6,
     elevation: 2,
@@ -1095,10 +1142,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: '#D9D9D9',
   },
   cardBody: {
     paddingHorizontal: mvs(16),
     paddingBottom: mvs(16),
+    marginTop: mvs(10),
   },
   chipRow: {
     flexDirection: 'row',
@@ -1109,10 +1159,10 @@ const styles = StyleSheet.create({
   },
   seekingRow: {
     flexDirection: 'row',
-    justifyContent:"flex-start",
+    justifyContent: "flex-start",
     flexWrap: 'wrap',
     rowGap: mvs(8),
-    gap:mvs(6),
+    gap: mvs(6),
     columnGap: 10,
     marginTop: mvs(10),
     alignItems: 'center',
@@ -1137,7 +1187,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: mvs(14),
     // paddingVertical: mvs(6),
     // paddingRight: mvs(8),
-     flexDirection: 'row',
+    flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: mvs(14),
     paddingVertical: mvs(6),
@@ -1153,7 +1203,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: mvs(14),
     // paddingVertical: mvs(6),
     // paddingRight: mvs(8),
-     flexDirection: 'row',
+    flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: mvs(14),
     paddingVertical: mvs(6),
@@ -1265,7 +1315,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   checkboxChecked: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     borderColor: colors.primary,
   },
   checkboxList: {
@@ -1274,10 +1324,10 @@ const styles = StyleSheet.create({
   geneticFilterButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingVertical: mvs(12),
     paddingHorizontal: mvs(16),
-    backgroundColor: '#F5F5F5',
-    borderRadius: mvs(12),
+    backgroundColor: colors.primary,
+    borderRadius: mvs(24),
   },
 });

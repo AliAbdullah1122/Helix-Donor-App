@@ -99,6 +99,15 @@ const SearchResultFilterScreen = () => {
     if (badge === 'Xytex') return 'business-outline';
     return null;
   };
+const BADGE_SVGS = {
+  'CGT Screened': IMG.screenedFlask,          // example svg
+  'Future Contact': IMG.futureContact,
+  'Biological Offspring': IMG.bbioloogicalOffspring,
+  'Xytex': IMG.xytex,
+};
+const getBadgeIcon = (badge) => {
+  return BADGE_SVGS[badge] || null;
+};
 
   const getBadgeColor = badge => {
     if (badge === 'Private Donor') return '#8C8C8C';
@@ -239,7 +248,7 @@ const SearchResultFilterScreen = () => {
         {/* Badges row under image (full width) */}
         <View style={styles.badgesContainer}>
           {item.badges.map((badge, index) => {
-            const iconName = getBadgeIconName(badge);
+  const BadgeIcon = getBadgeIcon(badge);
             const badgeColor = getBadgeColor(badge);
             const isInfoBadge =
               badge === 'CGT Screened' ||
@@ -251,15 +260,16 @@ const SearchResultFilterScreen = () => {
                 activeOpacity={isInfoBadge ? 0.8 : 1}
                 onPress={() => isInfoBadge && handleInfoBadgePress(badge)}>
                 <View style={[styles.badge, {backgroundColor: badgeColor}]}>
-                  {iconName && (
-                    <Icon
-                      name={iconName}
-                      size={mvs(12)}
+                  {BadgeIcon && (
+                    <BadgeIcon
+                      // name={iconName}
+                      size={mvs(18)}
                       color={colors.white}
                       style={{marginRight: mvs(4)}}
                     />
+                    // <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
                   )}
-                  <Regular label={badge} fontSize={mvs(11)} color={'#404040'} />
+                  <Regular label={badge} fontSize={mvs(11)} color={badge == "Xytex" || badge == "Private Donor" ? colors.white : '#404040'} />
                 </View>
               </TouchableOpacity>
             );
@@ -379,7 +389,7 @@ const SearchResultFilterScreen = () => {
             ))}
           </ScrollView>
         </View>
-
+<View style={{backgroundColor:'#f2f2f7'}}>
         {/* Results Count */}
         <Regular
           label="Showing 14 results..."
@@ -387,7 +397,7 @@ const SearchResultFilterScreen = () => {
           color="#8C8C8C"
           style={styles.resultsCount}
         />
-
+</View>
         {!hasResults ? (
           <View >
             {/* Profile Cards */}
@@ -460,7 +470,7 @@ const SearchResultFilterScreen = () => {
       </ScrollView>
 
       {/* Floating Show Map button */}
-{hasResults && (
+{/* {hasResults && ( */}
   <View style={styles.showMapWrapper}>
     <TouchableOpacity activeOpacity={0.9} style={styles.showMapButton}>
       <Row style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -474,7 +484,7 @@ const SearchResultFilterScreen = () => {
       </Row>
     </TouchableOpacity>
   </View>
-)}
+{/* )} */}
 
 
       {/* CGT Screened modal */}
@@ -602,7 +612,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.white,
-    borderRadius: mvs(40),
+    borderRadius: mvs(24),
     paddingHorizontal: mvs(16),
     paddingVertical: mvs(2),
     shadowColor: '#000',
@@ -610,6 +620,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    height: mvs(46),
   },
   searchInput: {
     flex: 1,
@@ -625,12 +636,13 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    backgroundColor: '#f2f2f7',
   },
   filtersSection: {
-    paddingHorizontal: mvs(20),
+    paddingLeft: mvs(20),
     paddingTop: mvs(16),
     paddingBottom: mvs(12),
-    backgroundColor: colors.white,
+    backgroundColor: "#f2f2f7",
   },
   filtersTitle: {
     marginBottom: mvs(12),
@@ -647,12 +659,13 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(6),
     borderRadius: mvs(16),
     marginRight: mvs(8),
+    // zIndex: 1,
   },
   resultsCount: {
     paddingHorizontal: mvs(20),
     paddingTop: mvs(12),
     paddingBottom: mvs(8),
-    backgroundColor: colors.white,
+    // backgroundColor: "",
   },
   profilesList: {
     paddingHorizontal: mvs(20),
@@ -847,7 +860,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: mvs(20),
+    bottom: mvs(15),
     alignItems: 'center',
     justifyContent: 'center',
   },

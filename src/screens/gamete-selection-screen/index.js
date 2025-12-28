@@ -30,8 +30,8 @@ const GameteSelectionScreen = props => {
       id: 'surrogacy',
       title: 'Sperm Donor',
 
-      icon: IMG.sperm,
-      iconType: 'svg',
+      icon: IMG.spermpng,
+      iconType: 'image',
       iconPosition: 'left',
     },
   ];

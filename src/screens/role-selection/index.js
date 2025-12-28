@@ -45,7 +45,7 @@ const RoleSelectionScreen = props => {
       id: 'looking-for-surrogate',
       title: 'I am Looking for Surrogate',
       description: 'Connect with a compassionate carrier to help build your family.',
-      icon: IMG.SearchNew,
+      icon: IMG.Search1,
       iconType: 'svg',
       iconPosition: 'left',
     },
@@ -152,8 +152,8 @@ const RoleSelectionScreen = props => {
                             />
                           ) : (
                             <option.icon 
-                              height={mvs(60)} 
-                              width={mvs(60)}
+                              height={serviceOptions == "donorOptions" ? mvs(56) : mvs(60)} 
+                              width={serviceOptions == "donorOptions" ? mvs(56) : mvs(60)}
                             />
                           )}
                         </View>
@@ -168,8 +168,8 @@ const RoleSelectionScreen = props => {
                             />
                           ) : (
                             <option.icon 
-                              height={mvs(60)} 
-                              width={mvs(60)}
+                              height={mvs(44)} 
+                              width={mvs(44)}
                             />
                           )}
                         </View>

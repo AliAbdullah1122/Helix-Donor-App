@@ -54,6 +54,7 @@ type props = {
   style?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  styleo?: StyleProp<ViewStyle>;
   mainContainer?: StyleProp<ViewStyle>;
   errorStyle?: StyleProp<ViewStyle>;
   secureTextEntry?: boolean | undefined;
@@ -579,6 +580,7 @@ export const InputWithIcon = (props: props & {
     editable,
     error,
     label,
+    styleo,
     isRequired = false,
     hairColorOptions = [],
     buildOptions = [],
@@ -589,7 +591,7 @@ export const InputWithIcon = (props: props & {
   } = props;
   
   return (
-    <View style={{position: 'relative', zIndex: visible ? 1000 : 1}}>
+    <View style={[styleo,{ position: 'relative', zIndex: visible ? 1000 : 1}]}>
       {label && (
         <Regular label={label} style={styles.labelStyle}>
           {isRequired ? <Regular color={colors.red} label={' *'} /> : null}
@@ -607,7 +609,7 @@ export const InputWithIcon = (props: props & {
           label={
             items?.find(x => x?.id == id)?.title ||
             items?.find(x => x?.id == id)?.name ||
-            placeholder
+            placeholder 
           }
           color={'#D9D9D9'}
           // color={colors.black}
@@ -1064,7 +1066,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: mvs(15),
-    backgroundColor: colors.inputBackground,
+    backgroundColor: colors.white,
     borderWidth: mvs(1),
     borderColor: colors.borderColor,
     

@@ -152,7 +152,7 @@ const navigation = useNavigation();
                       isRequired
                       // style={{backgroundColor:colors.red}}
                       value={values.firstName}
-                      // containerStyle={styles.inputContainer}
+                      containerStyle={{borderColor:'#18181B0F'}}
                     />
                    
                     <PrimaryInput
@@ -167,7 +167,7 @@ const navigation = useNavigation();
                       value={values.firstName}
                       keyboardType="phone-pad"
                       // isRequired
-                      // containerStyle={styles.inputContainer}
+                      containerStyle={{borderColor:'#18181B0F'}}
                     />
                    
                     <PrimaryInput
@@ -178,7 +178,7 @@ const navigation = useNavigation();
                       onBlur={handleBlur('firstName')}
                       value={values.firstName}
                       // containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
-                      containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start',paddingTop:mvs(10)}]}
+                      containerStyle={[styles.inputContainer, {borderRadius:mvs(24),height: mvs(100), alignItems: 'flex-start',paddingTop:mvs(10)}]}
                     />
                     
                     

@@ -140,8 +140,9 @@ elevation: 4,
   radioButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: mvs(20),
+    // marginRight: mvs(10),
     marginBottom: mvs(8),
+    width: '50%',
   },
   radioCircle: {
     height: mvs(20),

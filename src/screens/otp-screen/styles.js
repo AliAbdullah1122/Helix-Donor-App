@@ -5,7 +5,7 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.helixBackground,
+    backgroundColor: "#fbfbfe",
     paddingHorizontal: mvs(20),
   },
   scrollContainer: {
@@ -32,11 +32,13 @@ const styles = StyleSheet.create({
   },
   otpContainer: {
     alignItems: 'center',
-    marginBottom: mvs(4),
+    // marginBottom: mvs(4),
+    marginTop: mvs(20),
   },
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: mvs(-2),
     // justifyContent: 'center',
     // marginBottom: mvs(16),
     // paddingHorizontal: mvs(0),
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(28),
     width: '100%',
     height: mvs(43),
-    marginTop: mvs(0),
+    marginTop: mvs(25),
     // marginBottom: mvs(16),
     backgroundColor: colors.helixPrimary,
   },
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
   },
   modalIconContainer: {
     alignItems: 'center',
-    marginBottom: mvs(15),
+    marginBottom: mvs(10),
   },
   modalIcon: {
     width: mvs(60),
@@ -147,6 +149,17 @@ const styles = StyleSheet.create({
     marginBottom: mvs(6),
     lineHeight: mvs(20),
     fontWeight:"300"
+  },
+    sectionText2: {
+    marginTop: mvs(8),
+    lineHeight: mvs(20),
+    fontWeight:"300",
+  },
+  sectionText3: {
+    marginTop: mvs(-2),
+    lineHeight: mvs(20),
+    fontWeight:"300",
+    marginBottom:mvs(4)
   },
   modalDivider: {
     height: 1,

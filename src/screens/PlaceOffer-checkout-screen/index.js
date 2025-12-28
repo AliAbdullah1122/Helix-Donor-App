@@ -165,7 +165,7 @@ const PlaceofferCheckoutScreen = props => {
                 fontSize={mvs(14)}
                 color={colors.white}
               />
-              <Icon style={{marginLeft:mvs(10)}} name="chevron-down" size={mvs(20)} color={colors.white} />
+              <Icon style={{marginLeft:mvs(10),marginTop:mvs(3)}} name="chevron-down" size={mvs(20)} color={colors.white} />
             </Row>
           </TouchableOpacity>
         </View>

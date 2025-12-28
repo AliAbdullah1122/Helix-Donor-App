@@ -177,7 +177,7 @@ const MatchMakingScreen = props => {
           </View>
 
           <View style={styles.heartContainer}>
-            <IMG.MatchWhiteHeart width={mvs(68)} height={mvs(60)} />
+            <IMG.MatchWhiteHeart width={mvs(68)} height={mvs(61)} />
           </View>
 
           <View style={styles.profileCard}>

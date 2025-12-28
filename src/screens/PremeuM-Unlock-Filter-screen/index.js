@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,8 +9,8 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import * as IMG from 'assets/images';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
@@ -18,6 +18,7 @@ import Regular from 'typography/regular-text';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { setSubscribed } from 'store/reducers/user-reducer';
+import fonts from 'assets/fonts';
 const plans = [
   {
     id: '1',
@@ -48,32 +49,32 @@ const plans = [
 const features = [
   {
     id: '1',
-    text: 'View Adult/Current Photos',
+    text: '📷 View Adult/Current Photos',
     description: 'See what donors look like today.',
     icon: IMG.FilterResultCamera,
   },
   {
     id: '2',
-    text: 'Global Travel Mode Search',
+    text: '✈️ Global Travel Mode Search',
     description: 'Search globally (Dubai, London, NYC).',
     icon: IMG.searchNavigate,
   },
   {
     id: '3',
-    text: 'Direct Messaging (No Match Req)',
+    text: '💬 Direct Messaging (No Match Req)',
     description: 'Message anyone, anytime.',
     icon: IMG.chatSvg,
   },
   {
     id: '4',
-    text: 'Advanced Genetic Filters',
+    text: '🧬 Advanced Genetic Filters',
     description: 'Education, Height, Genetic History.',
     icon: IMG.ResourcesDna,
   },
   {
     id: '5',
-    text: 'Second Look (Unlimited)',
-    description: 'Second Look (Unlimited).',
+    text: ' 🔄 Second Look (Unlimited)',
+    // description: 'Second Look (Unlimited).',
     icon: IMG.preimumrotateleft,
   },
 ];
@@ -110,7 +111,7 @@ const PremiumUnlockFilterScreen = () => {
         {/* Chat Icon and Title Section */}
         <View style={styles.titleSection}>
           <View style={styles.iconWrapper}>
-            <IMG.premiumFilter width={mvs(40)} height={mvs(40)} />
+            <IMG.premiumFilter width={mvs(44)} height={mvs(44)} />
           </View>
           <View style={styles.titleTextWrapper}>
             <Medium
@@ -120,7 +121,7 @@ const PremiumUnlockFilterScreen = () => {
               style={styles.titleText}
             />
             <Regular
-             label="Unlock advanced filters like Height, Education, and Genetic History."
+              label="Unlock advanced filters like Height, Education, and Genetic History."
               fontSize={mvs(13)}
               numberOfLines={10}
               color={colors.subteXTcOLOR}
@@ -129,112 +130,117 @@ const PremiumUnlockFilterScreen = () => {
           </View>
         </View>
 
-      {/* Divider */}
-      <View style={styles.divider} />
+        {/* Divider */}
+        <View style={styles.divider} />
 
-      {/* Choose Your Plan Title */}
-      <Bold
-        label="Choose Your Plan"
-        fontSize={mvs(16)}
-        color={colors.black}
-        style={styles.planTitle}
-      />
-
-      {/* Plan List */}
-      <FlatList
-        horizontal
-        data={plans}
-        keyExtractor={item => item.id}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.planList}
-        renderItem={({item}) => {
-          const isSelected = selectedPlan === item.id;
-          return (
-            <View
-              style={[
-                styles.planCardWrapper,
-                isSelected && styles.planCardWrapperActive,
-              ]}>
-              {item.popular && (
-                <View style={styles.popularBadge}>
-                  <View style={styles.popularBadgeInner}>
-                    <Text style={styles.popularText}>MOST POPULAR</Text>
-                  </View>
-                </View>
-              )}
-              {item.best && (
-                <View style={styles.bestBadge}>
-                  <View style={styles.bestBadgeInner}>
-                    <Text style={styles.bestText}>BEST</Text>
-                  </View>
-                </View>
-              )}
-              <TouchableOpacity
-                onPress={() => setSelectedPlan(item.id)}
-                style={styles.planCard}>
-                <View style={styles.planCardInner}>
-                  <Medium
-                    label={item.title}
-                    fontSize={mvs(14)}
-                    color={colors.black}
-                  />
-                  <Bold
-                    label={item.price}
-                    fontSize={mvs(20)}
-                    color={colors.black}
-                    style={{marginTop: mvs(6)}}
-                  />
-                  <Regular
-                    label={item.sub}
-                    fontSize={mvs(12)}
-                    color={colors.subteXTcOLOR}
-                  />
-                </View>
-              </TouchableOpacity>
-            </View>
-          );
-        }}
-      />
-
-      {/* Features */}
-      <View style={styles.featuresBox}>
+        {/* Choose Your Plan Title */}
         <Bold
-          label="Unlock Everything Else:"
+          label="Choose Your Plan"
           fontSize={mvs(16)}
           color={colors.black}
-          style={styles.featuresTitle}
+          style={styles.planTitle}
         />
-        {features.map(feature => {
-          const IconComponent = feature.icon;
-          return (
-            <View key={feature.id} style={styles.featureItem}>
-              <View style={styles.featureIconWrapper}>
-                <IconComponent width={mvs(20)} height={mvs(20)} />
+
+        {/* Plan List */}
+        <FlatList
+          horizontal
+          data={plans}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.planList}
+          renderItem={({ item }) => {
+            const isSelected = selectedPlan === item.id;
+            return (
+              <View
+                style={[
+                  styles.planCardWrapper,
+                  isSelected && styles.planCardWrapperActive,
+                ]}>
+                {item.popular && (
+                  <View style={styles.popularBadge}>
+                    <View style={styles.popularBadgeInner}>
+                      <Text style={styles.popularText}>MOST POPULAR</Text>
+                    </View>
+                  </View>
+                )}
+                {item.best && (
+                  <View style={styles.bestBadge}>
+                    <View style={styles.bestBadgeInner}>
+                      <Text style={styles.bestText}>BEST</Text>
+                    </View>
+                  </View>
+                )}
+                <TouchableOpacity
+                  onPress={() => setSelectedPlan(item.id)}
+                  style={styles.planCard}>
+                  <View style={styles.planCardInner}>
+                    <Regular
+                      label={item.title}
+                      fontSize={mvs(16)}
+                      color={"#404040"}
+                      style={{ fontWeight: '400' }}
+                    />
+                    <Regular
+                      label={item.price}
+                      fontSize={mvs(14)}
+                      color={"#8C8C8C"}
+                      style={{ fontWeight: '400', marginTop: mvs(4) }}
+                    />
+                    <Regular
+                      label={item.sub}
+                      fontSize={mvs(14)}
+                      color={"#8C8C8C"}
+                      style={{ fontWeight: '400' }}
+                    />
+                  </View>
+                </TouchableOpacity>
               </View>
-              <View style={styles.featureTextWrapper}>
-                <Regular
-                  label={`• ${feature.text}`}
-                  fontSize={mvs(13)}
-                  color={colors.black}
-                />
-                <Regular
-                  label={feature.description}
-                  fontSize={mvs(11)}
-                  color={colors.subteXTcOLOR}
-                  style={styles.featureDescription}
-                />
+            );
+          }}
+        />
+
+        {/* Features */}
+        <View style={styles.featuresBox}>
+          <Bold
+            label="Unlock Everything Else:"
+            fontSize={mvs(16)}
+            color={colors.black}
+            style={styles.featuresTitle}
+          />
+          {features.map(feature => {
+            const IconComponent = feature.icon;
+            return (
+              <View key={feature.id} style={styles.featureItem}>
+                {/* <View style={styles.featureIconWrapper}>
+                  <IconComponent width={mvs(20)} height={mvs(20)} />
+                </View> */}
+                <View style={styles.featureTextWrapper}>
+                  <Regular
+                    label={`• ${feature?.text}`}
+                    fontSize={mvs(14)}
+                    color={"#8C8C8C"}
+                    style={{ fontWeight: '400' }}
+                  />
+                  <Regular
+                    label={feature?.description}
+                    fontSize={mvs(14)}
+                    color={"#8C8C8C"}
+                    style={{ fontWeight: '400', marginTop: mvs(2), marginLeft: mvs(10) }}
+
+                  />
+                </View>
               </View>
-            </View>
-          );
-        })}
-      </View>
+            );
+          })}
+        </View>
 
         {/* Subscribe Button */}
         {/* <TouchableOpacity 
         style={styles.subscribeBtn}> */}
         <TouchableOpacity style={styles.subscribeBtn} onPress={() => {
           dispatch(setSubscribed(true));
-          navigation.goBack() }}>
+          navigation.goBack()
+        }}>
           <Bold
             label={subscribeText}
             fontSize={mvs(15)}
@@ -261,7 +267,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: mvs(20),
+    // marginBottom: mvs(20),
     position: 'relative',
   },
 
@@ -291,7 +297,7 @@ const styles = StyleSheet.create({
   titleSection: {
     width: '100%',
     // alignItems: 'center',
-    marginTop: mvs(12),
+    // marginTop: mvs(12),
   },
 
   iconWrapper: {
@@ -301,7 +307,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#EEF2FF',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: mvs(12),
+    // marginBottom: mvs(12),
   },
 
   titleTextWrapper: {
@@ -322,6 +328,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 1,
     backgroundColor: '#E5E7EB',
+        marginBottom: mvs(10),
+
     marginTop: mvs(10),
     // marginBottom: mvs(20),
   },
@@ -332,7 +340,7 @@ const styles = StyleSheet.create({
   },
 
   planList: {
-    marginTop: mvs(24),
+    marginTop: mvs(14),
     paddingTop: mvs(15),
     paddingBottom: mvs(10),
   },
@@ -386,10 +394,11 @@ const styles = StyleSheet.create({
   },
 
   popularText: {
-    fontSize: mvs(9),
+    fontSize: mvs(12),
     color: colors.white,
-    fontWeight: '600',
-  },
+ fontWeight: '400',
+    fontFamily:fonts.regular,
+    letterSpacing:0  },
 
   bestBadge: {
     position: 'absolute',
@@ -408,9 +417,11 @@ const styles = StyleSheet.create({
   },
 
   bestText: {
-    fontSize: mvs(9),
+    fontSize: mvs(12),
     color: colors.white,
-    fontWeight: '600',
+     fontWeight: '400',
+    fontFamily:fonts.regular,
+    letterSpacing:0
   },
 
   featuresBox: {
@@ -448,8 +459,8 @@ const styles = StyleSheet.create({
     marginTop: mvs(30),
     marginBottom: mvs(30),
     width: '100%',
-    height: mvs(50),
-    borderRadius: mvs(25),
+    height: mvs(43),
+    borderRadius: mvs(24),
     backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',

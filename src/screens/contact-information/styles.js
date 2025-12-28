@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    borderRadius: mvs(30),
+    borderRadius: mvs(24),
     // backgroundColor: colors.white,
     borderWidth: 1,
-    // borderColor: '#E5E5E5',
+    borderColor: '#18181B0F',
     height: mvs(52),
     // marginTop: mvs(12),
   },

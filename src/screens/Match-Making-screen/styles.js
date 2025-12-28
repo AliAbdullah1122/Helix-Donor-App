@@ -5,12 +5,12 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: "#3b3e90",
     paddingHorizontal: mvs(20),
   },
   scrollContainer: {
     flexGrow: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: "#3b3e90",
     paddingBottom: mvs(30),
   },
   closeButton: {
@@ -60,7 +60,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   heartContainer: {
-    marginHorizontal: mvs(-16), // pull heart in so edges touch both images
+    marginHorizontal: mvs(-20), // pull heart in so edges touch both images
+    zIndex: 10,
+  
   },
   connectedTextContainer: {
     marginTop: mvs(24),

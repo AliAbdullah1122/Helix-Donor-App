@@ -75,6 +75,9 @@ const DropdownModalNationality = ({
           ) : (
             filteredItems.map((item, index) => {
               const isLastItem = index === filteredItems.length - 1;
+              console.log('🟢 InputWithIcon items:', items);
+console.log('🟢 InputWithIcon selected id:', index);
+
               return (
                 <TouchableOpacity
                   key={index}
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
   simpleContainer: {
     backgroundColor: colors.white,
     borderRadius: mvs(12),
-    maxHeight: mvs(300),
+    maxHeight: mvs(500),
     width: '100%',
     overflow: 'hidden',
     shadowColor: '#000',

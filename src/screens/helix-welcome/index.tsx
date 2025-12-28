@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {View, StatusBar, Text, Image} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StatusBar, Text, Image } from 'react-native';
 import * as IMG from 'assets/images';
-import {colors} from 'config/colors';
-import {mvs} from 'config/metrices';
-import {navigate} from 'navigation/navigation-ref';
+import { colors } from 'config/colors';
+import { mvs } from 'config/metrices';
+import { navigate } from 'navigation/navigation-ref';
 import styles from './styles';
 
 const HelixWelcomeScreen = () => {
@@ -19,7 +19,7 @@ const HelixWelcomeScreen = () => {
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
-    const [color, setColor] = useState("#121679");
+  const [color, setColor] = useState("#121679");
 
     useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,9 +37,9 @@ const HelixWelcomeScreen = () => {
         <Text style={styles.title}>Welcome to Helix Donor</Text>
       </View>
       <View style={styles.middle}>
-<View style={[styles.logoBlock,{backgroundColor: color}]}>
+        <View style={[styles.logoBlock, { backgroundColor: color }]}>
           <Image
-            source={IMG.helixLogo}
+            source={IMG.HelixLogoSplash}
             resizeMode="contain"
             style={styles.helixLogo}
           />

@@ -113,11 +113,13 @@ const BackgroundLifeStyleScreen = props => {
   ];
   
   const eyeColorOptions = [
-    {id: 'blue', title: 'Blue'},
-    {id: 'black', title: 'Black'},
-    {id: 'green', title: 'Green'},
-    {id: 'brown', title: 'Brown'},
-    {id: 'hazel', title: 'Hazel'},
+    {id: 'omnivore', title: 'Omnivore'},
+    {id: 'pescatarian', title: 'Pescatarian'},
+    {id: 'vegetarian', title: 'Vegetarian'},
+    {id: 'vegan', title: 'Vegan'},
+    {id: 'kosher', title: 'Kosher'},
+    {id: 'halal', title: 'Halal'},
+    {id: 'gluten-Free', title: 'Gluten - Free'},
   ];
   
   const raceOptions = [
@@ -159,12 +161,12 @@ const BackgroundLifeStyleScreen = props => {
        
         <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
         <Medium
-          label={'Whats you background?'}
+          label={'What\'s your background?'}
           color={colors.textColor}
           fontSize={mvs(18)}
         />
         <Regular
-          label={'Share a bit about your life and education'}
+          label={'Share a bit about your life and education.'}
           color={"#8C8C8C"}
           numberOfLines={10}
           fontSize={mvs(14)}

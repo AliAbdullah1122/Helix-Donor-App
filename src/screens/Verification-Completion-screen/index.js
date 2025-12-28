@@ -26,6 +26,7 @@ import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Light from 'typography/light-text';
 
 const VerificationCompletionScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -144,6 +145,7 @@ const navigation = useNavigation();
           color={colors.textColor}
           fontSize={mvs(14)}
           style={{marginTop:mvs(8)}}
+          numberOfLines={2}
         />
         </View>
 
@@ -186,9 +188,9 @@ const navigation = useNavigation();
                   </View>
                 </View>
               </View>
-
+<View style={{borderWidth:1,borderColor:"#D9D9D9",width:"100%",marginTop:mvs(10)}}></View>
               {/* Anonymity Preference */}
-              <View style={{marginTop: mvs(30)}}>
+              <View style={{marginTop: mvs(20)}}>
                 <Medium
                   label="Anonymity Preference:"
                   fontSize={mvs(14)}
@@ -300,20 +302,20 @@ const navigation = useNavigation();
         style={{paddingHorizontal: mvs(20)}}>
         <View style={styles.completionModalContainer}>
           <View style={styles.completionModalImageContainer}>
-            <IMG.Completionuser width={mvs(100)} height={mvs(100)} />
+            <IMG.Completionuser width={mvs(107)} height={mvs(107)} />
           </View>
           <Medium
             label="You're All Set!"
-            fontSize={mvs(20)}
+            fontSize={mvs(16)}
             color={colors.textColor}
-            style={{textAlign: 'center', marginTop: mvs(20), marginBottom: mvs(12)}}
+            style={{textAlign: 'center',fontWeight:"500", marginTop: mvs(7), marginBottom: mvs(12)}}
           />
-          <Regular
+          <Light
             label="It's time to start exploring and find your meaningful procreation connection."
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={"#404040"}
             numberOfLines={3}
-            style={{textAlign: 'center', marginBottom: mvs(24)}}
+            style={{textAlign: 'center', marginBottom: mvs(24),fontWeight:"300"}}
           />
           <PrimaryButton
             title="Start Swiping"

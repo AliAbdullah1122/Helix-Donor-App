@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     width: mvs(44),
     height: mvs(44),
     borderRadius: mvs(22),
-    backgroundColor: '#F4F3FF',
+    // backgroundColor: '#F4F3FF',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: mvs(12),

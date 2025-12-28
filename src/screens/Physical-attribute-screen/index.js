@@ -1,25 +1,26 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
-import React from 'react';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   View,
   Image,
   ScrollView,
   Alert,
+  Text,
 } from 'react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -28,6 +29,9 @@ import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import { useNavigation } from '@react-navigation/native';
+import HairColorDropdown from 'components/atoms/HairColorDropdown/HairColorDropdown';
+import Feather from 'react-native-vector-icons/Feather';
+import EyeColorChips from 'components/atoms/EyeColorDropdown/EyeColorDropdown';
 
 const PhysicalAtttributeScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -40,8 +44,15 @@ const PhysicalAtttributeScreen = props => {
   const [selectedEyeColor, setSelectedEyeColor] = React.useState(null);
   const [selectedRace, setSelectedRace] = React.useState(null);
   const [selectedOrientation, setSelectedOrientation] = React.useState(null);
-    const navigation = useNavigation();
+  const [hairColor, setHairColor] = useState('');
+  const [hairValue, setHairValue] = useState(false);
+  const [eyeValue, setEyeValue] = useState(false);
 
+  const navigation = useNavigation();
+  const handleHairColorChange = (selectedValue) => {
+    console.log('Selected hair color:', selectedValue);
+    setHairColor(selectedValue);
+  };
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -49,28 +60,28 @@ const PhysicalAtttributeScreen = props => {
     password: '',
     confirmPassword: '',
   };
-    const FullverifyOtp = async () => {
-      try {
-        setLoading(true);
-        const payload = {
-          otp: parseInt(otpValue), 
-          reset: false, 
-        };
-        const res = await verifyOtp(payload);
-        if (res?.success) {
-          setOtpModalVisible(false);
-          navigate("Login");
-        }
-      } catch (error) {
-        Alert.alert('Error', 'An error occurred while verifying OTP');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const handleFormSubmit = async (values,{ resetForm }) => {
+  const FullverifyOtp = async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
+      const payload = {
+        otp: parseInt(otpValue),
+        reset: false,
+      };
+      const res = await verifyOtp(payload);
+      if (res?.success) {
+        setOtpModalVisible(false);
+        navigate("Login");
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while verifying OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
       const apiBody = {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -79,10 +90,10 @@ const PhysicalAtttributeScreen = props => {
       };
       console.log('API Body:', apiBody);
       const response = await signUpForm(apiBody);
-      if (response.success) { 
+      if (response.success) {
         console.log('API Response:', response);
-        resetForm(); 
-        setOtpModalVisible(true); 
+        resetForm();
+        setOtpModalVisible(true);
       }
       console.log('response', response);
     } catch (error) {
@@ -91,89 +102,89 @@ const PhysicalAtttributeScreen = props => {
       setLoading(false); // Set loading to false after submission (success or error)
     }
   };
-  const Nationality = [{id: 'Pakistan'}, {id: 'United Kingdom'}, {id: 'France'}, {id: 'America'}];
-  
+  const Nationality = [{ id: 'Pakistan' }, { id: 'United Kingdom' }, { id: 'France' }, { id: 'America' }];
+
   // Static data for dropdowns
   const heightOptions = [
-    {id: '4ft', title: '4ft'},
-    {id: '5ft', title: '5ft'},
-    {id: '6ft', title: '6ft'},
+    { id: '4ft', title: '4ft' },
+    { id: '5ft', title: '5ft' },
+    { id: '6ft', title: '6ft' },
   ];
-  
+
   const bodyBuildOptions = [
-    {id: 'slim', title: 'Slim'},
-    {id: 'athletic', title: 'Athletic'},
-    {id: 'average', title: 'Average'},
-    {id: 'curvy', title: 'Curvy'},
-    {id: 'large', title: 'Large'},
+    { id: 'slim', title: 'Slim' },
+    { id: 'athletic', title: 'Athletic' },
+    { id: 'average', title: 'Average' },
+    { id: 'curvy', title: 'Curvy' },
+    { id: 'large', title: 'Large' },
   ];
-  
+
   const hairColorOptions = [
-    {id: 'auburn', title: 'Auburn'},
-    {id: 'black', title: 'Black'},
-    {id: 'blonde', title: 'Blonde'},
-    {id: 'brown', title: 'Brown'},
-    {id: 'red', title: 'Red'},
+    { id: 'auburn', title: 'Auburn' },
+    { id: 'black', title: 'Black' },
+    { id: 'blonde', title: 'Blonde' },
+    { id: 'brown', title: 'Brown' },
+    { id: 'red', title: 'Red' },
   ];
-  
+
   const eyeColorOptions = [
-    {id: 'blue', title: 'Blue'},
-    {id: 'black', title: 'Black'},
-    {id: 'green', title: 'Green'},
-    {id: 'brown', title: 'Brown'},
-    {id: 'hazel', title: 'Hazel'},
+    { id: 'blue', title: 'Blue' },
+    { id: 'black', title: 'Black' },
+    { id: 'green', title: 'Green' },
+    { id: 'brown', title: 'Brown' },
+    { id: 'hazel', title: 'Hazel' },
   ];
-  
+
   const raceOptions = [
-    {id: 'asian', title: 'Asian'},
-    {id: 'black', title: 'Black'},
-    {id: 'white', title: 'White'},
-    {id: 'hispanic', title: 'Hispanic'},
-    {id: 'other', title: 'Other'},
+    { id: 'asian', title: 'Asian' },
+    { id: 'black', title: 'Black' },
+    { id: 'white', title: 'White' },
+    { id: 'hispanic', title: 'Hispanic' },
+    { id: 'other', title: 'Other' },
   ];
-  
+
   const orientationOptions = [
-    {id: 'straight', title: 'Straight'},
-    {id: 'gay', title: 'Gay'},
-    {id: 'lesbian', title: 'Lesbian'},
-    {id: 'bisexual', title: 'Bisexual'},
-    {id: 'other', title: 'Other'},
+    { id: 'straight', title: 'Straight' },
+    { id: 'gay', title: 'Gay' },
+    { id: 'lesbian', title: 'Lesbian' },
+    { id: 'bisexual', title: 'Bisexual' },
+    { id: 'other', title: 'Other' },
   ];
   return (
     <View style={styles.container}>
-               {/* <Header1x2x title={'Driver Registration'} /> */}
+      {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <Row style={{ alignItems: "center", marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
 
-        <IMG.Progress2
-          width="100%" height={mvs(20)}
-        
-        />
-        
+          <IMG.Progress2
+            width="100%" height={mvs(20)}
+
+          />
+
 
         </Row>
-        <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
-        <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
+        <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(10) }}>
+          <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20) }}>
 
-         <Regular label={'Step 2 / 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
-         </View>
-       
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
-        <Medium
-          label={'Tell us about yourself'}
-          color={colors.textColor}
-          fontSize={mvs(18)}
-        />
-        <Regular
-          label={'This information help others to find you.'}
-          color={"#8C8C8C"}
-          numberOfLines={10}
-          fontSize={mvs(14)}
-          style={{marginTop:mvs(8)}}
-        />
+          <Regular label={'Step 2 / 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
+        </View>
+
+        <View style={{ marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+          <Medium
+            label={'Tell us about yourself'}
+            color={colors.textColor}
+            fontSize={mvs(18)}
+          />
+          <Regular
+            label={'This information help others to find you.'}
+            color={"#8C8C8C"}
+            numberOfLines={10}
+            fontSize={mvs(14)}
+            style={{ marginTop: mvs(8) }}
+          />
         </View>
         <View style={styles.contentContainerStyle}>
           <KeyboardAvoidScrollview
@@ -195,15 +206,15 @@ const PhysicalAtttributeScreen = props => {
                     {console.log('errors', errors)}
 
 
-                      <InputWithIcon
-                    placeholder={'Select One'}
-                    label='Height'
-                    items={heightOptions}
-                    onChangeText={(id) => setSelectedHeight(id)}
-                    id={selectedHeight}
-                    /> 
+                    <InputWithIcon
+                      placeholder={'Select One'}
+                      label='Height'
+                      items={heightOptions}
+                      onChangeText={(id) => setSelectedHeight(id)}
+                      id={selectedHeight}
+                    />
                     <PrimaryInput
-                    // isFulName
+                      // isFulName
                       error={touched?.firstName ? errors.firstName : ''}
                       placeholder={'Enter Weight'}
                       onChangeText={handleChange('firstName')}
@@ -211,97 +222,139 @@ const PhysicalAtttributeScreen = props => {
                       label='Weight'
                       // isRequired
                       value={values.firstName}
-                      containerStyle={{backgroundColor:colors.white}}
-                      // containerStyle={styles.input}
+                      containerStyle={{ backgroundColor: colors.white }}
+                    // containerStyle={styles.input}
                     />
-                      <InputWithIcon
-                    placeholder={'Select One'}
-                    label='Body Build'
-                    items={bodyBuildOptions}
-                    onChangeText={(id) => setSelectedBodyBuild(id)}
-                    id={selectedBodyBuild}
-                    /> 
-                      <InputWithIcon
+                    {/* <InputWithIcon
+                      placeholder={'Select One'}
+                      label='Body Build'
+                      items={bodyBuildOptions}
+                      onChangeText={(id) => setSelectedBodyBuild(id)}
+                      id={selectedBodyBuild}
+                    /> */}
+                    <Text style={[styles.label, { color: eyeValue ? colors.primary : "#8C8C8C", marginLeft: mvs(5) }]}>Body Build</Text>
+                    {!eyeValue ? (
+                      <TouchableOpacity
+                        style={styles.dropdown}
+                        onPress={() => setEyeValue(true)}
+                      >
+                        <Regular
+                          label={
+                            "Select One"
+                          }
+                          color={'#D9D9D9'}
+                          // color={colors.black}
+                          style={{ fontWeight: '400' }}
+                          fontSize={mvs(14)}
+                        />
+                        <Feather size={25} name={'chevron-down'} color={'#8C8C8C'} />
+                      </TouchableOpacity>
+                    ) : (
+                      <EyeColorChips />
+                    )}
+                    {/* <InputWithIcon
                     placeholder={'Select One'}
                     label='Hair Color'
                     items={hairColorOptions}
                     onChangeText={(id) => setSelectedHairColor(id)}
                     id={selectedHairColor}
-                    /> 
-                      <InputWithIcon
-                    placeholder={'Select One'}
-                    label='Eye Color'
-                    items={eyeColorOptions}
-                    onChangeText={(id) => setSelectedEyeColor(id)}
-                    id={selectedEyeColor}
-                    /> 
-                   
-                      <InputWithIcon
-                    placeholder={'Select One'}
-                    label='Race'
-                    items={raceOptions}
-                    onChangeText={(id) => setSelectedRace(id)}
-                    id={selectedRace}
-                    /> 
-                   
-                      <InputWithIcon
-                    placeholder={'Select One'}
-                    label='Orientation'
-                    items={orientationOptions}
-                    onChangeText={(id) => setSelectedOrientation(id)}
-                    id={selectedOrientation}
-                    /> 
-                   
-                  
-                    
-                    
+                    />  */}
+                    <Text style={[styles.label, { color: hairValue ? colors.primary : "#8C8C8C", marginLeft: mvs(5),marginTop:mvs(10) }]}>Hair Color</Text>
+                    {!hairValue ? (
+                      <TouchableOpacity
+                        activeOpacity={0.8}
+                        style={styles.dropdown}
+                        onPress={() => setHairValue(true)}
+                      >
+                        <Regular
+                          label={
+                            "Select One"
+                          }
+                          color={'#D9D9D9'}
+                          // color={colors.black}
+                          style={{ fontWeight: '400' }}
+                          fontSize={mvs(14)}
+                        />
+                        <Feather size={25} name={'chevron-down'} color={'#8C8C8C'} />
+                      </TouchableOpacity>
+                    ) : (
+                      <HairColorDropdown />
+                    )}
+                    <InputWithIcon
+                      placeholder={'Select One'}
+                      label='Eye Color'
+                      items={eyeColorOptions}
+                      onChangeText={(id) => setSelectedEyeColor(id)}
+                      id={selectedEyeColor}
+                      styleo={{ marginTop: mvs(10) }}
+                    />
+
+                    <InputWithIcon
+                      placeholder={'Select One'}
+                      label='Race'
+                      items={raceOptions}
+                      onChangeText={(id) => setSelectedRace(id)}
+                      id={selectedRace}
+                    />
+
+                    <InputWithIcon
+                      placeholder={'Select One'}
+                      label='Orientation'
+                      items={orientationOptions}
+                      onChangeText={(id) => setSelectedOrientation(id)}
+                      id={selectedOrientation}
+                    />
 
 
-                   
-                  
-                   
+
+
+
+
+
+
+
                   </>
                 )}
               </Formik>
-              
+
             </View>
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
-        <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
-              <Row>
-             <PrimaryButton
-                            containerStyle={{
-                              borderRadius: mvs(50),
-                              height: mvs(43),
-                              marginVertical: mvs(0),
-                              backgroundColor:colors.transparent,
-                              width:"33%",
-                              borderWidth:1,
-                              borderColor:colors.primary,
-      
-                            }}
-                            loading={loading}
-                            textStyle={{color:colors.primary}}
-                            // onPress={handleSubmit}
-                          onPress={() => navigation.goBack()}
-                            title={'Back'}
-                          />
-             <PrimaryButton
-                            containerStyle={{
-                              borderRadius: mvs(50),
-                              height: mvs(43),
-                              marginVertical: mvs(0),
-                              backgroundColor:"#3A3E90",
-                               width:"33%"
-                            }}
-                            loading={loading}
-                            // onPress={handleSubmit}
-                            onPress={()=>navigate("BackgroundLifeStyleScreen")}
-                            title={'Continue'}
-                          />
-                          </Row>
-                          </View>
+      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
+        <Row>
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: colors.transparent,
+              width: "33%",
+              borderWidth: 1,
+              borderColor: colors.primary,
+
+            }}
+            loading={loading}
+            textStyle={{ color: colors.primary }}
+            // onPress={handleSubmit}
+            onPress={() => navigation.goBack()}
+            title={'Back'}
+          />
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: "#3A3E90",
+              width: "33%"
+            }}
+            loading={loading}
+            // onPress={handleSubmit}
+            onPress={() => navigate("BackgroundLifeStyleScreen")}
+            title={'Continue'}
+          />
+        </Row>
+      </View>
       {/* <DropdownModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
@@ -317,7 +370,7 @@ const PhysicalAtttributeScreen = props => {
         setValue={setOtpValue}
         email={initialValues.email} // Pass the email from form
         loading={loading} // Pass loading state if needed
-        
+
       />
     </View>
   );

@@ -1,20 +1,20 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -22,9 +22,10 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ExactToggle from 'components/atoms/toggle';
 
 const ReproductiveHistoryScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -55,8 +56,9 @@ const ReproductiveHistoryScreen = props => {
   const [menstrualCycles, setMenstrualCycles] = React.useState(null);
   const [pregnancyBirth, setPregnancyBirth] = React.useState(null);
   const [reproductiveConditions, setReproductiveConditions] = React.useState(null);
+  const [isOn, setIsOn] = React.useState(false);
 
-const navigation = useNavigation();
+  const navigation = useNavigation();
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -64,28 +66,28 @@ const navigation = useNavigation();
     password: '',
     confirmPassword: '',
   };
-    const FullverifyOtp = async () => {
-      try {
-        setLoading(true);
-        const payload = {
-          otp: parseInt(otpValue), 
-          reset: false, 
-        };
-        const res = await verifyOtp(payload);
-        if (res?.success) {
-          setOtpModalVisible(false);
-          navigate("Login");
-        }
-      } catch (error) {
-        Alert.alert('Error', 'An error occurred while verifying OTP');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const handleFormSubmit = async (values,{ resetForm }) => {
+  const FullverifyOtp = async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
+      const payload = {
+        otp: parseInt(otpValue),
+        reset: false,
+      };
+      const res = await verifyOtp(payload);
+      if (res?.success) {
+        setOtpModalVisible(false);
+        navigate("Login");
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while verifying OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
       const apiBody = {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -94,10 +96,10 @@ const navigation = useNavigation();
       };
       console.log('API Body:', apiBody);
       const response = await signUpForm(apiBody);
-      if (response.success) { 
+      if (response.success) {
         console.log('API Response:', response);
-        resetForm(); 
-        setOtpModalVisible(true); 
+        resetForm();
+        setOtpModalVisible(true);
       }
       console.log('response', response);
     } catch (error) {
@@ -106,48 +108,48 @@ const navigation = useNavigation();
       setLoading(false); // Set loading to false after submission (success or error)
     }
   };
-  const Nationality = [{id: 'Pakistan'}, {id: 'United Kingdom'}, {id: 'France'}, {id: 'America'}];
+  const Nationality = [{ id: 'Pakistan' }, { id: 'United Kingdom' }, { id: 'France' }, { id: 'America' }];
   return (
     <View style={styles.container}>
-               {/* <Header1x2x title={'Driver Registration'} /> */}
+      {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <Row style={{ alignItems: "center", marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
 
-        <IMG.Progress3
-          width="100%" height={mvs(20)}
-        
-        />
-        
+          <IMG.Progress3
+            width="100%" height={mvs(20)}
+
+          />
+
 
         </Row>
-        <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
-        <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
+        <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(10) }}>
+          <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20) }}>
 
-         <Regular label={'Stage 3 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
-         </View>
-       
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
-        <Medium
-          label={'Personal Health History'}
-          color={colors.textColor}
-          fontSize={mvs(18)}
-        />
-        <Regular
-          label={'Please answer the following questions about your personal medical history.'}
-          color={"#8C8C8C"}
-          numberOfLines={3}
-          fontSize={mvs(14)}
-          style={{marginTop:mvs(8)}}
-        />
+          <Regular label={'Stage 3 of 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
+        </View>
+
+        <View style={{ marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+          <Medium
+            label={'Personal Health History'}
+            color={colors.textColor}
+            fontSize={mvs(18)}
+          />
+          <Regular
+            label={'Please answer the following questions about your personal medical history.'}
+            color={"#8C8C8C"}
+            numberOfLines={3}
+            fontSize={mvs(14)}
+            style={{ marginTop: mvs(8) }}
+          />
         </View>
 
         {/* Always Private Toggle */}
         <View style={styles.toggleContainer}>
-          <Regular label="Always Private" style={{marginRight:mvs(20)}} fontSize={mvs(14)} color={colors.textColor} />
-          <ToggleSwitch
+          <Regular label="Always Private" style={{ marginRight: mvs(10) }} fontSize={mvs(14)} color={colors.textColor} />
+          {/* <ToggleSwitch
             isOn={alwaysPrivate}
             onToggle={value => {
               setAlwaysPrivate(value);
@@ -159,7 +161,25 @@ const navigation = useNavigation();
             offColor="#E5E5E5"
             circleColor={colors.white}
             size="medium"
-          />
+          /> */}
+          {/* <View style={{ transform: [{ scaleX: 1.10 }, { scaleY: 1.2 }] }}> */}
+
+
+            <ExactToggle
+              isOn={alwaysPrivate}
+              onToggle={value => {
+                setAlwaysPrivate(value);
+                if (value) {
+                  setPrivacyModalVisible(true);
+                }
+              }}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
+
+
+          {/* </View> */}
         </View>
 
         <View style={styles.contentContainerStyle}>
@@ -184,17 +204,17 @@ const navigation = useNavigation();
                       fontSize={mvs(14)}
                       color={colors.textColor}
                       numberOfLines={10}
-                      style={{marginBottom: mvs(12)}}
+                      style={{ marginBottom: mvs(12) }}
                     />
-                    
+
                     {[
-                      {key: 'diabetes', label: 'Diabetes'},
-                      {key: 'heartCondition', label: 'Heart Condition (e.g., high blood pressure, arrhythmia)'},
-                      {key: 'autoimmune', label: 'Autoimmune Disorder (e.g., Lupus, Crohn\'s disease, Rheumatoid Arthritis)'},
-                      {key: 'cancer', label: 'Cancer'},
-                      {key: 'neurological', label: 'Neurological Disorder (e.g., Epilepsy, Multiple Sclerosis)'},
-                      {key: 'respiratory', label: 'Significant Respiratory Condition (e.g., Cystic Fibrosis, severe Asthma)'},
-                      {key: 'other', label: 'Other'},
+                      { key: 'diabetes', label: 'Diabetes' },
+                      { key: 'heartCondition', label: 'Heart Condition (e.g., high blood pressure, arrhythmia)' },
+                      { key: 'autoimmune', label: 'Autoimmune Disorder (e.g., Lupus, Crohn\'s disease, Rheumatoid Arthritis)' },
+                      { key: 'cancer', label: 'Cancer' },
+                      { key: 'neurological', label: 'Neurological Disorder (e.g., Epilepsy, Multiple Sclerosis)' },
+                      { key: 'respiratory', label: 'Significant Respiratory Condition (e.g., Cystic Fibrosis, severe Asthma)' },
+                      { key: 'other', label: 'Other' },
                     ].map(condition => (
                       <View key={condition.key} style={styles.checkboxRow}>
                         <TouchableOpacity
@@ -207,7 +227,7 @@ const navigation = useNavigation();
                           style={[
                             styles.customCheckbox,
                             chronicConditions[condition.key] &&
-                              styles.customCheckboxChecked,
+                            styles.customCheckboxChecked,
                           ]}>
                           {chronicConditions[condition.key] && (
                             <Icon
@@ -221,14 +241,14 @@ const navigation = useNavigation();
                           label={condition.label}
                           fontSize={mvs(14)}
                           color={colors.textColor}
-                           numberOfLines={10}
-                          style={{flex: 1, marginLeft: mvs(12)}}
+                          numberOfLines={10}
+                          style={{ flex: 1, marginLeft: mvs(12) }}
                         />
                       </View>
                     ))}
 
                     {chronicConditions.other && (
-                      <View style={{ marginTop: mvs(8)}}>
+                      <View style={{ marginTop: mvs(8) }}>
                         <TextInput
                           placeholder="Please Specify"
                           value={otherConditionText}
@@ -243,14 +263,14 @@ const navigation = useNavigation();
                     )}
 
                     {/* Major Surgeries */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Have you had any major surgeries?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                        style={{marginBottom: mvs(12)}}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start', marginBottom: mvs(12)}}>
+                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -268,7 +288,7 @@ const navigation = useNavigation();
                               label={option}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -288,15 +308,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Allergies */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Do you have any known allergies (medications, food, environmental)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                         numberOfLines={10}
-                        style={{marginBottom: mvs(12)}}
+                        numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{ justifyContent: 'flex-start' }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -313,9 +333,9 @@ const navigation = useNavigation();
                             <Regular
                               label={option}
                               fontSize={mvs(14)}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -323,15 +343,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* CMV Status */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="What is your CMV Status?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                         numberOfLines={10}
-                        style={{marginBottom: mvs(12)}}
+                        numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start', flexWrap: 'wrap'}}>
+                      <Row style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
                         {['Positive', 'Negative', 'Not Sure'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -349,24 +369,24 @@ const navigation = useNavigation();
                               label={option}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                               numberOfLines={10}
-                              style={{marginLeft: mvs(8)}}
+                              numberOfLines={10}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
                       </Row>
                     </View>
-                    
+
                     {/* Prescription Medications */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Are you currently taking any prescription medications?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                        style={{marginBottom: mvs(12)}}
-                         numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
+                        numberOfLines={10}
                       />
-                      <Row style={{justifyContent: 'flex-start', marginBottom: mvs(12)}}>
+                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -382,10 +402,10 @@ const navigation = useNavigation();
                             </View>
                             <Regular
                               label={option}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -405,15 +425,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Mental Health */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Have you ever been diagnosed with or received treatment for a significant mental health condition (e.g., depression, anxiety disorder, bipolar disorder, schizophrenia)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                         numberOfLines={10}
-                        style={{marginBottom: mvs(12)}}
+                        numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start', marginBottom: mvs(12)}}>
+                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -429,10 +449,10 @@ const navigation = useNavigation();
                             </View>
                             <Regular
                               label={option}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -452,15 +472,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Fathered Children */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Have you fathered any children (biologically)?"
                         fontSize={mvs(14)}
-                         numberOfLines={10}
+                        numberOfLines={10}
                         color={colors.textColor}
-                        style={{marginBottom: mvs(12)}}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{ justifyContent: 'flex-start' }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -476,10 +496,10 @@ const navigation = useNavigation();
                             </View>
                             <Regular
                               label={option}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -487,15 +507,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Reproductive Health Issues */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Have you ever been diagnosed with any reproductive health issues (e.g., low sperm count, varicocele)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                         numberOfLines={10}
-                        style={{marginBottom: mvs(12)}}
+                        numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{ justifyContent: 'flex-start' }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -511,10 +531,10 @@ const navigation = useNavigation();
                             </View>
                             <Regular
                               label={option}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -522,15 +542,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Menstrual Cycles */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Are your menstrual cycles regular?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                         numberOfLines={10}
-                        style={{marginBottom: mvs(12)}}
+                        numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{ justifyContent: 'flex-start' }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -545,11 +565,11 @@ const navigation = useNavigation();
                               )}
                             </View>
                             <Regular
-                             numberOfLines={10}
+                              numberOfLines={10}
                               label={option}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -557,15 +577,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Pregnancy/Birth */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Have you ever been pregnant or given birth?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                         numberOfLines={10}
-                        style={{marginBottom: mvs(12)}}
+                        numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{ justifyContent: 'flex-start' }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -581,10 +601,10 @@ const navigation = useNavigation();
                             </View>
                             <Regular
                               label={option}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -592,15 +612,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Reproductive Conditions */}
-                    <View style={{marginTop: mvs(24)}}>
+                    <View style={{ marginTop: mvs(24) }}>
                       <Medium
                         label="Have you ever been diagnosed with any reproductive health conditions (e.g., PCOS, endometriosis, fibroids)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
-                        style={{marginBottom: mvs(12)}}
-                         numberOfLines={10}
+                        style={{ marginBottom: mvs(12) }}
+                        numberOfLines={10}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{ justifyContent: 'flex-start' }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -616,10 +636,10 @@ const navigation = useNavigation();
                             </View>
                             <Regular
                               label={option}
-                               numberOfLines={10}
+                              numberOfLines={10}
                               fontSize={mvs(14)}
                               color={colors.textColor}
-                              style={{marginLeft: mvs(8)}}
+                              style={{ marginLeft: mvs(8) }}
                             />
                           </TouchableOpacity>
                         ))}
@@ -627,66 +647,66 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Select all that applies text */}
-                    <View style={{marginTop: mvs(30), marginBottom: mvs(20)}}>
+                    <View style={{ marginTop: mvs(30), marginBottom: mvs(20) }}>
                       <Regular
                         label="Select all that applies."
-                         numberOfLines={10}
+                        numberOfLines={10}
                         fontSize={mvs(14)}
                         color={"#8C8C8C"}
-                        style={{textAlign: 'center'}}
+                        style={{ textAlign: 'center' }}
                       />
                     </View>
                   </>
                 )}
               </Formik>
-              
+
             </View>
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
 
-     
 
-      <View style={{marginHorizontal: mvs(20), marginBottom: mvs(40)}}>
+
+      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
         <Row>
-       <PrimaryButton
-                      containerStyle={{
-                        borderRadius: mvs(50),
-                        height: mvs(43),
-                        marginVertical: mvs(0),
-                        backgroundColor:colors.transparent,
-                        width:"33%",
-                        borderWidth:1,
-                        borderColor:colors.primary,
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: colors.transparent,
+              width: "33%",
+              borderWidth: 1,
+              borderColor: colors.primary,
 
-                      }}
-                      loading={loading}
-                      textStyle={{color:colors.primary}}
-                      // onPress={handleSubmit}
-                       onPress={() => navigation.goBack()}
-                      title={'Back'}
-                    />
-       <PrimaryButton
-                      containerStyle={{
-                        borderRadius: mvs(50),
-                        height: mvs(43),
-                        marginVertical: mvs(0),
-                        backgroundColor:"#3A3E90",
-                         width:"33%"
-                      }}
-                      loading={loading}
-                      // onPress={handleSubmit}
-                      onPress={()=>navigate("InfectionDiseaseScreen")}
-                      title={'Continue'}
-                    />
-                    </Row>
-                    </View>
+            }}
+            loading={loading}
+            textStyle={{ color: colors.primary }}
+            // onPress={handleSubmit}
+            onPress={() => navigation.goBack()}
+            title={'Back'}
+          />
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: "#3A3E90",
+              width: "33%"
+            }}
+            loading={loading}
+            // onPress={handleSubmit}
+            onPress={() => navigate("InfectionDiseaseScreen")}
+            title={'Continue'}
+          />
+        </Row>
+      </View>
       {/* Privacy Modal */}
       <ModalWrapper
         visible={privacyModalVisible}
         onBackdropPress={() => setPrivacyModalVisible(false)}
         onBackButtonPress={() => setPrivacyModalVisible(false)}
-        style={{paddingHorizontal: mvs(20)}}>
+        style={{ paddingHorizontal: mvs(20) }}>
         <View
           style={{
             paddingHorizontal: mvs(24),
@@ -699,7 +719,7 @@ const navigation = useNavigation();
             label="Privacy"
             fontSize={mvs(18)}
             color={colors.textColor}
-            style={{textAlign: 'center', marginBottom: mvs(12)}}
+            style={{ textAlign: 'center', marginBottom: mvs(12) }}
           />
           <Regular
             label={
@@ -708,7 +728,7 @@ const navigation = useNavigation();
             fontSize={mvs(14)}
             color={colors.textColor}
             numberOfLines={3}
-            style={{textAlign: 'left', marginBottom: mvs(20)}}
+            style={{ textAlign: 'left', marginBottom: mvs(20) }}
           />
           <View style={styles.modalButtonContainer}>
             <PrimaryButton
@@ -719,9 +739,9 @@ const navigation = useNavigation();
                 height: mvs(43),
                 marginVertical: 0,
                 width: mvs(100),
-                backgroundColor: colors.helixPrimary,
+                backgroundColor: colors.primary,
               }}
-              textStyle={{color: colors.white}}
+              textStyle={{ color: colors.white }}
             />
           </View>
         </View>

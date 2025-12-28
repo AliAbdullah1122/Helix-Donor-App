@@ -1752,14 +1752,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(20),
   },
   newMatchProfileContainer: {
-    marginBottom: mvs(24),
+    marginBottom: mvs(14),
   },
   newMatchProfileBorder: {
     width: mvs(160),
     height: mvs(160),
     borderRadius: mvs(80),
-    borderWidth: mvs(4),
-    borderColor: colors.primary,
+    // borderWidth: mvs(4),
+    // borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',

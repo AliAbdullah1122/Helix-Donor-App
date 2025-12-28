@@ -289,15 +289,16 @@ const styles = StyleSheet.create({
   },
   placeOfferButton: {
     backgroundColor: colors.primary,
-    borderRadius: mvs(40),
-    paddingVertical: mvs(16),
+    borderRadius: mvs(24),
+    // paddingVertical: mvs(16),
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf:"center",
-    width: '80%',
+    width: '60%',
+    height:mvs(43)
   },
   placeOfferButtonDisabled: {
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#D9D9D9',
   },
   buyNowButton: {
     // backgroundColor: colors.white,

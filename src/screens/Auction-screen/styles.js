@@ -257,29 +257,33 @@ const styles = StyleSheet.create({
   },
   actionButtonsContainer: {
     gap: mvs(12),
-    marginTop: mvs(38),
-    marginBottom: mvs(30),
+    marginTop: mvs(58),
+    // marginBottom: mvs(10),
+    // bottom: mvs(20),
+    // alignSelf:'flex-end'
     // alignSelf:'center',
   },
   placeOfferButton: {
     backgroundColor: colors.primary,
-    borderRadius: mvs(50),
-    paddingVertical: mvs(16),
+    borderRadius: mvs(24),
+    // paddingVertical: mvs(16),
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf:"center",
     width: '60%',
+    height:mvs(43)
   },
   buyNowButton: {
     // backgroundColor: colors.white,
-    borderRadius: mvs(50),
-    borderWidth: 2,
+    borderRadius: mvs(24),
+    borderWidth: 1.8,
     borderColor: colors.primary,
-    paddingVertical: mvs(16),
+    // paddingVertical: mvs(16),
     alignItems: 'center',
     justifyContent: 'center',
      alignSelf:"center",
     width: '70%',
+    height:mvs(43)
   },
   charityModalContainer: {
     width: '80%',

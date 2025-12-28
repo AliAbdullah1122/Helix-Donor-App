@@ -1,21 +1,21 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -23,14 +23,15 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ExactToggle from 'components/atoms/toggle';
 
 const GeneticProfileScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
-  
+
   // Genetic Profile state
   const [shownOnProfile, setShownOnProfile] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
@@ -57,46 +58,54 @@ const GeneticProfileScreen = props => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
-      
+
       {/* Header */}
       <Row style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
         <Bold label="Genetic Profile" fontSize={mvs(18)} color={colors.textColor} />
-        <View style={{width: mvs(24)}} />
+        <View style={{ width: mvs(24) }} />
       </Row>
 
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        
+
         {/* Introduction Text */}
         <Regular
           label="Update your carrier status or upload a new report from your provider."
           fontSize={mvs(14)}
           color={colors.textColorSecondary}
           style={styles.introText}
+          numberOfLines={2}
         />
 
         {/* Profile Visibility Toggle */}
         <Row style={styles.toggleRow}>
-            <Regular
+          <Regular
             label="Shown on Profile"
             fontSize={mvs(14)}
             color={colors.textColor}
-            style={{marginRight: mvs(12)}}
+            style={{ marginRight: mvs(12) }}
           />
-          <ToggleSwitch
+          {/* <ToggleSwitch
             isOn={shownOnProfile}
             onToggle={setShownOnProfile}
             onColor={colors.primary}
             offColor="#E5E5E5"
             circleColor={colors.white}
             size="small"
+          /> */}
+          <ExactToggle
+            isOn={shownOnProfile}
+            onToggle={setShownOnProfile}
+            onColor={colors.primary}
+            offColor="#D9D9D9"
+            circleColor={colors.white}
           />
-        
+
         </Row>
 
         {/* Search Bar */}
@@ -118,7 +127,7 @@ const GeneticProfileScreen = props => {
           color={colors.textColor}
           style={styles.sectionTitle}
         />
-        
+
         {/* Reported Conditions Tags */}
         {reportedConditions.length > 0 && (
           <View style={styles.conditionsContainer}>
@@ -126,13 +135,14 @@ const GeneticProfileScreen = props => {
               <View key={index} style={styles.conditionTagSelected}>
                 <Regular
                   label={condition}
-                  fontSize={mvs(14)}
+                  fontSize={mvs(12)}
                   color={colors.white}
+                  style={{fontWeight: '400'}}
                 />
                 <TouchableOpacity
                   onPress={() => handleRemoveCondition(index)}
                   style={styles.removeButton}>
-                  <Icon name="close" size={mvs(16)} color={colors.white} />
+                  <Icon name="close" size={mvs(12)} color={colors.white} />
                 </TouchableOpacity>
               </View>
             ))}

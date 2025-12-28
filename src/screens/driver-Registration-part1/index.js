@@ -106,7 +106,7 @@ const DriverRegistrationPart1Screen = props => {
           <View style={{paddingHorizontal:mvs(10)}}>
                  <Medium  color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
                  </View>
-                 <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+                 <View style={{marginHorizontal:mvs(20),marginTop:mvs(15)}}>
                   <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
                  </View>
        

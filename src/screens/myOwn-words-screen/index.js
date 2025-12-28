@@ -149,9 +149,9 @@ const navigation = useNavigation();
                       onChangeText={handleChange('firstName')}
                       onBlur={handleBlur('firstName')}
                       value={values.firstName}
-                      containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
+                      containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start',paddingTop:mvs(10)}]}
                     />
-                    <View>
+                    <View style={{marginTop:mvs(-20)}}>
                       <Regular fontSize={mvs(12)} color={colors.textColor} label={'(450/500)'} style={{alignSelf:"flex-end"}}/>
                     </View>
                     
@@ -207,7 +207,7 @@ const navigation = useNavigation();
                         borderRadius: mvs(50),
                         height: mvs(43),
                         marginVertical: mvs(0),
-                        backgroundColor:"#3A3E90",
+                        backgroundColor:colors.primary,
                          width:"33%"
                       }}
                       loading={loading}

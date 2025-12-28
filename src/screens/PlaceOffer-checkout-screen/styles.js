@@ -413,12 +413,13 @@ const styles = StyleSheet.create({
   paymentButton: {
     // flex: 1,
     backgroundColor: "#D9D9D9" || '#F5F5F5',
-    borderRadius: mvs(40),
+    borderRadius: mvs(24),
     paddingVertical: mvs(10),
     width:'47%',
     // paddingHorizontal: mvs(12),
     borderWidth: 1,
     borderColor: colors.borderColor || '#E0E0E0',
+    height:mvs(43)
   },
   paymentButtonContent: {
     flexDirection: 'row',
@@ -431,11 +432,14 @@ const styles = StyleSheet.create({
   },
   creditCardButton: {
     backgroundColor: colors.primary,
-    borderRadius: mvs(40),
-    paddingVertical: mvs(14),
+    borderRadius: mvs(24),
+    // paddingVertical: mvs(14),
+    alignItems: 'center',
+    justifyContent: 'center',
     width:"100%",
     alignItems:'center',
-    paddingHorizontal: mvs(16),
+    // paddingHorizontal: mvs(16),
+    height:mvs(43)
   },
   creditCardRow: {
     justifyContent: 'centern',
@@ -443,11 +447,12 @@ const styles = StyleSheet.create({
   },
   payButton: {
     backgroundColor: colors.primary,
-    borderRadius: mvs(40),
-    paddingVertical: mvs(16),
+    borderRadius: mvs(24),
+    // paddingVertical: mvs(16),
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    height:mvs(43)
   },
 });
 

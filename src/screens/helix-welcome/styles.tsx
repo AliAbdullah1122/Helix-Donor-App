@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   top: {
-    flex: 2,
+    flex: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     marginTop:mvs(50)
   },
   middle: {
-    flex: 3,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
   logoBlock: {
     width: '100%',
-    height: mvs(220),
+    height: mvs(300),
     // backgroundColor: colors.helixPrimary,
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
     height: mvs(64),
   },
   bottom: {
-    flex: 2,
+    flex: 1.5,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    // alignItems: 'center',
     paddingTop: mvs(24),
+    marginLeft: mvs(25),
   },
   tagline: {
     fontSize: mvs(24),

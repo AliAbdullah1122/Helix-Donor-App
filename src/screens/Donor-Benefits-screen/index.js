@@ -1,21 +1,21 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -23,9 +23,11 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ExactToggle from 'components/atoms/toggle';
+import Light from 'typography/light-text';
 
 const DonorBenefitsScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -66,7 +68,7 @@ const DonorBenefitsScreen = props => {
   const [minimumCompensation, setMinimumCompensation] = React.useState('');
   const [buyNowCompensation, setBuyNowCompensation] = React.useState('');
 
-const navigation = useNavigation();
+  const navigation = useNavigation();
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -74,28 +76,28 @@ const navigation = useNavigation();
     password: '',
     confirmPassword: '',
   };
-    const FullverifyOtp = async () => {
-      try {
-        setLoading(true);
-        const payload = {
-          otp: parseInt(otpValue), 
-          reset: false, 
-        };
-        const res = await verifyOtp(payload);
-        if (res?.success) {
-          setOtpModalVisible(false);
-          navigate("Login");
-        }
-      } catch (error) {
-        Alert.alert('Error', 'An error occurred while verifying OTP');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const handleFormSubmit = async (values,{ resetForm }) => {
+  const FullverifyOtp = async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
+      const payload = {
+        otp: parseInt(otpValue),
+        reset: false,
+      };
+      const res = await verifyOtp(payload);
+      if (res?.success) {
+        setOtpModalVisible(false);
+        navigate("Login");
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while verifying OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
       const apiBody = {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -104,10 +106,10 @@ const navigation = useNavigation();
       };
       console.log('API Body:', apiBody);
       const response = await signUpForm(apiBody);
-      if (response.success) { 
+      if (response.success) {
         console.log('API Response:', response);
-        resetForm(); 
-        setOtpModalVisible(true); 
+        resetForm();
+        setOtpModalVisible(true);
       }
       console.log('response', response);
     } catch (error) {
@@ -116,57 +118,71 @@ const navigation = useNavigation();
       setLoading(false); // Set loading to false after submission (success or error)
     }
   };
-  const Nationality = [{id: 'Pakistan'}, {id: 'United Kingdom'}, {id: 'France'}, {id: 'America'}];
+  const Nationality = [{ id: 'Pakistan' }, { id: 'United Kingdom' }, { id: 'France' }, { id: 'America' }];
   return (
     <View style={styles.container}>
-               {/* <Header1x2x title={'Driver Registration'} /> */}
+      {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <Row style={{ alignItems: "center", marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
 
-        <IMG.Progress5
-          width="100%" height={mvs(20)}
-        
-        />
-        
+          <IMG.Progress5
+            width="100%" height={mvs(20)}
+
+          />
+
 
         </Row>
-        <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
-        <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
+        <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(10) }}>
+          <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20) }}>
 
-         <Regular label={'Stage 5 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
-         </View>
-       
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
-        <Medium
-          label={'Donor Compensation'}
-          color={colors.textColor}
-          fontSize={mvs(18)}
-        />
-        <Regular
-          label={'Are you interested in being compensated for the services of providing your gametes?'}
-          color={colors.textColor}
-          numberOfLines={10}
-          fontSize={mvs(14)}
-          style={{marginTop:mvs(8)}}
-        />
+          <Regular label={'Stage 5 of 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
+        </View>
+
+        <View style={{ marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+          <Medium
+            label={'Donor Compensation'}
+            color={colors.textColor}
+            fontSize={mvs(18)}
+          />
+          <Regular
+            label={'Are you interested in being compensated for the services of providing your gametes?'}
+            color={colors.textColor}
+            numberOfLines={10}
+            fontSize={mvs(14)}
+            style={{ marginTop: mvs(8) }}
+          />
         </View>
 
         {/* Compensation Interest Toggle */}
         <View style={styles.compensationToggleContainer}>
-          <Regular label="No" fontSize={mvs(14)} color={"#D9D9D9"} style={{marginRight:mvs(12)}} />
-          <ToggleSwitch
+          {/* NO */}
+          <Regular
+            label="No"
+            fontSize={mvs(14)}
+            color={isInterestedInCompensation ? '#D9D9D9' : '#404040'}
+            style={{ marginRight: mvs(10), fontWeight: '400' }}
+          />
+
+          <ExactToggle
             isOn={isInterestedInCompensation}
             onToggle={setIsInterestedInCompensation}
             onColor={colors.primary}
-            offColor="#E5E5E5"
+            offColor="#D9D9D9"
             circleColor={colors.white}
-            size="medium"
           />
-          <Regular label="Yes I am Interested" fontSize={mvs(14)} color={colors.textColor} style={{marginLeft:mvs(12)}} />
+
+          {/* YES */}
+          <Regular
+            label="Yes I am Interested"
+            fontSize={mvs(14)}
+            color={isInterestedInCompensation ? '#404040' : '#D9D9D9'}
+            style={{ marginLeft: mvs(10), fontWeight: '400' }}
+          />
         </View>
+
 
         <View style={styles.contentContainerStyle}>
           <KeyboardAvoidScrollview
@@ -176,12 +192,12 @@ const navigation = useNavigation();
               {isInterestedInCompensation && (
                 <>
                   {/* Asking Compensation */}
-                  <View style={{marginTop: mvs(0)}}>
+                  {/* <View style={{ marginTop: mvs(0) }}>
                     <Medium
                       label="Asking Compensation"
                       fontSize={mvs(14)}
                       color={colors.textColorSecondary}
-                      style={{marginBottom: mvs(12)}}
+                      style={{ marginBottom: mvs(12) }}
                     />
                     <PrimaryInput
                       placeholder="Enter amount"
@@ -195,40 +211,66 @@ const navigation = useNavigation();
                       fontSize={mvs(12)}
                       numberOfLines={10}
                       color={"#8C8C8C"}
-                      // style={{marginTop: mvs(8)}}
+                      style={{ marginTop: mvs(-22) }}
                     />
-                  </View>
+                  </View> */}
 
                   {/* Allow Bidding Toggle */}
-                  <View style={{marginTop: mvs(24)}}>
+                  <View style={{ marginTop: mvs(-20) }}>
                     <View style={styles.biddingToggleContainer}>
                       <Medium
                         label="Allow Bidding / Auction?"
                         fontSize={mvs(14)}
-                           numberOfLines={10}
+                        numberOfLines={10}
                         color={colors.textColor}
-                        style={{marginRight: mvs(12), flex: 1}}
+                        style={{ marginRight: mvs(12), flex: 1 }}
                       />
-                      <ToggleSwitch
+                      {/* <ToggleSwitch
                         isOn={allowBidding}
                         onToggle={setAllowBidding}
                         onColor={colors.primary}
                         offColor="#E5E5E5"
                         circleColor={colors.white}
                         size="medium"
-                      />
+                      /> */}
+                      <View style={styles.compensationToggleContainer}>
+                        {/* NO */}
+                        <Regular
+                          label="No"
+                          fontSize={mvs(14)}
+                          color={allowBidding ? '#D9D9D9' : '#404040'}
+                          style={{ marginRight: mvs(10), fontWeight: '400' }}
+                        />
+
+                        <ExactToggle
+                          isOn={allowBidding}
+                          onToggle={setAllowBidding}
+                          onColor={colors.primary}
+                          offColor="#D9D9D9"
+                          circleColor={colors.white}
+                        />
+
+                        {/* YES */}
+                        <Regular
+                          label="Yes"
+                          fontSize={mvs(14)}
+                          color={allowBidding ? '#404040' : '#D9D9D9'}
+                          style={{ marginLeft: mvs(10), fontWeight: '400' }}
+                        />
+                      </View>
+
                     </View>
 
                     {/* Bidding Fields - Show when bidding is allowed */}
                     {allowBidding && (
                       <>
-                        <View style={{marginTop: mvs(0)}}>
+                        <View style={{ marginTop: mvs(0) }}>
                           <Medium
                             label="Minimum Accepted Compensation"
                             fontSize={mvs(14)}
                             color={colors.textColorSecondary}
-                               numberOfLines={10}
-                            style={{marginBottom: mvs(7)}}
+                            numberOfLines={10}
+                            style={{ marginBottom: mvs(7) }}
                           />
                           <PrimaryInput
                             placeholder="Enter amount"
@@ -239,13 +281,13 @@ const navigation = useNavigation();
                           />
                         </View>
 
-                        <View style={{marginTop: mvs(0)}}>
+                        <View style={{ marginTop: mvs(0) }}>
                           <Medium
                             label='"Buy Now" Compensation (Maximum)'
                             fontSize={mvs(14)}
-                               numberOfLines={10}
+                            numberOfLines={10}
                             color={colors.textColorSecondary}
-                            style={{marginBottom: mvs(8)}}
+                            style={{ marginBottom: mvs(8) }}
                           />
                           <PrimaryInput
                             placeholder="Enter amount"
@@ -254,12 +296,12 @@ const navigation = useNavigation();
                             keyboardType="numeric"
                             containerStyle={styles.amountInput}
                           />
-                          <Regular
+                          <Light
                             label="(The amount at which you immediately accept an agreement.)"
-                            fontSize={mvs(12)}
-                               numberOfLines={10}
-                            color={"#8C8C8C"}
-                            style={{marginTop: mvs(8)}}
+                            fontSize={mvs(14)}
+                            numberOfLines={10}
+                            color={"#333333"}
+                            style={{ marginTop: mvs(-22),fontWeight:'300' }}
                           />
                         </View>
                       </>
@@ -272,60 +314,74 @@ const navigation = useNavigation();
         </View>
       </ScrollView>
 
-     
 
-      {/* Legal Disclaimer */}
-      <View style={{marginHorizontal: mvs(20), marginTop: mvs(20), marginBottom: mvs(10)}}>
-        <Regular
-          label="Helix does not provide legal advice. You are responsible for verifying that gamete compensation is legal in your jurisdiction. Please abide by the laws of your country."
-          fontSize={mvs(14)}
-             numberOfLines={10}
-          color={"#8C8C8C"}
-          style={{ lineHeight: mvs(16)}}
-        />
+{isInterestedInCompensation && (
+  // Legal Disclaimer
+  <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20), marginBottom: mvs(10) }}>
+    <Regular
+      label="Helix does not provide legal advice."
+      fontSize={mvs(14)}
+      numberOfLines={10}
+      color={"#8C8C8C"}
+      style={{ lineHeight: mvs(16) }}
+    />
+    <Regular
+      label="You are responsible for verifying that gamete compensation is legal in your jurisdiction."
+      fontSize={mvs(14)}
+      numberOfLines={10}
+      color={"#8C8C8C"}
+      style={{ lineHeight: mvs(16), marginVertical: mvs(10) }}
+    />
+    <Regular
+      label="Please abide by the laws of your country."
+      fontSize={mvs(14)}
+      numberOfLines={10}
+      color={"#8C8C8C"}
+      style={{ lineHeight: mvs(16) }}
+    />
+  </View>
+)}
+      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
+        <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: colors.transparent,
+              width: "33%",
+              borderWidth: 1,
+              borderColor: colors.primary,
+
+            }}
+            loading={loading}
+            textStyle={{ color: colors.primary }}
+            // onPress={handleSubmit}
+            onPress={() => navigation.goBack()}
+            title={'Back'}
+          />
+
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: "#3A3E90",
+              width: "33%"
+            }}
+            loading={loading}
+            // onPress={handleSubmit}
+            onPress={() => navigate("VerificationCompletionScreen")}
+            title={'Continue'}
+          />
+        </Row>
       </View>
-
-      <View style={{marginHorizontal: mvs(20), marginBottom: mvs(40)}}>
-        <Row style={{justifyContent: 'space-between', alignItems: 'center'}}>
-       <PrimaryButton
-                      containerStyle={{
-                        borderRadius: mvs(50),
-                        height: mvs(43),
-                        marginVertical: mvs(0),
-                        backgroundColor:colors.transparent,
-                        width:"33%",
-                        borderWidth:1,
-                        borderColor:colors.primary,
-
-                      }}
-                      loading={loading}
-                      textStyle={{color:colors.primary}}
-                      // onPress={handleSubmit}
-                       onPress={() => navigation.goBack()}
-                      title={'Back'}
-                    />
-      
-       <PrimaryButton
-                      containerStyle={{
-                        borderRadius: mvs(50),
-                        height: mvs(43),
-                        marginVertical: mvs(0),
-                        backgroundColor:"#3A3E90",
-                         width:"33%"
-                      }}
-                      loading={loading}
-                      // onPress={handleSubmit}
-                      onPress={()=>navigate("VerificationCompletionScreen")}
-                      title={'Continue'}
-                    />
-                    </Row>
-                    </View>
       {/* Privacy Modal */}
       <ModalWrapper
         visible={privacyModalVisible}
         onBackdropPress={() => setPrivacyModalVisible(false)}
         onBackButtonPress={() => setPrivacyModalVisible(false)}
-        style={{paddingHorizontal: mvs(20)}}>
+        style={{ paddingHorizontal: mvs(20) }}>
         <View
           style={{
             paddingHorizontal: mvs(24),
@@ -338,7 +394,7 @@ const navigation = useNavigation();
             label="Privacy"
             fontSize={mvs(18)}
             color={colors.textColor}
-            style={{textAlign: 'center', marginBottom: mvs(12)}}
+            style={{ textAlign: 'center', marginBottom: mvs(12) }}
           />
           <Regular
             label={
@@ -347,7 +403,7 @@ const navigation = useNavigation();
             fontSize={mvs(14)}
             color={colors.textColor}
             numberOfLines={3}
-            style={{textAlign: 'left', marginBottom: mvs(20)}}
+            style={{ textAlign: 'left', marginBottom: mvs(20) }}
           />
           <View style={styles.modalButtonContainer}>
             <PrimaryButton
@@ -360,7 +416,7 @@ const navigation = useNavigation();
                 width: mvs(100),
                 backgroundColor: colors.helixPrimary,
               }}
-              textStyle={{color: colors.white}}
+              textStyle={{ color: colors.white }}
             />
           </View>
         </View>

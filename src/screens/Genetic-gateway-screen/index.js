@@ -26,6 +26,7 @@ import Header1x2x from 'components/atoms/headers/header-1x-2x';
 import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ExactToggle from 'components/atoms/toggle';
 
 const GeneticGatewayScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -186,8 +187,8 @@ const navigation = useNavigation();
 
         {/* Always Private Toggle */}
         <View style={styles.toggleContainer}>
-          <Regular label="Always Private" style={{marginRight:mvs(20)}} fontSize={mvs(14)} color={colors.textColor} />
-          <ToggleSwitch
+          <Regular label="Always Private" style={{marginRight:mvs(10)}} fontSize={mvs(14)} color={colors.textColor} />
+          {/* <ToggleSwitch
             isOn={alwaysPrivate}
             onToggle={value => {
               setAlwaysPrivate(value);
@@ -199,7 +200,19 @@ const navigation = useNavigation();
             offColor="#E5E5E5"
             circleColor={colors.white}
             size="medium"
-          />
+          /> */}
+          <ExactToggle
+                        isOn={alwaysPrivate}
+                        onToggle={value => {
+                          setAlwaysPrivate(value);
+                          if (value) {
+                            setPrivacyModalVisible(true);
+                          }
+                        }}
+                        onColor={colors.primary}
+                        offColor="#D9D9D9"
+                        circleColor={colors.white}
+                      />
         </View>
 
         <View style={styles.contentContainerStyle}>
@@ -219,7 +232,8 @@ const navigation = useNavigation();
                   />
                   {searchText.length > 0 && (
                     <TouchableOpacity onPress={() => handleSearch('')}>
-                      <Icon name="close-circle" size={mvs(20)} color={colors.placeholder} />
+                      {/* <Icon name="close-circle" size={mvs(20)} color={colors.placeholder} /> */}
+                                      <IMG.close width={mvs(18)} height={mvs(18)} style={styles.searchIcon} />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -366,7 +380,7 @@ const navigation = useNavigation();
                 height: mvs(43),
                 marginVertical: 0,
                 width: mvs(100),
-                backgroundColor: colors.helixPrimary,
+                backgroundColor: colors.primary,
               }}
               textStyle={{color: colors.white}}
             />

@@ -1,6 +1,7 @@
 import {Platform, StyleSheet} from 'react-native';
 import {colors} from 'config/colors';
 import {mvs, width} from 'config/metrices';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -142,6 +143,41 @@ elevation: 4,
   tagSelected: {
     backgroundColor: colors.helixPrimary,
     borderColor: colors.helixPrimary,
+  },
+   label: {
+    fontSize: 14,
+    // color: '#8E8E8E',
+    marginBottom: 3,
+    fontFamily:fonts.medium,
+    fontWeight: '500',
+  },
+
+  dropdown: {
+    height: mvs(50),
+    alignItems: 'center',
+    marginBottom: mvs(10),
+    borderRadius: mvs(40),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: mvs(15),
+    backgroundColor: colors.white,
+    borderWidth: mvs(1),
+    borderColor: colors.borderColor,
+  },
+
+  valueText: {
+    fontSize: 14,
+    color: '#404040',
+  },
+
+  placeholder: {
+    color: '#C4C4C4',
+  },
+
+  arrow: {
+    fontSize: 16,
+    color: '#8E8E8E',
+    marginTop: -2,
   },
 });
 export default styles;

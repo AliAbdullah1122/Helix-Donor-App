@@ -1,30 +1,30 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert } from 'react-native';
 import PrimaryInput from 'components/atoms/inputs';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
-import {LoginSchema, signinFormValidation} from 'validations';
+import { LoginSchema, signinFormValidation } from 'validations';
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
-import {login, onLogin} from 'services/api/auth-api-actions';
+import { login, onLogin } from 'services/api/auth-api-actions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {UTILS} from 'utils';
-import {STORAGEKEYS} from 'config/constants';
+import { UTILS } from 'utils';
+import { STORAGEKEYS } from 'config/constants';
 import {
   GoogleAuthProvider,
   getAuth,
   signInWithCredential,
 } from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import Header1x2x from 'components/atoms/header-home/header-1x-2x';
 import { StatusBar } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -34,57 +34,59 @@ const LoginScreen = props => {
   const [loading, setLoading] = React.useState(false);
   const [rember, setRemember] = React.useState(true);
   const [error, setError] = React.useState('');
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const initialValues = {
     email: '',
   };
 
 
-const handleFormSubmit = async (values, {resetForm}) => {
-  try {
-    setLoading(true);
-    setError('');
+  const handleFormSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
+      setError('');
 
-    const apiBody = {
-      email: values.email,
-      password: values.password,
-    };
+      const apiBody = {
+        email: values.email,
+        password: values.password,
+      };
 
-    const response = await dispatch(onLogin(apiBody, setLoading));
+      const response = await dispatch(onLogin(apiBody, setLoading));
 
-    console.log("LOGIN RESPONSE:", response);
+      console.log("LOGIN RESPONSE:", response);
 
-    if (response?.status === true) {
-      resetForm();
-      navigate("TabBar");
-      return;
+      if (response?.status === true) {
+        resetForm();
+        navigate("TabBar");
+        return;
+      }
+
+      setError(response?.message || "Incorrect email please try again");
+
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Incorrect email please try again");
+    } finally {
+      setLoading(false);
     }
-
-    setError(response?.message || "Incorrect email please try again");
-
-  } catch (error) {
-    console.error("Login error:", error);
-    setError("Incorrect email please try again");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
-      
+
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false} bounces={false}>
         <View style={styles.imgView}>
-          <Image
+          {/* <Image
             source={IMG.HelixWrittenLogo}
             resizeMode="contain"
-            style={{width: mvs(140), height: mvs(35)}}
-          />
+            style={{ width: mvs(140), height: mvs(35) }}
+          /> */}
+          <IMG.HelixLoginLogo width={mvs(140)} height={mvs(35)} />
+
         </View>
-        
+
         <View style={styles.centerSection}>
           <View style={styles.contentContainerStyle}>
             <KeyboardAvoidScrollview
@@ -122,7 +124,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
                           value={values.email}
                           containerStyle={styles.emailInputContainer}
                         />
-                        
+
                         {/* Error Message */}
                         {/* {error ? (
                           <View style={styles.errorContainer}>
@@ -137,21 +139,21 @@ const handleFormSubmit = async (values, {resetForm}) => {
                             />
                           </View>
                         ) : null} */}
-                        
+
                         <PrimaryButton
                           containerStyle={styles.continueButton}
                           loading={loading}
                           // onPress={handleSubmit}
-                          onPress={()=>navigate("OtpScreen")}
+                          onPress={() => navigate("OtpScreen")}
                           title={'Continue'}
                         />
-                        
-                      
+
+
                       </>
                     );
                   }}
                 </Formik>
-               
+
               </View>
             </KeyboardAvoidScrollview>
           </View>
@@ -161,7 +163,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
               label={'or continue with'}
               color={"#404040"}
               fontSize={mvs(12)}
-              style={{marginHorizontal: mvs(12),fontWeight:"400"}}
+              style={{ marginHorizontal: mvs(12), fontWeight: "400" }}
             />
             <View style={styles.divider} />
           </View>
@@ -173,7 +175,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
                 resizeMode="contain"
                 style={styles.socialIcon}
               />
-              <Medium label={'Google'} color={colors.vibrantColor} fontSize={mvs(16)} style={{marginLeft: mvs(8)}} />
+              <Medium label={'Google'} color={colors.vibrantColor} fontSize={mvs(16)} style={{ marginLeft: mvs(8) }} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton}>
               <Image
@@ -181,7 +183,7 @@ const handleFormSubmit = async (values, {resetForm}) => {
                 resizeMode="contain"
                 style={styles.socialIcon}
               />
-              <Medium label={'Apple'} color={colors.vibrantColor} fontSize={mvs(16)} style={{marginLeft: mvs(8)}} />
+              <Medium label={'Apple'} color={colors.vibrantColor} fontSize={mvs(16)} style={{ marginLeft: mvs(8) }} />
             </TouchableOpacity>
           </Row>
         </View>
@@ -190,28 +192,28 @@ const handleFormSubmit = async (values, {resetForm}) => {
           <Regular
             color={colors.subText}
             fontSize={mvs(12)}
-            style={{textAlign: 'left'}}
+            style={{ textAlign: 'left' }}
             numberOfLines={2}
           >
-            <Regular label={'By continuing you agree to our '} color={"#8C8C8C"} fontSize={mvs(12)} style={{fontWeight:"400"}} />
+            <Regular label={'By continuing you agree to our '} color={"#8C8C8C"} fontSize={mvs(12)} style={{ fontWeight: "400" }} />
             <Regular
               label={'Terms and Conditions'}
               // color={colors.black}
               // color={colors.black}
               color={'#404040'}
               fontSize={mvs(12)}
-              style={{textDecorationLine: 'underline',fontWeight:"400"}}
-              onPress={() => {}}
+              style={{ textDecorationLine: 'underline', fontWeight: "400" }}
+              onPress={() => { }}
             />
-            <Regular label={' and our '} color={'#8C8C8C'} fontSize={mvs(12)} style={{fontWeight:"400"}}  />
+            <Regular label={' and our '} color={'#8C8C8C'} fontSize={mvs(12)} style={{ fontWeight: "400" }} />
             <Regular
               label={'Privacy Policy'}
               color={colors.black}
               fontSize={mvs(12)}
-              style={{textDecorationLine: 'underline',fontWeight:"400"}}
-              onPress={() => {}}
+              style={{ textDecorationLine: 'underline', fontWeight: "400" }}
+              onPress={() => { }}
             />
-            <Regular label={'.'} color={'#8C8C8C'} fontSize={mvs(12)} style={{fontWeight:"400"}} />
+            <Regular label={'.'} color={'#8C8C8C'} fontSize={mvs(12)} style={{ fontWeight: "400" }} />
           </Regular>
         </View>
       </ScrollView>

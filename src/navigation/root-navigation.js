@@ -151,12 +151,12 @@ export const RootNavigator = () => {
         barStyle={'dark-content'}
       />
       <Stack.Navigator
-         initialRouteName="Splash"
-        //  initialRouteName="PlaceofferCheckoutScreen"
-        //  initialRouteName="QRScreen"
+        //  initialRouteName="Splash"
+        //  initialRouteName="MainProfileScreen"
+         initialRouteName="DriverRegistrationPart1Screen"
         //  initialRouteName="ReviewFromAdminScreen"
+        // initialRouteName="Drawer"
         // initialRouteName="UserTab"
-      //  initialRouteName="Drawer"
         screenOptions={horizontalAnimation}>
         <Stack.Group>
           <Stack.Screen name="Splash" component={Splash} />

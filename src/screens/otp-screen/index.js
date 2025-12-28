@@ -1,11 +1,11 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {navigate} from 'navigation/navigation-ref';
-import React, {useState, useEffect} from 'react';
-import {TouchableOpacity, View, ScrollView, StatusBar, Text, Image} from 'react-native';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { navigate } from 'navigation/navigation-ref';
+import React, { useState, useEffect } from 'react';
+import { TouchableOpacity, View, ScrollView, StatusBar, Text, Image } from 'react-native';
 import styles from './styles';
-import {colors} from 'config/colors';
+import { colors } from 'config/colors';
 import Regular from 'typography/regular-text';
 import Medium from 'typography/medium-text';
 import Bold from 'typography/bold-text';
@@ -16,8 +16,8 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
-import {Checkbox} from 'components/atoms/checkbox';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
+import { Checkbox } from 'components/atoms/checkbox';
 import { useNavigation } from '@react-navigation/native';
 import Light from 'typography/light-text';
 
@@ -35,7 +35,7 @@ const OtpScreen = props => {
   const navigation = useNavigation();
   const email = props?.route?.params?.email || 'jessica@mail.com';
 
-  const ref = useBlurOnFulfill({value: otpValue, cellCount: CELL_COUNT});
+  const ref = useBlurOnFulfill({ value: otpValue, cellCount: CELL_COUNT });
   const [propsCodeField, getCellOnLayoutHandler] = useClearByFocusCell({
     value: otpValue,
     setValue: setOtpValue,
@@ -73,7 +73,7 @@ const OtpScreen = props => {
       // Open modal directly
       setShowModal(true);
     } else {
-      setError('Please enter complete OTP');
+      setError('Incorrect OTP please try again.');
     }
   };
 
@@ -100,144 +100,144 @@ const OtpScreen = props => {
         backgroundColor={showModal ? "rgba(152, 151, 152, 0.9)" : colors.helixBackground}
         barStyle="dark-content"
       />
-      
-      <ScrollView 
-        contentContainerStyle={styles.scrollContainer} 
+
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
         bounces={false}>
-        
+
         {/* Back Arrow */}
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backButton}
           // onPress={() => navigate('Login')}
           onPress={() => navigation.goBack()}
-          >
+        >
           <Icon name="chevron-back-outline" size={mvs(24)} color={"#8C8C8C"} />
         </TouchableOpacity>
 
-<View
- style={{gap:mvs(25)}}
- >
-        <Medium
-          label={'OTP Verification'}
-          fontSize={mvs(14)}
-          color={"#404040"}
-          style={styles.title}
-        />
-        {/* <View style={{borderWidth:0.7,borderColor:"#E6E8FF",width:"95%",alignSelf:'center'}}> */}
-        <View style={{ borderWidth: 1, borderColor: "#D9D9D9", width: "97%", alignSelf: 'center' }}>
-
-        </View>
-
-
-        <Regular
-          label={`We have sent the verification code to ${email}`}
-          fontSize={mvs(14)}
-          color={"#404040"}
-          numberOfLines={10}
-          style={styles.message}
-        />
-
-
-        {/* OTP Input Fields */}
-        <View style={styles.otpContainer}>
-          <CodeField
-            ref={ref}
-            {...propsCodeField}
-            value={otpValue}
-            onChangeText={setOtpValue}
-            cellCount={CELL_COUNT}
-            rootStyle={styles.codeFieldRoot}
-            keyboardType="number-pad"
-            textContentType="oneTimeCode"
-            renderCell={({index, symbol, isFocused}) => (
-              <View
-                onLayout={getCellOnLayoutHandler(index)}
-                key={index}
-                style={[
-                  styles.cellRoot,
-                  isFocused && styles.focusCell,
-                ]}>
-                {symbol ? (
-                  <Regular
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                    style={styles.cellText}>
-                    {symbol}
-                  </Regular>
-                ) : isFocused ? (
-                  <Text style={styles.cellText}>
-                    <Cursor />
-                  </Text>
-                ) : (
-                  <Regular
-                    fontSize={mvs(14)}
-                    color={colors.placeholder || '#8C8C8C'}
-                    style={styles.cellText}>
-                    1
-                  </Regular>
-                )}
-              </View>
-            )}
+        <View
+          style={{ gap: mvs(10) }}
+        >
+          <Medium
+            label={'OTP Verification'}
+            fontSize={mvs(14)}
+            color={"#404040"}
+            style={styles.title}
           />
-        </View>
+          {/* <View style={{borderWidth:0.7,borderColor:"#E6E8FF",width:"95%",alignSelf:'center'}}> */}
+          <View style={{ borderWidth: 1, borderColor: "#D9D9D9", width: "97%", alignSelf: 'center' }}>
 
-        {/* Error Message */}
-        {error ? (
-          <View style={styles.errorContainer}>
-            <View style={styles.errorIconContainer}>
-              {/* <Icon name="alert-circle" size={mvs(14)} color="#FFFFFF" /> */}
-              <Image source={IMG.alertcircle} resizeMode='contain' style={{height:mvs(16),width:mvs(16)}}/>
-            </View>
-            <Regular
-              label={error}
-              fontSize={mvs(12)}
-              color="#FF5F57"
-              style={styles.errorText}
+          </View>
+
+
+          <Regular
+            label={`We have sent the verification code to ${email}`}
+            fontSize={mvs(14)}
+            color={"#404040"}
+            numberOfLines={10}
+            style={styles.message}
+          />
+
+
+          {/* OTP Input Fields */}
+          <View style={styles.otpContainer}>
+            <CodeField
+              ref={ref}
+              {...propsCodeField}
+              value={otpValue}
+              onChangeText={setOtpValue}
+              cellCount={CELL_COUNT}
+              rootStyle={styles.codeFieldRoot}
+              keyboardType="number-pad"
+              textContentType="oneTimeCode"
+              renderCell={({ index, symbol, isFocused }) => (
+                <View
+                  onLayout={getCellOnLayoutHandler(index)}
+                  key={index}
+                  style={[
+                    styles.cellRoot,
+                    isFocused && styles.focusCell,
+                  ]}>
+                  {symbol ? (
+                    <Regular
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                      style={styles.cellText}>
+                      {symbol}
+                    </Regular>
+                  ) : isFocused ? (
+                    <Text style={styles.cellText}>
+                      <Cursor />
+                    </Text>
+                  ) : (
+                    <Regular
+                      fontSize={mvs(14)}
+                      color={colors.placeholder || '#8C8C8C'}
+                      style={styles.cellText}>
+                      1
+                    </Regular>
+                  )}
+                </View>
+              )}
             />
           </View>
-        ) : null}
 
-        {/* Continue Button */}
-        <PrimaryButton
-          containerStyle={styles.continueButton}
-          loading={loading}
-          onPress={handleContinue}
-          title={'Continue'}
-        />
-          <View >
-         <Regular
+          {/* Error Message */}
+          {error ? (
+            <View style={styles.errorContainer}>
+              <View style={styles.errorIconContainer}>
+                {/* <Icon name="alert-circle" size={mvs(14)} color="#FFFFFF" /> */}
+                <Image source={IMG.alertcircle} resizeMode='contain' style={{ height: mvs(16), width: mvs(16) }} />
+              </View>
+              <Regular
+                label={error}
+                fontSize={mvs(12)}
+                color="#FF5F57"
+                style={styles.errorText}
+              />
+            </View>
+          ) : null}
+
+          {/* Continue Button */}
+          <PrimaryButton
+            containerStyle={styles.continueButton}
+            loading={loading}
+            onPress={handleContinue}
+            title={'Continue'}
+          />
+          <View style={{marginTop:mvs(20)}}>
+            <Regular
               label={'Didn\'t get the OTP?'}
               fontSize={mvs(14)}
               color={"#404040"}
-              style={{marginBottom:mvs(10),fontWeight:"400"}}
+              style={{ marginBottom: mvs(10), fontWeight: "400" }}
             />
-        <View style={styles.footerContainer}>
-          <View style={styles.resendContainer}>
-           
-            <TouchableOpacity onPress={handleResend} disabled={!canResend}>
-              <Medium
-                label={'Resend'}
+            <View style={styles.footerContainer}>
+              <View style={styles.resendContainer}>
+
+                <TouchableOpacity onPress={handleResend} disabled={!canResend}>
+                  <Medium
+                    label={'Resend'}
+                    fontSize={mvs(14)}
+                    color={"#404040"}
+                    style={styles.resendLink}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Regular
+                label={`Request again in ${formatTime(timeLeft)}`}
                 fontSize={mvs(14)}
                 color={"#404040"}
-                style={styles.resendLink}
+                style={styles.timerText}
               />
-            </TouchableOpacity>
+            </View>
           </View>
-          <Regular
-            label={`Request again in ${formatTime(timeLeft)}`}
-            fontSize={mvs(14)}
-            color={"#404040"}
-            style={styles.timerText}
-          />
         </View>
-</View>
-                </View>
-        
+
         {/* Footer Section */}
-      
+
         {/* Back to Login Link */}
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backToLoginContainer}
           onPress={() => navigate('Login')}>
           <Medium
@@ -254,14 +254,14 @@ const OtpScreen = props => {
         visible={showModal}
         onBackdropPress={() => setShowModal(false)}
         onBackButtonPress={() => setShowModal(false)}
-       backdropOpacity={0.9}
-  backdropColor="#989798"
-  style={[styles.modalContainer, { marginTop: mvs(Platform.OS === 'ios' ? 0 : StatusBar.currentHeight - 60) }]}
->
-        <ScrollView 
+        backdropOpacity={0.9}
+        backdropColor="#989798"
+        style={[styles.modalContainer, { marginTop: mvs(Platform.OS === 'ios' ? 0 : StatusBar.currentHeight - 60) }]}
+      >
+        <ScrollView
           contentContainerStyle={styles.modalContent}
           showsVerticalScrollIndicator={false}>
-          
+
           {/* Donate Icon */}
           <View style={styles.modalIconContainer}>
             <Image
@@ -278,7 +278,7 @@ const OtpScreen = props => {
             color={"#404040"}
             style={styles.sectionTitle}
           />
-          
+
           <Light
             label={'Despite technology keeping us more connected than ever, millions of people in search for a partner to start a family are finding it harder than ever, feeling disconnected and disheartened by the process. Meanwhile birth rates are declining and the dream of having a child is fading for many.'}
             fontSize={mvs(14)}
@@ -286,7 +286,7 @@ const OtpScreen = props => {
             style={styles.sectionText}
             numberOfLines={10}
           />
-          
+
           <Light
             label={'This is where Helix can help.'}
             fontSize={mvs(14)}
@@ -294,15 +294,15 @@ const OtpScreen = props => {
             style={styles.sectionText}
             numberOfLines={10}
           />
-          
+
           <Light
             label={'Our mission is to expand procreation options globally. We provide a dedicated platform to connect you with like-minded individuals who share your goal of having a child.'}
             fontSize={mvs(14)}
-  color={"#404040"}
+            color={"#404040"}
             style={styles.sectionText}
             numberOfLines={10}
           />
-          
+
           <Light
             label={'Helix is here to help you not just date, but procreate.'}
             fontSize={mvs(14)}
@@ -310,12 +310,19 @@ const OtpScreen = props => {
             style={styles.sectionText}
             numberOfLines={10}
           />
-          
+
           <Light
-            label={'Signed Team Helix'}
+            label={'Signed'}
             fontSize={mvs(14)}
-           color={"#404040"}
-            style={styles.sectionText}
+            color={"#404040"}
+            style={styles.sectionText2}
+            numberOfLines={10}
+          />
+          <Light
+            label={'Team Helix'}
+            fontSize={mvs(14)}
+            color={"#404040"}
+            style={styles.sectionText3}
             numberOfLines={10}
           />
 
@@ -329,7 +336,7 @@ const OtpScreen = props => {
             color={"#404040"}
             style={styles.sectionTitle}
           />
-          
+
           <Light
             label={'Helix is a technology platform and matching database, allowing users to connect with the like-minded goal of procreation in mind.'}
             fontSize={mvs(14)}
@@ -337,17 +344,17 @@ const OtpScreen = props => {
             style={styles.sectionText}
             numberOfLines={10}
           />
-          
+
           <Light
             label={'We kindly request that all users engage in their own due diligence before proceeding with any next steps.'}
             fontSize={mvs(14)}
-           color={"#404040"}
+            color={"#404040"}
             style={styles.sectionText}
             numberOfLines={10}
           />
 
           {/* Checkbox */}
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.checkboxContainer}
             onPress={() => setAgreed(!agreed)}
             activeOpacity={0.7}>
@@ -367,16 +374,16 @@ const OtpScreen = props => {
                   label={'Terms and Conditions'}
                   fontSize={mvs(12)}
                   color={colors.primary}
-                  style={{textDecorationLine: 'underline'}}
-                  onPress={() => {}}
+                  style={{ textDecorationLine: 'underline' }}
+                  onPress={() => { }}
                 />
                 <Regular label={' and '} fontSize={mvs(12)} color={"#404040"} />
                 <Regular
                   label={'Privacy Policy'}
                   fontSize={mvs(12)}
                   color={colors.primary}
-                  style={{textDecorationLine: 'underline'}}
-                  onPress={() => {}}
+                  style={{ textDecorationLine: 'underline' }}
+                  onPress={() => { }}
                 />
                 <Regular label={'.'} fontSize={mvs(12)} color={"#404040"} />
               </Regular>
@@ -387,11 +394,11 @@ const OtpScreen = props => {
           <PrimaryButton
             containerStyle={styles.agreeButton}
             loading={false}
-            textStyle={{fontSize:mvs(16)}}
+            textStyle={{ fontSize: mvs(16) }}
             onPress={handleAgree}
             title={'Agree'}
             disabled={!agreed}
-            
+
           />
         </ScrollView>
       </ModalWrapper>

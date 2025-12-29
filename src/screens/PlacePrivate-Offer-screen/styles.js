@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(16),
     paddingVertical: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   messageSection: {
     marginBottom: mvs(20),
@@ -259,14 +259,16 @@ const styles = StyleSheet.create({
   },
   messageInput: {
     backgroundColor: colors.white,
-    borderRadius: mvs(30),
+    borderRadius: mvs(24),
     borderWidth: 1,
     borderColor: colors.borderColor || '#E0E0E0',
     paddingHorizontal: mvs(16),
     paddingVertical: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+     paddingTop: mvs(15),
+    color: colors.inputText,
     minHeight: mvs(100),
+
     textAlignVertical: 'top',
   },
   minOfferText: {

@@ -119,7 +119,7 @@ const navigation = useNavigation();
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+               <Row style={{alignItems:"center",marginHorizontal:mvs(12),marginVertical:mvs(10)}}>
 
         <IMG.Progress6
           width="100%" height={mvs(20)}
@@ -131,12 +131,12 @@ const navigation = useNavigation();
         <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
         <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{marginHorizontal:mvs(12),marginTop:mvs(20)}}>
 
          <Regular label={'Stage 6 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
        
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <View style={{marginHorizontal:mvs(12),marginVertical:mvs(10)}}>
         <Medium
           label={'Legal Agreements'}
           color={colors.textColor}
@@ -144,7 +144,7 @@ const navigation = useNavigation();
         />
         <Regular
           label={'Please review and agree to the terms of donation to complete your profile.'}
-          color={colors.textColor}
+          color={colors.textColorSecondary}
           fontSize={mvs(14)}
           style={{marginTop:mvs(8)}}
           numberOfLines={2}
@@ -176,7 +176,7 @@ const navigation = useNavigation();
                     <Regular
                       label="I have read and agree to the Informed Consent for Donation."
                       fontSize={mvs(14)}
-                      color={colors.textColor}
+                      color={colors.textColorSecondary}
                       numberOfLines={3}
                     />
                     <TouchableOpacity onPress={() => {}}>
@@ -193,10 +193,10 @@ const navigation = useNavigation();
 <View style={{borderWidth:1,borderColor:"#D9D9D9",width:"100%",marginTop:mvs(10)}}></View>
               {/* Anonymity Preference */}
               <View style={{marginTop: mvs(20)}}>
-                <Medium
+                <Regular
                   label="Anonymity Preference:"
                   fontSize={mvs(14)}
-                  color={colors.textColor}
+                  color={colors.textColorSecondary}
                   style={{marginBottom: mvs(16)}}
                 />
                 
@@ -216,14 +216,15 @@ const navigation = useNavigation();
                     <Regular
                       label="Identity Disclosure"
                       fontSize={mvs(14)}
-                      color={colors.textColor}
+                      color={colors.textColorSecondary}
                       style={{marginBottom: mvs(4)}}
                     />
                     <Regular
                       label="I agree to the release of my identifying information to any offspring upon their 18th birthday."
-                      fontSize={mvs(12)}
+                      fontSize={mvs(14)}
                       color={"#8C8C8C"}
                       numberOfLines={3}
+                      style={{marginTop:mvs(15)}}
                     />
                   </View>
                 </TouchableOpacity>
@@ -249,9 +250,10 @@ const navigation = useNavigation();
                     />
                     <Regular
                       label="I do not agree to the release of my identifying information."
-                      fontSize={mvs(12)}
+                      fontSize={mvs(14)}
                       color={"#8C8C8C"}
                       numberOfLines={2}
+                                    style={{marginTop:mvs(15)}}
                     />
                   </View>
                 </TouchableOpacity>
@@ -301,7 +303,7 @@ const navigation = useNavigation();
         visible={completionModalVisible}
         onBackdropPress={() => setCompletionModalVisible(false)}
         onBackButtonPress={() => setCompletionModalVisible(false)}
-        style={{paddingHorizontal: mvs(20)}}>
+             style={{ paddingHorizontal: mvs(20) ,borderRadius:mvs(24)}}>
         <View style={styles.completionModalContainer}>
           <View style={styles.completionModalImageContainer}>
             <IMG.Completionuser width={mvs(107)} height={mvs(107)} />

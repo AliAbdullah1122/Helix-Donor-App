@@ -23,6 +23,7 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import { navigate } from 'navigation/navigation-ref';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
+import Light from 'typography/light-text';
 
 const ChatMainScreen = () => {
   const [searchText, setSearchText] = useState('');
@@ -152,11 +153,11 @@ const ChatMainScreen = () => {
             </View>
             <View style={styles.messageContent}>
               <Row style={styles.messageHeaderRow}>
-                <Medium label={item.name} fontSize={mvs(15)} color={colors.black} />
+                <Medium label={item.name} fontSize={mvs(14)} color={colors.textColor} />
                 <Regular
                   label={item.time}
-                  fontSize={mvs(11)}
-                  color="#8C8C8C"
+                  fontSize={mvs(12)}
+                  color={colors.textColor}
                   style={styles.messageTime}
                 />
               </Row>
@@ -169,8 +170,8 @@ const ChatMainScreen = () => {
                 />
                 <Regular
                   label={item.preview}
-                  fontSize={mvs(13)}
-                  color="#8C8C8C"
+                  fontSize={mvs(14)}
+                  color="#989899"
                   numberOfLines={1}
                   style={{flex: 1}}
                 />
@@ -513,11 +514,12 @@ const ChatMainScreen = () => {
           <View style={styles.searchContainer}>
             <Row style={styles.searchRow}>
               <View style={styles.searchInputContainer}>
-                <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+                {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
+                <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
                 <TextInput
                   style={styles.searchInput}
                   placeholder="Search"
-                  placeholderTextColor="#8C8C8C"
+                  placeholderTextColor={colors.placeholder}
                   value={searchText}
                   onChangeText={setSearchText}
                 />
@@ -531,7 +533,7 @@ const ChatMainScreen = () => {
           <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             {/* Connections */}
             <View style={styles.sectionHeader}>
-              <Bold label="Your Connections" fontSize={mvs(18)} color={colors.black} />
+              <Medium label="Your Connections" fontSize={mvs(16)} color={colors.textColor} />
             </View>
             <FlatList
               data={connections}
@@ -544,7 +546,7 @@ const ChatMainScreen = () => {
 
             {/* Messages / Archived header */}
             <Row style={styles.messagesHeaderRow}>
-              <Bold label="Messages" fontSize={mvs(18)} color={colors.black} />
+              <Medium label="Messages" fontSize={mvs(16)} color={colors.textColor} />
               <TouchableOpacity onPress={()=>navigate("ArchiveChatScreen")}>
               <Row style={styles.archivedRow}>
 
@@ -552,7 +554,7 @@ const ChatMainScreen = () => {
                 <Medium
                   label="Archived"
                   fontSize={mvs(14)}
-                  color={colors.primary}
+                  color={colors.textColor}
                   style={{marginLeft: mvs(4)}}
                 />
               </Row>
@@ -585,9 +587,9 @@ const ChatMainScreen = () => {
             activeOpacity={1}
             onPress={(e) => e.stopPropagation()}
             style={styles.safetyModalContainer}>
-            <Bold
+            <Medium
               label="Safety Toolkit"
-              fontSize={mvs(18)}
+              fontSize={mvs(16)}
               color={colors.textColor}
               style={styles.safetyModalTitle}
             />
@@ -595,17 +597,24 @@ const ChatMainScreen = () => {
             {/* Report an Issue */}
             <TouchableOpacity style={styles.safetyOptionRow}>
               <Row style={styles.safetyOptionContent}>
-                <Icon name="flag" size={mvs(20)} color="#FF3B30" />
+                {/* <Icon name="flag" size={mvs(20)} color="#FF3B30" /> */}
                 <View style={styles.safetyOptionText}>
+                  <Row style={{justifyContent:"flex-start"}}>
+                  <Medium
+                    label="🚩 "
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
+                  />
                   <Medium
                     label="Report an Issue"
                     fontSize={mvs(14)}
                     color={colors.textColor}
                   />
-                  <Regular
+                  </Row>
+                  <Light
                     label="Report a user or incident."
-                    fontSize={mvs(12)}
-                    color="#8C8C8C"
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
                     style={styles.safetyOptionSubtitle}
                   />
                 </View>
@@ -616,17 +625,24 @@ const ChatMainScreen = () => {
             {/* Safety & Education Centre */}
             <TouchableOpacity style={styles.safetyOptionRow}>
               <Row style={styles.safetyOptionContent}>
-                <Icon name="book" size={mvs(20)} color="#27AE60" />
+                {/* <Icon name="book" size={mvs(20)} color="#27AE60" /> */}
                 <View style={styles.safetyOptionText}>
+                   <Row style={{justifyContent:"flex-start"}}>
+                  <Medium
+                    label="📚  "
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
+                  />
                   <Medium
                     label="Safety & Education Centre"
                     fontSize={mvs(14)}
                     color={colors.textColor}
                   />
-                  <Regular
+                   </Row>
+                  <Light
                     label="Guides and resources to stay safe."
-                    fontSize={mvs(12)}
-                    color="#8C8C8C"
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
                     style={styles.safetyOptionSubtitle}
                   />
                 </View>
@@ -637,17 +653,25 @@ const ChatMainScreen = () => {
             {/* Safety Tools */}
             <TouchableOpacity style={styles.safetyOptionRow}>
               <Row style={styles.safetyOptionContent}>
-                <Icon name="construct" size={mvs(20)} color="#8C8C8C" />
+                {/* <Icon name="construct" size={mvs(20)} color="#8C8C8C" /> */}
                 <View style={styles.safetyOptionText}>
+                    <Row style={{justifyContent:"flex-start"}}>
+                  <Medium
+                    label="🛠️  "
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
+                  />
                   <Medium
                     label="Safety Tools"
                     fontSize={mvs(14)}
                     color={colors.textColor}
                   />
-                  <Regular
+                     </Row>
+                  <Light
                     label="Access emergency contacts and location sharing."
                     fontSize={mvs(12)}
-                    color="#8C8C8C"
+                    color={colors.textColor}
+                    numberOfLines={10}
                     style={styles.safetyOptionSubtitle}
                   />
                 </View>
@@ -763,13 +787,13 @@ const ChatMainScreen = () => {
             activeOpacity={1}
             onPress={(e) => e.stopPropagation()}
             style={styles.blockModalContainer}>
-            <Bold
+            <Medium
               label="Block User"
-              fontSize={mvs(18)}
+              fontSize={mvs(16)}
               color={colors.textColor}
               style={styles.blockModalTitle}
             />
-            <Regular
+            <Light
               label={`Are you sure you want to block ${selectedMessage?.name || 'this user'}?`}
               fontSize={mvs(14)}
               color={colors.textColor}
@@ -814,20 +838,20 @@ const ChatMainScreen = () => {
             activeOpacity={1}
             onPress={(e) => e.stopPropagation()}
             style={styles.blockModalContainer}>
-            <Bold
+            <Medium
               label={`${selectedMessage?.name || 'User'} has been blocked`}
-              fontSize={mvs(18)}
+              fontSize={mvs(16)}
               color={colors.textColor}
               style={styles.blockModalTitle}
             />
-            <Regular
+            <Light
               label="You will no longer see their profile or receive messages from them."
               fontSize={mvs(14)}
               color={colors.textColor}
               style={styles.blockModalMessage}
               numberOfLines={10}
             />
-            <Regular
+            <Light
               label={`Would you also like to report ${selectedMessage?.name || 'this user'}?`}
               fontSize={mvs(14)}
               color={colors.textColor}
@@ -872,17 +896,17 @@ const ChatMainScreen = () => {
             activeOpacity={1}
             onPress={(e) => e.stopPropagation()}
             style={styles.reportModalContainer}>
-            <Bold
+            <Medium
               label={`Why are you reporting ${selectedMessage?.name || 'this user'}?`}
-              fontSize={mvs(18)}
+              fontSize={mvs(16)}
               color={colors.textColor}
-              style={styles.reportModalTitle}
+              style={{...styles.reportModalTitle,textAlign:'center'}}
             />
-            <Regular
+            <Light
               label="Your feedback helps keep our community safe. Please select a reason below."
               fontSize={mvs(14)}
               color={colors.textColorSecondary}
-              style={styles.reportModalSubtitle}
+              style={{...styles.reportModalSubtitle,textAlign:'center'}}
               numberOfLines={10}
             />
             
@@ -897,7 +921,7 @@ const ChatMainScreen = () => {
                     <View style={styles.radioButtonInner} />
                   )}
                 </View>
-                <Regular
+                <Light
                   label={reason}
                   fontSize={mvs(14)}
                   color={colors.textColor}
@@ -966,11 +990,11 @@ const ChatMainScreen = () => {
             style={styles.reportReceivedModalContainer}>
             <Medium
               label="Report Received"
-              fontSize={mvs(18)}
+              fontSize={mvs(16)}
               color={colors.textColor}
               style={styles.reportReceivedModalTitle}
             />
-            <Regular
+            <Light
               label="Thank you. Our safety team will review the profile and take action."
               fontSize={mvs(14)}
               color={colors.textColor}
@@ -1010,7 +1034,7 @@ const ChatMainScreen = () => {
               color={colors.textColor}
               style={styles.deleteModalTitle}
             />
-            <Regular
+            <Light
               label="Are you sure you want to delete this chat?"
               fontSize={mvs(14)}
               color={colors.textColor}
@@ -1055,13 +1079,13 @@ const ChatMainScreen = () => {
             activeOpacity={1}
             onPress={(e) => e.stopPropagation()}
             style={styles.unmatchModalContainer}>
-            <Bold
+            <Medium
               label="Unmatch User"
-              fontSize={mvs(18)}
+              fontSize={mvs(16)}
               color={colors.textColor}
               style={styles.unmatchModalTitle}
             />
-            <Regular
+            <Light
               label="Would you like to unmatch this user? This cannot be undone."
               fontSize={mvs(14)}
               color={colors.textColor}
@@ -1131,7 +1155,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(10),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   shieldButton: {
     padding: mvs(4),
@@ -1377,10 +1401,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   safetyModalContainer: {
-    width: '85%',
+    width: '90%',
     backgroundColor: colors.white,
-    borderRadius: mvs(20),
-    padding: mvs(24),
+    borderRadius: mvs(10),
+    padding: mvs(20),
+
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,

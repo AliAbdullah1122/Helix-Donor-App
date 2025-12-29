@@ -94,7 +94,7 @@ const navigation = useNavigation();
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+               <Row style={{alignItems:"center",marginHorizontal:mvs(0),marginVertical:mvs(10)}}>
 
         <IMG.Progress2
           width="100%" height={mvs(20)}
@@ -103,15 +103,15 @@ const navigation = useNavigation();
         
 
         </Row>
-        <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
+        <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(0)}}>
         <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{marginHorizontal:mvs(0),marginTop:mvs(20)}}>
 
-         <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
+         <Regular label={'Stage 2 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
        
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <View style={{marginHorizontal:mvs(0),marginVertical:mvs(10)}}>
         <Medium
           label={'In your own Words...'}
           color={colors.textColor}
@@ -121,7 +121,7 @@ const navigation = useNavigation();
           label={'Write a short bio to introduce yourself. What are your passions? What are you loking for this journey? '}
           color={"#8C8C8C"}
           numberOfLines={3}
-          fontSize={mvs(12)}
+          fontSize={mvs(14)}
           style={{marginTop:mvs(8)}}
         />
         </View>
@@ -155,7 +155,7 @@ const navigation = useNavigation();
                       containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start',paddingTop:mvs(10)}]}
                     />
                     <View style={{marginTop:mvs(-20)}}>
-                      <Regular fontSize={mvs(12)} color={colors.textColor} label={'(450/500)'} style={{alignSelf:"flex-end"}}/>
+                      <Regular fontSize={mvs(12)} color={colors.textColorSecondary} label={'(450/500)'} style={{alignSelf:"flex-end"}}/>
                     </View>
                     
                     
@@ -186,7 +186,7 @@ const navigation = useNavigation();
 
      
 
-      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
+      <View style={{marginHorizontal:mvs(0), marginBottom: mvs(40)}}>
         <Row>
        <PrimaryButton
                       containerStyle={{
@@ -195,7 +195,7 @@ const navigation = useNavigation();
                         marginVertical: mvs(0),
                         backgroundColor:colors.transparent,
                         width:"33%",
-                        borderWidth:1,
+                        borderWidth:1.8,
                         borderColor:colors.primary,
 
                       }}

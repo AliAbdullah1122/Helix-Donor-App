@@ -526,11 +526,12 @@ const renderMarker = marker => (
   </MapView> */}
              <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+          {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
+          <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
           <TextInput
             style={styles.searchInput}
             placeholder="Search by Ancestry, etc."
-            placeholderTextColor="#8C8C8C"
+            placeholderTextColor={colors.placeholder}
             value={searchText}
             onChangeText={setSearchText}
             onFocus={() => setIsSearchFocused(true)}
@@ -628,7 +629,7 @@ const renderMarker = marker => (
                       <Regular
                         label={item}
                         fontSize={mvs(14)}
-                        color="#333333"
+                        color="#404040"
                       />
                     </TouchableOpacity>
                   ))}
@@ -678,7 +679,7 @@ const renderMarker = marker => (
           {/* Members Nearby Section */}
           <View style={styles.membersSection}>
             <View style={styles.membersHandle} />
-            <Bold
+            <Medium
               label="Members Nearby"
               fontSize={mvs(18)}
               color="#333333"
@@ -698,9 +699,9 @@ const renderMarker = marker => (
         <View style={styles.locationPromptContainer}>
           <View style={styles.locationPromptContent}>
             <IMG.Nolocation width={mvs(120)} height={mvs(120)} />
-            <Bold
+            <Medium
               label="Location Access Needed"
-              fontSize={mvs(20)}
+              fontSize={mvs(16)}
               color="#333333"
               style={styles.locationPromptTitle}
             />
@@ -773,7 +774,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   clearButton: {
     marginLeft: mvs(8),
@@ -977,7 +978,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: mvs(12),
     marginTop: mvs(12),
-    paddingVertical: mvs(16),
+    paddingVertical: mvs(12),
     paddingHorizontal: mvs(20),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -987,17 +988,17 @@ const styles = StyleSheet.create({
     zIndex: 20,
   },
   suggestionsSection: {
-    marginBottom: mvs(16),
+    marginBottom: mvs(8),
   },
   sectionTitle: {
     marginBottom: mvs(12),
   },
   suggestionItem: {
-    paddingVertical: mvs(10),
+    paddingVertical: mvs(6),
   },
   suggestionsDivider: {
     height: 1,
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#D9D9D9',
     marginVertical: mvs(8),
   },
 });

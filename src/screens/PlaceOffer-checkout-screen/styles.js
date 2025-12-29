@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.lightGray || '#F5F5F5',
-    // paddingHorizontal: mvs(10),
+    // paddingHorizontal: mvs(12),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: mvs(0),
     marginBottom: mvs(20),
-    marginHorizontal:mvs(20)
+    marginHorizontal:mvs(12)
   },
   headerTitle: {
     textAlign: 'center',

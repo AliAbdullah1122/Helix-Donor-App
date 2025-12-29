@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -144,7 +144,7 @@ elevation: 4,
     borderColor: colors.helixPrimary,
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -155,7 +155,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   description: {
@@ -200,9 +200,10 @@ elevation: 4,
   },
   saveButton: {
     borderRadius: mvs(25),
-    height: mvs(50),
+    height: mvs(43),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf:"center"
   },
   modalOverlay: {
     flex: 1,
@@ -340,7 +341,7 @@ elevation: 4,
     flex: 1,
     height: mvs(44),
     borderRadius: mvs(22),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: '#EF4444',
     // backgroundColor: colors.white,
     alignItems: 'center',
@@ -350,7 +351,7 @@ elevation: 4,
     flex: 1,
     height: mvs(44),
     borderRadius: mvs(22),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: colors.primary || '#3A3E90',
     // backgroundColor: colors.white,
     alignItems: 'center',
@@ -366,12 +367,13 @@ elevation: 4,
   tipItem: {
     marginBottom: mvs(8),
     lineHeight: mvs(20),
+    marginLeft:mvs(6)
   },
   saveButtonContainer: {
     paddingHorizontal: mvs(20),
     paddingBottom: mvs(40),
     paddingTop: mvs(10),
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
   },
 });
 export default styles;

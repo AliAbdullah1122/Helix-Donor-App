@@ -132,7 +132,7 @@ const OtpScreen = props => {
             style={styles.title}
           />
           {/* <View style={{borderWidth:0.7,borderColor:"#E6E8FF",width:"95%",alignSelf:'center'}}> */}
-          <View style={{ borderWidth: 1, borderColor: "#D9D9D9", width: "97%", alignSelf: 'center' }}>
+          <View style={{ borderWidth: 1, borderColor: "#D9D9D9", width: "93%", alignSelf: 'center',justifyContent:"center",alignItems:'center' ,}}>
 
           </View>
 

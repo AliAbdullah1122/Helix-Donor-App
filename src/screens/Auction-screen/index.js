@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Light from 'typography/light-text';
 
 const AuctionScreen = props => {
   const [offerValue, setOfferValue] = useState('');
@@ -46,10 +47,10 @@ const AuctionScreen = props => {
             onPress={() => navigation.goBack()}>
             <Icon name="chevron-back-outline" size={mvs(24)} color={"#8C8C8C"} />
           </TouchableOpacity>
-          <Bold
+          <Medium
             label="Item"
             fontSize={mvs(18)}
-            color={colors.black}
+            color={colors.textColor}
             style={styles.headerTitle}
           />
           <View style={{width: mvs(24)}} />
@@ -68,10 +69,10 @@ const AuctionScreen = props => {
             {/* Profile Info */}
             <View style={styles.profileInfo}>
               <Row style={{alignItems: 'center', marginBottom: mvs(6)}}>
-                <Bold
+                <Medium
                   label="Nathan, 32"
                   fontSize={mvs(18)}
-                  color={colors.black}
+                  color={colors.textColor}
                 />
                 <View style={{marginLeft: mvs(8)}}>
                   <IMG.HomeFlags width={mvs(20)} height={mvs(20)} />
@@ -99,10 +100,10 @@ const AuctionScreen = props => {
               
               {/* Offering Details */}
               <Row style={{justifyContent: 'space-between', marginTop: mvs(12), width: '100%'}}>
-                <Bold
+                <Medium
                   label="Offering"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.textColor}
                 />
                 <Regular
                   label="Sperm Vial"
@@ -175,16 +176,16 @@ const AuctionScreen = props => {
           <TextInput
             style={styles.offerInput}
             placeholder="Enter Offer"
-            placeholderTextColor={"#D9D9D9" || '#8C8C8C'}
+            placeholderTextColor={colors.placeholder || '#8C8C8C'}
             value={offerValue}
             onChangeText={setOfferValue}
             keyboardType="numeric"
           />
-          <Regular
+          <Light
             label="(Min. offer must be $860)"
             fontSize={mvs(14)}
-            color={"333333" || '#8C8C8C'}
-            style={"#333333"}
+            color={"#333333" || '#8C8C8C'}
+            // style={"#333333"}
           />
         </View>
 

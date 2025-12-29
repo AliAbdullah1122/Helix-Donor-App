@@ -160,7 +160,7 @@ const PhysicalAtttributeScreen = props => {
       {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-        <Row style={{ alignItems: "center", marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+        <Row style={{ alignItems: "center", marginHorizontal: mvs(0), marginVertical: mvs(10) }}>
 
           <IMG.Progress2
             width="100%" height={mvs(20)}
@@ -169,15 +169,15 @@ const PhysicalAtttributeScreen = props => {
 
 
         </Row>
-        <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(10) }}>
+        <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(0) }}>
           <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
         </TouchableOpacity>
-        <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20) }}>
+        <View style={{ marginHorizontal: mvs(0), marginTop: mvs(20) }}>
 
-          <Regular label={'Step 2 / 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
+          <Regular label={'Stage 2 / 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
         </View>
 
-        <View style={{ marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+        <View style={{ marginHorizontal: mvs(0), marginVertical: mvs(10) }}>
           <Medium
             label={'Tell us about yourself'}
             color={colors.textColor}
@@ -326,7 +326,7 @@ const PhysicalAtttributeScreen = props => {
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
-      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
+      <View style={{ marginHorizontal: mvs(0), marginBottom: mvs(40) }}>
         <Row>
           <PrimaryButton
             containerStyle={{
@@ -335,7 +335,7 @@ const PhysicalAtttributeScreen = props => {
               marginVertical: mvs(0),
               backgroundColor: colors.transparent,
               width: "33%",
-              borderWidth: 1,
+              borderWidth: 1.8,
               borderColor: colors.primary,
 
             }}

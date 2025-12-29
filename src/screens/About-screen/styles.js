@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -307,7 +307,7 @@ elevation: 4,
     justifyContent: 'center',
   },
   header: {
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(0),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -317,7 +317,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   section: {
@@ -336,12 +336,13 @@ elevation: 4,
     paddingHorizontal: mvs(16),
     paddingVertical: mvs(12),
     fontSize: mvs(14),
-    color: colors.textColor,
+    color: colors.inputText,
     textAlignVertical: 'top',
     marginBottom: mvs(8),
   },
   characterCount: {
     marginBottom: mvs(12),
+    textAlign:"right"
   },
   toggleRow: {
     justifyContent: 'flex-end',
@@ -357,7 +358,8 @@ elevation: 4,
     borderRadius: mvs(25),
     height: mvs(50),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf:"center"
   },
 });
 export default styles;

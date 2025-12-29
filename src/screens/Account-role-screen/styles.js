@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -144,7 +144,7 @@ elevation: 4,
     borderColor: colors.helixPrimary,
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -155,7 +155,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   description: {
@@ -164,14 +164,17 @@ elevation: 4,
   },
   section: {
     marginBottom: mvs(24),
+    paddingVertical:mvs(10)
   },
   sectionTitle: {
     marginBottom: mvs(16),
     textTransform: 'uppercase',
+    fontWeight:"600"
   },
   inputContainer: {
     backgroundColor: colors.white,
     marginBottom: mvs(12),
+    color:colors.inputText
   },
   addressInputContainer: {
     minHeight: mvs(100),
@@ -202,7 +205,8 @@ elevation: 4,
     borderRadius: mvs(25),
     height: mvs(50),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf:"center"
   },
   modalOverlay: {
     flex: 1,

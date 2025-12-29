@@ -207,7 +207,7 @@ const AccountRoleScreen = props => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="Account & Role" fontSize={mvs(18)} color={colors.textColorSecondary} />
+        <Medium label="Account & Role" fontSize={mvs(18)} color={colors.vibrantColor} />
         <View style={{width: mvs(24)}} />
       </Row>
 
@@ -243,7 +243,7 @@ const AccountRoleScreen = props => {
                       <Bold
                         label="PRIVATE ACCOUNT DETAILS"
                         fontSize={mvs(14)}
-                        color={colors.textColorSecondary}
+                        color={colors.textColor}
                         style={styles.sectionTitle}
                       />
                       <PrimaryInput
@@ -290,12 +290,14 @@ const AccountRoleScreen = props => {
                       />
                     </View>
 
+                    <View style={{ borderWidth: 1, borderColor: "#D9D9D9", width: "100%", alignSelf: 'center',justifyContent:"center",alignItems:'center' ,}}></View>
+
                     {/* MY VOICE INTRO Section */}
                     <View style={styles.section}>
                       <Bold
                         label="MY VOICE INTRO"
                         fontSize={mvs(14)}
-                        color={colors.textColorSecondary}
+                        color={colors.textColor}
                         style={styles.sectionTitle}
                       />
                     <TouchableOpacity style={styles.recordAudioRow} onPress={() => navigate('RecordAudioScreen')}>
@@ -313,7 +315,7 @@ const AccountRoleScreen = props => {
                       <Bold
                         label="MY CORE PROFILE"
                         fontSize={mvs(14)}
-                        color={colors.textColorSecondary}
+                        color={colors.textColor}
                         style={styles.sectionTitle}
                       />
                       <View style={styles.dropdownContainer}>
@@ -354,7 +356,7 @@ const AccountRoleScreen = props => {
                       <Bold
                         label="MY PAIRING PREFERENCES"
                         fontSize={mvs(14)}
-                        color={colors.black}
+                        color={colors.textColor}
                         style={styles.sectionTitle}
                       />
                       <InputWithIcon
@@ -451,7 +453,7 @@ const AccountRoleScreen = props => {
               </Formik>
       </ScrollView>
       {/* Save Changes Button */}
-      <View style={{paddingHorizontal: mvs(20), paddingBottom: mvs(40)}}>
+      <View style={{paddingHorizontal: mvs(0), paddingBottom: mvs(40)}}>
              <PrimaryButton
           containerStyle={styles.saveButton}
                             loading={loading}

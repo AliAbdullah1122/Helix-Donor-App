@@ -43,6 +43,8 @@ const MainInboxScreen = () => {
   const [recordingTime, setRecordingTime] = useState(0);
   const [recordingTimer, setRecordingTimer] = useState(null);
   const flatListRef = useRef(null);
+  const isPickerOpenRef = useRef(false);
+
 
   const connections = useMemo(
     () => [
@@ -332,113 +334,203 @@ const MainInboxScreen = () => {
     }
   };
 
-  const handleOpenCamera = async () => {
-    setShowPlusMenu(false);
-    try {
-      const image = await ImagePicker.openCamera({
-        mediaType: 'any',
-        cropping: false,
-        includeBase64: false,
-      });
+  // const handleOpenCamera = async () => {
+  //   setShowPlusMenu(false);
+  //   try {
+  //     const image = await ImagePicker.openCamera({
+  //       mediaType: 'any',
+  //       cropping: false,
+  //       includeBase64: false,
+  //     });
       
-      if (image.mime && image.mime.startsWith('video/')) {
-        // Video
-        const videoMessage = {
-          id: Date.now().toString(),
-          type: 'video',
-          uri: image.path,
-          text: 'Hope it is helpful.',
-          duration: '0:27',
-          sent: true,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-          status: 'Read',
-        };
-        setChatMessages(prev => [...prev, videoMessage]);
+  //     if (image.mime && image.mime.startsWith('video/')) {
+  //       // Video
+  //       const videoMessage = {
+  //         id: Date.now().toString(),
+  //         type: 'video',
+  //         uri: image.path,
+  //         text: 'Hope it is helpful.',
+  //         duration: '0:27',
+  //         sent: true,
+  //         time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+  //         status: 'Read',
+  //       };
+  //       setChatMessages(prev => [...prev, videoMessage]);
         
-        // Simulate receiving a video from other user after 2 seconds
-        setTimeout(() => {
-          const receivedVideoMessage = {
-            id: (Date.now() + 1).toString(),
-            type: 'video',
-            uri: image.path,
-            text: 'Hope it is helpful.',
-            duration: '0:27',
-            sent: false,
-            time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-          };
-          setChatMessages(prev => [...prev, receivedVideoMessage]);
-        }, 2000);
-    } else {
-        // Image
-        const imageMessage = {
-          id: Date.now().toString(),
-          type: 'image',
-          uri: image.path,
-          sent: true,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-          status: 'Read',
-        };
-        setChatMessages(prev => [...prev, imageMessage]);
+  //       // Simulate receiving a video from other user after 2 seconds
+  //       setTimeout(() => {
+  //         const receivedVideoMessage = {
+  //           id: (Date.now() + 1).toString(),
+  //           type: 'video',
+  //           uri: image.path,
+  //           text: 'Hope it is helpful.',
+  //           duration: '0:27',
+  //           sent: false,
+  //           time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+  //         };
+  //         setChatMessages(prev => [...prev, receivedVideoMessage]);
+  //       }, 2000);
+  //   } else {
+  //       // Image
+  //       const imageMessage = {
+  //         id: Date.now().toString(),
+  //         type: 'image',
+  //         uri: image.path,
+  //         sent: true,
+  //         time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+  //         status: 'Read',
+  //       };
+  //       setChatMessages(prev => [...prev, imageMessage]);
         
-        // Simulate receiving an image from other user after 2 seconds
-        setTimeout(() => {
-          const receivedImageMessage = {
-            id: (Date.now() + 1).toString(),
-            type: 'image',
-            uri: image.path,
-            sent: false,
-            time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-          };
-          setChatMessages(prev => [...prev, receivedImageMessage]);
-        }, 2000);
-      }
-    } catch (error) {
-      if (error.code !== 'E_PICKER_CANCELLED') {
-        console.log('Camera error:', error);
-      }
+  //       // Simulate receiving an image from other user after 2 seconds
+  //       setTimeout(() => {
+  //         const receivedImageMessage = {
+  //           id: (Date.now() + 1).toString(),
+  //           type: 'image',
+  //           uri: image.path,
+  //           sent: false,
+  //           time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+  //         };
+  //         setChatMessages(prev => [...prev, receivedImageMessage]);
+  //       }, 2000);
+  //     }
+  //   } catch (error) {
+  //     if (error.code !== 'E_PICKER_CANCELLED') {
+  //       console.log('Camera error:', error);
+  //     }
+  //   }
+  // };
+
+  // const handleOpenGallery = async () => {
+  //   setShowPlusMenu(false);
+  //   try {
+  //     const image = await ImagePicker.openPicker({
+  //       mediaType: 'any',
+  //       cropping: false,
+  //       includeBase64: false,
+  //     });
+      
+  //     if (image.mime && image.mime.startsWith('video/')) {
+  //       // Video
+  //       const videoMessage = {
+  //         id: Date.now().toString(),
+  //         type: 'video',
+  //         uri: image.path,
+  //         text: 'Hope it is helpful.',
+  //         duration: '0:27',
+  //         sent: true,
+  //         time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+  //         status: 'Read',
+  //       };
+  //       setChatMessages(prev => [...prev, videoMessage]);
+  //     } else {
+  //       // Image
+  //       const imageMessage = {
+  //         id: Date.now().toString(),
+  //         type: 'image',
+  //         uri: image.path,
+  //         sent: true,
+  //         time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+  //         status: 'Read',
+  //       };
+  //       setChatMessages(prev => [...prev, imageMessage]);
+  //     }
+  //   } catch (error) {
+  //     if (error.code !== 'E_PICKER_CANCELLED') {
+  //       console.log('Gallery error:', error);
+  //     }
+  //   }
+  // };
+
+const handleOpenCamera = async () => {
+  if (isPickerOpenRef.current) return;
+
+  isPickerOpenRef.current = true;
+  setShowPlusMenu(false);
+
+  try {
+    const image = await ImagePicker.openCamera({
+      mediaType: 'any',
+      cropping: false,
+    });
+
+    if (!image) return;
+
+    setChatMessages(prev => [
+      ...prev,
+      {
+        id: Date.now().toString(),
+        type: image.mime?.startsWith('video/') ? 'video' : 'image',
+        uri: image.path,
+        sent: true,
+        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+        status: 'Read',
+      },
+    ]);
+  } catch (error) {
+    if (error?.code !== 'E_PICKER_CANCELLED') {
+      console.log('Camera error:', error);
     }
-  };
+  } finally {
+    setTimeout(() => {
+      isPickerOpenRef.current = false;
+    }, 500);
+  }
+};
+
 
   const handleOpenGallery = async () => {
-    setShowPlusMenu(false);
-    try {
-      const image = await ImagePicker.openPicker({
-        mediaType: 'any',
-        cropping: false,
-        includeBase64: false,
-      });
-      
-      if (image.mime && image.mime.startsWith('video/')) {
-        // Video
-        const videoMessage = {
+  if (isPickerOpenRef.current) return;
+
+  isPickerOpenRef.current = true;
+  setShowPlusMenu(false);
+
+  try {
+    const image = await ImagePicker.openPicker({
+      mediaType: 'any',
+      cropping: false,
+      includeBase64: false,
+    });
+
+    if (!image) return;
+
+    if (image.mime?.startsWith('video/')) {
+      setChatMessages(prev => [
+        ...prev,
+        {
           id: Date.now().toString(),
           type: 'video',
           uri: image.path,
-          text: 'Hope it is helpful.',
-          duration: '0:27',
           sent: true,
           time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
           status: 'Read',
-        };
-        setChatMessages(prev => [...prev, videoMessage]);
-      } else {
-        // Image
-        const imageMessage = {
+        },
+      ]);
+    } else {
+      setChatMessages(prev => [
+        ...prev,
+        {
           id: Date.now().toString(),
           type: 'image',
           uri: image.path,
           sent: true,
           time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
           status: 'Read',
-        };
-        setChatMessages(prev => [...prev, imageMessage]);
-      }
-    } catch (error) {
-      if (error.code !== 'E_PICKER_CANCELLED') {
-        console.log('Gallery error:', error);
-      }
+        },
+      ]);
     }
-  };
+  } catch (error) {
+    // DO NOTHING on cancel
+    if (error?.code !== 'E_PICKER_CANCELLED') {
+      console.log('Gallery error:', error);
+    }
+  } finally {
+    // IMPORTANT: delay unlock
+    setTimeout(() => {
+      isPickerOpenRef.current = false;
+    }, 500);
+  }
+};
 
   const handleOpenFiles = async () => {
     setShowPlusMenu(false);
@@ -636,7 +728,7 @@ const MainInboxScreen = () => {
                   <Regular
                 label={item.time}
                     numberOfLines={10}
-                fontSize={mvs(11)}
+                fontSize={mvs(12)}
                 color={isSent ? '#8C8C8C' : '#8C8C8C'}
               />
               {isSent && (
@@ -1000,13 +1092,13 @@ const MainInboxScreen = () => {
               {/* Header */}
               <View style={styles.chatHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <Icon name="chevron-back" size={mvs(24)} color={colors.black} />
+                  <Icon name="chevron-back" size={mvs(24)} color={colors.textColor} />
                 </TouchableOpacity>
                 <View style={styles.chatHeaderProfile}>
                   <View style={styles.chatHeaderAvatar}>
                     <IMG.InboxAvatar width={mvs(40)} height={mvs(40)} />
           </View>
-                  <Medium label="Liam Carter" fontSize={mvs(16)} color={colors.black} />
+                  <Medium label="Liam Carter" fontSize={mvs(14)} color={colors.textColor} />
         </View>
                 <Row style={styles.chatHeaderActions}>
                   <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVideoCall}>
@@ -1025,10 +1117,10 @@ const MainInboxScreen = () => {
                     <IMG.InboxAvatar width={mvs(150)} height={mvs(150)} />
                   </View>
                 </View>
-                <Bold
+                <Medium
                   label="You matched with Liam"
-                  fontSize={mvs(18)}
-                  color={colors.black}
+                  fontSize={mvs(16)}
+                  color={colors.textColor}
                   style={styles.newMatchTitle}
                   />
                   <Regular
@@ -1131,6 +1223,7 @@ const MainInboxScreen = () => {
                   <Row style={styles.plusMenuRow}>
                     <TouchableOpacity
                       style={styles.plusMenuOption}
+                       disabled={isPickerOpenRef.current}
                       onPress={handleOpenGallery}>
                       <View style={styles.plusMenuIconContainer}>
                         <IMG.InboxGallery width={mvs(50)} height={mvs(50)} />
@@ -1876,7 +1969,7 @@ const styles = StyleSheet.create({
     borderColor:"#F5F5F9",
     paddingVertical: mvs(8),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
     maxHeight: mvs(100),
     marginHorizontal: mvs(4),
   },

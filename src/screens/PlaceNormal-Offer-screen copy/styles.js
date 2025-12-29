@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(16),
     paddingVertical: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   messageSection: {
     marginBottom: mvs(20),

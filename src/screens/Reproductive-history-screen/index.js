@@ -28,6 +28,7 @@ import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ExactToggle from 'components/atoms/toggle';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Light from 'typography/light-text';
 
 const ReproductiveHistoryScreen = props => {
   const [loading, setLoading] = React.useState(false);
@@ -130,12 +131,12 @@ const ReproductiveHistoryScreen = props => {
         <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(10) }}>
           <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
         </TouchableOpacity>
-        <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20) }}>
+        <View style={{ marginHorizontal: mvs(12), marginTop: mvs(20) }}>
 
           <Regular label={'Stage 3 of 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
         </View>
 
-        <View style={{ marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+        <View style={{ marginHorizontal: mvs(12), marginVertical: mvs(10) }}>
           <Medium
             label={'Personal Health History'}
             color={colors.textColor}
@@ -203,7 +204,7 @@ const ReproductiveHistoryScreen = props => {
                 }) => (
                   <>
                     {/* Chronic Conditions Section */}
-                    <Medium
+                    <Regular
                       label="Have you ever been diagnosed by a doctor with any of the following chronic conditions?"
                       fontSize={mvs(14)}
                       color={colors.textColor}
@@ -237,14 +238,20 @@ const ReproductiveHistoryScreen = props => {
                             <Icon
                               name="checkmark"
                               size={mvs(14)}
-                              color={colors.white}
+                              color={colors.primary}
+                              style={{alignSelf:'center',justifyContent:'center',alignItems:"center"}}
                             />
                           )}
                         </TouchableOpacity>
                         <Regular
                           label={condition.label}
                           fontSize={mvs(14)}
-                          color={colors.textColor}
+                          // color={colors.textColorSecondary}
+                          color={
+    chronicConditions[condition.key]
+      ? colors.textColor       // 👈 selected color
+      : colors.textColorSecondary
+  }
                           numberOfLines={10}
                           style={{ flex: 1, marginLeft: mvs(12) }}
                         />
@@ -262,19 +269,20 @@ const ReproductiveHistoryScreen = props => {
                           style={styles.largeTextInput}
                           placeholderTextColor={colors.placeholder}
                           textAlignVertical="top"
+                          
                         />
                       </View>
                     )}
 
                     {/* Major Surgeries */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Have you had any major surgeries?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12) }}>
+                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12),marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -313,14 +321,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Allergies */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Do you have any known allergies (medications, food, environmental)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start' }}>
+                      <Row style={{ justifyContent: 'flex-start',marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -348,14 +356,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* CMV Status */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="What is your CMV Status?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+                      <Row style={{ justifyContent: 'flex-start', flexWrap: 'wrap' ,marginLeft:mvs(10)}}>
                         {['Positive', 'Negative', 'Not Sure'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -383,14 +391,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Prescription Medications */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Are you currently taking any prescription medications?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         style={{ marginBottom: mvs(12) }}
                         numberOfLines={10}
                       />
-                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12) }}>
+                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12),marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -430,14 +438,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Mental Health */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Have you ever been diagnosed with or received treatment for a significant mental health condition (e.g., depression, anxiety disorder, bipolar disorder, schizophrenia)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12) }}>
+                      <Row style={{ justifyContent: 'flex-start', marginBottom: mvs(12),marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -467,8 +475,8 @@ const ReproductiveHistoryScreen = props => {
                           value={mentalHealthText}
                           onChangeText={setMentalHealthText}
                           multiline={true}
-                          numberOfLines={10}
-                          style={styles.largeTextInput}
+                          numberOfLines={4}
+                       style={styles.largeTextInput}
                           placeholderTextColor={colors.placeholder}
                           textAlignVertical="top"
                         />
@@ -477,14 +485,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Fathered Children */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Have you fathered any children (biologically)?"
                         fontSize={mvs(14)}
                         numberOfLines={10}
                         color={colors.textColor}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start' }}>
+                      <Row style={{ justifyContent: 'flex-start' ,marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -512,14 +520,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Reproductive Health Issues */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Have you ever been diagnosed with any reproductive health issues (e.g., low sperm count, varicocele)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start' }}>
+                      <Row style={{ justifyContent: 'flex-start' ,marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -547,14 +555,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Menstrual Cycles */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Are your menstrual cycles regular?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start' }}>
+                      <Row style={{ justifyContent: 'flex-start',marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -582,14 +590,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Pregnancy/Birth */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Have you ever been pregnant or given birth?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{ marginBottom: mvs(12) }}
                       />
-                      <Row style={{ justifyContent: 'flex-start' }}>
+                      <Row style={{ justifyContent: 'flex-start',marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -617,14 +625,14 @@ const ReproductiveHistoryScreen = props => {
 
                     {/* Reproductive Conditions */}
                     <View style={{ marginTop: mvs(24) }}>
-                      <Medium
+                      <Regular
                         label="Have you ever been diagnosed with any reproductive health conditions (e.g., PCOS, endometriosis, fibroids)?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         style={{ marginBottom: mvs(12) }}
                         numberOfLines={10}
                       />
-                      <Row style={{ justifyContent: 'flex-start' }}>
+                      <Row style={{ justifyContent: 'flex-start',marginLeft:mvs(10) }}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -671,7 +679,7 @@ const ReproductiveHistoryScreen = props => {
 
 
 
-      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
+      <View style={{ marginHorizontal: mvs(12), marginBottom: mvs(40) }}>
         <Row>
           <PrimaryButton
             containerStyle={{
@@ -680,7 +688,7 @@ const ReproductiveHistoryScreen = props => {
               marginVertical: mvs(0),
               backgroundColor: colors.transparent,
               width: "33%",
-              borderWidth: 1,
+              borderWidth: 1.8,
               borderColor: colors.primary,
 
             }}
@@ -710,12 +718,12 @@ const ReproductiveHistoryScreen = props => {
         visible={privacyModalVisible}
         onBackdropPress={() => setPrivacyModalVisible(false)}
         onBackButtonPress={() => setPrivacyModalVisible(false)}
-        style={{ paddingHorizontal: mvs(20) }}>
+        style={{ paddingHorizontal: mvs(20) ,borderRadius:mvs(24)}}>
         <View
           style={{
-            paddingHorizontal: mvs(24),
+            // paddingHorizontal: mvs(24),
             paddingVertical: mvs(24),
-            borderRadius: mvs(20),
+            borderRadius: mvs(24),
             backgroundColor: colors.white,
             width: '95%',
           }}>
@@ -725,7 +733,7 @@ const ReproductiveHistoryScreen = props => {
             color={colors.textColor}
             style={{ textAlign: 'center', marginBottom: mvs(12) }}
           />
-          <Regular
+          <Light
             label={
               'All your medical information will always be kept private to you, and wont be publicly visible.'
             }

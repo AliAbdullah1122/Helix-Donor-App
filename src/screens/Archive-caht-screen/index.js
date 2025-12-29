@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
+import Light from 'typography/light-text';
 
 const ArchiveChatScreen = () => {
   const navigation = useNavigation();
@@ -90,17 +91,17 @@ const ArchiveChatScreen = () => {
             </View>
             <View style={styles.archivedChatContent}>
               <Row style={styles.archivedChatHeaderRow}>
-                <Medium label={item.name} fontSize={mvs(15)} color={colors.black} />
+                <Medium label={item.name} fontSize={mvs(14)} color={colors.textColor} />
                 <Regular
                   label={item.time}
-                  fontSize={mvs(11)}
-                  color="#8C8C8C"
+                  fontSize={mvs(12)}
+                  color={colors.textColor}
                   style={styles.archivedChatTime}
                 />
               </Row>
               <Regular
                 label={item.preview}
-                fontSize={mvs(13)}
+                fontSize={mvs(14)}
                 color="#8C8C8C"
                 numberOfLines={1}
                 style={styles.archivedChatPreview}
@@ -210,13 +211,13 @@ const ArchiveChatScreen = () => {
       {isEmpty ? (
         // Empty State (Image 1)
         <View style={styles.emptyStateContainer}>
-          <Bold
+          <Medium
             label="Your Archive is Empty"
-            fontSize={mvs(18)}
+            fontSize={mvs(16)}
             color={colors.textColor}
             style={styles.emptyStateTitle}
           />
-          <Regular
+          <Light
             label="To archive a chat, swipe left on a conversation in your main inbox."
             fontSize={mvs(14)}
             color="#8C8C8C"

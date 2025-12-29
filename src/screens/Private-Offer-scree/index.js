@@ -47,10 +47,10 @@ const PrivateOfferScreen = props => {
             onPress={() => navigation.goBack()}>
             <Icon name="chevron-back-outline" size={mvs(24)} color={"#8C8C8C"} />
           </TouchableOpacity>
-          <Bold
+          <Medium
             label="Donor Benefit"
             fontSize={mvs(18)}
-            color={colors.black}
+            color={colors.textColor}
             style={styles.headerTitle}
           />
           <View style={{width: mvs(24)}} />
@@ -69,10 +69,10 @@ const PrivateOfferScreen = props => {
             {/* Profile Info */}
             <View style={styles.profileInfo}>
               <Row style={{alignItems: 'center', marginBottom: mvs(6)}}>
-                <Bold
+                <Medium
                   label="Nathan, 32"
                   fontSize={mvs(18)}
-                  color={colors.black}
+                  color={colors.textColor}
                 />
                 <View style={{marginLeft: mvs(8)}}>
                   <IMG.HomeFlags width={mvs(20)} height={mvs(20)} />
@@ -100,10 +100,10 @@ const PrivateOfferScreen = props => {
               
               {/* Offering Details */}
               <Row style={{justifyContent: 'space-between', marginTop: mvs(12), width: '100%'}}>
-                <Bold
+                <Medium
                   label="Offering"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.textColor}
                 />
                 <Regular
                   label="Sperm Vial"

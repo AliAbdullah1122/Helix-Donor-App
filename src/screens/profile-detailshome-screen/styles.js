@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
   },
   body: {
     flex: 1,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     height: mvs(25),
   },
   giftcard: {
-    backgroundColor: colors.primary,
+    // backgroundColor: colors.primary,
     alignItems: 'center',
     marginVertical: mvs(20),
     borderRadius: mvs(10),

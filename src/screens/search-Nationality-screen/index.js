@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,32 +7,37 @@ import {
   StatusBar,
   Dimensions,
   TextInput,
+  SafeAreaView,
+  Platform,
 } from 'react-native';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import * as IMG from 'assets/images';
-import {Row} from 'components/atoms/row';
+import { Row } from 'components/atoms/row';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {navigate, goBack} from 'navigation/navigation-ref';
+import { navigate, goBack } from 'navigation/navigation-ref';
+import fonts from 'assets/fonts';
 
-const {width: SCREEN_WIDTH} = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const SearchNationlaityScreen = () => {
   const [searchText, setSearchText] = useState('');
-  const [selectedOccupations, setSelectedOccupations] = useState(['Doctor']);
+  const [selectedOccupations, setSelectedOccupations] = useState(['African']);
 
   // All occupations list
   const allOccupations = useMemo(
     () => [
-      'Doctor',
-      'Teacher',
-      'Athlete',
-      'Engineer',
-      'Scientist',
-    
+      'Antiguan',
+      'Arabian',
+      'Argentinean',
+      'Armenian',
+
+      '....',
+      '....',
+
     ],
     [],
   );
@@ -67,8 +72,8 @@ const SearchNationlaityScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
-
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       {/* Header */}
       <Row style={styles.headerRow}>
         <TouchableOpacity onPress={() => goBack()}>
@@ -83,11 +88,11 @@ const SearchNationlaityScreen = () => {
       {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+          <IMG.SearchNew width={mvs(18)} height={mvs(18)} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search for an occupation"
-            placeholderTextColor="#8C8C8C"
+            placeholder="Search"
+            placeholderTextColor={colors.placeholder}
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -99,24 +104,26 @@ const SearchNationlaityScreen = () => {
 
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={{paddingBottom: mvs(100)}}>
+        contentContainerStyle={{ paddingBottom: mvs(100) }}>
         {/* Selected Section */}
         {selectedOccupations.length > 0 && (
           <>
-              <Medium
+            <Bold
               label="Selected"
-                fontSize={mvs(14)}
-              color={colors.black}
+              fontSize={mvs(14)}
+              color={colors.textColor}
               style={styles.sectionTitle}
-              />
-              <View style={styles.chipRow}>
+            />
+            <View style={styles.chipRow}>
               {selectedOccupations.map(occupation => (
                 <SelectedChip
                   key={occupation}
                   label={occupation}
                   onRemove={() => toggleOccupation(occupation)}
-                  />
-                ))}
+                  color={colors.textColor}
+                  style={{ fontWeight: mvs('400') }}
+                />
+              ))}
             </View>
             <View style={styles.divider} />
           </>
@@ -129,7 +136,7 @@ const SearchNationlaityScreen = () => {
               key={occupation}
               style={styles.occupationItem}
               onPress={() => toggleOccupation(occupation)}>
-                  <Regular
+              <Regular
                 label={occupation}
                 fontSize={mvs(14)}
                 color={colors.black}
@@ -137,7 +144,7 @@ const SearchNationlaityScreen = () => {
               {selectedOccupations.includes(occupation) && (
                 <Icon name="checkmark" size={mvs(20)} color={colors.primary} />
               )}
-                </TouchableOpacity>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
@@ -159,15 +166,16 @@ const SearchNationlaityScreen = () => {
   );
 };
 
-const SelectedChip = ({label, onRemove}) => {
+const SelectedChip = ({ label, onRemove }) => {
   return (
     <TouchableOpacity style={styles.selectedChip} onPress={onRemove}>
       <Regular
         label={label}
-        fontSize={mvs(13)}
+        fontSize={mvs(12)}
         color={colors.white}
+        style={{ fontWeight: "400" }}
       />
-      <Icon name="close" size={mvs(14)} color={colors.white} style={{marginLeft: mvs(6)}} />
+      <Icon name="close" size={mvs(14)} color={colors.white} style={{ marginLeft: mvs(5) }} />
     </TouchableOpacity>
   );
 };
@@ -190,31 +198,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(20),
     paddingVertical: mvs(12),
   },
-  searchInputContainer: {
+ searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.white,
     borderRadius: mvs(40),
     paddingHorizontal: mvs(16),
-    paddingVertical: mvs(4),
+    height: mvs(46),
+    // paddingVertical: mvs(4),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
   },
   searchInput: {
     flex: 1,
-    marginLeft: mvs(12),
+    marginLeft: mvs(10),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.placeholder,
+    fontWeight: "400",
+    fontFamily: fonts.regular
   },
   divider: {
     height: mvs(1.5),
-    backgroundColor: '#E5E5E5',
+    // backgroundColor: '#E5E5E5',
+    backgroundColor: colors.placeholder,
     // marginHorizontal: mvs(20),
     marginVertical: mvs(12),
-    width:"100%"
+    width: "100%"
   },
   scroll: {
     flex: 1,
@@ -222,6 +234,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     marginBottom: mvs(12),
+        fontWeight: "600"
+
   },
   chipRow: {
     flexDirection: 'row',
@@ -232,20 +246,22 @@ const styles = StyleSheet.create({
   },
   selectedChip: {
     flexDirection: 'row',
+    minHeight: mvs(30),
     alignItems: 'center',
-    paddingHorizontal: mvs(14),
+    paddingHorizontal: mvs(10),
+    justifyContent: "center",
     paddingVertical: mvs(6),
     borderRadius: mvs(20),
     backgroundColor: colors.primary,
   },
   occupationList: {
-    marginTop: mvs(8),
+    // marginTop: mvs(8),
   },
   occupationItem: {
-     flexDirection: 'row',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: mvs(14),
+    paddingVertical: mvs(10),
   },
   bottomButtonsRow: {
     position: 'absolute',
@@ -255,6 +271,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(16),
     justifyContent: 'space-between',
     alignItems: 'center',
+        paddingBottom: mvs(20),
     columnGap: mvs(12),
   },
   clearButton: {

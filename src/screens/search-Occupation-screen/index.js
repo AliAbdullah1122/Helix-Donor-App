@@ -92,7 +92,7 @@ const SearchOccupationScreen = () => {
           <TextInput
             style={styles.searchInput}
             placeholder="Search"
-            placeholderTextColor="#8C8C8C"
+            placeholderTextColor="#D9D9D9"
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   divider: {
     height: mvs(1.5),

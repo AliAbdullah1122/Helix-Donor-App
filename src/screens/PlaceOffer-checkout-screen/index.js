@@ -92,12 +92,12 @@ const PlaceofferCheckoutScreen = props => {
           </Row>
           <View style={styles.separator} />
           <Row style={styles.orderRow}>
-            <Bold
+            <Regular
               label="Total"
               fontSize={mvs(14)}
               color={colors.textColor}
             />
-            <Bold
+            <Regular
               label="$29.99 / week"
               fontSize={mvs(14)}
               color={colors.textColor}
@@ -107,7 +107,7 @@ const PlaceofferCheckoutScreen = props => {
 
         {/* PAYMENT METHOD Section */}
         <View style={styles.paymentMethodSection}>
-          <Bold
+          <Regular
             label="PAYMENT METHOD"
             fontSize={mvs(14)}
             color={colors.primary}

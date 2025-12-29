@@ -120,7 +120,7 @@ const navigation = useNavigation();
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+               <Row style={{alignItems:"center",marginHorizontal:mvs(12),marginVertical:mvs(10)}}>
 
         <IMG.Progress3
           width="100%" height={mvs(20)}
@@ -132,12 +132,12 @@ const navigation = useNavigation();
         <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
         <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{marginHorizontal:mvs(12),marginTop:mvs(20)}}>
 
          <Regular label={'Stage 3 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
        
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <View style={{marginHorizontal:mvs(12),marginVertical:mvs(10)}}>
         <Medium
           label={'Lifestyle & Travel History'}
           color={colors.textColor}
@@ -177,15 +177,15 @@ const navigation = useNavigation();
                 }) => (
                   <>
                     {/* HIV, Hepatitis B, or Hepatitis C */}
-                    <View style={{marginTop: mvs(24)}}>
-                      <Medium
+                    <View style={{marginTop: mvs(14)}}>
+                      <Regular
                         label="Have you ever tested positive for HIV, Hepatitis B, or Hepatitis C?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{marginBottom: mvs(12)}}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{justifyContent: 'flex-start',marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -212,15 +212,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Needle Drug Use */}
-                    <View style={{marginTop: mvs(24)}}>
-                      <Medium
+                    <View style={{marginTop: mvs(14)}}>
+                      <Regular
                         label="Have you ever used a needle to take a drug, steroid, or anything not prescribed by a doctor?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{marginBottom: mvs(12)}}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{justifyContent: 'flex-start',marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -247,15 +247,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Blood Transfusion or Organ Transplant */}
-                    <View style={{marginTop: mvs(24)}}>
-                      <Medium
+                    <View style={{marginTop: mvs(14)}}>
+                      <Regular
                         label="Have you ever received a blood transfusion or organ transplant?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{marginBottom: mvs(12)}}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{justifyContent: 'flex-start',marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -282,15 +282,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Malaria Travel */}
-                    <View style={{marginTop: mvs(24)}}>
-                      <Medium
+                    <View style={{marginTop: mvs(14)}}>
+                      <Regular
                         label="In the last 3 years, have you traveled to an area with a known risk for malaria?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{marginBottom: mvs(12)}}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{justifyContent: 'flex-start',marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -317,15 +317,15 @@ const navigation = useNavigation();
                     </View>
 
                     {/* Zika Travel */}
-                    <View style={{marginTop: mvs(24)}}>
-                      <Medium
+                    <View style={{marginTop: mvs(14)}}>
+                      <Regular
                         label="In the last 6 months, have you traveled to or resided in an area with a known risk for Zika virus transmission?"
                         fontSize={mvs(14)}
                         color={colors.textColor}
                         numberOfLines={10}
                         style={{marginBottom: mvs(12)}}
                       />
-                      <Row style={{justifyContent: 'flex-start'}}>
+                      <Row style={{justifyContent: 'flex-start',marginLeft:mvs(10)}}>
                         {['Yes', 'No'].map((option) => (
                           <TouchableOpacity
                             key={option}
@@ -385,7 +385,7 @@ const navigation = useNavigation();
 
      
 
-      <View style={{marginHorizontal: mvs(20), marginBottom: mvs(40)}}>
+      <View style={{marginHorizontal: mvs(12), marginBottom: mvs(40)}}>
         <Row>
        <PrimaryButton
                       containerStyle={{
@@ -394,7 +394,7 @@ const navigation = useNavigation();
                         marginVertical: mvs(0),
                         backgroundColor:colors.transparent,
                         width:"33%",
-                        borderWidth:1,
+                        borderWidth:1.8,
                         borderColor:colors.primary,
 
                       }}

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -144,7 +144,7 @@ elevation: 4,
     borderColor: colors.helixPrimary,
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -155,7 +155,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   description: {
@@ -166,7 +166,7 @@ elevation: 4,
     marginBottom: mvs(24),
   },
   sectionTitle: {
-    marginBottom: mvs(16),
+    marginBottom: mvs(6),
     textTransform: 'uppercase',
   },
   inputContainer: {
@@ -379,7 +379,7 @@ elevation: 4,
     lineHeight: mvs(20),
   },
   sectionSubtitle: {
-    marginBottom: mvs(16),
+    marginBottom: mvs(8),
   },
   photoGallery: {
     flexDirection: 'row',

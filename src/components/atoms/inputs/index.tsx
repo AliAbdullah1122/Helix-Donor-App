@@ -1120,7 +1120,7 @@ textInput: {
     alignSelf: 'flex-start',
     color: "#8C8C8C",
     fontSize:mvs(14),
-    marginBottom: mvs(3),
+    marginBottom: mvs(6),
     paddingHorizontal: mvs(5),
   },
   PasswordIcon: {

@@ -403,11 +403,12 @@ const renderMarker = marker => (
   </MapView>
    <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+          {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
+          <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
           <TextInput
             style={styles.searchInput}
             placeholder="Search by Ancestry, etc."
-            placeholderTextColor="#8C8C8C"
+            placeholderTextColor={colors.placeholder}
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -432,10 +433,10 @@ const renderMarker = marker => (
           {/* Members Nearby Section */}
           <View style={styles.membersSection}>
             <View style={styles.membersHandle} />
-            <Bold
+            <Medium
               label="Members in this area"
-              fontSize={mvs(18)}
-              color="#333333"
+              fontSize={mvs(16)}
+              color={colors.textColor}
               style={styles.membersTitle}
             />
             <FlatList
@@ -528,7 +529,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   searchDivider: {
     width: 1,

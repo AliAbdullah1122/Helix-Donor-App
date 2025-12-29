@@ -12,7 +12,7 @@ const formatHeight = (inches) => {
   return `${feet}'${remainingInches}"`;
 };
 
-const HeightRangeSlider = ({ min = 60, max = 78, low: propLow, high: propHigh, onChange }) => {
+const HeightRangeSlider = ({ min = 60, max = 78, low: propLow, high: propHigh, onChange ,color}) => {
   // Default values: 5'0" (60 inches) to 5'6" (66 inches) as initial range
   const initialSpacing = 6; // 6 inches spacing initially
   const defaultLow = propLow || min; // 5'0"
@@ -25,10 +25,10 @@ const HeightRangeSlider = ({ min = 60, max = 78, low: propLow, high: propHigh, o
   const highPos = useRef(new Animated.Value(0)).current;
   const sliderRef = useRef(null);
 
-  const Thumb = () => <View style={styles.thumb} />;
+  const Thumb = () => <View style={[styles.thumb, {backgroundColor:color}]} />;
   const Rail = () => <View style={styles.rail} />;
-  const RailSelected = () => <View style={styles.railSelected} />;
-
+  const RailSelected = () => <View style={[styles.railSelected, {backgroundColor:color}]} />;
+console.log(color);
   const renderThumb = useCallback(() => <Thumb />, []);
   const renderRail = useCallback(() => <Rail />, []);
   const renderRailSelected = useCallback(() => <RailSelected />, []);
@@ -104,7 +104,7 @@ const HeightRangeSlider = ({ min = 60, max = 78, low: propLow, high: propHigh, o
           ]}
         >
           <View style={styles.labelBubble}>
-            <Text style={styles.labelText}>{formatHeight(low)}</Text>
+            <Text style={[styles.labelText,{color:color}]}>{formatHeight(low)}</Text>
           </View>
         </Animated.View>
         
@@ -118,7 +118,7 @@ const HeightRangeSlider = ({ min = 60, max = 78, low: propLow, high: propHigh, o
           ]}
         >
           <View style={styles.labelBubble}>
-            <Text style={styles.labelText}>{formatHeight(high)}</Text>
+            <Text style={[styles.labelText,{color:color}]}>{formatHeight(high)}</Text>
           </View>
         </Animated.View>
       </View>

@@ -8,6 +8,7 @@ import {
   View,
   ScrollView,
   StatusBar,
+  Platform,
 } from 'react-native';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
@@ -17,6 +18,7 @@ import {colors} from 'config/colors';
 import {Row} from 'components/atoms/row';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RecordAudioScreen = props => {
     const navigation = useNavigation();
@@ -62,14 +64,16 @@ const RecordAudioScreen = props => {
 
   return (
     <View style={styles.container}>
+ <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
+      
       
       {/* Header */}
       <Row style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="Record Audio" fontSize={mvs(18)} color={colors.textColorSecondary} />
+        <Medium label="Record Audio" fontSize={mvs(18)} color={colors.textColor} />
         <View style={{width: mvs(24)}} />
       </Row>
 
@@ -79,10 +83,10 @@ const RecordAudioScreen = props => {
         showsVerticalScrollIndicator={false}>
         
         {/* Instructions */}
-        <Bold
+        <Medium
           label="Record a short intro"
           fontSize={mvs(18)}
-          color={colors.textColorSecondary}
+          color={colors.textColor}
           style={styles.introTitle}
         />
         <Regular
@@ -111,8 +115,8 @@ const RecordAudioScreen = props => {
                     </View>
             <Regular
               label="Tap to Record"
-              fontSize={mvs(16)}
-              color={colors.textColorSecondary}
+              fontSize={mvs(14)}
+              color={colors.textColor}
               style={styles.tapToRecordText}
             />
           </TouchableOpacity>
@@ -181,10 +185,10 @@ const RecordAudioScreen = props => {
 
         {/* PRO TIPS Section */}
         <View style={styles.proTipsSection}>
-          <Bold
+          <Medium
             label="PRO TIPS:"
             fontSize={mvs(14)}
-            color={colors.textColorSecondary}
+            color={colors.textColor}
             style={styles.proTipsTitle}
           />
           <Regular

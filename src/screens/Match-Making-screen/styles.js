@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   
   },
   connectedTextContainer: {
-    marginTop: mvs(24),
+    marginTop: mvs(44),
     alignItems: 'center',
   },
   messagingText: {

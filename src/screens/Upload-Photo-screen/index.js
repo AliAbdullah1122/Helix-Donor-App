@@ -53,7 +53,7 @@ const UploadPhotoScreen = props => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="My Photos" fontSize={mvs(18)} color={colors.textColor} />
+        <Medium label="My Photos" fontSize={mvs(18)} color={colors.textColor} />
         <View style={{width: mvs(24)}} />
       </Row>
 
@@ -73,10 +73,10 @@ const UploadPhotoScreen = props => {
 
         {/* CURRENT PHOTOS Section */}
         <View style={styles.section}>
-          <Bold
+          <Medium
             label="CURRENT PHOTOS"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={"#333333"}
             style={styles.sectionTitle}
           />
           <Regular

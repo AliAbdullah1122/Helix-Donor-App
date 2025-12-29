@@ -93,7 +93,7 @@ const DriverRegistrationPart1Screen = props => {
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+               <Row style={{alignItems:"center",marginVertical:mvs(10)}}>
 
         <IMG.Progress1
           width="100%" height={mvs(20)}
@@ -106,24 +106,24 @@ const DriverRegistrationPart1Screen = props => {
 
          <Regular label={'Step 1 / 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View> */}
-          <View style={{paddingHorizontal:mvs(10)}}>
+          <View style={{paddingHorizontal:mvs(0)}}>
                  <Medium  color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
                  </View>
-                 <View style={{marginHorizontal:mvs(20),marginTop:mvs(15)}}>
+                 <View style={{marginHorizontal:mvs(0),marginTop:mvs(15)}}>
                   <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
                  </View>
        
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <View style={{marginHorizontal:mvs(0),marginVertical:mvs(10)}}>
         <Medium
           label={'Lets start with the basis'}
           color={colors.textColor}
           fontSize={mvs(18)}
         />
         <Regular
-          label={'Please give us the information that appears on your gpvernment-issued ID.'}
-          color={"8C8C8C"}
+          label={'Please give us the information that appears on your government-issued ID.'}
+          color={"#8C8C8C"}
           numberOfLines={10}
-          fontSize={mvs(12)}
+          fontSize={mvs(14)}
           style={{marginTop:mvs(8)}}
         />
         </View>
@@ -196,7 +196,7 @@ const DriverRegistrationPart1Screen = props => {
           </KeyboardAvoidScrollview>
         </View>
       </ScrollView>
-      <View style={{marginHorizontal:mvs(20), marginBottom: mvs(40)}}>
+      <View style={{marginHorizontal:mvs(0), marginBottom: mvs(40)}}>
        <PrimaryButton
                       containerStyle={{
                         borderRadius: mvs(50),

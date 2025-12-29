@@ -295,7 +295,7 @@ elevation: 4,
     justifyContent: 'center',
   },
   header: {
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',

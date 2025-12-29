@@ -172,10 +172,10 @@ const getBadgeIcon = (badge) => {
             <Row style={styles.profileHeader}>
               <View style={styles.profileHeaderLeft}>
                 <Row style={styles.nameRow}>
-                  <Bold
+                  <Medium
                     label={`${item.name}, ${item.age}`}
                     fontSize={mvs(18)}
-                    color={colors.black}
+                    color={colors.textColor}
                   />
                   <IMG.HomeFlags width={mvs(20)} height={mvs(14)} style={{marginLeft: mvs(6)}} />
                 </Row>
@@ -192,28 +192,28 @@ const getBadgeIcon = (badge) => {
             {/* Eye / Hair color row */}
             <Row style={styles.attributesContainer}>
               <View style={styles.attributeBlock}>
-                <Medium
+                <Bold
                   label="Eye Color"
-                  fontSize={mvs(13)}
-                  color={colors.black}
+                  fontSize={mvs(14)}
+                  color={colors.textColor}
                 />
                 <Regular
                   label={item.eyeColor}
-                  fontSize={mvs(12)}
-                  color="#4F4F4F"
+                  fontSize={mvs(14)}
+                  color={colors.textColorSecondary}
                   style={{marginTop: mvs(2)}}
                 />
               </View>
               <View style={styles.attributeBlock}>
-                <Medium
+                <Bold
                   label="Hair Color"
-                  fontSize={mvs(13)}
-                  color={colors.black}
+                  fontSize={mvs(14)}
+                  color={colors.textColor}
                 />
                 <Regular
                   label={item.hairColor}
-                  fontSize={mvs(12)}
-                  color="#4F4F4F"
+                  fontSize={mvs(14)}
+                 color={colors.textColorSecondary}
                   style={{marginTop: mvs(2)}}
                 />
               </View>
@@ -222,25 +222,25 @@ const getBadgeIcon = (badge) => {
             {/* Height / Weight / Blood type row */}
             <Row style={styles.physicalRow}>
               <View style={styles.metricItem}>
-                <Regular label={item.height} fontSize={mvs(12)} color={colors.black} />
+                <Regular label={item.height} fontSize={mvs(14)} color={colors.textColorSecondary} />
               </View>
               <View style={styles.metricDivider} />
               <View style={styles.metricItem}>
-                <Regular label={item.weight} fontSize={mvs(12)} color={colors.black} />
+                <Regular label={item.weight} fontSize={mvs(14)} color={colors.textColorSecondary} />
               </View>
               <View style={styles.metricDivider} />
               <View style={styles.metricItem}>
-                <Regular label={item.bloodType} fontSize={mvs(12)} color={colors.black} />
+                <Regular label={item.bloodType} fontSize={mvs(14)} color={colors.textColorSecondary} />
               </View>
             </Row>
 
             {/* Occupation */}
             <Row style={styles.occupationRow}>
-              <Icon name="briefcase-outline" size={mvs(14)} color="#4F4F4F" />
+              <Icon name="briefcase-outline" size={mvs(14)} color={colors.textColorSecondary} />
               <Regular
                 label={item.occupation}
-                fontSize={mvs(12)}
-                color="#4F4F4F"
+                fontSize={mvs(14)}
+                color={colors.textColorSecondary}
                 style={{marginLeft: mvs(6)}}
               />
             </Row>
@@ -271,7 +271,7 @@ const getBadgeIcon = (badge) => {
                     />
                     // <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
                   )}
-                  <Regular label={badge} fontSize={mvs(11)} color={badge == "Xytex" || badge == "Private Donor" ? colors.white : '#404040'} />
+                  <Regular label={badge} fontSize={mvs(12)} color={badge == "Xytex" || badge == "Private Donor" ? colors.white : '#404040'} />
                 </View>
               </TouchableOpacity>
             );
@@ -291,31 +291,31 @@ const getBadgeIcon = (badge) => {
           </View>
           <View style={styles.matchInfoContainer}>
             <Row style={{alignItems: 'center', justifyContent: 'space-between'}}>
-              <Bold
+              <Medium
                 label={`${item.name}, ${item.age}`}
-                fontSize={mvs(16)}
-                color={colors.black}
+                fontSize={mvs(18)}
+                color={colors.textColor}
               />
               <IMG.HomeFlags width={mvs(20)} height={mvs(14)} />
             </Row>
             <Regular
               label={item.location}
-              fontSize={mvs(13)}
+              fontSize={mvs(14)}
               color="#8C8C8C"
               style={{marginTop: mvs(2)}}
             />
             <Regular
               label={`${item.height}   |   ${item.weight}   |   ${item.bloodType}`}
-              fontSize={mvs(12)}
-              color={colors.black}
+              fontSize={mvs(14)}
+              color={colors.textColorSecondary}
               style={{marginTop: mvs(8)}}
             />
             <Row style={styles.matchOccupationRow}>
-              <Icon name="briefcase-outline" size={mvs(14)} color="#4F4F4F" />
+              <Icon name="briefcase-outline" size={mvs(14)} color={colors.textColorSecondary} />
               <Regular
                 label={item.occupation}
-                fontSize={mvs(12)}
-                color="#4F4F4F"
+                fontSize={mvs(14)}
+                color={colors.textColorSecondary}
                 style={{marginLeft: mvs(6)}}
               />
             </Row>
@@ -344,11 +344,12 @@ const getBadgeIcon = (badge) => {
       {/* Search Input */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+          <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
+          {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
           <TextInput
             style={styles.searchInput}
             placeholder="Search by Ancestry, etc."
-            placeholderTextColor="#8C8C8C"
+            placeholderTextColor={colors.placeholder}
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -362,10 +363,10 @@ const getBadgeIcon = (badge) => {
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Active Filters */}
         <View style={styles.filtersSection}>
-          <Medium
+          <Bold
             label="Active Filters"
             fontSize={mvs(16)}
-            color={colors.black}
+            color={colors.textColor}
             style={styles.filtersTitle}
           />
           <ScrollView
@@ -418,12 +419,12 @@ const getBadgeIcon = (badge) => {
                 <Medium
                   label="Matches near You"
                   fontSize={mvs(16)}
-                  color={colors.black}
+                  color={colors.textColor}
                 />
                 <TouchableOpacity>
-                  <Medium
+                  <Bold
                     label="View All"
-                    fontSize={mvs(13)}
+                    fontSize={mvs(14)}
                     color={colors.primary}
                   />
                 </TouchableOpacity>
@@ -629,7 +630,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   searchDivider: {
     width: 1,
@@ -688,6 +689,7 @@ const styles = StyleSheet.create({
   },
   matchesList: {
     paddingRight: mvs(20),
+    marginVertical:mvs(10)
   },
   profileCard: {
     flexDirection: 'column',

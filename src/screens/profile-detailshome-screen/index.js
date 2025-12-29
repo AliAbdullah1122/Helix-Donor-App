@@ -138,11 +138,11 @@ const goToImage = index => {
 
   return (
     // <View style={{ flex: 1, backgroundColor: colors.primary }}>
-    <View style={{flex: 1, backgroundColor: colors.primary}}>
+    <View style={{flex: 1, backgroundColor:colors.black }}>
         <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
       <StatusBar
         // backgroundColor="transparent"
-        backgroundColor={'transparent'}
+        backgroundColor={colors.primary}
         barStyle="light-content"
         translucent
       />
@@ -472,11 +472,14 @@ const goToImage = index => {
                 fontSize={mvs(14)}
                 color={colors.white}
               />
+                 <View style={{width:"45%",alignSelf:'center',justifyContent:'center',alignItems:'center', borderLeftWidth:0.4,borderRightWidth:0.4,borderLeftColor:colors.white,borderRightColor:colors.white}}>
+
               <Regular
                 label={'170lbs'}
                 fontSize={mvs(14)}
                 color={colors.white}
               />
+              </View>
               <Regular label={'O+'} fontSize={mvs(14)} color={colors.white} />
             </Row>
             <View
@@ -489,7 +492,7 @@ const goToImage = index => {
             />
             <Row style={styles.infoRow}>
               <View style={styles.infoColumn}>
-                <Medium
+               <Medium
                   label={'Eye Color'}
                   fontSize={mvs(14)}
                   color={colors.white}
@@ -498,20 +501,28 @@ const goToImage = index => {
                   label={'Blue'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{ marginTop: mvs(4) }}
+                  style={{marginTop: mvs(4)}}
                 />
+                {/* <Regular
+                  label={'Blue'}
+                  fontSize={mvs(14)}
+                  color={colors.white}
+                  style={{ marginTop: mvs(4) }}
+                /> */}
               </View>
               <View style={styles.infoColumn}>
                 <Medium
                   label={'Hair Color'}
                   fontSize={mvs(14)}
                   color={colors.white}
+                    style={{marginTop: mvs(4),textAlign:"right"}}
                 />
                 <Regular
                   label={'Brown'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{ marginTop: mvs(4) }}
+  style={{marginTop: mvs(4),textAlign:"right"}}
+
                 />
               </View>
             </Row>
@@ -532,7 +543,7 @@ const goToImage = index => {
                   fontSize={mvs(14)}
                   color={colors.white}
                 />
-                <Regular
+                <Medium
                   label={'Occupation'}
                   fontSize={mvs(14)}
                   color={colors.white}
@@ -540,16 +551,17 @@ const goToImage = index => {
                 />
               </View>
               <View style={styles.infoColumn}>
-                <Medium
+                <Regular
                   label={'PhD (Currently enrolled)'}
                   fontSize={mvs(14)}
                   color={colors.white}
+                   style={{marginTop: mvs(4),fontWeight:"400", textAlign:"right"}}
                 />
                 <Regular
                   label={'Research Assistant'}
                   fontSize={mvs(14)}
                   color={colors.white}
-                  style={{ marginTop: mvs(4) }}
+                 style={{marginTop: mvs(4),fontWeight:"400", textAlign:"right"}}
                 />
               </View>
             </Row>
@@ -564,24 +576,25 @@ const goToImage = index => {
             />
           </View>
         ) : (
-          <View
-            // style={styles.detailsScroll}
-            // contentContainerStyle={styles.detailsScrollContent}
-            // showsVerticalScrollIndicator={false}>
-            style={styles.detailsScrollContent}>
-            {/* Blue summary card at top of scroll */}
-            <View style={styles.infoSheet}>
+
+
+
+          <>
+           <View style={styles.infoSheet}>
               <Row style={styles.infoTopRow}>
                 <Regular
                   label={"6' 1”"}
                   fontSize={mvs(14)}
                   color={colors.white}
                 />
+                 <View style={{width:"45%",alignSelf:'center',justifyContent:'center',alignItems:'center', borderLeftWidth:0.4,borderRightWidth:0.4,borderLeftColor:colors.white,borderRightColor:colors.white}}>
+
                 <Regular
                   label={'170lbs'}
                   fontSize={mvs(14)}
                   color={colors.white}
                 />
+                </View>
                 <Regular label={'O+'} fontSize={mvs(14)} color={colors.white} />
               </Row>
               <View
@@ -594,7 +607,7 @@ const goToImage = index => {
               />
               <Row style={styles.infoRow}>
                 <View style={styles.infoColumn}>
-                  <Medium
+                  <Bold
                     label={'Eye Color'}
                     fontSize={mvs(14)}
                     color={colors.white}
@@ -603,20 +616,22 @@ const goToImage = index => {
                     label={'Blue'}
                     fontSize={mvs(14)}
                     color={colors.white}
-                    style={{ marginTop: mvs(4) }}
+                    style={{ marginTop: mvs(4),fontWeight:"400" }}
                   />
                 </View>
                 <View style={styles.infoColumn}>
-                  <Medium
+                  <Bold
                     label={'Hair Color'}
                     fontSize={mvs(14)}
                     color={colors.white}
+                     style={{marginTop: mvs(4),textAlign:"right"}}
                   />
                   <Regular
                     label={'Brown'}
                     fontSize={mvs(14)}
                     color={colors.white}
-                    style={{ marginTop: mvs(4) }}
+
+                     style={{marginTop: mvs(4),fontWeight:"400", textAlign:"right"}}
                   />
                 </View>
               </Row>
@@ -636,12 +651,13 @@ const goToImage = index => {
                     label={'Education'}
                     fontSize={mvs(14)}
                     color={colors.white}
+                     style={{fontWeight:"500"}}
                   />
-                  <Regular
+                  <Medium
                     label={'Occupation'}
                     fontSize={mvs(14)}
                     color={colors.white}
-                    style={{ marginTop: mvs(4) }}
+             style={{marginTop: mvs(4),fontWeight:"500", }}
                   />
                 </View>
                 <View style={styles.infoColumn}>
@@ -649,12 +665,13 @@ const goToImage = index => {
                     label={'PhD (Currently enrolled)'}
                     fontSize={mvs(14)}
                     color={colors.white}
+                     style={{fontWeight:"400", textAlign:"right"}}
                   />
                   <Regular
                     label={'Research Assistant'}
                     fontSize={mvs(14)}
                     color={colors.white}
-                    style={{ marginTop: mvs(4) }}
+                style={{marginTop: mvs(4),fontWeight:"400", textAlign:"right"}}
                   />
                 </View>
               </Row>
@@ -667,7 +684,45 @@ const goToImage = index => {
                   width: '100%',
                 }}
               />
+                <Row style={styles.infoRow}>
+                <View style={styles.infoColumn}>
+                  <Medium
+                    label={'Race'}
+                    fontSize={mvs(14)}
+                    color={colors.white}
+                     style={{fontWeight:"500"}}
+                  />
+                  <Medium
+                    label={'Ethnicity'}
+                    fontSize={mvs(14)}
+                    color={colors.white}
+             style={{marginTop: mvs(4),fontWeight:"500", }}
+                  />
+                </View>
+                <View style={styles.infoColumn}>
+                  <Medium
+                    label={'White Or Caucasian'}
+                    fontSize={mvs(14)}
+                    color={colors.white}
+                     style={{fontWeight:"400", textAlign:"right"}}
+                  />
+                  <Regular
+                    label={'Kazakh, Russian'}
+                    fontSize={mvs(14)}
+                    color={colors.white}
+                style={{marginTop: mvs(4),fontWeight:"400", textAlign:"right"}}
+                  />
+                </View>
+              </Row>
             </View>
+     
+          <View
+            // style={styles.detailsScroll}
+            // contentContainerStyle={styles.detailsScrollContent}
+            // showsVerticalScrollIndicator={false}>
+            style={styles.detailsScrollContent}>
+            {/* Blue summary card at top of scroll */}
+           
 
             {/* White expandable cards under blue section */}
             {/* ABOUT card */}
@@ -705,6 +760,7 @@ const goToImage = index => {
                     fontSize={mvs(14)}
                     numberOfLines={10}
                     color={colors.primary}
+                    style={{fontWeight:"400"}}
                   />
 
                   <View
@@ -722,7 +778,7 @@ const goToImage = index => {
                     style={{ marginBottom: mvs(8), alignSelf: 'center' }}
                   />
 
-                  <Regular
+                  <Medium
                     label="Adjectives"
                     fontSize={mvs(14)}
                     color={colors.primary}
@@ -737,7 +793,7 @@ const goToImage = index => {
                     style={{ marginBottom: mvs(8) }}
                   />
 
-                  <Regular
+                  <Medium
                     label="Favorite Hero"
                     fontSize={mvs(14)}
                     color={colors.primary}
@@ -752,7 +808,7 @@ const goToImage = index => {
                     style={{ marginBottom: mvs(8) }}
                   />
 
-                  <Regular
+                  <Medium
                     label="Hobbies & Interests"
                     fontSize={mvs(14)}
                     color={colors.primary}
@@ -1118,30 +1174,34 @@ const goToImage = index => {
               </TouchableOpacity>
               {educationExpanded && (
                 <View style={styles.sectionBody}>
-                  <Row style={styles.sectionRow}>
+                  <Row style={{...styles.sectionRow,justifyContent:"flex-start"}}>
                     <Medium
                       label="Occupation"
                       fontSize={mvs(14)}
                       color={colors.primary}
+                      style={{width:"50%"}}
                     />
                     <Regular
                       label="Research Assistant"
                       fontSize={mvs(14)}
                       color={colors.primary}
+                      style={{textAlign:"left"}}
                     />
                   </Row>
-                  <Row style={styles.sectionRow}>
+                 <Row style={{...styles.sectionRow,justifyContent:"flex-start"}}>
                     <Medium
                       label="Education Level"
                       fontSize={mvs(14)}
                       color={colors.primary}
                       numberOfLines={10}
+                       style={{width:"50%"}}
                     />
                     <Regular
                       label="PhD (Currently enrolled)"
                       fontSize={mvs(14)}
                       numberOfLines={10}
                       color={colors.primary}
+                        style={{textAlign:"left"}}
                     />
                   </Row>
                   <Row style={styles.sectionRow}>
@@ -1384,10 +1444,16 @@ const goToImage = index => {
               </TouchableOpacity>
               {geneticExpanded && (
                 <View style={styles.sectionBody}>
-                  <Row style={{ alignItems: 'center', marginBottom: mvs(6) }}>
+                  <Row style={{ alignItems: 'center',justifyContent:"flex-start", marginBottom: mvs(6) }}>
                     <Medium
-                      label={'\u26A0  ADVISORY'}
+                      label={'\u26A0'}
                       fontSize={mvs(14)}
+                      color={'#EAB308'}
+                    />
+                    <Medium
+                      label={'ADVISORY'}
+                      fontSize={mvs(14)}
+                      style={{marginLeft:mvs(5)}}
                       color={colors.primary || '#EAB308'}
                     />
                   </Row>
@@ -1511,6 +1577,7 @@ const goToImage = index => {
               </TouchableOpacity>
             </Row>
           </View>
+               </>
         )}
 
         {/* Bottom floating action buttons when blur is ON */}
@@ -1643,7 +1710,7 @@ const styles = StyleSheet.create({
   },
   infoSheet: {
     // marginTop: mvs(14),
-    // height:mvs(238),
+    height:mvs(238),
 
     // backgroundColor:"#3a3e90ab",
     // borderTopLeftRadius: mvs(24),
@@ -1653,8 +1720,8 @@ const styles = StyleSheet.create({
     // paddingTop: mvs(16),
     // paddingBottom: mvs(14),
     // marginTop: mvs(14),
-    height: mvs(238),
-    backgroundColor: '#3a3e90ab',
+    // height: mvs(238),
+      backgroundColor: 'rgba(58, 62, 144, 0.85)',
     borderRadius: mvs(24),
     // borderWidth: 1,
     // borderColor: 'rgba(255,255,255,0.35)',
@@ -1663,7 +1730,8 @@ const styles = StyleSheet.create({
   },
   infoTopRow: {
     justifyContent: 'space-between',
-    marginBottom: mvs(16),
+    marginBottom: mvs(12),
+    paddingHorizontal:mvs(20)
     // borderBottomWidth:1,
     // borderBottomColor:colors.white
   },
@@ -1688,7 +1756,7 @@ const styles = StyleSheet.create({
   actionButtonsRowInline: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "black",
+    // backgroundColor: "black",
 
     columnGap: mvs(24),
     // marginTop: mvs(24),
@@ -1802,8 +1870,11 @@ const styles = StyleSheet.create({
   },
   detailsScrollContent: {
     // paddingBottom: mvs(24),
-    backgroundColor: 'black',
-    borderRadius: mvs(24)
+    // backgroundColor: 'black',
+      // backgroundColor: 'rgba(58, 62, 144, 0.85)',
+      // backgroundColor:'red',
+    borderRadius: mvs(24),
+    minHeight:mvs(238)
   },
   sectionCard: {
     backgroundColor: colors.white,

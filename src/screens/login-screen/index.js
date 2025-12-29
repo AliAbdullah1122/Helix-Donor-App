@@ -195,7 +195,7 @@ const LoginScreen = props => {
             style={{ textAlign: 'left' }}
             numberOfLines={2}
           >
-            <Regular label={'By continuing you agree to our '} color={"#8C8C8C"} fontSize={mvs(12)} style={{ fontWeight: "400" }} />
+            <Regular label={'By continuing you agree to our '} color={"#919191"} fontSize={mvs(12)} style={{ fontWeight: "400" }} />
             <Regular
               label={'Terms and Conditions'}
               // color={colors.black}

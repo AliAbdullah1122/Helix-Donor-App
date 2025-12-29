@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.helixBackground,    
-    // paddingHorizontal:mvs(5)
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   contentContainerStyleNew: {
     flexGrow: 1,
     // backgroundColor: colors.white,
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingVertical: mvs(10),
     // backgroundColor: colors.white,
     justifyContent: 'center', 

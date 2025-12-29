@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: mvs(15),
     color: colors.black, //default color
-    fontWeight: '500',
+    fontWeight: '400',
     // letterSpacing: 0.2,
   },
 });

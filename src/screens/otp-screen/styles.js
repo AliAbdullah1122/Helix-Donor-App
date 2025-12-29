@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: "#fbfbfe",
     backgroundColor:colors.helixBackground,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   cellRoot: {
     width: mvs(46),
     height: mvs(46),
-    marginHorizontal: mvs(4),
+    marginHorizontal: mvs(8),
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: "#18181B0F" || '#E0E0E0',
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: mvs(0),
-    paddingHorizontal: mvs(0),
+    // paddingHorizontal: mvs(0),
     width: '100%',
   },
   resendContainer: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   resendLink: {
     textDecorationLine: 'underline',
-    marginLeft: mvs(4),
+    // marginLeft: mvs(4),
   },
   timerText: {
     textAlign: 'right',
@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   modalDivider: {
     height: 1,
     backgroundColor: '#E0E0E0',
+    // width:"80%",
     marginVertical: mvs(10),
   },
   checkboxContainer: {

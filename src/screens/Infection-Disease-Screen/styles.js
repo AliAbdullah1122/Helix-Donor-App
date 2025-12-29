@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   contentContainerStyleNew: {
     flexGrow: 1,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
     paddingVertical: mvs(10),
     // backgroundColor: colors.white,
     justifyContent: 'flex-start',

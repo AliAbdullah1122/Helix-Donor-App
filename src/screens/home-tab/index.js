@@ -41,6 +41,7 @@ const HomeTab = () => {
         price: "$800.00 USD",
         mutualMatch: false,
         Subscription: false,
+        hidebutton:false,
       },
       {
         id: 2,
@@ -55,6 +56,7 @@ const HomeTab = () => {
         price: "$800.00 USD",
         mutualMatch: false,
         Subscription: true,
+        hidebutton:true
       },
       {
         id: 3,
@@ -68,6 +70,7 @@ const HomeTab = () => {
         badge: 'New',
         price: "$800.00 USD",
         mutualMatch: true,
+        hidebutton:false,
         Subscription: true,
       },
     ],
@@ -386,14 +389,14 @@ const HomeTab = () => {
             label="You've gone through all the profiles currently matching your preferences."
             fontSize={mvs(14)}
             numberOfLines={10}
-            color={colors.textColor}
+            color={"#333333"}
             style={styles.emptyParagraph}
           />
           <Regular
             label="Don't worry, someone great could be just around the corner."
             fontSize={mvs(14)}
             numberOfLines={10}
-            color={colors.textColor}
+            color={"#333333"}
             style={[styles.emptyParagraph, { marginTop: mvs(8) }]}
           />
         </View>
@@ -407,8 +410,8 @@ const HomeTab = () => {
         </TouchableOpacity>
         <Regular
           label="(Reloads profiles you passed on)"
-          fontSize={mvs(12)}
-          color={colors.placeholder}
+          fontSize={mvs(14)}
+          color={"#999999"}
           style={{ marginTop: mvs(6) }}
         />
 
@@ -421,8 +424,8 @@ const HomeTab = () => {
         </TouchableOpacity>
         <Regular
           label="(Broaden your search criteria)"
-          fontSize={mvs(12)}
-          color={colors.placeholder}
+          fontSize={mvs(14)}
+          color={"#999999"}
           style={{ marginTop: mvs(6) }}
         />
       </ScrollView>
@@ -430,9 +433,9 @@ const HomeTab = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f4f4ff" }}>
+    <View style={{ flex: 1, backgroundColor:colors.helixBackground }}>
     <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-         <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+         <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* HEADER */}
       <View style={styles.headerContainer}>
@@ -465,7 +468,7 @@ export default HomeTab;
 
 const styles = StyleSheet.create({
   headerContainer: {
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
     paddingTop: mvs(20),
     paddingBottom: mvs(10),
     backgroundColor: "#f4f4ff",
@@ -476,19 +479,21 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
+    // height:mvs(617),
     // justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
   },
   profileCardContainer: {
     width: '100%',
     position: 'absolute',
     zIndex: 10,
-    marginTop: mvs(10)
+    marginTop: mvs(4)
   },
   profileCard: {
     width: '100%',
     borderRadius: mvs(20),
+    //  height: mvs(617),
     overflow: 'visible',
   },
   profileImageContainer: {
@@ -563,14 +568,14 @@ const styles = StyleSheet.create({
   },
   emptyContainer: {
     flexGrow: 1,
-    paddingHorizontal: mvs(0),
+    paddingHorizontal: mvs(12),
     paddingTop: mvs(60),
     paddingBottom: mvs(40),
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   emptyParagraph: {
-    marginHorizontal: mvs(10),
+    // marginHorizontal: mvs(12),
   },
   primaryEmptyButton: {
     marginTop: mvs(40),

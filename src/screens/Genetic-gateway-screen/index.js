@@ -156,7 +156,7 @@ const navigation = useNavigation();
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+               <Row style={{alignItems:"center",marginHorizontal:mvs(12),marginVertical:mvs(10)}}>
 
         <IMG.Progress4
           width="100%" height={mvs(20)}
@@ -168,12 +168,12 @@ const navigation = useNavigation();
         <TouchableOpacity onPress={()=>navigate("TabBar")} style={{paddingHorizontal:mvs(10)}}>
         <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
         </TouchableOpacity>
-        <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
+        <View style={{marginHorizontal:mvs(12),marginTop:mvs(20)}}>
 
          <Regular label={'Stage 4 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View>
        
-        <View style={{marginHorizontal:mvs(14),marginVertical:mvs(10)}}>
+        <View style={{marginHorizontal:mvs(12),marginVertical:mvs(10)}}>
         <Medium
           label={'Genetic Profile (CGT)'}
           color={colors.textColor}
@@ -181,7 +181,7 @@ const navigation = useNavigation();
         />
         <Regular
           label={'Are you a carrier for any genetic conditions?'}
-          color={colors.textColor}
+          color={colors.textColorSecondary}
           fontSize={mvs(14)}
           style={{marginTop:mvs(8)}}
         />
@@ -297,7 +297,7 @@ const navigation = useNavigation();
 
      
 
-      <View style={{marginHorizontal: mvs(20), marginBottom: mvs(40)}}>
+      <View style={{marginHorizontal: mvs(12), marginBottom: mvs(40)}}>
         <View style={{marginBottom:mvs(20)}}>
          <TouchableOpacity style={styles.uploadButton}>
                 <IMG.UploadWhite width={mvs(24)} height={mvs(24)} />
@@ -318,7 +318,7 @@ const navigation = useNavigation();
                         marginVertical: mvs(0),
                         backgroundColor:colors.transparent,
                         width:"33%",
-                        borderWidth:1,
+                        borderWidth:1.8,
                         borderColor:colors.primary,
 
                       }}
@@ -349,14 +349,14 @@ const navigation = useNavigation();
         visible={privacyModalVisible}
         onBackdropPress={() => setPrivacyModalVisible(false)}
         onBackButtonPress={() => setPrivacyModalVisible(false)}
-        style={{paddingHorizontal: mvs(20)}}>
+       style={{ paddingHorizontal: mvs(20) ,borderRadius:mvs(24)}}>
         <View
           style={{
-            paddingHorizontal: mvs(24),
+            // paddingHorizontal: mvs(24),
             paddingVertical: mvs(24),
-            borderRadius: mvs(20),
+            borderRadius: mvs(24),
             backgroundColor: colors.white,
-            width: '100%',
+            width: '95%',
           }}>
           <Medium
             label="Privacy"
@@ -369,7 +369,7 @@ const navigation = useNavigation();
               'All your medical information will always be kept private to you, and wont be publicly visible.'
             }
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             numberOfLines={3}
             style={{textAlign: 'left', marginBottom: mvs(20)}}
           />

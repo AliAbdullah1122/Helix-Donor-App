@@ -67,7 +67,7 @@ const AboutScreen = props => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="About" fontSize={mvs(18)} color={colors.textColor} />
+        <Medium label="About" fontSize={mvs(18)} color={colors.textColor} />
         <View style={{width: mvs(24)}} />
       </Row>
 
@@ -78,10 +78,10 @@ const AboutScreen = props => {
         
         {/* In Your Own Words Section */}
         <View style={styles.section}>
-          <Bold
+          <Medium
             label="In Your Own Words"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.sectionTitle}
           />
           <TextInput
@@ -94,7 +94,7 @@ const AboutScreen = props => {
             }}
             multiline
             placeholder="Tell us about yourself..."
-            placeholderTextColor={colors.textColorSecondary}
+            placeholderTextColor={colors.primary}
             maxLength={maxCharacters}
           />
           <Regular
@@ -130,10 +130,10 @@ const AboutScreen = props => {
 
         {/* Adjectives Section */}
         <View style={styles.section}>
-          <Bold
+          <Medium
             label="Adjectives"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.sectionTitle}
           />
           <InputWithIcon
@@ -181,10 +181,10 @@ const AboutScreen = props => {
 
         {/* Favorite Hero Section */}
         <View style={styles.section}>
-          <Bold
+          <Medium
             label="Favorite Hero"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.sectionTitle}
           />
           <TextInput
@@ -233,10 +233,10 @@ const AboutScreen = props => {
 
         {/* Hobbies & Interests Section */}
         <View style={styles.section}>
-          <Bold
+          <Medium
             label="Hobbies & Interests"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.sectionTitle}
           />
           <TextInput

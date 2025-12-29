@@ -22,6 +22,7 @@ export const colors = {
   orange:'#FF7F74',
   homegreen: '#56CE33',
   acceptcolor: '#02A650',
+  bgColor:"#F2F2F7",
   homecard1: '#00ACDD11',
   subteXTcOLOR:'#6B7280',
   grey700:'#374151',

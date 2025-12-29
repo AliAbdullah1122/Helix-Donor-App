@@ -347,6 +347,7 @@ const MainProfileScreen = () => {
                 fontSize={mvs(14)}
                 numberOfLines={10}
                 color={colors.primary}
+                style={{fontWeight:"400"}}
               />
               <View
                 style={{
@@ -361,7 +362,7 @@ const MainProfileScreen = () => {
                 color={colors.primary}
                 style={{marginBottom: mvs(8), alignSelf: 'center'}}
               />
-              <Regular
+              <Medium
                 label="Adjectives"
                 fontSize={mvs(14)}
                 color={colors.primary}
@@ -373,7 +374,7 @@ const MainProfileScreen = () => {
                 color={colors.primary}
                 style={{marginBottom: mvs(8)}}
               />
-              <Regular
+              <Medium
                 label="Favorite Hero"
                 fontSize={mvs(14)}
                 color={colors.primary}
@@ -385,7 +386,7 @@ const MainProfileScreen = () => {
                 color={colors.primary}
                 style={{marginBottom: mvs(8)}}
               />
-              <Regular
+              <Medium
                 label="Hobbies & Interests"
                 fontSize={mvs(14)}
                 color={colors.primary}
@@ -695,30 +696,36 @@ const MainProfileScreen = () => {
           </TouchableOpacity>
           {educationExpanded && (
             <View style={styles.sectionBody}>
-              <Row style={styles.sectionRow}>
-                <Medium
-                  label="Occupation"
-                  fontSize={mvs(14)}
-                  color={colors.primary}
-                />
-                <Regular
-                  label="Research Assistant"
-                  fontSize={mvs(14)}
-                  color={colors.primary}
-                />
-              </Row>
-              <Row style={styles.sectionRow}>
-                <Medium
-                  label="Education Level"
-                  fontSize={mvs(14)}
-                  color={colors.primary}
-                />
-                <Regular
-                  label="PhD (Currently enrolled)"
-                  fontSize={mvs(14)}
-                  color={colors.primary}
-                />
-              </Row>
+            <Row style={{...styles.sectionRow,justifyContent:"flex-start"}}>
+                    <Medium
+                      label="Occupation"
+                      fontSize={mvs(14)}
+                      color={colors.primary}
+                      style={{width:"50%"}}
+                    />
+                    <Regular
+                      label="Research Assistant"
+                      fontSize={mvs(14)}
+                      color={colors.primary}
+                      style={{textAlign:"left"}}
+                    />
+                  </Row>
+             <Row style={{...styles.sectionRow,justifyContent:"flex-start"}}>
+                    <Medium
+                      label="Education Level"
+                      fontSize={mvs(14)}
+                      color={colors.primary}
+                      numberOfLines={10}
+                       style={{width:"50%"}}
+                    />
+                    <Regular
+                      label="PhD (Currently enrolled)"
+                      fontSize={mvs(14)}
+                      numberOfLines={10}
+                      color={colors.primary}
+                        style={{textAlign:"left"}}
+                    />
+                  </Row>
               <Row style={styles.sectionRow}>
                 <Medium
                   label="Undergraduate"
@@ -933,17 +940,24 @@ const MainProfileScreen = () => {
           </TouchableOpacity>
           {geneticExpanded && (
             <View style={styles.sectionBody}>
-              <Row style={{alignItems: 'center', marginBottom: mvs(6)}}>
-                <Medium
-                  label={'⚠  ADVISORY'}
-                  fontSize={mvs(14)}
-                  color={colors.primary || '#EAB308'}
-                />
-              </Row>
+              <Row style={{ alignItems: 'center',justifyContent:"flex-start", marginBottom: mvs(6) }}>
+                    <Medium
+                      label={'\u26A0'}
+                      fontSize={mvs(14)}
+                      color={'#EAB308'}
+                    />
+                    <Medium
+                      label={'ADVISORY'}
+                      fontSize={mvs(14)}
+                      style={{marginLeft:mvs(5)}}
+                      color={colors.primary || '#EAB308'}
+                    />
+                  </Row>
               <Regular
                 label="This donor is a carrier of one or more genetic conditions."
                 fontSize={mvs(14)}
                 color={colors.primary}
+                numberOfLines={10}
                 style={{marginBottom: mvs(10)}}
               />
               <Medium
@@ -1124,6 +1138,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Dimensions.get('window').height * 0.38,
     left: mvs(20),
+    // top:mvs(20),
+    // bottom:mvs(-20),
+    marginTop:mvs(20),
+    // backgroundColor:'red',
     zIndex: 10,
   },
   editButtonContainer: {
@@ -1168,6 +1186,7 @@ const styles = StyleSheet.create({
   },
   infoTopRow: {
     justifyContent: 'space-between',
+    paddingHorizontal:mvs(20),
     marginBottom: mvs(16),
   },
   infoRow: {

@@ -47,10 +47,10 @@ const PlacePrivateOfferScreen = props => {
             onPress={() => navigation.goBack()}>
             <Icon name="chevron-back-outline" size={mvs(24)} color={"#8C8C8C"} />
           </TouchableOpacity>
-          <Bold
+          <Medium
             label="Place Your Proposal"
             fontSize={mvs(18)}
-            color={colors.black}
+            color={colors.textColor}
             style={styles.headerTitle}
           />
           <View style={{width: mvs(24)}} />

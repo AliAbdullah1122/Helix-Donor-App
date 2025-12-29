@@ -127,7 +127,7 @@ const DonorBenefitsScreen = props => {
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
-        <Row style={{ alignItems: "center", marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+        <Row style={{ alignItems: "center", marginHorizontal: mvs(12), marginVertical: mvs(10) }}>
 
           <IMG.Progress5
             width="100%" height={mvs(20)}
@@ -139,12 +139,12 @@ const DonorBenefitsScreen = props => {
         <TouchableOpacity onPress={() => navigate("TabBar")} style={{ paddingHorizontal: mvs(10) }}>
           <Medium label={'Skip For Now'} color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
         </TouchableOpacity>
-        <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20) }}>
+        <View style={{ marginHorizontal: mvs(12), marginTop: mvs(20) }}>
 
           <Regular label={'Stage 5 of 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
         </View>
 
-        <View style={{ marginHorizontal: mvs(14), marginVertical: mvs(10) }}>
+        <View style={{ marginHorizontal: mvs(12), marginVertical: mvs(10) }}>
           <Medium
             label={'Donor Compensation'}
             color={colors.textColor}
@@ -152,7 +152,7 @@ const DonorBenefitsScreen = props => {
           />
           <Regular
             label={'Are you interested in being compensated for the services of providing your gametes?'}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             numberOfLines={10}
             fontSize={mvs(14)}
             style={{ marginTop: mvs(8) }}
@@ -221,7 +221,7 @@ const DonorBenefitsScreen = props => {
                   {/* Allow Bidding Toggle */}
                   <View style={{ marginTop: mvs(-20) }}>
                     <View style={styles.biddingToggleContainer}>
-                      <Medium
+                      <Regular
                         label="Allow Bidding / Auction?"
                         fontSize={mvs(14)}
                         numberOfLines={10}
@@ -273,7 +273,7 @@ const DonorBenefitsScreen = props => {
                             fontSize={mvs(14)}
                             color={colors.textColorSecondary}
                             numberOfLines={10}
-                            style={{ marginBottom: mvs(7) }}
+                            style={{ marginBottom: mvs(7),marginLeft:mvs(8) }}
                           />
                           <PrimaryInput
                             placeholder="Enter amount"
@@ -290,7 +290,7 @@ const DonorBenefitsScreen = props => {
                             fontSize={mvs(14)}
                             numberOfLines={10}
                             color={colors.textColorSecondary}
-                            style={{ marginBottom: mvs(8) }}
+                             style={{ marginBottom: mvs(7),marginLeft:mvs(8) }}
                           />
                           <PrimaryInput
                             placeholder="Enter amount"
@@ -304,7 +304,7 @@ const DonorBenefitsScreen = props => {
                             fontSize={mvs(14)}
                             numberOfLines={10}
                             color={"#333333"}
-                            style={{ marginTop: mvs(-22),fontWeight:'300' }}
+                            style={{ marginTop: mvs(-22),fontWeight:'300' ,marginLeft:mvs(0)}}
                           />
                         </View>
                       </>
@@ -320,7 +320,7 @@ const DonorBenefitsScreen = props => {
 
 {isInterestedInCompensation && (
   // Legal Disclaimer
-  <View style={{ marginHorizontal: mvs(20), marginTop: mvs(20), marginBottom: mvs(10) }}>
+  <View style={{ marginHorizontal: mvs(12), marginTop: mvs(20), marginBottom: mvs(10) }}>
     <Regular
       label="Helix does not provide legal advice."
       fontSize={mvs(14)}
@@ -353,7 +353,7 @@ const DonorBenefitsScreen = props => {
               marginVertical: mvs(0),
               backgroundColor: colors.transparent,
               width: "33%",
-              borderWidth: 1,
+              borderWidth: 1.8,
               borderColor: colors.primary,
 
             }}

@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Light from 'typography/light-text';
 
 const PlaceIncreaseOfferScreen = props => {
   const [offerValue, setOfferValue] = useState('');
@@ -61,7 +62,7 @@ const PlaceIncreaseOfferScreen = props => {
             onPress={() => navigation.goBack()}>
             <Icon name="chevron-back-outline" size={mvs(24)} color={"#8C8C8C"} />
           </TouchableOpacity>
-          <Bold
+          <Medium
             label="Place your offer"
             fontSize={mvs(18)}
             color={colors.textColor}
@@ -119,7 +120,7 @@ const PlaceIncreaseOfferScreen = props => {
               <IMG.alertcircleNew height={mvs(16)} width={mvs(16)}/>
               <Regular
                 label="Another offer is winning, increase your offer."
-                fontSize={mvs(14)}
+                fontSize={mvs(16)}
                 color="#333333"
                 style={{marginLeft: mvs(8), flex: 1}}
               />
@@ -144,12 +145,12 @@ const PlaceIncreaseOfferScreen = props => {
           <TextInput
             style={styles.offerInput}
             placeholder="Enter Offer"
-            placeholderTextColor={"#D9D9D9" || '#8C8C8C'}
+            placeholderTextColor={colors.placeholder || '#8C8C8C'}
             value={offerValue}
             onChangeText={setOfferValue}
             keyboardType="numeric"
           />
-          <Regular
+          <Light
             label={`(Min. offer must be $${minOffer})`}
             fontSize={mvs(14)}
             color={"#333333"}

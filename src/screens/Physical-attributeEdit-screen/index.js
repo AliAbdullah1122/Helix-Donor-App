@@ -28,6 +28,7 @@ import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
+import ExactToggle from 'components/atoms/toggle';
 
 const PhysicalAttributeEditScreen = props => {
   const navigation = useNavigation();
@@ -114,14 +115,21 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={heightVisible}
               onToggle={setHeightVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+              <ExactToggle
+                                                isOn={heightVisible}
+                                               onToggle={setHeightVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -177,14 +185,21 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={heightVisible}
               onToggle={setHeightVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+            <ExactToggle
+                                                isOn={heightVisible}
+                                               onToggle={setHeightVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -208,14 +223,22 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={bodyBuildVisible}
               onToggle={setBodyBuildVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+              <ExactToggle
+                                                isOn={bodyBuildVisible}
+                                               onToggle={setBodyBuildVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
+            
           </Row>
         </View>
 
@@ -239,14 +262,22 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={hairColorVisible}
               onToggle={setHairColorVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+
+             <ExactToggle
+                                                isOn={hairColorVisible}
+                                               onToggle={setHairColorVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -270,14 +301,21 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={eyeColorVisible}
               onToggle={setEyeColorVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                                isOn={eyeColorVisible}
+                                               onToggle={setEyeColorVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -301,14 +339,22 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={raceVisible}
               onToggle={setRaceVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+
+               <ExactToggle
+                                                isOn={raceVisible}
+                                               onToggle={setRaceVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -332,14 +378,22 @@ const PhysicalAttributeEditScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={ethnicityVisible}
               onToggle={setEthnicityVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+
+               <ExactToggle
+                                                isOn={ethnicityVisible}
+                                               onToggle={setEthnicityVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 

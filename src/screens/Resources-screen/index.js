@@ -21,6 +21,7 @@ import {Checkbox} from 'components/atoms/checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { Row } from 'components/atoms/row';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import LinearGradient from 'react-native-linear-gradient';
 
 
 const CELL_COUNT = 6;
@@ -84,7 +85,7 @@ const ResourcesScreen = props => {
       title: 'Legal Resources',
       description:
         'Guidelines on co-parenting contracts, donor rights, and local surrogacy laws.',
-      icon: IMG.ResourcesShiled, // Using shield as placeholder, can be updated later
+      icon: IMG.LegalResource, // Using shield as placeholder, can be updated later
     },
   ];
 
@@ -185,7 +186,16 @@ const ResourcesScreen = props => {
             const isExpanded = expandedCard === item.id;
             
             return (
-              <View key={item.id} style={styles.resourceCard}>
+              // <View key={item.id} style={styles.resourceCard}>
+               <LinearGradient
+                              key={item?.id}
+                              colors={[
+                                                                             'rgba(217, 217, 217, 0.2)',
+                                                                             'rgba(233, 233, 233, 0.2)',
+                                                                           ]}
+                                                                           start={{ x: 0, y: 0.5 }}
+                                                                           end={{ x: 1, y: 0.6 }}
+                              style={styles.resourceCard}>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPress={() => {
@@ -197,16 +207,18 @@ const ResourcesScreen = props => {
                         <IconComponent width={mvs(60)} height={mvs(60)} />
                       </View>
                       <View style={styles.resourceTextContainer}>
-                        <Medium
+                        <Regular
                           label={item.title}
                           fontSize={mvs(16)}
                           color={colors.textColor || '#404040'}
+                          style={{fontWeight:"400"}}
                         />
                         <Regular
                           label={item.description}
                           fontSize={mvs(14)}
                           color={"#8C8C8C" || '#6D6D6D'}
-                          style={{marginTop: mvs(6)}}
+                          style={{marginTop: mvs(6),fontWeight:"400"}}
+
                           // numberOfLines={isExpanded ? undefined : 3}
                           numberOfLines={10}
                         />
@@ -224,71 +236,147 @@ const ResourcesScreen = props => {
                       <View style={styles.expandedContent}>
                     {item.id === 'ivf' && (
                       <>
-                        <Regular
+                        {/* <Regular
                           label="Connect with your local Service provider for laboratory Insemination & Egg extraction."
                           fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.expandedText}
                           numberOfLines={10}
-                        />
+                        /> */}
                         
                         <Regular
-                          label="IVF is a process where an egg is combined with sperm outside the body, in a laboratory ('in vitro'). The resulting embryo is then monitored and transferred to the uterus. It is the most effective form of assisted reproductive technology."
+                          label="IVF is a process where an egg is combined with sperm outside the body, in a laboratory ('in vitro')."
+                          color={colors.textColorSecondary || '#404040'}
+                          style={styles.expandedText}
+                            numberOfLines={10}
+                        />
+                        <Regular
+                          label="The resulting embryo is then monitored and transferred to the uterus. It is the most effective form of assisted reproductive technology."
                           fontSize={mvs(14)}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                             numberOfLines={10}
                         />
                         
-                        <Bold
+                        <Medium
                           label="Key Facts:"
-                          fontSize={mvs(16)}
+                          fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.keyFactsTitle}
                             numberOfLines={10}
                         />
                         
                         <View style={styles.keyFactItem}>
-                          <Bold
-                            label="Success Rate:"
+                          <Regular
+                            label=" • Success Rate:"
                             fontSize={mvs(14)}
                             color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
                           />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
                           <Regular
-                            label=" Varies by age (approx. 20-50% per cycle)."
+                           label=" • "
                             fontSize={mvs(14)}
                               numberOfLines={10}
-                            color={colors.textColor || '#404040'}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
                           />
+                          <Regular
+                           label="Varies by age (approx. 20–50% per         cycle)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Timeline:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                           label=" One cycle typically takes 2-3 weeks.          "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
-                          <Bold
+                        {/* <View style={styles.keyFactItem}>
+                          <Regular
                             label="Timeline:"
                             fontSize={mvs(14)}
                             color={colors.textColor || '#404040'}
+                             style={{fontWeight:"400"}}
                           />
                           <Regular
                             label=" One cycle typically takes 2-3 weeks."
                             fontSize={mvs(14)}
                               numberOfLines={10}
-                            color={colors.textColor || '#404040'}
+                             color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400"}}
                           />
-                        </View>
+                        </View> */}
                         
+
+
                         <View style={styles.keyFactItem}>
-                          <Bold
+                          <Regular
+                            label=" • Cost:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                         label="Average $12,000 - $30,000 per cycle    (varies by region)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        {/* <View style={styles.keyFactItem}>
+                          <Regular
                             label="Cost:"
                             fontSize={mvs(14)}
                             color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                            
+                            
                           />
                           <Regular
-                            label=" Average $12,000 - $30,000 per cycle (varies by region)."
+                            label="Average $12,000 - $30,000 per cycle (varies by region)."
                             fontSize={mvs(14)}
                               numberOfLines={10}
-                            color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",width:"90%"}}
                           />
-                        </View>
+                        </View> */}
                         
                         <PrimaryButton
                           containerStyle={styles.searchButton}
@@ -314,7 +402,7 @@ const ResourcesScreen = props => {
                         <Regular
                           label="IUI involves placing sperm directly inside the uterus to facilitate fertilization."
                           fontSize={mvs(14)}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                             numberOfLines={10}
                         />
@@ -323,27 +411,53 @@ const ResourcesScreen = props => {
                           label="It increases the number of sperm that reach the fallopian tubes."
                           fontSize={mvs(14)}
                             numberOfLines={10}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                         />
                         
                         <Regular
                           label="This can be performed clinically or using at-home insemination kits."
                           fontSize={mvs(14)}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                             numberOfLines={10}
                         />
                         
-                        <Bold
+                        <Medium
                           label="Key Facts:"
-                          fontSize={mvs(16)}
+                          fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.keyFactsTitle}
                             numberOfLines={10}
                         />
-                        
+
                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Clinical IUI:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                        label=" Performed by a doctor; may use fertility drugs."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Clinical IUI:"
                             fontSize={mvs(14)}
@@ -355,9 +469,37 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
-                        </View>
+                        </View> */}
                         
-                        <View style={styles.keyFactItem}>
+
+
+
+                           <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • At-Home IUI:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                       label="Self-insemination using sterile kits            (needle-free).      "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="At-Home IUI:"
                             fontSize={mvs(14)}
@@ -369,9 +511,34 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
-                        </View>
+                        </View> */}
                         
-                        <View style={styles.keyFactItem}>
+                                  <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Cost:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                      label=" Significantly lower than IVF ($300 –        $1,000)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Cost:"
                             fontSize={mvs(14)}
@@ -383,7 +550,7 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
-                        </View>
+                        </View> */}
                         
                         <PrimaryButton
                           containerStyle={styles.searchButton}
@@ -400,6 +567,7 @@ const ResourcesScreen = props => {
                             numberOfLines={10}
                           color={"#8C8C8C"}
                           style={styles.sourceText}
+
                         />
                       </>
                     )}
@@ -410,7 +578,7 @@ const ResourcesScreen = props => {
                           label={'Mitochondrial Replacement Therapy (MRT) is a specialized form of IVF often called "three-person IVF."'}
                           fontSize={mvs(14)}
                             numberOfLines={10}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                         />
                         
@@ -418,18 +586,43 @@ const ResourcesScreen = props => {
                           label="It replaces the mitochondrial DNA in an egg to prevent the transmission of genetic mitochondrial diseases or improve egg quality in older patients."
                           fontSize={mvs(14)}
                             numberOfLines={10}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                         />
                         
-                        <Bold
+                        <Medium
                           label="Key Facts:"
-                          fontSize={mvs(16)}
+                          fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.keyFactsTitle}
                         />
                         
-                        <View style={styles.keyFactItem}>
+                              <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Status:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                       label="Highly specialized; available in limited   regions (e.g., UK, parts of Europe)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Status:"
                             fontSize={mvs(14)}
@@ -441,9 +634,35 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
+                        </View> */}
+
+
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Purpose:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                     label="Treating mitochondrial disease and          advanced age infertility."
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Purpose:"
                             fontSize={mvs(14)}
@@ -455,9 +674,34 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
+                        </View> */}
+
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Availability:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                    label="Restricted to specific research centers   and clinics."
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Availability:"
                             fontSize={mvs(14)}
@@ -469,7 +713,7 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
-                        </View>
+                        </View> */}
                         
                         <PrimaryButton
                           containerStyle={styles.searchButton}
@@ -496,7 +740,7 @@ const ResourcesScreen = props => {
                           label="Determine your risk of passing on genetic conditions to your child."
                           fontSize={mvs(14)}
                             numberOfLines={10}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                         />
                         
@@ -504,22 +748,48 @@ const ResourcesScreen = props => {
                           label="Our partner, iGenomix, offers comprehensive screening for over 600 hereditary disorders."
                           fontSize={mvs(14)}
                             numberOfLines={10}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                         />
                         
-                        <Bold
+                        <Medium
                           label="Key Facts:"
-                          fontSize={mvs(16)}
+                          fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.keyFactsTitle}
                         />
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Screening:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                         label="Performed by a doctor; may use fertility drugs"
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
                         
-                        <View style={styles.keyFactItem}>
-                          <Bold
+                        {/* <View style={styles.keyFactItem}>
+                          <Regular
                             label="Screening:"
                             fontSize={mvs(14)}
                             color={colors.textColor || '#404040'}
+                        
                           />
                           <Regular
                             label=" Comprehensive testing for over 600 hereditary disorders."
@@ -527,9 +797,36 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
+                        </View> */}
+
+
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Partner:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                         label="Self-insemination using sterile kits          (needle-free)"
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Partner:"
                             fontSize={mvs(14)}
@@ -541,9 +838,9 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
-                        </View>
+                        </View> */}
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Testing:"
                             fontSize={mvs(14)}
@@ -555,6 +852,31 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
+                        </View> */}
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Testing:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                         label="Significally lower than IVF ($300 -             $1000)."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
                         <PrimaryButton
@@ -581,7 +903,7 @@ const ResourcesScreen = props => {
                         <Regular
                           label="Ensuring a healthy pregnancy starts before conception."
                           fontSize={mvs(14)}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                             numberOfLines={10}
                         />
@@ -589,19 +911,46 @@ const ResourcesScreen = props => {
                         <Regular
                           label="Whether you are using a donor or a partner, it is vital to screen for infectious diseases (STIs) and understand your genetic compatibility."
                           fontSize={mvs(14)}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                             numberOfLines={10}
                         />
                         
-                        <Bold
+                        <Medium
                           label="Key Facts:"
-                          fontSize={mvs(16)}
+                          fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.keyFactsTitle}
                         />
+
+
+                          <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • STI Screening:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                         label="Test for HIV, Hepatitis B/C, Syphilis,         Gonorrhea, and Chlamydia."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="STI Screening:"
                             fontSize={mvs(14)}
@@ -613,9 +962,36 @@ const ResourcesScreen = props => {
                             color={colors.textColor || '#404040'}
                               numberOfLines={10}
                           />
+                        </View> */}
+
+
+                        <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Vaccinations:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                         label="Ensure Rubella and Varicella immunity      before pregnancy."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Vaccinations:"
                             fontSize={mvs(14)}
@@ -627,9 +1003,34 @@ const ResourcesScreen = props => {
                             color={colors.textColor || '#404040'}
                               numberOfLines={10}
                           />
-                        </View>
+                        </View> */}
                         
                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Folic Acid:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                           label="400mcg daily is recommended to prevent birth defects."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Folic Acid:"
                             fontSize={mvs(14)}
@@ -642,7 +1043,7 @@ const ResourcesScreen = props => {
                             color={colors.textColor || '#404040'}
                               numberOfLines={10}
                           />
-                        </View>
+                        </View> */}
                         
                         <PrimaryButton
                           containerStyle={styles.searchButton}
@@ -668,20 +1069,45 @@ const ResourcesScreen = props => {
                         <Regular
                           label="Helix does not provide legal advice. Laws regarding gamete donation, surrogacy, and compensation vary by country. It is your responsibility to verify local requirements."
                           fontSize={mvs(14)}
-                          color={colors.textColor || '#404040'}
+                          color={colors.textColorSecondary || '#404040'}
                           style={styles.expandedText}
                             numberOfLines={10}
                         />
                         
-                        <Bold
+                        <Medium
                           label="Key Facts:"
                             numberOfLines={10}
-                          fontSize={mvs(16)}
+                          fontSize={mvs(14)}
                           color={colors.textColor || '#404040'}
                           style={styles.keyFactsTitle}
                         />
                         
-                        <View style={styles.keyFactItem}>
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Contracts are Vital:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                  label="Never exchange money or genetic           material without a clinical contract."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
+                        </View>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Contracts are Vital:"
                             fontSize={mvs(14)}
@@ -693,9 +1119,36 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
+                        </View> */}
+
+
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Parental Rights:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                 label="Without a legal agreement, genetic donors may be considered legal parents and liable for child support."
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Parental Rights:"
                             fontSize={mvs(14)}
@@ -707,9 +1160,37 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
+                        </View> */}
+
+
+                         <View style={styles.keyFactItem}>
+                          <Regular
+                            label=" • Surrogacy Laws:"
+                            fontSize={mvs(14)}
+                            color={colors.textColor || '#404040'}
+                            style={{fontWeight:"400"}}
+                          />
+                          <Row style={{width:"95%",marginLeft:mvs(20)}}>
+
+                          <Regular
+                           label=" • "
+                            fontSize={mvs(14)}
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                            //  style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          <Regular
+                    label="Commercial surrogacy is illegal in some regions. Verify your local laws before proceeding."
+                            fontSize={mvs(14)}
+
+                              numberOfLines={10}
+                            color={colors.textColorSecondary || '#404040'}
+                             style={{fontWeight:"400",textAlign:"left"}}
+                          />
+                          </Row>
                         </View>
                         
-                        <View style={styles.keyFactItem}>
+                        {/* <View style={styles.keyFactItem}>
                           <Bold
                             label="Surrogacy Laws:"
                             fontSize={mvs(14)}
@@ -721,7 +1202,7 @@ const ResourcesScreen = props => {
                               numberOfLines={10}
                             color={colors.textColor || '#404040'}
                           />
-                        </View>
+                        </View> */}
                         
                         <PrimaryButton
                           containerStyle={styles.searchButton}
@@ -744,7 +1225,8 @@ const ResourcesScreen = props => {
                     )}
                   </View>
                 </TouchableOpacity>
-              </View>
+              {/* </View> */}
+              </LinearGradient>
             );
           })}
         </View>

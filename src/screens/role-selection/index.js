@@ -27,7 +27,7 @@ const RoleSelectionScreen = props => {
       id: 'looking-for-donor',
       title: "I'm Looking for a Donor",
       description: 'Find a compatible match to help you build your family',
-      icon: IMG.SearchNew,
+      icon: IMG.Search1,
       iconType: 'svg',
       iconPosition: 'left',
     },
@@ -129,9 +129,12 @@ const RoleSelectionScreen = props => {
             return (
               <LinearGradient
                 key={option.id}
-                colors={['rgba(175, 168, 168, 0.2)', 'rgba(233, 233, 233, 0.2)']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0.1}}
+                 colors={[
+                                  'rgba(217, 217, 217, 0.2)',
+                                  'rgba(233, 233, 233, 0.2)',
+                                ]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.6 }}
                 style={styles.serviceCardGradient}>
                 <TouchableOpacity
                   onPress={() => handleRoleToggle(option.id)}

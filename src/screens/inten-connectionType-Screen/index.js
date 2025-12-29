@@ -132,9 +132,12 @@ const IntentConnectiontypeScreen = props => {
             return (
               <LinearGradient
                 key={option.id}
-                colors={['rgba(175, 168, 168, 0.2)', 'rgba(233, 233, 233, 0.2)']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0.1}}
+                colors={[
+                                                               'rgba(217, 217, 217, 0.2)',
+                                                               'rgba(233, 233, 233, 0.2)',
+                                                             ]}
+                                                             start={{ x: 0, y: 0.5 }}
+                                                             end={{ x: 1, y: 0.6 }}
                 style={styles.serviceCardGradient}>
                 <TouchableOpacity
                   onPress={() => handleServiceToggle(option.id)}
@@ -181,11 +184,11 @@ const IntentConnectiontypeScreen = props => {
                         </View>
                       )}
                       <View style={styles.serviceTextContainer}>
-                        <Medium
+                        <Regular
                           label={option.title}
                           fontSize={mvs(16)}
                           color={colors.textColor}
-                          style={styles.serviceTitle}
+                          style={{fontWeight:"400"}}
                         />
                         
                       </View>

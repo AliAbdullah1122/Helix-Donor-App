@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   },
   serviceCardInner: {
     backgroundColor: colors.white,
-    borderRadius: mvs(9),
-    padding: mvs(15),
+    borderRadius: mvs(14),
+    padding: mvs(20),
     height: '100%',
     width: '100%',
   },

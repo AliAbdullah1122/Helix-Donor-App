@@ -26,20 +26,21 @@ const styles = StyleSheet.create({
   optionsContainer: {
     marginTop: mvs(50),
     // borderRadius: mvs(16),
-     borderRadius: mvs(20),
+     borderRadius: mvs(24),
     // flex: 1,
     gap: mvs(14),
     marginBottom: mvs(20),
   },
   serviceCardGradient: {
     // borderRadius: mvs(16),
-     borderRadius: mvs(20),
+     borderRadius: mvs(24),
+     height:mvs(64)
     
   },
   serviceCardOuter: {
-    borderRadius: mvs(20),
+    borderRadius: mvs(24),
     padding: mvs(10),
-    minHeight: mvs(54),
+    height: mvs(64),
   },
   serviceCardOuterSelected: {
     borderWidth: 1,
@@ -50,8 +51,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
      borderRadius: mvs(14),
     // padding: mvs(10),
-    paddingHorizontal:mvs(10),
-    height:mvs(53),
+    // paddingHorizontal:mvs(10),
+    padding:mvs(20),
+    height:mvs(44),
     alignItems:'center',
     justifyContent:'center',
     // height: '100%',
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
   },
   serviceCardContent: {
     justifyContent:"center",
-    marginTop:mvs(10),
+    // marginTop:mvs(10),
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -83,8 +85,8 @@ const styles = StyleSheet.create({
     // height:mvs(20)
   },
   serviceTitle: {
-    marginBottom: mvs(8),
-    color: '#404040',
+    // marginBottom: mvs(8),
+    // color: '#404040',
   },
   serviceDescription: {
     lineHeight: mvs(20),

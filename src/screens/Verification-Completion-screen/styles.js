@@ -5,7 +5,7 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
+    backgroundColor: colors.helixBackground,    
     // paddingHorizontal:mvs(5)
 
   },
@@ -312,11 +312,11 @@ elevation: 4,
     justifyContent: 'center',
   },
   completionModalContainer: {
-    paddingHorizontal: mvs(24),
+    paddingHorizontal: mvs(10),
     paddingVertical: mvs(16),
     borderRadius: mvs(24),
     backgroundColor: colors.white,
-    width: '100%',
+    width: '95%',
     alignItems: 'center',
   },
   completionModalImageContainer: {

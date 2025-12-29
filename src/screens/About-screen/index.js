@@ -28,6 +28,7 @@ import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
+import ExactToggle from 'components/atoms/toggle';
 
 const AboutScreen = props => {
   const navigation = useNavigation();
@@ -109,14 +110,21 @@ const AboutScreen = props => {
                style={{marginRight:mvs(10)}}
               color={colors.textColor}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={inYourOwnWordsVisible}
               onToggle={setInYourOwnWordsVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+            <ExactToggle
+                                                            isOn={inYourOwnWordsVisible}
+                                                           onToggle={setInYourOwnWordsVisible}
+                                                            onColor={colors.primary}
+                                                            offColor="#D9D9D9"
+                                                            circleColor={colors.white}
+                                                          />
           </Row>
         </View>
 
@@ -153,14 +161,21 @@ const AboutScreen = props => {
               color={colors.textColor}
               style={{marginRight:mvs(10)}}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={adjectivesVisible}
               onToggle={setAdjectivesVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                                            isOn={adjectivesVisible}
+                                                           onToggle={setAdjectivesVisible}
+                                                            onColor={colors.primary}
+                                                            offColor="#D9D9D9"
+                                                            circleColor={colors.white}
+                                                          />
           </Row>
         </View>
 
@@ -198,14 +213,21 @@ const AboutScreen = props => {
                style={{marginRight:mvs(10)}}
               color={colors.textColor}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={favoriteHeroVisible}
               onToggle={setFavoriteHeroVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                                            isOn={favoriteHeroVisible}
+                                                           onToggle={setFavoriteHeroVisible}
+                                                            onColor={colors.primary}
+                                                            offColor="#D9D9D9"
+                                                            circleColor={colors.white}
+                                                          />
           </Row>
         </View>
 
@@ -243,14 +265,22 @@ const AboutScreen = props => {
               color={colors.textColor}
                style={{marginRight:mvs(10)}}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={hobbiesInterestsVisible}
               onToggle={setHobbiesInterestsVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+              <ExactToggle
+                                                            isOn={hobbiesInterestsVisible}
+                                                           onToggle={setHobbiesInterestsVisible}
+                                                            onColor={colors.primary}
+                                                            offColor="#D9D9D9"
+                                                            circleColor={colors.white}
+                                                          />
+            
           </Row>
         </View>
       </ScrollView>

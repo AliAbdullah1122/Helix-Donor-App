@@ -475,7 +475,7 @@ const getBadgeIcon = (badge) => {
       {/* Floating Show Map button */}
 {/* {hasResults && ( */}
   <View style={styles.showMapWrapper}>
-    <TouchableOpacity activeOpacity={0.9} style={styles.showMapButton}>
+    <TouchableOpacity onPress={()=> navigate("SearchScreen")} activeOpacity={0.9} style={styles.showMapButton}>
       <Row style={{alignItems: 'center', justifyContent: 'center'}}>
         <IMG.Showmap width={mvs(18)} height={mvs(18)} />
         <Medium

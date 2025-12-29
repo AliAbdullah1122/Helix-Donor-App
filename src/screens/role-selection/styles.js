@@ -24,16 +24,16 @@ const styles = StyleSheet.create({
   },
   optionsContainer: {
     marginTop: mvs(100),
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
     flex: 1,
     gap: mvs(16),
     marginBottom: mvs(40),
   },
   serviceCardGradient: {
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
   },
   serviceCardOuter: {
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
     padding: mvs(10),
     height: mvs(123),
   },
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   },
   serviceCardInner: {
     backgroundColor: colors.white,
-    borderRadius: mvs(9),
-    padding: mvs(16),
+    borderRadius: mvs(14),
+    padding: mvs(20),
     height: '100%',
     width: '100%',
   },

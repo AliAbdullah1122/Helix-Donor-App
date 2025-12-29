@@ -28,6 +28,7 @@ import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
+import ExactToggle from 'components/atoms/toggle';
 
 const HealthSummaryScreen = props => {
   const navigation = useNavigation();
@@ -139,14 +140,21 @@ const HealthSummaryScreen = props => {
                 label="No"
               />
             </View>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={carriedToTermVisible}
               onToggle={setCarriedToTermVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                    isOn={carriedToTermVisible}
+                                    onToggle={setCarriedToTermVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -171,14 +179,21 @@ const HealthSummaryScreen = props => {
                 label="No"
               />
             </View>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={pregnancyComplicationsVisible}
               onToggle={setPregnancyComplicationsVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+            <ExactToggle
+                                    isOn={pregnancyComplicationsVisible}
+                                   onToggle={setPregnancyComplicationsVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -199,14 +214,21 @@ const HealthSummaryScreen = props => {
               onChangeText={setBirthWeight}
               keyboardType="numeric"
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={birthWeightVisible}
               onToggle={setBirthWeightVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+            <ExactToggle
+                                    isOn={birthWeightVisible}
+                                   onToggle={setBirthWeightVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -227,14 +249,21 @@ const HealthSummaryScreen = props => {
               onChangeText={setBirthLength}
               keyboardType="numeric"
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={birthLengthVisible}
               onToggle={setBirthLengthVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                    isOn={birthLengthVisible}
+                                   onToggle={setBirthLengthVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -254,14 +283,21 @@ const HealthSummaryScreen = props => {
               value={childhoodHealth}
               onChangeText={setChildhoodHealth}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={childhoodHealthVisible}
               onToggle={setChildhoodHealthVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+              <ExactToggle
+                                    isOn={childhoodHealthVisible}
+                                   onToggle={setChildhoodHealthVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -294,14 +330,21 @@ const HealthSummaryScreen = props => {
                 label="Negative"
               />
             </View>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={cmvStatusVisible}
               onToggle={setCmvStatusVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                    isOn={cmvStatusVisible}
+                                   onToggle={setCmvStatusVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -342,14 +385,21 @@ const HealthSummaryScreen = props => {
                 </View>
               )}
             </View>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={eyesightCorrectionVisible}
               onToggle={setEyesightCorrectionVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                    isOn={eyesightCorrectionVisible}
+                                   onToggle={setEyesightCorrectionVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -374,14 +424,21 @@ const HealthSummaryScreen = props => {
                 label="No"
               />
             </View>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={herniaVisible}
               onToggle={setHerniaVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                    isOn={herniaVisible}
+                                   onToggle={setHerniaVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -418,14 +475,21 @@ const HealthSummaryScreen = props => {
                 />
               )}
             </View>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={allergiesVisible}
               onToggle={setAllergiesVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+            <ExactToggle
+                                    isOn={allergiesVisible}
+                                   onToggle={setAllergiesVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 
@@ -446,14 +510,21 @@ const HealthSummaryScreen = props => {
               placeholder="Please Specify"
               placeholderTextColor={colors.textColorSecondary}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={commentsVisible}
               onToggle={setCommentsVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+             <ExactToggle
+                                    isOn={commentsVisible}
+                                   onToggle={setCommentsVisible}
+                                    onColor={colors.primary}
+                                    offColor="#D9D9D9"
+                                    circleColor={colors.white}
+                                  />
           </Row>
         </View>
 

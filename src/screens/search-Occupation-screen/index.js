@@ -7,6 +7,7 @@ import {
   StatusBar,
   Dimensions,
   TextInput,
+  Platform,
 } from 'react-native';
 import {mvs} from 'config/metrices';
 import {colors} from 'config/colors';
@@ -17,6 +18,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {navigate, goBack} from 'navigation/navigation-ref';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
@@ -67,7 +69,9 @@ const SearchOccupationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+           <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
+           
 
       {/* Header */}
       <Row style={styles.headerRow}>
@@ -83,10 +87,11 @@ const SearchOccupationScreen = () => {
       {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+          {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
+          <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
           <TextInput
             style={styles.searchInput}
-            placeholder="Search for an occupation"
+            placeholder="Search"
             placeholderTextColor="#8C8C8C"
             value={searchText}
             onChangeText={setSearchText}
@@ -103,10 +108,10 @@ const SearchOccupationScreen = () => {
         {/* Selected Section */}
         {selectedOccupations.length > 0 && (
           <>
-              <Medium
+              <Bold
               label="Selected"
                 fontSize={mvs(14)}
-              color={colors.black}
+              color={colors.textColor}
               style={styles.sectionTitle}
               />
               <View style={styles.chipRow}>
@@ -132,11 +137,12 @@ const SearchOccupationScreen = () => {
                   <Regular
                 label={occupation}
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.textColor}
+                style={{fontWeight:mvs('400')}}
               />
-              {selectedOccupations.includes(occupation) && (
+              {/* {selectedOccupations.includes(occupation) && (
                 <Icon name="checkmark" size={mvs(20)} color={colors.primary} />
-              )}
+              )} */}
                 </TouchableOpacity>
           ))}
         </View>
@@ -164,10 +170,11 @@ const SelectedChip = ({label, onRemove}) => {
     <TouchableOpacity style={styles.selectedChip} onPress={onRemove}>
       <Regular
         label={label}
-        fontSize={mvs(13)}
+        fontSize={mvs(12)}
         color={colors.white}
+        style={{fontWeight:"400"}}
       />
-      <Icon name="close" size={mvs(14)} color={colors.white} style={{marginLeft: mvs(6)}} />
+      <Icon name="close" size={mvs(14)} color={colors.white} style={{marginLeft: mvs(5)}} />
     </TouchableOpacity>
   );
 };
@@ -189,6 +196,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     paddingHorizontal: mvs(20),
     paddingVertical: mvs(12),
+
   },
   searchInputContainer: {
     flexDirection: 'row',
@@ -196,6 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: mvs(40),
     paddingHorizontal: mvs(16),
+        height:mvs(46),
     paddingVertical: mvs(4),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -211,7 +220,8 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: mvs(1.5),
-    backgroundColor: '#E5E5E5',
+    // backgroundColor: '#E5E5E5',
+    backgroundColor:colors.placeholder,
     // marginHorizontal: mvs(20),
     marginVertical: mvs(12),
     width:"100%"
@@ -222,6 +232,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     marginBottom: mvs(12),
+    fontWeight:"600"
   },
   chipRow: {
     flexDirection: 'row',
@@ -232,8 +243,10 @@ const styles = StyleSheet.create({
   },
   selectedChip: {
     flexDirection: 'row',
+    minHeight:mvs(30),
     alignItems: 'center',
-    paddingHorizontal: mvs(14),
+    paddingHorizontal: mvs(10),
+    justifyContent:"center",
     paddingVertical: mvs(6),
     borderRadius: mvs(20),
     backgroundColor: colors.primary,
@@ -255,6 +268,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(16),
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingBottom:mvs(20),
     columnGap: mvs(12),
   },
   clearButton: {

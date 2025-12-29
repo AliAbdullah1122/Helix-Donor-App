@@ -27,6 +27,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ExactToggle from 'components/atoms/toggle';
 
 const EducationCareerScreen = props => {
   const navigation = useNavigation();
@@ -98,14 +99,21 @@ const EducationCareerScreen = props => {
               value={occupation}
               onChangeText={setOccupation}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={occupationVisible}
               onToggle={setOccupationVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+              <ExactToggle
+                                                isOn={occupationVisible}
+                                               onToggle={setOccupationVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -125,14 +133,22 @@ const EducationCareerScreen = props => {
               value={educationLevel}
               onChangeText={setEducationLevel}
             />
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={educationLevelVisible}
               onToggle={setEducationLevelVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+              <ExactToggle
+                                                isOn={educationLevelVisible}
+                                               onToggle={setEducationLevelVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
+            
           </Row>
         </View>
 
@@ -156,14 +172,23 @@ const EducationCareerScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={undergraduateVisible}
               onToggle={setUndergraduateVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+               <ExactToggle
+                                                isOn={undergraduateVisible}
+                                               onToggle={setUndergraduateVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
+            
+            
           </Row>
         </View>
 
@@ -187,14 +212,21 @@ const EducationCareerScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={graduateVisible}
               onToggle={setGraduateVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+                 <ExactToggle
+                                                isOn={undergraduateVisible}
+                                               onToggle={setUndergraduateVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 
@@ -218,14 +250,21 @@ const EducationCareerScreen = props => {
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
-            <ToggleSwitch
+            {/* <ToggleSwitch
               isOn={phdVisible}
               onToggle={setPhdVisible}
               onColor={colors.primary}
               offColor="#E5E5E5"
               circleColor={colors.white}
               size="small"
-            />
+            /> */}
+                 <ExactToggle
+                                                isOn={phdVisible}
+                                               onToggle={setPhdVisible}
+                                                onColor={colors.primary}
+                                                offColor="#D9D9D9"
+                                                circleColor={colors.white}
+                                              />
           </Row>
         </View>
 

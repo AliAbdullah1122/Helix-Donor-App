@@ -6,7 +6,7 @@ import fonts from 'assets/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
+    backgroundColor: colors.helixBackground,    
     // paddingHorizontal:mvs(5)
 
   },

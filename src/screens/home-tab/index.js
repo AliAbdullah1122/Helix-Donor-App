@@ -223,7 +223,6 @@ const HomeTab = () => {
       <Animated.View style={[styles.profileCardContainer, cardStyle]}>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => navigate("ProfileDetailsHomeScreen", { item })}
           style={styles.profileCard}
           onPressIn={handleTouchStart}
           onPressOut={handleTouchEnd}
@@ -248,6 +247,8 @@ const HomeTab = () => {
               <LinearGradient
                 colors={['transparent', 'rgba(0,0,0,0.7)', 'rgba(0,0,0,0.9)']}
                 style={styles.profileInfoOverlay}>
+                  <TouchableOpacity   onPress={() => navigate("ProfileDetailsHomeScreen", { item })}>
+                    <Row >
                 <Bold
                   label={`${item.name}, ${item.age}`}
                   fontSize={mvs(28)}
@@ -264,6 +265,7 @@ const HomeTab = () => {
                     />
                   </View>
                 )}
+                </Row>
                 <Row style={{ alignItems: 'center', justifyContent: "flex-start", marginTop: mvs(4) }}>
                   <IMG.HomeFlags width={mvs(20)} height={mvs(20)} />
                   <Medium
@@ -285,6 +287,7 @@ const HomeTab = () => {
                   color={colors.white}
                   style={{ marginTop: mvs(2) }}
                 />
+                </TouchableOpacity>
 
                 <Row style={{ marginTop: mvs(10), justifyContent: 'space-between', width: '100%' }}>
                   <Medium
@@ -512,9 +515,9 @@ const styles = StyleSheet.create({
     zIndex: 20,
   },
   badgeContainer: {
-    position: 'absolute',
-    bottom: mvs(240),
-    right: mvs(20),
+    // position: 'absolute',
+    // bottom: Platform.OS==='ios'? mvs(78): mvs(240),
+    // right: Platform.OS==='ios'? mvs(0): mvs(20),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#34862E',

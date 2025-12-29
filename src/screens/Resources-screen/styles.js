@@ -27,12 +27,15 @@ const styles = StyleSheet.create({
   resourcesContainer: {
     marginTop: mvs(10),
     paddingBottom: mvs(20),
+    borderRadius:mvs(24),
     gap: mvs(16),
+
   },
   resourceCard: {
     borderRadius: mvs(24),
     padding: mvs(10),
-    backgroundColor: '#f4f4f4ff', // outer light grey container
+        minHeight:mvs(140),
+    // backgroundColor: '#f4f4f4ff', // outer light grey container
     // shadowColor: '#000',
     // shadowOffset: {width: 0, height: 4},
     // shadowOpacity: 0.04,
@@ -40,10 +43,14 @@ const styles = StyleSheet.create({
     // elevation: 3,
   },
   resourceInnerCard: {
-    paddingVertical: mvs(25),
-    paddingHorizontal: mvs(18),
-    borderRadius: mvs(20),
+    // paddingVertical: mvs(25),
+    // paddingHorizontal: mvs(18),
+    padding:mvs(20),
+    borderRadius: mvs(14),
+    minHeight:mvs(120),
     backgroundColor: colors.white,
+    alignItems:'center',
+    justifyContent:'center'
   },
   resourceHeaderRow: {
     flexDirection: 'row',
@@ -53,7 +60,7 @@ const styles = StyleSheet.create({
   resourceIconContainer: {
     width: mvs(44),
     height: mvs(44),
-    borderRadius: mvs(22),
+    // borderRadius: mvs(22),
     // backgroundColor: '#F4F3FF',
     alignItems: 'center',
     justifyContent: 'center',
@@ -70,18 +77,20 @@ const styles = StyleSheet.create({
   expandedContent: {
     width: '100%',
     paddingTop: mvs(20),
-    paddingBottom: mvs(24),
+    // paddingBottom: mvs(24),
   },
   expandedText: {
     marginBottom: mvs(16),
-    lineHeight: mvs(20),
+   lineHeight: mvs(16.8),
+    fontWeight:"400"
   },
   keyFactsTitle: {
     marginTop: mvs(8),
     marginBottom: mvs(12),
+    fontWeight:"500"
   },
   keyFactItem: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     marginBottom: mvs(8),
     flexWrap: 'wrap',
   },
@@ -93,6 +102,7 @@ const styles = StyleSheet.create({
   },
   sourceText: {
     marginTop: mvs(8),
+    fontWeight:"400"
   },
   modalContainer: {
     width: '90%',

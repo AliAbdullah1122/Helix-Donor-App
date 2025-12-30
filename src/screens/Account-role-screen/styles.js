@@ -1,31 +1,31 @@
-import {Platform, StyleSheet} from 'react-native';
-import {colors} from 'config/colors';
-import {mvs, width} from 'config/metrices';
+import { Platform, StyleSheet } from 'react-native';
+import { colors } from 'config/colors';
+import { mvs, width } from 'config/metrices';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
-    paddingHorizontal:mvs(12)
+    backgroundColor: colors.helixBackground,    
+    paddingHorizontal: mvs(12)
 
   },
-  imglogo:{
+  imglogo: {
     width: '80%',
     height: mvs(40),
     alignSelf: 'center',
     // marginTop: mvs(25),
   },
-  waveimg:{
+  waveimg: {
     width: mvs(30),
     height: mvs(30),
   },
-  titleview:{
+  titleview: {
     width: '70%',
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
     marginTop: mvs(20),
     gap: mvs(10),
     paddingHorizontal: mvs(20),
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   contentContainerStyle: {
     // marginTop: mvs(10),
@@ -36,16 +36,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(20),
     paddingVertical: mvs(10),
     // backgroundColor: colors.white,
-    justifyContent: 'center', 
+    justifyContent: 'center',
     borderRadius: mvs(6),
   },
-  input:{
+  input: {
     borderRadius: mvs(40),
     borderColor: colors.borderColor,
     height: mvs(50),
     alignItems: 'center',
   },
-  txt: {marginBottom: mvs(10), fontSize: mvs(20)},
+  txt: { marginBottom: mvs(10), fontSize: mvs(20) },
   button: {
     width: '100%',
     paddingHorizontal: mvs(20),
@@ -60,15 +60,15 @@ const styles = StyleSheet.create({
     borderRadius: mvs(10),
     alignItems: 'center',
     justifyContent: 'center',
-shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 2,
-},
-shadowOpacity: 0.23,
-shadowRadius: 2.62,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
 
-elevation: 4,
+    elevation: 4,
   },
   imagebackground: {
     height: mvs(400),
@@ -110,7 +110,7 @@ elevation: 4,
     alignItems: 'center',
     gap: mvs(10),
   },
-  loginview:{
+  loginview: {
     justifyContent: 'center',
     alignItems: 'center',
     gap: mvs(10),
@@ -159,26 +159,26 @@ elevation: 4,
     paddingBottom: mvs(100),
   },
   description: {
-    marginBottom: mvs(24),
+    marginBottom: mvs(20),
     lineHeight: mvs(20),
   },
   section: {
     marginBottom: mvs(24),
-    paddingVertical:mvs(10)
+    paddingVertical: mvs(10)
   },
   sectionTitle: {
     marginBottom: mvs(16),
     textTransform: 'uppercase',
-    fontWeight:"600"
+    fontWeight: "600"
   },
   inputContainer: {
     backgroundColor: colors.white,
-    marginBottom: mvs(12),
-    color:colors.inputText
+    // marginBottom: mvs(12),
+    color: colors.inputText
   },
   addressInputContainer: {
     minHeight: mvs(100),
-    borderRadius:mvs(20),
+    borderRadius: mvs(20),
     width: '100%',
   },
   recordAudioRow: {
@@ -186,8 +186,8 @@ elevation: 4,
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: mvs(12),
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#E5E7EB',
+    // borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: '#E5E7EB',
   },
   dropdownContainer: {
     position: 'relative',
@@ -202,11 +202,13 @@ elevation: 4,
     backgroundColor: '#EC4899',
   },
   saveButton: {
-    borderRadius: mvs(25),
-    height: mvs(50),
+    borderRadius: mvs(24),
+    height: mvs(43),
     backgroundColor: colors.primary || '#3A3E90',
     width: '60%',
-    alignSelf:"center"
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center"
   },
   modalOverlay: {
     flex: 1,
@@ -253,6 +255,19 @@ elevation: 4,
     backgroundColor: colors.primary || '#3A3E90',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  multilineInput: {
+    borderRadius: mvs(16),
+    borderWidth: 1,
+    borderColor: '#E5E5E5',
+    backgroundColor: colors.white,
+    minHeight: mvs(120),
+    paddingHorizontal: mvs(16),
+    paddingVertical: mvs(12),
+    fontSize: mvs(14),
+    color: colors.inputText,
+    textAlignVertical: 'top',
+    // marginBottom: mvs(8),
   },
 });
 export default styles;

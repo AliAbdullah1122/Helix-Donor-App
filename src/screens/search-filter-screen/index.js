@@ -185,51 +185,52 @@ const SearchFilterScreen = () => {
   return (
     <View style={styles.container}>
 
-              <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <StatusBar backgroundColor={colors.bgColor} barStyle="dark-content" />
 
       {/* Header */}
       <Row style={styles.headerRow}>
         <View />
-        <Bold label="Filter" fontSize={mvs(18)} color={colors.black} />
+        <Medium style={{ fontWeight: '400' }} label="Filter" fontSize={mvs(18)} color={colors.vibrantColor} />
         <TouchableOpacity
           //  onPress={() => navigate('SearchScreen')}
           onPress={() => navigation.goBack()}
         >
-          <Icon name="close" size={mvs(22)} color={colors.black} />
+          <Icon name="close" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
       </Row>
 
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={{ paddingBottom: mvs(120) }}>
+        contentContainerStyle={{ paddingBottom: mvs(120), marginTop: mvs(10) }}>
         {/* Intent & Goals card */}
         <View style={styles.card}>
           <TouchableOpacity
             style={styles.cardHeader}
             onPress={() => setIntentExpanded(!intentExpanded)}>
             <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
-              <IMG.Filtergoal width={mvs(20)} height={mvs(20)} />
+              <IMG.Filtergoal width={mvs(18)} height={mvs(18)} />
               <Medium
                 label="INTENT & GOALS"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.vibrantColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={intentExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
 
           {intentExpanded && (
-            <View style={styles.cardBody}>
-              <Medium
+            <View style={[styles.cardBody]}>
+              <Regular
                 label="Their Goal is"
                 fontSize={mvs(14)}
                 color={colors.primary}
+                style={{ fontWeight: "400" }}
               />
               <View style={styles.chipRow}>
                 {['Co-Parenting', 'Private Donor', 'Donor + Relationship', 'Donor + Marriage'].map(
@@ -244,7 +245,7 @@ const SearchFilterScreen = () => {
                 )}
               </View>
 
-              <Medium
+              <Regular
                 label="I'm Seeking"
                 fontSize={mvs(14)}
                 color={colors.primary}
@@ -271,18 +272,18 @@ const SearchFilterScreen = () => {
             style={styles.cardHeader}
             onPress={() => setBasicsExpanded(!basicsExpanded)}>
             <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
-              <IMG.FilterBasis width={mvs(20)} height={mvs(20)} />
+              <IMG.FilterBasis width={mvs(18)} height={mvs(18)} />
               <Medium
                 label="BASICS"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.textColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={basicsExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
 
@@ -339,11 +340,11 @@ const SearchFilterScreen = () => {
 
               </View>
               {/* Location */}
-              <Row style={{ marginTop: mvs(20), justifyContent: 'space-between' }}>
-                <Medium
+              <Row style={{ marginTop: mvs(20), justifyContent: 'space-between', alignItems: 'center' }}>
+                <Regular
                   label="Location"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.primary}
                 />
                 <Regular
                   label={`Within ${locationRange[0]} miles`}
@@ -368,10 +369,10 @@ const SearchFilterScreen = () => {
               </View>
 
               {/* Marital Status */}
-              <Medium
+              <Regular
                 label="Marital Status"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
                 style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
@@ -387,12 +388,16 @@ const SearchFilterScreen = () => {
 
               {/* Education */}
               <Row style={{ marginTop: mvs(20), alignItems: 'center' }}>
-                <Medium
+                <Regular
                   label="Education"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={educationUnlocked ? colors.primary : colors.textColorSecondary}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
+                {
+                  console.log('educationUnlocked', educationUnlocked)
+                }
+                { !educationUnlocked ?
+                <IMG.FilterLock width={mvs(18)} height={mvs(18)} style={{ marginLeft: mvs(8) }} /> : null}
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <View style={styles.chipRow}>
@@ -414,17 +419,17 @@ const SearchFilterScreen = () => {
                 <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
                     label="Unlock"
-                    fontSize={mvs(14)}
+                    fontSize={mvs(16)}
                     color={colors.white}
                   />
                 </TouchableOpacity>
               )}
 
               {/* Diet */}
-              <Medium
+              <Regular
                 label="Diet"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
                 style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
@@ -443,12 +448,12 @@ const SearchFilterScreen = () => {
               {/* Occupation */}
               {/* <TouchableOpacity style={styles.navigationRow}> */}
               <TouchableOpacity style={styles.navigationRow} onPress={() => navigate('SearchOccupationScreen')}>
-                <Medium
+                <Regular
                   label="Occupation (2 Selected)"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.primary}
                 />
-                <Icon name="chevron-forward" size={mvs(18)} color={colors.black} />
+                <Icon name="chevron-forward" size={mvs(18)} color={colors.textColorSecondary} />
               </TouchableOpacity>
             </View>
           )}
@@ -460,18 +465,18 @@ const SearchFilterScreen = () => {
             style={styles.cardHeader}
             onPress={() => setPhysicalExpanded(!physicalExpanded)}>
             <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
-              <IMG.FilterPhysical width={mvs(20)} height={mvs(20)} />
+              <IMG.FilterPhysical width={mvs(18)} height={mvs(18)} />
               <Medium
                 label="PHYSICAL ATTRIBUTES"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={heightUnlocked ? colors.primary : colors.textColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={physicalExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
           {physicalExpanded && (
@@ -481,9 +486,15 @@ const SearchFilterScreen = () => {
                 <Medium
                   label="Height"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={heightUnlocked ? colors.primary : colors.textColorSecondary}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
+                {heightUnlocked ? <Regular
+                  label="5'7&quot; - 5'11&quot; (1.70 - 1.80m)"
+                  fontSize={mvs(12)}
+                  color={colors.textColorSecondary}
+                />
+                  :
+                  <IMG.FilterLock width={mvs(18)} height={mvs(18)} style={{ marginLeft: mvs(8) }} />}
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               {/* <View style={styles.sliderWrapper}>
@@ -523,6 +534,7 @@ const SearchFilterScreen = () => {
                   setMinHeight(low);
                   setMaxHeight(high);
                 }}
+                color={heightUnlocked ? colors.primary : colors.textColorSecondary}
               />
               {!heightUnlocked && (
                 // <TouchableOpacity style={styles.unlockButton} onPress={() => setHeightUnlocked(true)}>
@@ -534,14 +546,20 @@ const SearchFilterScreen = () => {
                   />
                 </TouchableOpacity>
               )}
-
-              {/* Weight */}
-              <Medium
-                label="Weight"
-                fontSize={mvs(14)}
-                color={colors.black}
-                style={{ marginTop: mvs(10) }}
-              />
+              <Row style={{ marginTop: mvs(15), alignItems: 'center' }}>
+                {/* Weight */}
+                <Medium
+                  label="Weight"
+                  fontSize={mvs(14)}
+                  color={colors.primary}
+                // style={{ marginTop: mvs(10) }}
+                />
+                <Regular
+                  label={`${weightRange[0]} - ${weightRange[1]} lbs`}
+                  fontSize={mvs(12)}
+                  color="#8C8C8C"
+                />
+              </Row>
               {/* <View style={styles.sliderWrapper}>
                 <Row style={styles.sliderLabels}>
                   <Regular
@@ -585,23 +603,23 @@ const SearchFilterScreen = () => {
                 />
 
               </View>
-              <Row style={{ justifyContent: 'flex-end', marginTop: mvs(4) }}>
+              {/* <Row style={{ justifyContent: 'flex-end', marginTop: mvs(4) }}>
                 <Regular
                   label={`${weightRange[0]} - ${weightRange[1]} lbs`}
                   fontSize={mvs(12)}
                   color="#8C8C8C"
                 />
-              </Row>
+              </Row> */}
 
               {/* Hair Color */}
-              <Medium
+              <Regular
                 label="Hair Color"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
                 style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
-                {['Auburn','Black', 'Blonde', 'Brown', 'Red'].map(
+                {['Auburn', 'Black', 'Blonde', 'Brown', 'Red'].map(
                   item => (
                     <FilterChip
                       key={item}
@@ -618,13 +636,16 @@ const SearchFilterScreen = () => {
                 <Medium
                   label="Eye Color"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={eyeColorUnlocked ? colors.primary : colors.textColorSecondary}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
+                {!eyeColorUnlocked ?
+                  <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
+                  : null}
+                {/* <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} /> */}
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <View style={styles.chipRow}>
-                {['Blue','Black', 'Green', 'Brown', 'Hazel'].map(
+                {['Blue', 'Black', 'Green', 'Brown', 'Hazel'].map(
                   item => (
                     <FilterChip
                       key={item}
@@ -641,7 +662,7 @@ const SearchFilterScreen = () => {
                 <TouchableOpacity style={styles.unlockButton} onPress={() => navigate('PremiumUnlockFilterScreen')}>
                   <Medium
                     label="Unlock"
-                    fontSize={mvs(14)}
+                    fontSize={mvs(16)}
                     color={colors.white}
                   />
                 </TouchableOpacity>
@@ -655,7 +676,7 @@ const SearchFilterScreen = () => {
                 style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
-                {['Slim','Athletic', 'Average', 'Curvy',  'Large'].map(
+                {['Slim', 'Athletic', 'Average', 'Curvy', 'Large'].map(
                   item => (
                     <FilterChip
                       key={item}
@@ -676,18 +697,18 @@ const SearchFilterScreen = () => {
             style={styles.cardHeader}
             onPress={() => setAncestryExpanded(!ancestryExpanded)}>
             <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
-              <IMG.FilterAncestors width={mvs(20)} height={mvs(20)} />
+              <IMG.FilterAncestors width={mvs(18)} height={mvs(18)} />
               <Medium
                 label="ANCESTRY & BACKGROUND"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.textColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={ancestryExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
           {ancestryExpanded && (
@@ -695,30 +716,30 @@ const SearchFilterScreen = () => {
               {/* Race / Ethnicity */}
               {/* <TouchableOpacity style={styles.navigationRow}> */}
               <TouchableOpacity style={styles.navigationRow} onPress={() => navigate('SearchEthnicityScreen')}>
-                <Medium
+                <Regular
                   label="Race / Ethnicity (2 Selected)"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.primary}
                 />
-                <Icon name="chevron-forward" size={mvs(18)} color={colors.black} />
+                <Icon name="chevron-forward" size={mvs(18)} color={colors.textColorSecondary} />
               </TouchableOpacity>
 
               {/* Nationality */}
               {/* <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}> */}
               <TouchableOpacity style={[styles.navigationRow, { marginTop: mvs(16) }]} onPress={() => navigate('SearchNationlaityScreen')}>
-                <Medium
+                <Regular
                   label="Nationality (2 Selected)"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.primary}
                 />
-                <Icon name="chevron-forward" size={mvs(18)} color={colors.black} />
+                <Icon name="chevron-forward" size={mvs(18)} color={colors.textColorSecondary} />
               </TouchableOpacity>
 
               {/* Jewish Ancestry */}
-              <Medium
+              <Regular
                 label="Jewish Ancestry"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
                 style={{ marginTop: mvs(16) }}
               />
               <View style={styles.chipRow}>
@@ -737,12 +758,12 @@ const SearchFilterScreen = () => {
               {/* Religion */}
               {/* <TouchableOpacity style={[styles.navigationRow, {marginTop: mvs(16)}]}> */}
               <TouchableOpacity style={[styles.navigationRow, { marginTop: mvs(16) }]} onPress={() => navigate('SearchReligionScreen')}>
-                <Medium
+                <Regular
                   label="Religion (2 Selected)"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.primary}
                 />
-                <Icon name="chevron-forward" size={mvs(18)} color={colors.black} />
+                <Icon name="chevron-forward" size={mvs(18)} color={colors.textColorSecondary} />
               </TouchableOpacity>
             </View>
           )}
@@ -754,27 +775,27 @@ const SearchFilterScreen = () => {
             style={styles.cardHeader}
             onPress={() => setMedicalExpanded(!medicalExpanded)}>
             <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
-              <IMG.FilterMedical width={mvs(20)} height={mvs(20)} />
+              <IMG.FilterMedical width={mvs(18)} height={mvs(18)} />
               <Medium
                 label="MEDICAL HEALTH"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.textColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={medicalExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
           {medicalExpanded && (
             <View style={styles.cardBody}>
               {/* Blood Type */}
-              <Medium
+              <Regular
                 label="Blood Type"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
               />
               <View style={styles.chipRow}>
                 {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(
@@ -790,10 +811,10 @@ const SearchFilterScreen = () => {
               </View>
 
               {/* CMV Status */}
-              <Medium
+              <Regular
                 label="CMV Status"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.primary}
                 style={{ marginTop: mvs(20) }}
               />
               <View style={styles.chipRow}>
@@ -818,18 +839,18 @@ const SearchFilterScreen = () => {
             style={styles.cardHeader}
             onPress={() => setGeneticExpanded(!geneticExpanded)}>
             <Row style={{ alignItems: 'center', justifyContent: "flex-start", flex: 1 }}>
-              <IMG.FilterGenetic width={mvs(20)} height={mvs(20)} />
+              <IMG.FilterGenetic width={mvs(18)} height={mvs(18)} />
               <Medium
                 label="GENETIC HEALTH"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.vibrantColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={geneticExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
           {geneticExpanded && (
@@ -839,16 +860,19 @@ const SearchFilterScreen = () => {
                 <Medium
                   label="EXCLUSION MODE"
                   fontSize={mvs(14)}
-                  color={colors.black}
+                  color={colors.vibrantColor}
                 />
-                <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} />
+                {!geneticUnlocked ?
+                  <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} /> : null}
+                {/* <IMG.FilterLock width={mvs(16)} height={mvs(16)} style={{ marginLeft: mvs(8) }} /> */}
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <Regular
                 label="Donors who are carriers of the conditions selected below will be REMOVED from your search results."
-                fontSize={mvs(12)}
+                fontSize={mvs(14)}
                 color="#8C8C8C"
                 style={{ marginTop: mvs(8), lineHeight: mvs(18) }}
+                numberOfLines={2}
               />
 
               {/* Checkboxes */}
@@ -856,13 +880,13 @@ const SearchFilterScreen = () => {
                 <TouchableOpacity
                   style={styles.checkbox}
                   onPress={() => setGeneticVerified(!geneticVerified)}>
-                  <View style={[styles.checkboxBox, geneticVerified && styles.checkboxChecked]}>
+                  <View style={[styles.checkboxBox, geneticVerified && styles.checkboxChecked, { borderColor: geneticUnlocked ? colors.primary : colors.textColorSecondary }]}>
                     {geneticVerified && <Icon name="checkmark" size={mvs(14)} color={colors.primary} />}
                   </View>
                   <Regular
                     label="Show only iGenomix Verified Donors"
                     fontSize={mvs(14)}
-                    color={colors.black}
+                    color={colors.textColor}
                     style={{ marginLeft: mvs(12), flex: 1 }}
                   />
                 </TouchableOpacity>
@@ -870,7 +894,7 @@ const SearchFilterScreen = () => {
                 <TouchableOpacity
                   style={styles.checkbox}
                   onPress={() => setGeneticNonCarrier(!geneticNonCarrier)}>
-                  <View style={[styles.checkboxBox, geneticNonCarrier && styles.checkboxChecked]}>
+                  <View style={[styles.checkboxBox, geneticNonCarrier && styles.checkboxChecked, { borderColor: geneticUnlocked ? colors.primary : colors.textColorSecondary }]}>
                     {geneticNonCarrier && <Icon name="checkmark" size={mvs(14)} color={colors.primary} />}
                   </View>
                   <Regular
@@ -884,11 +908,11 @@ const SearchFilterScreen = () => {
 
               {/* Genetic Conditions Filter */}
               {/* <TouchableOpacity style={[styles.geneticFilterButton, {marginTop: mvs(16)}]}> */}
-              <TouchableOpacity style={[styles.geneticFilterButton, { marginTop: mvs(16) }]} onPress={() => navigate('SearchGeneticScreen')}>
+              <TouchableOpacity style={[styles.geneticFilterButton, { marginTop: mvs(16), backgroundColor: geneticUnlocked ? colors.primary : colors.placeholder }]} onPress={() => navigate('SearchGeneticScreen')}>
                 <Regular
                   label={`Genetic Conditions Filter (${selectedGeneticConditions.length})`}
                   fontSize={mvs(14)}
-                  color={colors.white}
+                  color={geneticUnlocked ? colors.white : colors.textColorSecondary}
                 />
                 {/* <Icon name="chevron-forward" size={mvs(18)} color={colors.black} /> */}
               </TouchableOpacity>
@@ -896,10 +920,10 @@ const SearchFilterScreen = () => {
               {/* Selected Conditions */}
               {selectedGeneticConditions.length > 0 && (
                 <>
-                  <Medium
+                  <Bold
                     label="Selected:"
                     fontSize={mvs(14)}
-                    color={colors.black}
+                    color={colors.vibrantColor}
                     style={{ marginTop: mvs(16) }}
                   />
                   <View style={styles.chipRow}>
@@ -944,14 +968,14 @@ const SearchFilterScreen = () => {
               <Medium
                 label="VIAL TYPE"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.vibrantColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={vialExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
           {vialExpanded && (
@@ -982,14 +1006,14 @@ const SearchFilterScreen = () => {
               <Medium
                 label="DONOR TYPE & AVAILABILITY"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.vibrantColor}
                 style={{ marginLeft: mvs(8) }}
               />
             </Row>
             <Icon
               name={donorTypeExpanded ? 'chevron-up' : 'chevron-down'}
               size={mvs(18)}
-              color={colors.black}
+              color={colors.textColorSecondary}
             />
           </TouchableOpacity>
           {donorTypeExpanded && (
@@ -1066,7 +1090,7 @@ const CheckboxItem = ({ label, checked, onPress }) => {
       <Regular
         label={label}
         fontSize={mvs(14)}
-        color={colors.black}
+        color={checked ? colors.textColor : colors.textColorSecondary}
         style={{ marginLeft: mvs(12), flex: 1 }}
       />
     </TouchableOpacity>
@@ -1093,11 +1117,12 @@ const FilterChip = ({ label, selected, onPress, isLocked = false }) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
-      style={chipStyle}>
+      // style={chipStyle}>
+      style={[chipStyle, { height: mvs(30), borderColor: selected ? isLocked ? colors.textColorSecondary : colors.primary : colors.textColorSecondary, backgroundColor: selected ? isLocked ? colors.textColorSecondary : colors.primary : colors.white }]}>
       <Regular
         label={label}
-        fontSize={mvs(13)}
-        color={selected ? colors.white : '#3F3F3F'}
+        fontSize={mvs(12)}
+        color={selected ? colors.white : colors.textColorSecondary}
       />
       {selected && (
         <TouchableOpacity
@@ -1116,7 +1141,7 @@ export default SearchFilterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    backgroundColor: '#F2F2F7',
   },
   headerRow: {
     paddingHorizontal: mvs(20),
@@ -1131,14 +1156,14 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: colors.white,
-    borderRadius: mvs(18),
+    borderRadius: mvs(24),
     marginBottom: mvs(16),
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 6,
-    elevation: 2,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.05,
+    // shadowRadius: 6,
+    // elevation: 2,
   },
   cardHeader: {
     paddingHorizontal: mvs(16),
@@ -1152,14 +1177,15 @@ const styles = StyleSheet.create({
   cardBody: {
     paddingHorizontal: mvs(16),
     paddingBottom: mvs(16),
-    marginTop: mvs(10),
+    marginTop: mvs(18),
   },
   chipRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    rowGap: mvs(8),
-    columnGap: mvs(8),
+    rowGap: mvs(10),
+    columnGap: mvs(10),
     marginTop: mvs(10),
+    // height: mvs(30),
   },
   seekingRow: {
     flexDirection: 'row',
@@ -1181,7 +1207,7 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(6),
     borderRadius: mvs(20),
     borderWidth: 1,
-    borderColor: '#D4D4D8',
+    borderColor: colors.textColorSecondary,
     backgroundColor: colors.white,
   },
   chipSelected: {
@@ -1197,8 +1223,10 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(6),
     borderRadius: mvs(20),
     borderWidth: 1,
+    height: mvs(30),
     borderColor: '#D4D4D8',
     backgroundColor: colors.primary,
+            justifyContent: 'center'
   },
   chipSelectedLocked: {
     // backgroundColor: '#8C8C8C',
@@ -1211,14 +1239,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: mvs(14),
     paddingVertical: mvs(6),
-    borderRadius: mvs(20),
+    borderRadius: mvs(24),
+    height: mvs(30),
     borderWidth: 1,
-    borderColor: '#D4D4D8',
+    // borderColor: '#D4D4D8',
     backgroundColor: "#8C8C8C",
+    justifyContent: 'center'
   },
   chipClose: {
     marginLeft: mvs(6),
-    padding: mvs(2),
+    // padding: mvs(2),
   },
   sliderWrapper: {
     marginTop: mvs(12),
@@ -1243,11 +1273,12 @@ const styles = StyleSheet.create({
   },
   sliderMarker: {
     backgroundColor: colors.primary,
-    width: mvs(16),
-    height: mvs(16),
-    borderRadius: mvs(8),
-    borderWidth: 2,
-    borderColor: colors.white,
+    width: mvs(20),
+    height: mvs(20),
+    borderRadius: mvs(24),
+    // borderWidth: 2,
+    borderColor: colors.primary,
+    top: mvs(2),
   },
   bottomButtonsRow: {
     position: 'absolute',
@@ -1263,11 +1294,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: mvs(48),
     borderRadius: mvs(24),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     marginRight: mvs(8),
   },
   applyButton: {
@@ -1293,12 +1324,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: mvs(16),
+            height: mvs(43)
   },
   navigationRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: mvs(8),
+            marginTop: mvs(10),
   },
   checkboxRow: {
     marginTop: mvs(12),
@@ -1311,8 +1344,8 @@ const styles = StyleSheet.create({
   checkboxBox: {
     width: mvs(20),
     height: mvs(20),
-    borderWidth: 2,
-    borderColor: '#D4D4D8',
+    borderWidth: 1.5,
+    borderColor: colors.primary,
     borderRadius: mvs(4),
     alignItems: 'center',
     justifyContent: 'center',
@@ -1321,6 +1354,7 @@ const styles = StyleSheet.create({
   checkboxChecked: {
     backgroundColor: colors.white,
     borderColor: colors.primary,
+    borderWidth: 1.5,
   },
   checkboxList: {
     marginTop: mvs(8),

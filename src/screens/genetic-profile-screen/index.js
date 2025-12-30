@@ -113,11 +113,12 @@ const GeneticProfileScreen = props => {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Feather name="search" size={mvs(20)} color={colors.textColorSecondary} style={styles.searchIcon} />
+          {/* <Feather name="search" size={mvs(20)} color={colors.textColorSecondary} style={styles.searchIcon} /> */}
+          <IMG.SearchNew style={styles.searchIcon} width={mvs(18)} height={mvs(18)}/>
           <TextInput
             style={styles.searchInput}
             placeholder="Search for a condition or gene (e.g. CFTR)"
-            placeholderTextColor={colors.textColorSecondary}
+            placeholderTextColor={colors.placeholder}
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -201,12 +202,12 @@ const GeneticProfileScreen = props => {
         {/* Igenomix Logo */}
         <View style={styles.logoContainer}>
           <IMG.geneticImage width={mvs(200)} height={mvs(60)} />
-          <Regular
+          {/* <Regular
             label="PART OF VITROLIFE GROUP"
             fontSize={mvs(10)}
             color={colors.textColorSecondary}
             style={styles.logoSubtext}
-          />
+          /> */}
         </View>
 
         {/* Description */}

@@ -5,8 +5,8 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    backgroundColor: colors.helixBackground,    
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent:'flex-start',
     marginTop: mvs(20),
     gap: mvs(10),
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     alignSelf:'center',
   },
   contentContainerStyle: {
@@ -307,7 +307,7 @@ elevation: 4,
     justifyContent: 'center',
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -317,7 +317,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   section: {
@@ -326,6 +326,7 @@ elevation: 4,
   sectionTitle: {
     marginBottom: mvs(12),
     textTransform: 'uppercase',
+    fontWeight:"600"
   },
   multilineInput: {
     borderRadius: mvs(16),
@@ -348,16 +349,17 @@ elevation: 4,
     alignItems: 'center',
   },
   saveButtonContainer: {
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(10),
     paddingBottom: mvs(40),
     paddingTop: mvs(10),
     // backgroundColor: colors.white,
   },
   saveButton: {
     borderRadius: mvs(25),
-    height: mvs(50),
+    height: mvs(43),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf:'center'
   },
   attributeSection: {
     marginBottom: mvs(20),
@@ -380,26 +382,34 @@ elevation: 4,
   },
   instructionText: {
     textAlign: 'center',
-    marginTop: mvs(8),
+    // marginTop: mvs(8),
     marginBottom: mvs(20),
   },
   healthSection: {
     marginBottom: mvs(20),
   },
   healthLabel: {
-    marginBottom: mvs(12),
+    marginBottom: mvs(10),
+    marginLeft: mvs(6),
   },
   healthRow: {
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    alignItems: "center",
+    // paddingLeft:mvs(10),
+    gap: mvs(12),
+  },
+  healthRow2: {
+    justifyContent: 'space-between',
+    alignItems: "center",
+    paddingLeft:mvs(10),
     gap: mvs(12),
   },
   healthInput: {
     flex: 1,
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
     borderWidth: 1,
-    borderColor: '#E5E5E5',
-    height: mvs(50),
+    borderColor: '#18181B0F',
+    height: mvs(46),
     backgroundColor: colors.white,
     paddingHorizontal: mvs(16),
     fontSize: mvs(14),

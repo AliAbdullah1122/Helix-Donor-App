@@ -384,3 +384,5 @@ export {default as MapMoreUser} from './MapMoreUser.png';
 export {default as HelixLogoSplash} from './HelixLogoSplash.png';
 export {default as EditNewImage} from './EditNewImage.svg';
 export {default as LegalResource} from './LegalResource.svg';
+export {default as SearchResultImg1} from './SearchResultImg1.svg';
+export {default as SearchResultImg2} from './SearchResultImg2.svg';

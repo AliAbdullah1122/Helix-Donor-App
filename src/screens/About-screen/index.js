@@ -1,21 +1,21 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -23,8 +23,8 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
@@ -33,17 +33,17 @@ import ExactToggle from 'components/atoms/toggle';
 const AboutScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
-  
+
   // State for each section
   const [inYourOwnWords, setInYourOwnWords] = React.useState('Creative director living in...');
   const [inYourOwnWordsVisible, setInYourOwnWordsVisible] = React.useState(false);
-  
+
   const [adjectives, setAdjectives] = React.useState('Creative, Empathetic, Organized');
   const [adjectivesVisible, setAdjectivesVisible] = React.useState(false);
-  
+
   const [favoriteHero, setFavoriteHero] = React.useState('My grandmother, a painter...');
   const [favoriteHeroVisible, setFavoriteHeroVisible] = React.useState(false);
-  
+
   const [hobbiesInterests, setHobbiesInterests] = React.useState('My grandmother, a painter...');
   const [hobbiesInterestsVisible, setHobbiesInterestsVisible] = React.useState(false);
 
@@ -59,23 +59,23 @@ const AboutScreen = props => {
   };
   return (
     <View style={styles.container}>
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
-      
+
       {/* Header */}
       <Row style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
         <Medium label="About" fontSize={mvs(18)} color={colors.textColor} />
-        <View style={{width: mvs(24)}} />
+        <View style={{ width: mvs(24) }} />
       </Row>
 
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        
+
         {/* In Your Own Words Section */}
         <View style={styles.section}>
           <Medium
@@ -107,7 +107,7 @@ const AboutScreen = props => {
             <Regular
               label="Shown on Profile"
               fontSize={mvs(14)}
-               style={{marginRight:mvs(10)}}
+              style={{ marginRight: mvs(10) }}
               color={colors.textColor}
             />
             {/* <ToggleSwitch
@@ -119,12 +119,12 @@ const AboutScreen = props => {
               size="small"
             /> */}
             <ExactToggle
-                                                            isOn={inYourOwnWordsVisible}
-                                                           onToggle={setInYourOwnWordsVisible}
-                                                            onColor={colors.primary}
-                                                            offColor="#D9D9D9"
-                                                            circleColor={colors.white}
-                                                          />
+              isOn={inYourOwnWordsVisible}
+              onToggle={setInYourOwnWordsVisible}
+              onColor={colors.primary}
+              offColor={colors.placeholder}
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
@@ -152,14 +152,14 @@ const AboutScreen = props => {
             label={`(${getCharacterCount(adjectives)}/${maxCharacters})`}
             fontSize={mvs(12)}
             color={colors.textColorSecondary}
-            style={styles.characterCount}
+            style={[styles.characterCount, { marginTop: mvs(-10) }]}
           />
           <Row style={styles.toggleRow}>
             <Regular
               label="Shown on Profile"
               fontSize={mvs(14)}
               color={colors.textColor}
-              style={{marginRight:mvs(10)}}
+              style={{ marginRight: mvs(10) }}
             />
             {/* <ToggleSwitch
               isOn={adjectivesVisible}
@@ -169,13 +169,13 @@ const AboutScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                                            isOn={adjectivesVisible}
-                                                           onToggle={setAdjectivesVisible}
-                                                            onColor={colors.primary}
-                                                            offColor="#D9D9D9"
-                                                            circleColor={colors.white}
-                                                          />
+            <ExactToggle
+              isOn={adjectivesVisible}
+              onToggle={setAdjectivesVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
@@ -210,7 +210,7 @@ const AboutScreen = props => {
             <Regular
               label="Shown on Profile"
               fontSize={mvs(14)}
-               style={{marginRight:mvs(10)}}
+              style={{ marginRight: mvs(10) }}
               color={colors.textColor}
             />
             {/* <ToggleSwitch
@@ -221,13 +221,13 @@ const AboutScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                                            isOn={favoriteHeroVisible}
-                                                           onToggle={setFavoriteHeroVisible}
-                                                            onColor={colors.primary}
-                                                            offColor="#D9D9D9"
-                                                            circleColor={colors.white}
-                                                          />
+            <ExactToggle
+              isOn={favoriteHeroVisible}
+              onToggle={setFavoriteHeroVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
@@ -263,7 +263,7 @@ const AboutScreen = props => {
               label="Shown on Profile"
               fontSize={mvs(14)}
               color={colors.textColor}
-               style={{marginRight:mvs(10)}}
+              style={{ marginRight: mvs(10) }}
             />
             {/* <ToggleSwitch
               isOn={hobbiesInterestsVisible}
@@ -273,14 +273,14 @@ const AboutScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-              <ExactToggle
-                                                            isOn={hobbiesInterestsVisible}
-                                                           onToggle={setHobbiesInterestsVisible}
-                                                            onColor={colors.primary}
-                                                            offColor="#D9D9D9"
-                                                            circleColor={colors.white}
-                                                          />
-            
+            <ExactToggle
+              isOn={hobbiesInterestsVisible}
+              onToggle={setHobbiesInterestsVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
+
           </Row>
         </View>
       </ScrollView>

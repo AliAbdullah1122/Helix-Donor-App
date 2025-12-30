@@ -251,7 +251,7 @@ const HomeTab = () => {
                 colors={['transparent', 'rgba(0,0,0,0.7)', 'rgba(0,0,0,0.9)']}
                 style={styles.profileInfoOverlay}>
                   <TouchableOpacity   onPress={() => navigate("ProfileDetailsHomeScreen", { item })}>
-                    <Row >
+                    <Row style={{alignItems:"center",}}>
                 <Bold
                   label={`${item.name}, ${item.age}`}
                   fontSize={mvs(28)}
@@ -528,7 +528,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#34862E',
     borderRadius: mvs(8),
     paddingHorizontal: mvs(10),
+    height:mvs(30),
     paddingVertical: mvs(6),
+    // marginTop:mvs(5),
     zIndex: 10,
   },
   profileInfoOverlay: {
@@ -543,7 +545,7 @@ const styles = StyleSheet.create({
   },
   actionButtonsContainer: {
     position: 'absolute',
-    bottom: mvs(-55),
+    bottom:Platform.OS==='ios'? mvs(-55):mvs(-60),
     left: 0,
     right: 0,
     justifyContent: 'center',

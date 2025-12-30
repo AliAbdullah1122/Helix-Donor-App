@@ -1,21 +1,21 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Platform} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Platform } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -23,8 +23,8 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ExactToggle from 'components/atoms/toggle';
@@ -32,25 +32,25 @@ import ExactToggle from 'components/atoms/toggle';
 const EducationCareerScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
-  
+
   // Static data for dropdowns
   const undergraduateOptions = ['Bachelor of Arts', 'Bachelor of Science', 'Bachelor of Engineering', 'Bachelor of Business Administration', 'Other'];
   const graduateOptions = ['Master of Arts', 'Master of Science', 'Master of Business Administration', 'Master of Engineering', 'Other'];
   const phdOptions = ['PhD in Arts', 'PhD in Science', 'PhD in Engineering', 'PhD in Business', 'PhD in Medicine', 'Other'];
-  
+
   // Education & Career fields
   const [occupation, setOccupation] = React.useState('');
   const [occupationVisible, setOccupationVisible] = React.useState(true);
-  
+
   const [educationLevel, setEducationLevel] = React.useState('');
   const [educationLevelVisible, setEducationLevelVisible] = React.useState(false);
-  
+
   const [undergraduate, setUndergraduate] = React.useState('');
   const [undergraduateVisible, setUndergraduateVisible] = React.useState(false);
-  
+
   const [graduate, setGraduate] = React.useState('');
   const [graduateVisible, setGraduateVisible] = React.useState(false);
-  
+
   const [phd, setPhd] = React.useState('');
   const [phdVisible, setPhdVisible] = React.useState(false);
 
@@ -66,36 +66,36 @@ const EducationCareerScreen = props => {
 
   return (
     <View style={styles.container}>
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
-      
+
       {/* Header */}
       <Row style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="Education & Career" fontSize={mvs(18)} color={colors.textColor} />
-        <View style={{width: mvs(24)}} />
+        <Medium label="Education & Career" fontSize={mvs(18)} color={colors.textColor} />
+        <View style={{ width: mvs(24) }} />
       </Row>
 
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        
+
         {/* Occupation */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Occupation"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
           <Row style={styles.healthRow}>
             <TextInput
               style={styles.healthInput}
               placeholder="Enter Occupation"
-              placeholderTextColor={colors.textColorSecondary}
+              placeholderTextColor={colors.placeholder}
               value={occupation}
               onChangeText={setOccupation}
             />
@@ -107,29 +107,29 @@ const EducationCareerScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-              <ExactToggle
-                                                isOn={occupationVisible}
-                                               onToggle={setOccupationVisible}
-                                                onColor={colors.primary}
-                                                offColor="#D9D9D9"
-                                                circleColor={colors.white}
-                                              />
+            <ExactToggle
+              isOn={occupationVisible}
+              onToggle={setOccupationVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Education Level */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Education Level"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
           <Row style={styles.healthRow}>
             <TextInput
               style={styles.healthInput}
               placeholder="Enter Education"
-              placeholderTextColor={colors.textColorSecondary}
+              placeholderTextColor={colors.placeholder}
               value={educationLevel}
               onChangeText={setEducationLevel}
             />
@@ -141,28 +141,28 @@ const EducationCareerScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-              <ExactToggle
-                                                isOn={educationLevelVisible}
-                                               onToggle={setEducationLevelVisible}
-                                                onColor={colors.primary}
-                                                offColor="#D9D9D9"
-                                                circleColor={colors.white}
-                                              />
-            
+            <ExactToggle
+              isOn={educationLevelVisible}
+              onToggle={setEducationLevelVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
+
           </Row>
         </View>
 
         {/* Undergraduate */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Undergraduate"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
           <Row style={styles.healthRow}>
             <TouchableOpacity
-              style={{flex: 1}}
+              style={{ flex: 1 }}
               onPress={() => setUndergraduateModalVisible(true)}>
               <InputWithIcon
                 placeholder="Select One"
@@ -180,29 +180,31 @@ const EducationCareerScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-               <ExactToggle
-                                                isOn={undergraduateVisible}
-                                               onToggle={setUndergraduateVisible}
-                                                onColor={colors.primary}
-                                                offColor="#D9D9D9"
-                                                circleColor={colors.white}
-                                              />
-            
-            
+            <View style={{ marginTop: mvs(-7) }}>
+
+              <ExactToggle
+                isOn={undergraduateVisible}
+                onToggle={setUndergraduateVisible}
+                onColor={colors.primary}
+                offColor="#D9D9D9"
+                circleColor={colors.white}
+              />
+
+            </View>
           </Row>
         </View>
 
         {/* Graduate */}
-        <View style={styles.healthSection}>
+        <View style={[styles.healthSection, { marginTop: mvs(-10) }]}>
           <Bold
             label="Graduate"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
           <Row style={styles.healthRow}>
             <TouchableOpacity
-              style={{flex: 1}}
+              style={{ flex: 1 }}
               onPress={() => setGraduateModalVisible(true)}>
               <InputWithIcon
                 placeholder="Select One"
@@ -220,13 +222,15 @@ const EducationCareerScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-                 <ExactToggle
-                                                isOn={undergraduateVisible}
-                                               onToggle={setUndergraduateVisible}
-                                                onColor={colors.primary}
-                                                offColor="#D9D9D9"
-                                                circleColor={colors.white}
-                                              />
+            <View style={{ marginTop: mvs(-7) }}>
+              <ExactToggle
+                isOn={undergraduateVisible}
+                onToggle={setUndergraduateVisible}
+                onColor={colors.primary}
+                offColor="#D9D9D9"
+                circleColor={colors.white}
+              />
+            </View>
           </Row>
         </View>
 
@@ -235,12 +239,12 @@ const EducationCareerScreen = props => {
           <Bold
             label="PhD"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
           <Row style={styles.healthRow}>
             <TouchableOpacity
-              style={{flex: 1}}
+              style={{ flex: 1 }}
               onPress={() => setPhdModalVisible(true)}>
               <InputWithIcon
                 placeholder="Select One"
@@ -258,28 +262,34 @@ const EducationCareerScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-                 <ExactToggle
-                                                isOn={phdVisible}
-                                               onToggle={setPhdVisible}
-                                                onColor={colors.primary}
-                                                offColor="#D9D9D9"
-                                                circleColor={colors.white}
-                                              />
+                        <View style={{marginTop:mvs(-7)}}>
+
+            <ExactToggle
+              isOn={phdVisible}
+              onToggle={setPhdVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
+
+                        </View>
           </Row>
+          
         </View>
 
         {/* Instructional Text */}
-        <Regular
-          label="Toggle on indicates the information will be visible on your profile."
-          fontSize={mvs(12)}
-          numberOfLines={10}
-          color={colors.textColorSecondary}
-          style={styles.instructionText}
-        />
+
       </ScrollView>
 
       {/* Save Changes Button */}
       <View style={styles.saveButtonContainer}>
+                <Regular
+          label="Toggle on indicates the information will be visible on your profile."
+          fontSize={mvs(14)}
+          numberOfLines={10}
+          color={colors.textColorSecondary}
+          style={styles.instructionText}
+        />
         <PrimaryButton
           containerStyle={styles.saveButton}
           onPress={handleSaveChanges}
@@ -292,7 +302,7 @@ const EducationCareerScreen = props => {
       <DropdownModal
         visible={undergraduateModalVisible}
         onClose={() => setUndergraduateModalVisible(false)}
-        data={undergraduateOptions.map(item => ({id: item, label: item}))}
+        data={undergraduateOptions.map(item => ({ id: item, label: item }))}
         onSelect={(item) => {
           setUndergraduate(item.label);
           setUndergraduateModalVisible(false);
@@ -301,7 +311,7 @@ const EducationCareerScreen = props => {
       <DropdownModal
         visible={graduateModalVisible}
         onClose={() => setGraduateModalVisible(false)}
-        data={graduateOptions.map(item => ({id: item, label: item}))}
+        data={graduateOptions.map(item => ({ id: item, label: item }))}
         onSelect={(item) => {
           setGraduate(item.label);
           setGraduateModalVisible(false);
@@ -310,7 +320,7 @@ const EducationCareerScreen = props => {
       <DropdownModal
         visible={phdModalVisible}
         onClose={() => setPhdModalVisible(false)}
-        data={phdOptions.map(item => ({id: item, label: item}))}
+        data={phdOptions.map(item => ({ id: item, label: item }))}
         onSelect={(item) => {
           setPhd(item.label);
           setPhdModalVisible(false);

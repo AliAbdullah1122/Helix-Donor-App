@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     width: '48%',
     height: mvs(43),
     backgroundColor: colors.primary,
-    marginTop: mvs(20),
+    // marginTop: mvs(40),
   },
  BackButton: {
     borderRadius: mvs(24),
     width: '48%',
     height: mvs(43),
     backgroundColor: colors.transparent,
-    marginTop: mvs(20),
+    // marginTop: mvs(40),
     borderWidth:1.5,
     borderColor:colors.primary
   },

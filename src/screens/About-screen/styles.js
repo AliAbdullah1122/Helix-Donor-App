@@ -5,7 +5,7 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
+    backgroundColor: colors.helixBackground,    
     paddingHorizontal:mvs(12)
 
   },
@@ -324,13 +324,13 @@ elevation: 4,
     marginBottom: mvs(24),
   },
   sectionTitle: {
-    marginBottom: mvs(12),
+    marginBottom: mvs(3),
     textTransform: 'uppercase',
   },
   multilineInput: {
     borderRadius: mvs(16),
     borderWidth: 1,
-    borderColor: '#E5E5E5',
+    borderColor: '#18181B0F',
     backgroundColor: colors.white,
     minHeight: mvs(120),
     paddingHorizontal: mvs(16),
@@ -338,10 +338,11 @@ elevation: 4,
     fontSize: mvs(14),
     color: colors.inputText,
     textAlignVertical: 'top',
-    marginBottom: mvs(8),
+    marginBottom: mvs(3),
+    height: mvs(101),
   },
   characterCount: {
-    marginBottom: mvs(12),
+    marginBottom: mvs(6),
     textAlign:"right"
   },
   toggleRow: {
@@ -349,14 +350,14 @@ elevation: 4,
     alignItems: 'center',
   },
   saveButtonContainer: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(40),
-    paddingTop: mvs(10),
+    // paddingTop: mvs(10),
     // backgroundColor: colors.white,
   },
   saveButton: {
     borderRadius: mvs(25),
-    height: mvs(50),
+    height: mvs(43),
     backgroundColor: colors.primary || '#3A3E90',
     width: '60%',
     alignSelf:"center"

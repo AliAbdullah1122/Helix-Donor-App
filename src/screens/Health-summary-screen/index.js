@@ -1,21 +1,21 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -23,8 +23,8 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
@@ -33,41 +33,41 @@ import ExactToggle from 'components/atoms/toggle';
 const HealthSummaryScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
-  
+
   // Static data for dropdowns
   const eyesightCorrectionOptions = ['Glasses', 'Contact Lenses', 'LASIK', 'Other'];
-  
+
   // BIRTH & CHILDHOOD Section
   const [carriedToTerm, setCarriedToTerm] = React.useState('No');
   const [carriedToTermVisible, setCarriedToTermVisible] = React.useState(true);
-  
+
   const [pregnancyComplications, setPregnancyComplications] = React.useState('No');
   const [pregnancyComplicationsVisible, setPregnancyComplicationsVisible] = React.useState(true);
-  
+
   const [birthWeight, setBirthWeight] = React.useState('');
   const [birthWeightVisible, setBirthWeightVisible] = React.useState(false);
-  
+
   const [birthLength, setBirthLength] = React.useState('');
   const [birthLengthVisible, setBirthLengthVisible] = React.useState(false);
-  
+
   const [childhoodHealth, setChildhoodHealth] = React.useState('');
   const [childhoodHealthVisible, setChildhoodHealthVisible] = React.useState(false);
-  
+
   // HEALTH INFORMATION Section
   const [cmvStatus, setCmvStatus] = React.useState('Negative');
   const [cmvStatusVisible, setCmvStatusVisible] = React.useState(true);
-  
+
   const [eyesightCorrection, setEyesightCorrection] = React.useState('Yes');
   const [eyesightCorrectionType, setEyesightCorrectionType] = React.useState('');
   const [eyesightCorrectionVisible, setEyesightCorrectionVisible] = React.useState(true);
-  
+
   const [hernia, setHernia] = React.useState('Yes');
   const [herniaVisible, setHerniaVisible] = React.useState(true);
-  
+
   const [allergies, setAllergies] = React.useState('Yes');
   const [allergiesText, setAllergiesText] = React.useState('');
   const [allergiesVisible, setAllergiesVisible] = React.useState(true);
-  
+
   // Comments Section
   const [comments, setComments] = React.useState('');
   const [commentsVisible, setCommentsVisible] = React.useState(false);
@@ -80,7 +80,7 @@ const HealthSummaryScreen = props => {
     navigation.goBack();
   };
   // Radio Button Component
-  const RadioButton = ({selected, onPress, label}) => (
+  const RadioButton = ({ selected, onPress, label }) => (
     <TouchableOpacity
       style={styles.radioButton}
       onPress={onPress}
@@ -88,29 +88,29 @@ const HealthSummaryScreen = props => {
       <View style={[styles.radioCircle, selected && styles.radioCircleSelected]}>
         {selected && <View style={styles.radioInner} />}
       </View>
-      <Regular label={label} fontSize={mvs(14)} color={colors.textColor} style={{marginLeft: mvs(8)}} />
+      <Regular label={label} fontSize={mvs(14)} color={colors.textColorSecondary} style={{ marginLeft: mvs(8) }} />
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
-      
+
       {/* Header */}
       <Row style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="Health Summary" fontSize={mvs(18)} color={colors.textColor} />
-        <View style={{width: mvs(24)}} />
+        <Medium label="Health Summary" fontSize={mvs(18)} color={colors.textColor} />
+        <View style={{ width: mvs(24) }} />
       </Row>
 
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        
+
         {/* BIRTH & CHILDHOOD Section */}
         <Bold
           label="BIRTH & CHILDHOOD"
@@ -118,28 +118,28 @@ const HealthSummaryScreen = props => {
           color={colors.textColor}
           style={styles.sectionTitle}
         />
-        
+
         {/* Carried to Term */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Carried to Term"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
-          <Row style={styles.healthRow}>
-            <View style={styles.radioGroup}>
-              <RadioButton
-                selected={carriedToTerm === 'Yes'}
-                onPress={() => setCarriedToTerm('Yes')}
-                label="Yes"
-              />
-              <RadioButton
-                selected={carriedToTerm === 'No'}
-                onPress={() => setCarriedToTerm('No')}
-                label="No"
-              />
-            </View>
+          <Row style={styles.healthRow2}>
+            {/* <View style={styles.radioGroup}> */}
+            <RadioButton
+              selected={carriedToTerm === 'Yes'}
+              onPress={() => setCarriedToTerm('Yes')}
+              label="Yes"
+            />
+            <RadioButton
+              selected={carriedToTerm === 'No'}
+              onPress={() => setCarriedToTerm('No')}
+              label="No"
+            />
+            {/* </View> */}
             {/* <ToggleSwitch
               isOn={carriedToTermVisible}
               onToggle={setCarriedToTermVisible}
@@ -148,37 +148,37 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                    isOn={carriedToTermVisible}
-                                    onToggle={setCarriedToTermVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+            <ExactToggle
+              isOn={carriedToTermVisible}
+              onToggle={setCarriedToTermVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Pregnancy Complications */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Pregnancy Complications"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
-          <Row style={styles.healthRow}>
-            <View style={styles.radioGroup}>
-              <RadioButton
-                selected={pregnancyComplications === 'Yes'}
-                onPress={() => setPregnancyComplications('Yes')}
-                label="Yes"
-              />
-              <RadioButton
-                selected={pregnancyComplications === 'No'}
-                onPress={() => setPregnancyComplications('No')}
-                label="No"
-              />
-            </View>
+          <Row style={styles.healthRow2}>
+            {/* <View style={styles.radioGroup}> */}
+            <RadioButton
+              selected={pregnancyComplications === 'Yes'}
+              onPress={() => setPregnancyComplications('Yes')}
+              label="Yes"
+            />
+            <RadioButton
+              selected={pregnancyComplications === 'No'}
+              onPress={() => setPregnancyComplications('No')}
+              label="No"
+            />
+            {/* </View> */}
             {/* <ToggleSwitch
               isOn={pregnancyComplicationsVisible}
               onToggle={setPregnancyComplicationsVisible}
@@ -188,28 +188,28 @@ const HealthSummaryScreen = props => {
               size="small"
             /> */}
             <ExactToggle
-                                    isOn={pregnancyComplicationsVisible}
-                                   onToggle={setPregnancyComplicationsVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+              isOn={pregnancyComplicationsVisible}
+              onToggle={setPregnancyComplicationsVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Birth Weight */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Birth Weight"
             fontSize={mvs(14)}
-            color={colors.textColor}
-            style={styles.healthLabel}
+            color={colors.textColorSecondary}
+            style={[styles.healthLabel, { marginBottom: mvs(5) }]}
           />
           <Row style={styles.healthRow}>
             <TextInput
               style={styles.healthInput}
               placeholder="Enter Weight"
-              placeholderTextColor={colors.textColorSecondary}
+              placeholderTextColor={colors.placeholder}
               value={birthWeight}
               onChangeText={setBirthWeight}
               keyboardType="numeric"
@@ -223,28 +223,28 @@ const HealthSummaryScreen = props => {
               size="small"
             /> */}
             <ExactToggle
-                                    isOn={birthWeightVisible}
-                                   onToggle={setBirthWeightVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+              isOn={birthWeightVisible}
+              onToggle={setBirthWeightVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Birth Length */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Birth Length"
             fontSize={mvs(14)}
-            color={colors.textColor}
-            style={styles.healthLabel}
+            color={colors.textColorSecondary}
+            style={[styles.healthLabel, { marginBottom: mvs(5) }]}
           />
           <Row style={styles.healthRow}>
             <TextInput
-              style={styles.healthInput}
+              style={[styles.healthInput]}
               placeholder="Enter Length"
-              placeholderTextColor={colors.textColorSecondary}
+              placeholderTextColor={colors.placeholder}
               value={birthLength}
               onChangeText={setBirthLength}
               keyboardType="numeric"
@@ -257,29 +257,29 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                    isOn={birthLengthVisible}
-                                   onToggle={setBirthLengthVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+            <ExactToggle
+              isOn={birthLengthVisible}
+              onToggle={setBirthLengthVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Childhood Health */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Childhood Health"
             fontSize={mvs(14)}
-            color={colors.textColor}
-            style={styles.healthLabel}
+            color={colors.textColorSecondary}
+            style={[styles.healthLabel, { marginBottom: mvs(5) }]}
           />
           <Row style={styles.healthRow}>
             <TextInput
               style={styles.healthInput}
               placeholder="Enter Health Condition"
-              placeholderTextColor={colors.textColorSecondary}
+              placeholderTextColor={colors.placeholder}
               value={childhoodHealth}
               onChangeText={setChildhoodHealth}
             />
@@ -291,45 +291,45 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-              <ExactToggle
-                                    isOn={childhoodHealthVisible}
-                                   onToggle={setChildhoodHealthVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+            <ExactToggle
+              isOn={childhoodHealthVisible}
+              onToggle={setChildhoodHealthVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
-
+        <View style={{ borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
         {/* HEALTH INFORMATION Section */}
         <Bold
           label="HEALTH INFORMATION"
           fontSize={mvs(14)}
           color={colors.textColor}
-          style={[styles.sectionTitle, {marginTop: mvs(24)}]}
+          style={[styles.sectionTitle, { marginTop: mvs(24) }]}
         />
 
         {/* CMV Status */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="CMV Status"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
-          <Row style={styles.healthRow}>
-            <View style={styles.radioGroup}>
-              <RadioButton
-                selected={cmvStatus === 'Positive'}
-                onPress={() => setCmvStatus('Positive')}
-                label="Positive"
-              />
-              <RadioButton
-                selected={cmvStatus === 'Negative'}
-                onPress={() => setCmvStatus('Negative')}
-                label="Negative"
-              />
-            </View>
+          <Row style={styles.healthRow2}>
+            {/* <View style={styles.radioGroup}> */}
+            <RadioButton
+              selected={cmvStatus === 'Positive'}
+              onPress={() => setCmvStatus('Positive')}
+              label="Positive"
+            />
+            <RadioButton
+              selected={cmvStatus === 'Negative'}
+              onPress={() => setCmvStatus('Negative')}
+              label="Negative"
+            />
+            {/* </View> */}
             {/* <ToggleSwitch
               isOn={cmvStatusVisible}
               onToggle={setCmvStatusVisible}
@@ -338,27 +338,29 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                    isOn={cmvStatusVisible}
-                                   onToggle={setCmvStatusVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+            <ExactToggle
+              isOn={cmvStatusVisible}
+              onToggle={setCmvStatusVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Eyesight Correction */}
-        <View style={styles.healthSection}>
-          <Bold
+        <View style={[styles.healthSection, { marginBottom: mvs(0) }]}>
+          <Medium
             label="Eyesight Correction"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
-          <Row style={styles.healthRow}>
-            <View style={{flex: 1}}>
-              <View style={styles.radioGroup}>
+          {/* <Row style={styles.healthRow2}> */}
+            {/* <View style={{ flex: 1 }}> */}
+              {/* <View style={styles.radioGroup}> */}
+              <Row style={styles.healthRow2}>
+
                 <RadioButton
                   selected={eyesightCorrection === 'Yes'}
                   onPress={() => setEyesightCorrection('Yes')}
@@ -369,9 +371,17 @@ const HealthSummaryScreen = props => {
                   onPress={() => setEyesightCorrection('No')}
                   label="No"
                 />
-              </View>
+                <ExactToggle
+                  isOn={eyesightCorrectionVisible}
+                  onToggle={setEyesightCorrectionVisible}
+                  onColor={colors.primary}
+                  offColor="#D9D9D9"
+                  circleColor={colors.white}
+                />
+              </Row>
+              {/* </View> */}
               {eyesightCorrection === 'Yes' && (
-                <View style={{marginTop: mvs(12)}}>
+                <View style={{ marginTop: mvs(15) }}>
                   <TouchableOpacity
                     onPress={() => setEyesightCorrectionModalVisible(true)}>
                     <InputWithIcon
@@ -393,26 +403,26 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                    isOn={eyesightCorrectionVisible}
-                                   onToggle={setEyesightCorrectionVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
-          </Row>
-        </View>
+            {/* <ExactToggle
+              isOn={eyesightCorrectionVisible}
+              onToggle={setEyesightCorrectionVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            /> */}
+          {/* </Row> */}
+        {/* </View> */}
 
         {/* Hernia */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Hernia"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
             style={styles.healthLabel}
           />
-          <Row style={styles.healthRow}>
-            <View style={styles.radioGroup}>
+          <Row style={styles.healthRow2}>
+            {/* <View style={styles.radioGroup}> */}
               <RadioButton
                 selected={hernia === 'Yes'}
                 onPress={() => setHernia('Yes')}
@@ -423,7 +433,7 @@ const HealthSummaryScreen = props => {
                 onPress={() => setHernia('No')}
                 label="No"
               />
-            </View>
+            {/* </View> */}
             {/* <ToggleSwitch
               isOn={herniaVisible}
               onToggle={setHerniaVisible}
@@ -432,27 +442,27 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                    isOn={herniaVisible}
-                                   onToggle={setHerniaVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+            <ExactToggle
+              isOn={herniaVisible}
+              onToggle={setHerniaVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
         </View>
 
         {/* Allergies */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Allergies"
             fontSize={mvs(14)}
-            color={colors.textColor}
-            style={styles.healthLabel}
+            color={colors.textColorSecondary}
+            style={[styles.healthLabel]}
           />
-          <Row style={styles.healthRow}>
-            <View style={{flex: 1}}>
-              <View style={styles.radioGroup}>
+          <Row style={styles.healthRow2}>
+            {/* <View style={{ flex: 1 }}> */}
+              {/* <View style={styles.radioGroup}> */}
                 <RadioButton
                   selected={allergies === 'Yes'}
                   onPress={() => setAllergies('Yes')}
@@ -463,18 +473,9 @@ const HealthSummaryScreen = props => {
                   onPress={() => setAllergies('No')}
                   label="No"
                 />
-              </View>
-              {allergies === 'Yes' && (
-                <TextInput
-                  style={[styles.multilineInput, styles.healthInput, {marginTop: mvs(12), minHeight: mvs(80)}]}
-                  value={allergiesText}
-                  onChangeText={setAllergiesText}
-                  multiline
-                  placeholder="Please Specify"
-                  placeholderTextColor={colors.textColorSecondary}
-                />
-              )}
-            </View>
+              {/* </View> */}
+         
+            {/* </View> */}
             {/* <ToggleSwitch
               isOn={allergiesVisible}
               onToggle={setAllergiesVisible}
@@ -484,24 +485,34 @@ const HealthSummaryScreen = props => {
               size="small"
             /> */}
             <ExactToggle
-                                    isOn={allergiesVisible}
-                                   onToggle={setAllergiesVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+              isOn={allergiesVisible}
+              onToggle={setAllergiesVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
           </Row>
+               {allergies === 'Yes' && (
+                <TextInput
+                  style={[styles.multilineInput, styles.healthInput, { marginTop: mvs(12), minHeight: mvs(80) }]}
+                  value={allergiesText}
+                  onChangeText={setAllergiesText}
+                  multiline
+                  placeholder="Please Specify"
+                  placeholderTextColor={colors.textColorSecondary}
+                />
+              )}
         </View>
 
         {/* Comments Section */}
         <View style={styles.healthSection}>
-          <Bold
+          <Medium
             label="Comments"
             fontSize={mvs(14)}
-            color={colors.textColor}
-            style={styles.healthLabel}
+            color={colors.textColorSecondary}
+            style={[styles.healthLabel,{marginTop:mvs(15)}]}
           />
-          <Row style={styles.healthRow}>
+          <Row style={[styles.healthRow,{marginTop:mvs(-5),alignItems: "flex-start"}]}>
             <TextInput
               style={[styles.multilineInput, styles.healthInput]}
               value={comments}
@@ -518,28 +529,31 @@ const HealthSummaryScreen = props => {
               circleColor={colors.white}
               size="small"
             /> */}
-             <ExactToggle
-                                    isOn={commentsVisible}
-                                   onToggle={setCommentsVisible}
-                                    onColor={colors.primary}
-                                    offColor="#D9D9D9"
-                                    circleColor={colors.white}
-                                  />
+            <View style={{marginTop:mvs(10)}}>
+            <ExactToggle
+              isOn={commentsVisible}
+              onToggle={setCommentsVisible}
+              onColor={colors.primary}
+              offColor="#D9D9D9"
+              circleColor={colors.white}
+            />
+            </View>
           </Row>
         </View>
 
         {/* Instructional Text */}
-        <Regular
-          label="Toggle on indicates the information will be visible on your profile."
-          fontSize={mvs(12)}
-          numberOfLines={10}
-          color={colors.textColorSecondary}
-          style={styles.instructionText}
-        />
+     
       </ScrollView>
 
       {/* Save Changes Button */}
       <View style={styles.saveButtonContainer}>
+           <Regular
+          label="Toggle on indicates the information will be visible on your profile."
+          fontSize={mvs(14)}
+          numberOfLines={10}
+          color={colors.textColorSecondary}
+          style={styles.instructionText}
+        />
         <PrimaryButton
           containerStyle={styles.saveButton}
           onPress={handleSaveChanges}
@@ -552,7 +566,7 @@ const HealthSummaryScreen = props => {
       <DropdownModal
         visible={eyesightCorrectionModalVisible}
         onClose={() => setEyesightCorrectionModalVisible(false)}
-        data={eyesightCorrectionOptions.map(item => ({id: item, label: item}))}
+        data={eyesightCorrectionOptions.map(item => ({ id: item, label: item }))}
         onSelect={(item) => {
           setEyesightCorrectionType(item.label);
           setEyesightCorrectionModalVisible(false);

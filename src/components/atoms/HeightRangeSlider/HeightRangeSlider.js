@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     width: mvs(20),
     height: mvs(20),
     borderRadius: mvs(10),
-    backgroundColor: colors.primary,
+    // backgroundColor: colors.primary,
     // elevation: 2,
     // shadowColor: '#000',
     // shadowOffset: { width: 0, height: 1 },
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   },
   railSelected: {
     height: mvs(6),
-    backgroundColor: colors.primary,
+    // backgroundColor: colors.primary,
     borderRadius: mvs(4),
   },
 });

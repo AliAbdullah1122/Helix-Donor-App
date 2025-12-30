@@ -91,8 +91,9 @@ const UploadPhotoScreen = props => {
             {currentPhotos.map((photo, index) => (
               <TouchableOpacity
                 key={photo.id}
-                style={styles.photoThumbnail}
-                activeOpacity={0.8}>
+                // style={styles.photoThumbnail}
+                activeOpacity={0.8}
+                >
                 <Image
                   source={photo.image}
                   style={styles.photoImage}
@@ -121,10 +122,10 @@ const UploadPhotoScreen = props => {
 
         {/* BABY PHOTOS Section */}
         <View style={styles.section}>
-          <Bold
+          <Medium
             label="BABY PHOTOS"
             fontSize={mvs(14)}
-            color={colors.black}
+            color={"#333333"}
             style={styles.sectionTitle}
           />
           <Regular
@@ -136,15 +137,15 @@ const UploadPhotoScreen = props => {
 
           {/* Upload Baby Photo Button */}
           <TouchableOpacity
-            style={styles.uploadButton}
+            style={[styles.uploadButton,{marginTop:mvs(5)}]}
             onPress={handleUploadBabyPhoto}
             activeOpacity={0.8}>
             <View style={styles.uploadButtonContent}>
-              <IMG.UploadPhotoCloud width={mvs(24)} height={mvs(24)} />
-              <Regular
-                label="Upload Baby Photo"
+              <IMG.UploadPhotoCloud width={mvs(52)} height={mvs(52)} />
+               <Regular
+                label="Upload Current Photo"
                 fontSize={mvs(14)}
-                color={colors.black}
+                color={colors.textColor}
                 style={styles.uploadButtonText}
               />
             </View>

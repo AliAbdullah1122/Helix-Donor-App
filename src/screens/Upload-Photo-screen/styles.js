@@ -5,7 +5,7 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
+    backgroundColor: colors.helixBackground,    
     paddingHorizontal:mvs(12)
 
   },
@@ -166,7 +166,7 @@ elevation: 4,
     marginBottom: mvs(24),
   },
   sectionTitle: {
-    marginBottom: mvs(6),
+    // marginBottom: mvs(6),
     textTransform: 'uppercase',
   },
   inputContainer: {
@@ -375,57 +375,65 @@ elevation: 4,
   },
   descriptionText: {
     marginTop: mvs(12),
-    marginBottom: mvs(24),
+    marginBottom: mvs(15),
     lineHeight: mvs(20),
   },
   sectionSubtitle: {
-    marginBottom: mvs(8),
+    marginBottom: mvs(4),
   },
   photoGallery: {
     flexDirection: 'row',
-    gap: mvs(12),
+    gap: mvs(10),
     marginBottom: mvs(16),
   },
   photoThumbnail: {
     flex: 1,
     aspectRatio: 1,
-    borderRadius: mvs(12),
-    overflow: 'hidden',
+    borderRadius: mvs(24),
+    overflow: 'visible',
     backgroundColor: '#F3F4F6',
   },
   photoImage: {
-    width: '100%',
-    height: '100%',
+    // width: '100%',
+    // height: '100%',
+    width:mvs(116),
+    height:mvs(100),
+    borderRadius: mvs(24),
+
   },
   uploadButton: {
     backgroundColor: colors.white,
-    borderRadius: mvs(16),
-    paddingVertical: mvs(20),
-    paddingHorizontal: mvs(16),
+    borderRadius: mvs(24),
+    // paddingVertical: mvs(20),
+    // paddingHorizontal: mvs(16),
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.placeholder,
+    width:mvs(247),
+    height:mvs(100),
+    alignSelf:'center'
   },
   uploadButtonContent: {
     alignItems: 'center',
     justifyContent: 'center',
-    gap: mvs(8),
+    gap: mvs(6),
   },
   uploadButtonText: {
     marginTop: mvs(4),
   },
   doneButtonContainer: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(40),
     paddingTop: mvs(10),
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
   },
   doneButton: {
-    borderRadius: mvs(25),
-    height: mvs(50),
+    borderRadius: mvs(24),
+    height: mvs(43),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf: 'center',
   },
 });
 export default styles;

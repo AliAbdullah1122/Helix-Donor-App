@@ -76,11 +76,11 @@ const SearchOccupationScreen = () => {
       {/* Header */}
       <Row style={styles.headerRow}>
         <TouchableOpacity onPress={() => goBack()}>
-          <Icon name="arrow-back-ios" size={mvs(22)} color={colors.textColor} />
+          <Icon name="arrow-back-ios" size={mvs(22)} color={colors.textColorSecondary} />
         </TouchableOpacity>
         <Bold label="Occupation" fontSize={mvs(18)} color={colors.textColor} />
         <TouchableOpacity onPress={() => goBack()}>
-          <Icon name="close" size={mvs(22)} color={colors.black} />
+          <Icon name="close" size={mvs(22)} color={colors.textColorSecondary} />
         </TouchableOpacity>
       </Row>
 
@@ -92,7 +92,7 @@ const SearchOccupationScreen = () => {
           <TextInput
             style={styles.searchInput}
             placeholder="Search"
-            placeholderTextColor="#D9D9D9"
+            placeholderTextColor={colors.placeholder}
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -123,7 +123,7 @@ const SearchOccupationScreen = () => {
                   />
                 ))}
             </View>
-            <View style={styles.divider} />
+      <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
           </>
         )}
 
@@ -184,17 +184,18 @@ export default SearchOccupationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    backgroundColor: colors.helixBackground,
+    paddingHorizontal:mvs(16)
   },
   headerRow: {
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(6),
     paddingTop: mvs(20),
     paddingBottom: mvs(10),
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   searchContainer: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingVertical: mvs(12),
 
   },
@@ -275,11 +276,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: mvs(48),
     borderRadius: mvs(24),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     marginRight: mvs(8),
   },
   saveButton: {

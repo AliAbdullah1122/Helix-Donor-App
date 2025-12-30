@@ -7,7 +7,7 @@ import {
   StatusBar,
   Dimensions,
   TextInput,
-  SafeAreaView,
+
   Platform,
 } from 'react-native';
 import { mvs } from 'config/metrices';
@@ -20,6 +20,7 @@ import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { navigate, goBack } from 'navigation/navigation-ref';
 import fonts from 'assets/fonts';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -82,11 +83,11 @@ const SearchReligionScreen = () => {
       {/* Header */}
       <Row style={styles.headerRow}>
         <TouchableOpacity onPress={() => goBack()}>
-          <Icon name="arrow-back-ios" size={mvs(22)} color={colors.textColor} />
+          <Icon name="arrow-back-ios" size={mvs(22)} color={colors.textColorSecondary} />
         </TouchableOpacity>
         <Bold label="Religion" fontSize={mvs(18)} color={colors.textColor} />
         <TouchableOpacity onPress={() => goBack()}>
-          <Icon name="close" size={mvs(22)} color={colors.black} />
+          <Icon name="close" size={mvs(22)} color={colors.textColorSecondary} />
         </TouchableOpacity>
       </Row>
 
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(10),
     fontSize: mvs(14),
-    color: colors.placeholder,
+  color: colors.inputText,
     fontWeight: "400",
     fontFamily: fonts.regular
   },
@@ -283,11 +284,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: mvs(48),
     borderRadius: mvs(24),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     marginRight: mvs(8),
   },
   saveButton: {

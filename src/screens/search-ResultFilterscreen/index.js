@@ -48,7 +48,7 @@ const SearchResultFilterScreen = () => {
         name: 'Nathan',
         age: 32,
         location: 'Denver, Colorado',
-        image: IMG.SearchImage1,
+        image: IMG.SearchResultImg1,
         eyeColor: 'Blue',
         hairColor: 'Brown',
         height: "6' 1\"",
@@ -62,7 +62,7 @@ const SearchResultFilterScreen = () => {
         name: 'Ron',
         age: 35,
         location: 'Boston, Massachusetts',
-        image: IMG.SearchImage2,
+        image: IMG.SearchResultImg2,
         eyeColor: 'Blue',
         hairColor: 'Brown',
         height: "5' 9\"",
@@ -76,7 +76,7 @@ const SearchResultFilterScreen = () => {
         name: 'Sarah',
         age: 28,
         location: 'New York, New York',
-        image: IMG.SearchImage3,
+        image: IMG.SearchResultImg2,
         eyeColor: 'Blue',
         hairColor: 'Brown',
         height: "5' 6\"",
@@ -166,7 +166,7 @@ const getBadgeIcon = (badge) => {
         {/* Top row: image + info */}
         <Row style={styles.profileTopRow}>
           <View style={styles.profileImageContainer}>
-            <ImageComponent width={mvs(120)} height={mvs(120)} />
+            <ImageComponent width="100%" height="100%" />
           </View>
           <View style={styles.profileContent}>
             <Row style={styles.profileHeader}>
@@ -308,7 +308,7 @@ const getBadgeIcon = (badge) => {
               label={`${item.height}   |   ${item.weight}   |   ${item.bloodType}`}
               fontSize={mvs(14)}
               color={colors.textColorSecondary}
-              style={{marginTop: mvs(8)}}
+              style={{marginTop: mvs(8),paddingVertical:mvs(5)}}
             />
             <Row style={styles.matchOccupationRow}>
               <Icon name="briefcase-outline" size={mvs(14)} color={colors.textColorSecondary} />
@@ -694,7 +694,7 @@ const styles = StyleSheet.create({
   profileCard: {
     flexDirection: 'column',
     backgroundColor: colors.white,
-    borderRadius: mvs(12),
+    borderRadius: mvs(24),
     padding: mvs(12),
     marginBottom: mvs(16),
     shadowColor: '#000',
@@ -704,10 +704,11 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   profileImageContainer: {
-    width: mvs(120),
-    height: mvs(120),
-    borderRadius: mvs(8),
-    overflow: 'hidden',
+    width: mvs(100),
+    height: mvs(151),
+    borderRadius: mvs(14),
+    // backgroundColor:"red",
+    // overflow: 'hidden',
     marginRight: mvs(12),
   },
   profileTopRow: {
@@ -715,6 +716,7 @@ const styles = StyleSheet.create({
   },
   profileContent: {
     flex: 1,
+    // backgroundColor:"red"
   },
   profileHeader: {
     justifyContent: 'space-between',
@@ -735,6 +737,8 @@ const styles = StyleSheet.create({
   physicalRow: {
     marginTop: mvs(8),
     alignItems: 'center',
+    paddingHorizontal:mvs(10),
+    paddingVertical:mvs(4)
   },
   metricItem: {
     paddingHorizontal: mvs(4),
@@ -808,7 +812,7 @@ const styles = StyleSheet.create({
   },
   matchTopRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   matchImageContainer: {
     width: mvs(100),
@@ -819,6 +823,7 @@ const styles = StyleSheet.create({
   },
   matchInfoContainer: {
     flex: 1,
+    marginTop:mvs(2)
   },
   matchOccupationRow: {
     marginTop: mvs(6),

@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {
   View,
@@ -15,11 +14,11 @@ import * as IMG from 'assets/images';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import fonts from 'assets/fonts';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Platform } from 'react-native';
-import { navigate } from 'navigation/navigation-ref';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Platform} from 'react-native';
+import {navigate} from 'navigation/navigation-ref';
 
 const plans = [
   {
@@ -80,7 +79,6 @@ const features = [
   },
 ];
 
-
 const PremiumUnlockChatScreen = () => {
   const navigation = useNavigation();
   const [selectedPlan, setSelectedPlan] = useState('1');
@@ -90,18 +88,22 @@ const PremiumUnlockChatScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-      <StatusBar barStyle="dark-content"  />
+      <SafeAreaView
+        style={{marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0}}
+      />
+      <StatusBar barStyle="dark-content" />
 
       {/* Header */}
       <View style={styles.header}>
         <Medium
           label="Helix Premium"
           fontSize={mvs(18)}
-          color={"#404040"}
+          color={'#404040'}
           style={styles.headerTitle}
         />
-       <TouchableOpacity onPress={() => navigation.goBack()} style={styles.closeBtn}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.closeBtn}>
           <Text style={styles.closeText}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -118,131 +120,155 @@ const PremiumUnlockChatScreen = () => {
             <Medium
               label="Don't Wait to Match"
               fontSize={mvs(24)}
-              color={colors.black}
+              color={colors.textColor}
               style={styles.titleText}
             />
             <Regular
               label="Unlock Direct Messaging to slide into anyone's DMs instantly."
-              fontSize={mvs(13)}
+              fontSize={mvs(14)}
               numberOfLines={10}
-              color={colors.subteXTcOLOR}
+              color={colors.textColorSecondary}
               style={styles.subtitle}
             />
           </View>
         </View>
 
-      {/* Divider */}
-      <View style={styles.divider} />
+        {/* Divider */}
+        <View
+          style={{
+            marginBottom: mvs(20),
+            borderWidth: 1,
+            borderColor: colors.placeholder,
+            width: '100%',
+            alignSelf: 'center',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: mvs(20),
+          }}></View>
 
-      {/* Choose Your Plan Title */}
-      <Bold
-        label="Choose Your Plan"
-        fontSize={mvs(16)}
-        color={colors.black}
-        style={styles.planTitle}
-      />
-
-      {/* Plan List */}
-      <FlatList
-        horizontal
-        data={plans}
-        keyExtractor={item => item.id}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.planList}
-        renderItem={({item}) => {
-          const isSelected = selectedPlan === item.id;
-          return (
-            <View
-              style={[
-                styles.planCardWrapper,
-                isSelected && styles.planCardWrapperActive,
-              ]}>
-              {item.popular && (
-                <View style={styles.popularBadge}>
-                  <View style={styles.popularBadgeInner}>
-                    <Text style={styles.popularText}>MOST POPULAR</Text>
-                  </View>
-                </View>
-              )}
-              {item.best && (
-                <View style={styles.bestBadge}>
-                  <View style={styles.bestBadgeInner}>
-                    <Text style={styles.bestText}>BEST</Text>
-                  </View>
-                </View>
-              )}
-              <TouchableOpacity
-                onPress={() => setSelectedPlan(item.id)}
-                style={styles.planCard}>
-                <View style={styles.planCardInner}>
-                  <Regular
-                    label={item.title}
-                    fontSize={mvs(16)}
-                    color={"#404040"}
-                    style={{fontWeight: '400'}}
-                  />
-                  <Regular
-                    label={item.price}
-                    fontSize={mvs(14)}
-                    color={"#8C8C8C"}
-                    style={{fontWeight: '400',marginTop: mvs(4)}}
-                  />
-                  <Regular
-                    label={item.sub}
-                    fontSize={mvs(14)}
-                    color={"#8C8C8C"}
-                    style={{fontWeight: '400'}}
-                  />
-                </View>
-              </TouchableOpacity>
-            </View>
-          );
-        }}
-      />
-
-      {/* Features */}
-      <View style={styles.featuresBox}>
+        {/* Choose Your Plan Title */}
         <Bold
-          label="Unlock Everything Else:"
-          fontSize={mvs(16)}
-          color={colors.black}
-          style={styles.featuresTitle}
+          label="Choose Your Plan"
+          fontSize={mvs(14)}
+          color={colors.textColor}
+          style={styles.planTitle}
         />
-        {features.map(feature => {
-          const IconComponent = feature.icon;
-          return (
-            <View key={feature.id} style={styles.featureItem}>
-              {/* <View style={styles.featureIconWrapper}>
+
+        {/* Plan List */}
+        <FlatList
+          horizontal
+          data={plans}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.planList}
+          renderItem={({item}) => {
+            const isSelected = selectedPlan === item.id;
+            return (
+              <View
+                style={[
+                  styles.planCardWrapper,
+                  isSelected && styles.planCardWrapperActive,
+                ]}>
+                {item.popular && (
+                  <View style={styles.popularBadge}>
+                    <View style={styles.popularBadgeInner}>
+                      {/* <Regular style={styles.popularText}>MOST POPULAR</Regular> */}
+                      <Regular
+                      label={'MOST POPULAR'}
+                      fontSize={mvs(12)}
+
+                style={styles.popularText}
+                    />
+                    </View>
+                  </View>
+                )}
+                {item.best && (
+                  <View style={styles.bestBadge}>
+                    <View style={styles.bestBadgeInner}>
+                      {/* <Text style={styles.bestText}>BEST</Text> */}
+                      <Regular
+                      label={'BEST'}
+                      fontSize={mvs(12)}
+
+                style={styles.popularText}
+                    />
+                    </View>
+                  </View>
+                )}
+                <TouchableOpacity
+                  onPress={() => setSelectedPlan(item.id)}
+                  style={styles.planCard}>
+                  <View style={styles.planCardInner}>
+                    <Regular
+                      label={item.title}
+                      fontSize={mvs(16)}
+                      color={'#404040'}
+                      style={{fontWeight: '400'}}
+                    />
+                    <Regular
+                      label={item.price}
+                      fontSize={mvs(14)}
+                      color={'#8C8C8C'}
+                      style={{fontWeight: '400', marginTop: mvs(4)}}
+                    />
+                    <Regular
+                      label={item.sub}
+                      fontSize={mvs(14)}
+                      color={'#8C8C8C'}
+                      style={{fontWeight: '400'}}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+        />
+
+        {/* Features */}
+        <View style={styles.featuresBox}>
+          <Bold
+            label="Unlock Everything Else:"
+            fontSize={mvs(14)}
+            color={colors.textColor}
+            style={styles.featuresTitle}
+          />
+          {features.map(feature => {
+            const IconComponent = feature.icon;
+            return (
+              <View key={feature.id} style={styles.featureItem}>
+                {/* <View style={styles.featureIconWrapper}>
                 <IconComponent width={mvs(20)} height={mvs(20)} />
               </View> */}
-              <View style={styles.featureTextWrapper}>
-                <Regular
-                  label={`• ${feature?.text}`}
-                  fontSize={mvs(14)}
-                  color={"#8C8C8C"}
-                  style={{fontWeight: '400'}}
-                />
-                <Regular
-                  label={feature?.description}
-                  fontSize={mvs(14)}
-                  color={"#8C8C8C"}
-                  style={{fontWeight: '400',marginTop: mvs(2),marginLeft: mvs(10)}}
-                  // style={styles.featureDescription}
-                />
+                <View style={styles.featureTextWrapper}>
+                  <Regular
+                    label={`• ${feature?.text}`}
+                    fontSize={mvs(14)}
+                    color={'#8C8C8C'}
+                    style={{fontWeight: '400'}}
+                  />
+                  <Regular
+                    label={feature?.description}
+                    fontSize={mvs(14)}
+                    color={'#8C8C8C'}
+                    style={{
+                      fontWeight: '400',
+                      marginTop: mvs(2),
+                      marginLeft: mvs(10),
+                    }}
+                    // style={styles.featureDescription}
+                  />
+                </View>
               </View>
-            </View>
-          );
-        })}
-      </View>
+            );
+          })}
+        </View>
 
         {/* Subscribe Button */}
         {/* <TouchableOpacity style={styles.subscribeBtn}> */}
-        <TouchableOpacity onPress={() => navigate("MainInboxScreen")} style={styles.subscribeBtn}>
-          <Bold
-            label={subscribeText}
-            fontSize={mvs(15)}
-            color={colors.white}
-          />
+        <TouchableOpacity
+          onPress={() => navigate('MainInboxScreen')}
+          style={styles.subscribeBtn}>
+          <Bold label={subscribeText} fontSize={mvs(15)} color={colors.white} />
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -255,7 +281,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.white,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
     paddingTop: mvs(40),
   },
 
@@ -283,7 +309,7 @@ const styles = StyleSheet.create({
 
   closeText: {
     fontSize: mvs(20),
-    color: colors.black,
+    color: '#8C8C8C',
     fontWeight: '300',
   },
 
@@ -347,14 +373,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(10),
     width: mvs(140),
     height: mvs(150),
-    borderRadius: mvs(20),
-    borderColor: '#E5E7EB',
+    borderRadius: mvs(24),
+    borderColor: colors.primary,
+   backgroundColor: 'rgba(225, 225, 225, 0.2)',
     alignItems: 'center',
-    borderWidth: 1,
+    // borderWidth: 1,
   },
 
   planCardWrapperActive: {
     borderColor: colors.primary,
+    borderWidth: 1,
   },
 
   planCard: {
@@ -369,7 +397,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: mvs(16),
+    borderRadius: mvs(20),
   },
 
   popularBadge: {
@@ -383,22 +411,26 @@ const styles = StyleSheet.create({
 
   popularBadgeInner: {
     backgroundColor: colors.primary,
+    width:mvs(132),
+    alignSelf:'center',
+    justifyContent:"center",
+    alignItems:"center",
     paddingHorizontal: mvs(18),
     paddingVertical: mvs(8),
-    borderRadius: mvs(12),
+    borderRadius: mvs(30),
   },
 
   popularText: {
-    fontSize: mvs(12),
+    // fontSize: mvs(12),
     color: colors.white,
     fontWeight: '400',
-    fontFamily:fonts.regular,
-    letterSpacing:0
+    // fontFamily: fonts.regular,
+    letterSpacing: 0,
   },
 
   bestBadge: {
     position: 'absolute',
-    top: -mvs(6),
+    top: -mvs(10),
     left: 0,
     right: 0,
     alignItems: 'center',
@@ -406,18 +438,23 @@ const styles = StyleSheet.create({
   },
 
   bestBadgeInner: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: mvs(12),
-    paddingVertical: mvs(4),
-    borderRadius: mvs(12),
+       backgroundColor: colors.primary,
+    width:mvs(128),
+    alignSelf:'center',
+    justifyContent:"center",
+    alignItems:"center",
+    paddingHorizontal: mvs(18),
+    paddingVertical: mvs(8),
+    borderRadius: mvs(30),
+
   },
 
   bestText: {
     fontSize: mvs(12),
     color: colors.white,
     fontWeight: '400',
-    fontFamily:fonts.regular,
-    letterSpacing:0
+    fontFamily: fonts.regular,
+    letterSpacing: 0,
   },
 
   featuresBox: {
@@ -454,11 +491,11 @@ const styles = StyleSheet.create({
   subscribeBtn: {
     marginTop: mvs(30),
     marginBottom: mvs(30),
-    width: '100%',
+    width: '90%',alignSelf:'center',
     borderRadius: mvs(24),
     backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    height:mvs(43)
+    height: mvs(43),
   },
 });

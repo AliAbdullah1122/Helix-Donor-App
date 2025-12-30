@@ -83,7 +83,7 @@ const BlockedContactsScreen = props => {
               <Regular
                 label={contact.name}
                 fontSize={mvs(14)}
-                color={colors.textColor}
+                color={colors.textColorSecondary}
                 style={styles.contactName}
               />
             </View>

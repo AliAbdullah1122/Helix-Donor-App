@@ -54,7 +54,7 @@ const ManageSusbcriptionScreen = props => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="Manage Subscription" fontSize={mvs(18)} color={colors.textColor} />
+        <Medium label="Manage Subscription" fontSize={mvs(18)} color={colors.textColor} />
         <View style={{width: mvs(24)}} />
       </Row>
 
@@ -76,7 +76,7 @@ const ManageSusbcriptionScreen = props => {
           color={colors.textColorSecondary}
           style={styles.sectionValue}
         />
-        <View style={styles.separator} />
+       <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
 
         {/* STATUS Section */}
         <Bold
@@ -91,7 +91,7 @@ const ManageSusbcriptionScreen = props => {
           color={colors.textColorSecondary}
           style={styles.sectionValue}
         />
-        <View style={styles.separator} />
+       <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
 
         {/* NEXT BILLING DATE Section */}
         <Bold
@@ -106,7 +106,7 @@ const ManageSusbcriptionScreen = props => {
           color={colors.textColorSecondary}
           style={styles.sectionValue}
         />
-        <View style={styles.separator} />
+       <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
 
         {/* GENETIC SCREENING PARTNER Section */}
         <Bold

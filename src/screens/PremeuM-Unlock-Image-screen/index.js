@@ -8,6 +8,7 @@ import {
   FlatList,
   StatusBar,
   ScrollView,
+  Platform,
 } from 'react-native';
 import { mvs } from 'config/metrices';
 import { colors } from 'config/colors';
@@ -17,6 +18,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import fonts from 'assets/fonts';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const plans = [
   {
@@ -86,7 +88,10 @@ const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
+     <SafeAreaView
+             style={{marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0}}
+           />
+           <StatusBar barStyle="dark-content" />
 
       {/* Header */}
       <View style={styles.header}>
@@ -113,27 +118,37 @@ const navigation = useNavigation();
             <Medium
               label="See the Real Person"
               fontSize={mvs(24)}
-              color={colors.black}
+              color={colors.textColor}
               style={styles.titleText}
             />
             <Regular
               label="Unlock current adult photos to see what donors look like today."
-              fontSize={mvs(13)}
+              fontSize={mvs(14)}
               numberOfLines={10}
-              color={colors.subteXTcOLOR}
+              color={colors.textColorSecondary}
               style={styles.subtitle}
             />
           </View>
         </View>
 
         {/* Divider */}
-        <View style={styles.divider} />
+         <View
+                  style={{
+                    marginBottom: mvs(20),
+                    borderWidth: 1,
+                    borderColor: colors.placeholder,
+                    width: '100%',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: mvs(20),
+                  }}></View>
 
         {/* Choose Your Plan Title */}
         <Bold
           label="Choose Your Plan"
-          fontSize={mvs(16)}
-          color={colors.black}
+          fontSize={mvs(14)}
+          color={colors.textColor}
           style={styles.planTitle}
         />
 
@@ -155,14 +170,26 @@ const navigation = useNavigation();
                 {item.popular && (
                   <View style={styles.popularBadge}>
                     <View style={styles.popularBadgeInner}>
-                      <Text style={styles.popularText}>MOST POPULAR</Text>
+                      {/* <Regular style={styles.popularText}>MOST POPULAR</Regular> */}
+                      <Regular
+                      label={'MOST POPULAR'}
+                      fontSize={mvs(12)}
+
+                style={styles.popularText}
+                    />
                     </View>
                   </View>
                 )}
                 {item.best && (
                   <View style={styles.bestBadge}>
                     <View style={styles.bestBadgeInner}>
-                      <Text style={styles.bestText}>BEST</Text>
+                      {/* <Text style={styles.bestText}>BEST</Text> */}
+                      <Regular
+                      label={'BEST'}
+                      fontSize={mvs(12)}
+
+                style={styles.popularText}
+                    />
                     </View>
                   </View>
                 )}
@@ -173,20 +200,20 @@ const navigation = useNavigation();
                     <Regular
                       label={item.title}
                       fontSize={mvs(16)}
-                      color={"#404040"}
-                      style={{ fontWeight: '400' }}
+                      color={'#404040'}
+                      style={{fontWeight: '400'}}
                     />
                     <Regular
                       label={item.price}
                       fontSize={mvs(14)}
-                      color={"#8C8C8C"}
-                      style={{ fontWeight: '400', marginTop: mvs(4) }}
+                      color={'#8C8C8C'}
+                      style={{fontWeight: '400', marginTop: mvs(4)}}
                     />
                     <Regular
                       label={item.sub}
                       fontSize={mvs(14)}
-                      color={"#8C8C8C"}
-                      style={{ fontWeight: '400' }}
+                      color={'#8C8C8C'}
+                      style={{fontWeight: '400'}}
                     />
                   </View>
                 </TouchableOpacity>
@@ -199,8 +226,8 @@ const navigation = useNavigation();
         <View style={styles.featuresBox}>
           <Bold
             label="Unlock Everything Else:"
-            fontSize={mvs(16)}
-            color={colors.black}
+            fontSize={mvs(14)}
+            color={colors.textColor}
             style={styles.featuresTitle}
           />
           {features.map(feature => {
@@ -276,7 +303,7 @@ const styles = StyleSheet.create({
 
   closeText: {
     fontSize: mvs(20),
-    color: colors.black,
+    color: colors.textColorSecondary,
     fontWeight: '300',
   },
 
@@ -333,23 +360,24 @@ const styles = StyleSheet.create({
     paddingBottom: mvs(10),
   },
 
-  planCardWrapper: {
+planCardWrapper: {
     marginRight: mvs(12),
     position: 'relative',
     padding: mvs(10),
     paddingHorizontal: mvs(10),
     width: mvs(140),
     height: mvs(150),
-    borderRadius: mvs(20),
-    borderColor: '#E5E7EB',
+    borderRadius: mvs(24),
+    borderColor: colors.primary,
+   backgroundColor: 'rgba(225, 225, 225, 0.2)',
     alignItems: 'center',
-    borderWidth: 1,
+    // borderWidth: 1,
   },
 
   planCardWrapperActive: {
     borderColor: colors.primary,
+    borderWidth: 1,
   },
-
   planCard: {
     width: mvs(120),
     height: mvs(130),
@@ -362,7 +390,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: mvs(16),
+    borderRadius: mvs(20),
   },
 
   popularBadge: {
@@ -376,22 +404,26 @@ const styles = StyleSheet.create({
 
   popularBadgeInner: {
     backgroundColor: colors.primary,
+    width:mvs(132),
+    alignSelf:'center',
+    justifyContent:"center",
+    alignItems:"center",
     paddingHorizontal: mvs(18),
     paddingVertical: mvs(8),
-    borderRadius: mvs(12),
+    borderRadius: mvs(30),
   },
 
   popularText: {
-    fontSize: mvs(12),
+    // fontSize: mvs(12),
     color: colors.white,
-     fontWeight: '400',
-    fontFamily:fonts.regular,
-    letterSpacing:0
+    fontWeight: '400',
+    // fontFamily: fonts.regular,
+    letterSpacing: 0,
   },
 
   bestBadge: {
     position: 'absolute',
-    top: -mvs(6),
+    top: -mvs(10),
     left: 0,
     right: 0,
     alignItems: 'center',
@@ -399,12 +431,16 @@ const styles = StyleSheet.create({
   },
 
   bestBadgeInner: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: mvs(12),
-    paddingVertical: mvs(4),
-    borderRadius: mvs(12),
-  },
+       backgroundColor: colors.primary,
+    width:mvs(128),
+    alignSelf:'center',
+    justifyContent:"center",
+    alignItems:"center",
+    paddingHorizontal: mvs(18),
+    paddingVertical: mvs(8),
+    borderRadius: mvs(30),
 
+  },
   bestText: {
     fontSize: mvs(12),
     color: colors.white,
@@ -447,7 +483,8 @@ const styles = StyleSheet.create({
   subscribeBtn: {
     marginTop: mvs(30),
     marginBottom: mvs(30),
-    width: '100%',
+    width: '90%',
+    alignSelf:'center',
     height: mvs(50),
     borderRadius: mvs(24),
     backgroundColor: colors.primary,

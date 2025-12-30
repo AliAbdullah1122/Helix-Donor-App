@@ -5,8 +5,8 @@ import {colors} from 'config/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,
-    paddingHorizontal: 20,
+    backgroundColor: colors.helixBackground,
+    paddingHorizontal: mvs(20),
   },
   body: {
     flex: 1,

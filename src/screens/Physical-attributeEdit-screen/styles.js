@@ -5,8 +5,8 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    backgroundColor: colors.helixBackground,    
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   contentContainerStyleNew: {
     flexGrow: 1,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(2),
     paddingVertical: mvs(10),
     // backgroundColor: colors.white,
     justifyContent: 'flex-start',
@@ -307,7 +307,7 @@ elevation: 4,
     justifyContent: 'center',
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -317,7 +317,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   section: {
@@ -348,34 +348,36 @@ elevation: 4,
     alignItems: 'center',
   },
   saveButtonContainer: {
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(15),
     paddingBottom: mvs(40),
     paddingTop: mvs(10),
     // backgroundColor: colors.white,
   },
   saveButton: {
     borderRadius: mvs(25),
-    height: mvs(50),
+    height: mvs(43),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf: 'center',
   },
   attributeSection: {
-    marginBottom: mvs(20),
+    marginBottom: mvs(0),
   },
   attributeLabel: {
-    marginBottom: mvs(8),
+    marginBottom: mvs(4),
+    marginLeft: mvs(6),
   },
   attributeRow: {
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
     gap: mvs(12),
   },
   attributeInput: {
     flex: 1,
-    borderRadius: mvs(16),
+    borderRadius: mvs(24),
     borderWidth: 1,
-    borderColor: '#E5E5E5',
-    height: mvs(50),
+    borderColor: '#18181B0F',
+    height: mvs(46),
     backgroundColor: colors.white,
   },
   instructionText: {

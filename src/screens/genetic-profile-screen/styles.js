@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.helixBackground,    
-    // paddingHorizontal:mvs(5)
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -232,7 +232,7 @@ elevation: 4,
   searchInput: {
     flex: 1,
     fontSize: mvs(14),
-    color: colors.textColor,
+    color: colors.inputText,
   },
   suggestionsContainer: {
     position: 'absolute',
@@ -297,7 +297,7 @@ elevation: 4,
     justifyContent: 'center',
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -307,7 +307,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(100),
   },
   section: {
@@ -349,7 +349,8 @@ elevation: 4,
     borderRadius: mvs(25),
     height: mvs(50),
     backgroundColor: colors.primary || '#3A3E90',
-    width: '100%',
+    width: '60%',
+    alignSelf:"center"
   },
   attributeSection: {
     marginBottom: mvs(20),
@@ -468,8 +469,8 @@ elevation: 4,
   },
   dividerLine: {
     flex: 1,
-    height: 1,
-    backgroundColor: '#E5E5E5',
+    height: 1.2,
+    backgroundColor: '#D9D9D9',
   },
   dividerText: {
     marginHorizontal: mvs(12),

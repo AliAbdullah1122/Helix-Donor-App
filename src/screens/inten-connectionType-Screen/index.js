@@ -201,7 +201,10 @@ const IntentConnectiontypeScreen = props => {
         </View>
 
         {/* Continue Button */}
-        <Row>
+       
+      </ScrollView>
+
+       <Row style={{marginBottom:mvs(40)}}>
         {/* <PrimaryButton
           containerStyle={styles.BackButton}
          onPress={() => navigation.goBack()}
@@ -227,7 +230,6 @@ const IntentConnectiontypeScreen = props => {
             title={'Continue'}
         />
         </Row>
-      </ScrollView>
     </View>
   );
 };

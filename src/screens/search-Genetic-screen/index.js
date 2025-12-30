@@ -7,6 +7,7 @@ import {
   StatusBar,
   Dimensions,
   TextInput,
+  Platform,
 } from 'react-native';
 import {mvs} from 'config/metrices';
 import {colors} from 'config/colors';
@@ -17,6 +18,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {navigate, goBack} from 'navigation/navigation-ref';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
@@ -28,52 +30,36 @@ const SearchGeneticScreen = () => {
   const allConditions = useMemo(
     () => [
       {
-        name: '17-Beta Hydroxysteroid Dehydrogenase 3 Deficiency',
+        name: '17-Beta Hydroxysteroid Dehydrogenase 3 Deficiency (HSD17B.3)',
         abbreviation: 'HSD17B.3',
       },
       {
-        name: '21-Alpha-Hydroxylase-Deficient Congenital Adrenal Hyperplasia',
+        name: '21-Alpha-Hydroxylase-Deficient Congenital Adrenal Hyperplasia (CYP21A2)',
         abbreviation: 'CYP21A2',
       },
       {
-        name: '3-Hydroxy-3-Methylglutaryl-CoA Lyase Deficiency',
+        name: '3-Hydroxy-3-Methylglutaryl-CoA Lyase Deficiency (HMGCL)',
         abbreviation: 'HMGCL',
       },
       {
-        name: '3-Methylcrotonyl-CoA Carboxylase Deficiency, MCCC1-Related',
+        name: '3-Methylcrotonyl-CoA Carboxylase Deficiency, MCCC1-Related (MCCC1)',
         abbreviation: 'MCCC1',
       },
       {
-        name: '3-Methylcrotonyl-CoA Carboxylase Deficiency, MCCC2-Related',
+        name: '3-Methylcrotonyl-CoA Carboxylase Deficiency, MCCC2-Related (MCCC2)',
         abbreviation: 'MCCC2',
       },
       {
-        name: '3-Methylglutaconic Aciduria Type IIL also known as Costeff Optic Atrophy',
+        name: '3-Methylglutaconic Aciduria Type IIL also known as Costeff Optic Atrophy (OPA3)',
         abbreviation: 'OPA3',
       },
       {
-        name: '3-Phosphoglycerate Dehydrogenase Deficiency_ PHGDH-Related',
+        name: '3-Phosphoglycerate Dehydrogenase Deficiency_ PHGDH-Related (PHGDH)',
         abbreviation: 'PHGDH',
       },
       {
-        name: '6-Pyruvoyl-Tetrahydropterin Synthase Deficiency',
+        name: '6-Pyruvoyl-Tetrahydropterin Synthase Deficiency (PTS)',
         abbreviation: 'PTS',
-      },
-      {
-        name: 'Aarskog-Scott Syndrome',
-        abbreviation: 'FGD1',
-      },
-      {
-        name: 'Abetalipoproteinemia',
-        abbreviation: 'MTTP',
-      },
-      {
-        name: 'Achondroplasia',
-        abbreviation: 'FGFR3',
-      },
-      {
-        name: 'Acute Intermittent Porphyria',
-        abbreviation: 'HMBS',
       },
     ],
     [],
@@ -111,16 +97,18 @@ const SearchGeneticScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+           <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
+     
 
       {/* Header */}
       <Row style={styles.headerRow}>
         <TouchableOpacity onPress={() => goBack()}>
-          <Icon name="arrow-back-ios" size={mvs(22)} color={colors.textColor} />
+          <Icon name="arrow-back-ios" size={mvs(22)} color={colors.textColorSecondary} />
         </TouchableOpacity>
         <Bold label="Exclude Conditions" fontSize={mvs(18)} color={colors.textColor} />
         <TouchableOpacity onPress={() => goBack()}>
-          <Icon name="close" size={mvs(22)} color={colors.black} />
+          <Icon name="close" size={mvs(22)} color={colors.textColorSecondary} />
         </TouchableOpacity>
       </Row>
 
@@ -147,11 +135,12 @@ const SearchGeneticScreen = () => {
         {/* Search Bar */}
         <View style={styles.searchContainer}>
           <View style={styles.searchInputContainer}>
-            <Icon name="search" size={mvs(20)} color="#8C8C8C" />
+            {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
+            <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
             <TextInput
               style={styles.searchInput}
               placeholder="Search conditions to exclude"
-              placeholderTextColor="#8C8C8C"
+              placeholderTextColor={colors.placeholder}
               value={searchText}
               onChangeText={setSearchText}
             />
@@ -164,7 +153,7 @@ const SearchGeneticScreen = () => {
             <Medium
               label="Selected"
               fontSize={mvs(14)}
-              color={colors.black}
+              color={colors.textColor}
               style={styles.sectionTitle}
             />
             <View style={styles.chipRow}>
@@ -176,7 +165,7 @@ const SearchGeneticScreen = () => {
                 />
               ))}
             </View>
-            <View style={styles.divider} />
+           <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
           </>
         )}
 
@@ -194,17 +183,17 @@ const SearchGeneticScreen = () => {
                   numberOfLines={10}
                   color={colors.textColor}
                 />
-                <Regular
+                {/* <Regular
                   label={`(${condition.abbreviation})`}
                   fontSize={mvs(14)}
                   numberOfLines={10}
-                  color="#8C8C8C"
+                  color={colors.textColor}
                   style={{marginTop: mvs(2)}}
-                />
+                /> */}
               </View>
-              {selectedConditions.includes(condition.abbreviation) && (
+              {/* {selectedConditions.includes(condition.abbreviation) && (
                 <Icon name="checkmark" size={mvs(20)} color={colors.primary} />
-              )}
+              )} */}
             </TouchableOpacity>
           ))}
         </View>
@@ -245,10 +234,12 @@ export default SearchGeneticScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    // backgroundColor: '#F5F5F9',
+    backgroundColor:colors.helixBackground,
+    paddingHorizontal:mvs(16)
   },
   headerRow: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(10),
     justifyContent: 'space-between',
@@ -264,6 +255,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: mvs(40),
     paddingHorizontal: mvs(16),
+    height:mvs(46),
     paddingVertical: mvs(4),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -275,7 +267,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: mvs(12),
     fontSize: mvs(14),
-    color: colors.black,
+    color: colors.inputText,
   },
   divider: {
     height: mvs(1.5),
@@ -286,7 +278,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
   },
   exclusionSection: {
     marginTop: mvs(12),
@@ -318,13 +310,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   conditionsList: {
-    marginTop: mvs(8),
+    // marginTop: mvs(8),
   },
   conditionItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    paddingVertical: mvs(14),
+    paddingVertical: mvs(6),
   },
   conditionTextContainer: {
     flex: 1,
@@ -344,11 +336,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: mvs(48),
     borderRadius: mvs(24),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     marginRight: mvs(8),
   },
   saveButton: {

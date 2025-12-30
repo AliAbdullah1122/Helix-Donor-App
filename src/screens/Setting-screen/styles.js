@@ -5,8 +5,8 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,    
-    // paddingHorizontal:mvs(5)
+    backgroundColor: colors.helixBackground,    
+    paddingHorizontal:mvs(12)
 
   },
   imglogo:{
@@ -297,7 +297,7 @@ elevation: 4,
     justifyContent: 'center',
   },
   header: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(14),
     paddingTop: mvs(20),
     paddingBottom: mvs(16),
     justifyContent: 'space-between',
@@ -307,7 +307,7 @@ elevation: 4,
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(12),
     paddingBottom: mvs(100),
   },
   section: {
@@ -316,6 +316,7 @@ elevation: 4,
   sectionTitle: {
     marginBottom: mvs(12),
     textTransform: 'uppercase',
+    foontweight: '600',
   },
   multilineInput: {
     borderRadius: mvs(16),
@@ -512,8 +513,9 @@ elevation: 4,
   },
   separator: {
     height: 1,
-    backgroundColor: '#E5E5E5',
-    marginBottom: mvs(20),
+    backgroundColor: '#D9D9D9',
+    marginBottom: mvs(15),
+    marginTop: mvs(10),
   },
   bottomButtonsContainer: {
     flexDirection: 'row',
@@ -548,15 +550,15 @@ elevation: 4,
     marginBottom: mvs(4),
   },
   logOutButtonContainer: {
-    paddingHorizontal: mvs(20),
+    // paddingHorizontal: mvs(20),
     paddingBottom: mvs(40),
-    paddingTop: mvs(10),
+    // paddingTop: mvs(10),
     alignItems: 'center',
   },
   logOutButton: {
-    width: '100%',
-    height: mvs(50),
-    borderRadius: mvs(25),
+    width: '50%',
+    height: mvs(43),
+    borderRadius: mvs(24),
     backgroundColor: colors.primary || '#3A3E90',
     alignItems: 'center',
     justifyContent: 'center',

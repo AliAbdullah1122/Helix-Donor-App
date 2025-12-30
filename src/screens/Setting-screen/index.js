@@ -81,7 +81,7 @@ const SettingsScreen = props => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
-        <Bold label="Settings" fontSize={mvs(18)} color={colors.textColor} />
+        <Medium label="Settings" fontSize={mvs(18)} color={colors.textColor} />
         <View style={{width: mvs(24)}} />
       </Row>
 
@@ -106,9 +106,9 @@ const SettingsScreen = props => {
           <Regular
             label="Blocked Contacts"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
           />
-          <Icon name="chevron-forward" size={mvs(20)} color={colors.textColorSecondary} />
+          <Icon name="chevron-forward" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -118,9 +118,9 @@ const SettingsScreen = props => {
           <Regular
             label="Delete Account"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
           />
-          <Icon name="chevron-forward" size={mvs(20)} color={colors.textColorSecondary} />
+          <Icon name="chevron-forward" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
 
         <View style={styles.separator} />
@@ -140,9 +140,9 @@ const SettingsScreen = props => {
           <Regular
             label="Help & Support Centre"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
           />
-          <Icon name="chevron-forward" size={mvs(20)} color={colors.textColorSecondary} />
+          <Icon name="chevron-forward" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -153,9 +153,9 @@ const SettingsScreen = props => {
           <Regular
             label="Resources"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
           />
-          <Icon name="chevron-forward" size={mvs(20)} color={colors.textColorSecondary} />
+          <Icon name="chevron-forward" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
 
         <View style={styles.separator} />
@@ -175,9 +175,9 @@ const SettingsScreen = props => {
           <Regular
             label="Privacy Policy"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
           />
-          <Icon name="chevron-forward" size={mvs(20)} color={colors.textColorSecondary} />
+          <Icon name="chevron-forward" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -187,9 +187,9 @@ const SettingsScreen = props => {
           <Regular
             label="Terms of Service"
             fontSize={mvs(14)}
-            color={colors.textColor}
+            color={colors.textColorSecondary}
           />
-          <Icon name="chevron-forward" size={mvs(20)} color={colors.textColorSecondary} />
+          <Icon name="chevron-forward" size={mvs(20)} color={"#A6A6A6"} />
         </TouchableOpacity>
       </ScrollView>
 

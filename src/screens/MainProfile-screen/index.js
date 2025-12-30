@@ -52,61 +52,63 @@ const MainProfileScreen = () => {
 
   return (
     <View style={{flex: 1}}>
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-      <StatusBar backgroundColor="transparent" barStyle="light-content" translucent />
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0,backgroundColor:colors.primary}} />
+      <StatusBar backgroundColor={colors.primary} barStyle="light-content" translucent />
+
+      <ScrollView
+              showsVerticalScrollIndicator={false}
+              bounces={false}
+              contentContainerStyle={{ backgroundColor:"black" }}>
 
       {/* Full Background Image */}
-      <Image
-        source={profile.image}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      />
+<View style={styles.header}>
+  <Image
+    source={profile.image}
+    style={styles.headerImage}
+    resizeMode="cover"
+  />
 
-      {/* Top overlay controls */}
-      
-      <Row style={styles.topOverlayRow}>
-        <View />
-        <TouchableOpacity style={styles.settingsButton} onPress={() => navigate('SettingsScreen')}>
-          <IMG.SettingsProfile width={mvs(30)} height={mvs(30)} />
-        </TouchableOpacity>
+  <View style={styles.headerOverlay}>
+    <Row style={styles.topOverlayRow}>
+      <View />
+      <TouchableOpacity
+        style={styles.settingsButton}
+        onPress={() => navigate('SettingsScreen')}>
+        <IMG.SettingsProfile width={mvs(30)} height={mvs(30)} />
+      </TouchableOpacity>
+    </Row>
+
+    <View style={styles.nameLocationContainer}>
+      <Bold label={`${profile.name}, ${profile.age}`} fontSize={mvs(28)} color={colors.white} />
+      <Row style={{alignItems: 'center',justifyContent:"flex-start", marginTop: mvs(4)}}>
+        <IMG.HomeFlags width={mvs(22)} height={mvs(16)} />
+        <Medium label={` ${profile.location}`} fontSize={mvs(24)} color={colors.white} />
       </Row>
-
-      {/* Name and Location overlaid on image */}
-      <View style={styles.nameLocationContainer}>
-        <Bold
-          label={`${profile.name}, ${profile.age}`}
-          fontSize={mvs(28)}
-          color={colors.white}
-        />
-        <Row style={{alignItems: 'center', marginTop: mvs(4)}}>
-          <IMG.HomeFlags width={mvs(22)} height={mvs(16)} />
-          <Medium
-            label={` ${profile.location}`}
-            fontSize={mvs(24)}
-            color={colors.white}
-            style={{marginLeft: mvs(4)}}
-          />
-        </Row>
+ <View style={styles.editButtonContainer}>
+      
+    
+      <TouchableOpacity
+        onPress={() => navigate('AccountRoleScreen')}
+        style={styles.editProfileButton}>
+        <IMG.EditNewImage width={mvs(16)} height={mvs(16)} />
+        <Medium label="Edit Profile" fontSize={mvs(14)} color={colors.black} style={{marginLeft: mvs(8)}} />
+      </TouchableOpacity>
       </View>
+    </View>
 
-      {/* Edit Profile Button overlaid on image */}
-      <View style={styles.editButtonContainer}>
-        <TouchableOpacity  onPress={()=> navigate("AccountRoleScreen")} style={styles.editProfileButton}>
-          <IMG.EditNewImage width={mvs(16)} height={mvs(16)} />
-          <Medium
-            label="Edit Profile"
-            fontSize={mvs(14)}
-            color={colors.black}
-            style={{marginLeft: mvs(8)}}
-          />
-        </TouchableOpacity>
-      </View>
+    <View style={styles.editButtonContainer}>
+      
+    </View>
+  </View>
+</View>
+
 
       {/* Scrollable content starting from blue section */}
-      <ScrollView
+      <View
         style={styles.scrollContainer}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}>
+        // contentContainerStyle={styles.scrollContent}
+        // showsVerticalScrollIndicator={false}
+        >
         {/* Blue info sheet - first item in scroll */}
         <View style={styles.infoSheet}>
             <Row style={styles.infoTopRow}>
@@ -359,24 +361,28 @@ const MainProfileScreen = () => {
               <Medium
                 label="Personality & Interests"
                 fontSize={mvs(14)}
+                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(8), alignSelf: 'center'}}
               />
               <Medium
                 label="Adjectives"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(4)}}
               />
               <Regular
                 label="Smart, Flexible, Persevering (Determined)"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(8)}}
               />
               <Medium
                 label="Favorite Hero"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(4)}}
               />
@@ -384,6 +390,7 @@ const MainProfileScreen = () => {
                 label="Mother Theresa – she excelled in teaching and used all her resources to help, nourish, and educate the most disadvantaged."
                 fontSize={mvs(14)}
                 color={colors.primary}
+                                numberOfLines={10}
                 style={{marginBottom: mvs(8)}}
               />
               <Medium
@@ -978,12 +985,14 @@ const MainProfileScreen = () => {
               <Regular
                 label="Limb-Girdle Muscular Dystrophy, Type 2A (CAPN3): Carrier"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(4)}}
               />
               <Regular
                 label="• One pathogenic variant, c.1465C>T, p.R489W, was detected."
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
               />
               <Regular
@@ -995,27 +1004,32 @@ const MainProfileScreen = () => {
               <Medium
                 label="NEGATIVE RESULTS"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(4)}}
               />
               <Regular
                 label="Cystic Fibrosis (CFTR): Reduced Risk"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
               />
               <Regular
                 label="Spinal Muscular Atrophy (SMN1): Reduced Risk (2 copies of SMN1 detected)"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
               />
               <Regular
                 label="Tay-Sachs Disease (HEXA): Reduced Risk (Normal enzyme analysis)"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
               />
               <Regular
                 label="Sickle Cell Disease (HBB): Reduced Risk"
                 fontSize={mvs(14)}
+                                numberOfLines={10}
                 color={colors.primary}
                 style={{marginBottom: mvs(12)}}
               />
@@ -1048,12 +1062,12 @@ const MainProfileScreen = () => {
           {subscriptionExpanded && (
             <View style={styles.sectionBody}>
               <Row style={styles.sectionRow}>
-                <Medium label="Status" fontSize={mvs(14)} color={colors.primary} />
+                <Medium label="Status" fontSize={mvs(14)} color={colors.white} />
                 <Row style={{alignItems: 'center'}}>
                   <Regular
                     label="Premium Member"
                     fontSize={mvs(14)}
-                    color={colors.primary}
+                    color={colors.white}
                   />
                   {/* <Icon name="star" size={mvs(16)} color="#EAB308" style={{marginLeft: mvs(4)}} /> */}
                   <IMG.MatchSparkle width={mvs(12)} height={mvs(12)}/>
@@ -1102,6 +1116,7 @@ const MainProfileScreen = () => {
             </View>
           )}
         </View>
+      </View>
       </ScrollView>
     </View>
   );
@@ -1111,66 +1126,82 @@ export default MainProfileScreen;
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    width: SCREEN_WIDTH,
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    // width: SCREEN_WIDTH,
+    // height: Dimensions.get('window').height,
+      width: SCREEN_WIDTH,
     height: Dimensions.get('window').height,
   },
   topOverlayRow: {
-    position: 'absolute',
-    top: mvs(70),
-    left: mvs(20),
-    right: mvs(20),
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    zIndex: 10,
+    // position: 'absolute',
+    // top: mvs(40),
+    // left: mvs(10),
+    // right: mvs(20),
+    // // backgroundColor:"red",
+    // justifyContent: 'flex-end',
+    // alignItems: 'center',
+    // zIndex: 10,
   },
   settingsButton: {
     // padding: mvs(8),
     // backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: mvs(8),
+    marginHorizontal:mvs(2)
 
   },
-  nameLocationContainer: {
-    position: 'absolute',
-    top: Dimensions.get('window').height * 0.38,
-    left: mvs(20),
-    // top:mvs(20),
-    // bottom:mvs(-20),
-    marginTop:mvs(20),
-    // backgroundColor:'red',
-    zIndex: 10,
-  },
-  editButtonContainer: {
-    position: 'absolute',
-    top: Dimensions.get('window').height * 0.50,
-    left: 0,
-    right: 0,
-    // bottom:mvs(20),
-    alignItems: 'center',
-    width:"100%",
-    zIndex: 10,
-  },
+  // nameLocationContainer: {
+  //   // position: 'absolute',
+  //   // top: Dimensions.get('window').height * 0.38,
+  //   // left: mvs(20),
+  //   // // top:mvs(20),
+  //   // // bottom:mvs(-20),
+  //   // marginTop:mvs(20),
+  //   // // backgroundColor:'red',
+  //   // zIndex: 10,
+  //    paddingHorizontal: mvs(10),
+  //   paddingTop: mvs(20),
+  //   // paddingBottom: mvs(-50),
+  //   marginTop: -mvs(550),
+  //   position: 'relative',
+  //   zIndex: 5,
+  // },
+  // editButtonContainer: {
+  //   // position: 'absolute',
+  //   top: Dimensions.get('window').height * 0.50,
+  //   // left: 0,
+  //   // right: 0,
+  //   // bottom:mvs(20),
+  //   alignItems: 'center',
+  //   width:"100%",
+  //  paddingTop: mvs(20),
+  //   // paddingBottom: mvs(-50),
+  //   marginTop: -mvs(430),
+  //   position: 'relative',
+  //   zIndex: 5,
+  // },
   editProfileButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'center',
-    width:"90%",
-    backgroundColor: "#D9D9D9",
-    borderRadius: mvs(20),
+    width:"100%",
+    backgroundColor: colors.white,
+    borderRadius: mvs(24),
     paddingHorizontal: mvs(16),
     paddingVertical: mvs(10),
     alignSelf: 'center',
   },
   scrollContainer: {
-    position: 'absolute',
-    top: Dimensions.get('window').height * 0.55,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    // position: 'absolute',
+    // top: Dimensions.get('window').height * 0.55,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    marginTop: mvs(12),
+    paddingHorizontal:mvs(12),
   },
   scrollContent: {
     paddingHorizontal: mvs(20),
@@ -1184,6 +1215,41 @@ const styles = StyleSheet.create({
     paddingTop: mvs(16),
     paddingBottom: mvs(14),
   },
+
+  header: {
+  height: mvs(380),
+  width: '100%',
+},
+
+headerImage: {
+   width: SCREEN_WIDTH,
+    height: Dimensions.get('window').height,
+},
+
+headerOverlay: {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  justifyContent: 'space-between',
+  paddingTop: mvs(40),
+  // paddingBottom: mvs(20),
+  paddingHorizontal: mvs(12),
+},
+
+nameLocationContainer: {
+  marginTop: mvs(205),
+
+
+},
+
+editButtonContainer: {
+  alignItems: 'center',
+  marginTop:mvs(14)
+  // marginBottom:mvs(20)
+},
+
   infoTopRow: {
     justifyContent: 'space-between',
     paddingHorizontal:mvs(20),

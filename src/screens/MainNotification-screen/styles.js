@@ -5,7 +5,8 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    // backgroundColor: '#F5F5F5',
+    backgroundColor:colors.helixBackground
   },
   imglogo:{
     width: '80%',

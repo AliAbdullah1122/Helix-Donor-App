@@ -338,7 +338,7 @@ const getBadgeIcon = (badge) => {
 
   return (
     <View style={styles.container}>
-          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0,backgroundColor:Platform.OS==='ios'? "#FFFFFF":""}} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Search Input */}
@@ -604,7 +604,8 @@ export default SearchResultFilterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    // backgroundColor: '#F5F5F9',
+    backgroundColor:colors.helixBackground
   },
   searchContainer: {
     paddingHorizontal: mvs(20),

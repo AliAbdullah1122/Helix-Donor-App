@@ -5,8 +5,9 @@ import {mvs, width} from 'config/metrices';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.lightGray || '#F5F5F5',
-    // paddingHorizontal: mvs(12),
+    // backgroundColor: colors.lightGray || '#F5F5F5',
+        backgroundColor: colors.helixBackground,
+    paddingHorizontal: mvs(12),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: mvs(0),
     marginBottom: mvs(20),
-    marginHorizontal:mvs(12)
+    // marginHorizontal:mvs(12)
   },
   headerTitle: {
     textAlign: 'center',
@@ -379,16 +380,16 @@ const styles = StyleSheet.create({
     width: '55%',
   },
   orderSummarySection: {
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     borderRadius: mvs(12),
-    padding: mvs(16),
+    // padding: mvs(16),
     marginTop: mvs(20),
     marginBottom: mvs(20),
   },
   paymentMethodSection: {
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     borderRadius: mvs(12),
-    padding: mvs(16),
+    // padding: mvs(16),
     marginBottom: mvs(20),
   },
   sectionTitle: {

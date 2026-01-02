@@ -198,8 +198,8 @@ elevation: 4,
     marginTop: mvs(2),
   },
   customCheckboxChecked: {
-    backgroundColor: colors.helixPrimary,
-    borderColor: colors.helixPrimary,
+    backgroundColor: colors.white,
+    // borderColor: colors.helixPrimary,
   },
   largeTextInput: {
     borderRadius: mvs(16),

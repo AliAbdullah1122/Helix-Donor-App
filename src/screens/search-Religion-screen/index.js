@@ -288,6 +288,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+        backgroundColor: colors.helixBackground,
     // backgroundColor: colors.white,
     marginRight: mvs(8),
   },

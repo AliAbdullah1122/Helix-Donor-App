@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.helixBackground,
-    paddingHorizontal: mvs(10), 
+    // paddingHorizontal: mvs(12), 
   },
   scrollContainer:{
     flexGrow: 1,
@@ -196,7 +196,7 @@ elevation: 4,
   },
   termsContainer: {
     paddingBottom: mvs(70),
-    paddingHorizontal: mvs(10),
+    // paddingHorizontal: mvs(10),
     // marginTop: mvs(0),
     alignItems: 'flex-start',
     // paddingTop: mvs(10),

@@ -471,7 +471,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(12),
     paddingTop: mvs(20),
     paddingBottom: mvs(10),
-    backgroundColor: "#f4f4ff",
+    // backgroundColor: "#f4f4ff",
+    backgroundColor:colors.helixBackground
   },
   headerRow: {
     justifyContent: 'space-between',
@@ -545,7 +546,7 @@ const styles = StyleSheet.create({
   },
   actionButtonsContainer: {
     position: 'absolute',
-    bottom:Platform.OS==='ios'? mvs(-55):mvs(-60),
+    bottom:Platform.OS==='ios'? mvs(-55):mvs(-65),
     left: 0,
     right: 0,
     justifyContent: 'center',

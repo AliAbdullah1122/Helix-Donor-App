@@ -71,9 +71,9 @@ const AboutScreen = props => {
         <View style={{ width: mvs(24) }} />
       </Row>
 
-      <ScrollView
+      <KeyboardAvoidScrollview
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={styles.keyboradscrollcontent}
         showsVerticalScrollIndicator={false}>
 
         {/* In Your Own Words Section */}
@@ -283,7 +283,7 @@ const AboutScreen = props => {
 
           </Row>
         </View>
-      </ScrollView>
+      </KeyboardAvoidScrollview>
 
       {/* Save Changes Button */}
       <View style={styles.saveButtonContainer}>

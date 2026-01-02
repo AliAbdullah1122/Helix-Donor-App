@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect, useRef} from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -16,15 +16,15 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import DocumentPicker from 'react-native-document-picker';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import * as IMG from 'assets/images';
-import {Row} from 'components/atoms/row';
+import { Row } from 'components/atoms/row';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MainInboxScreen = () => {
@@ -48,10 +48,10 @@ const MainInboxScreen = () => {
 
   const connections = useMemo(
     () => [
-      {id: 1, name: 'Nathan', image: IMG.SearchImage1},
-      {id: 2, name: 'Ethan', image: IMG.SearchImage2, isHighlighted: true},
-      {id: 3, name: 'Liam', image: IMG.SearchImage3, isOnline: true},
-      {id: 4, name: 'Jack', image: IMG.SearchImage1},
+      { id: 1, name: 'Nathan', image: IMG.SearchImage1 },
+      { id: 2, name: 'Ethan', image: IMG.SearchImage2, isHighlighted: true },
+      { id: 3, name: 'Liam', image: IMG.SearchImage3, isOnline: true },
+      { id: 4, name: 'Jack', image: IMG.SearchImage1 },
     ],
     [],
   );
@@ -93,7 +93,7 @@ const MainInboxScreen = () => {
     [],
   );
 
-  const renderConnection = ({item}) => {
+  const renderConnection = ({ item }) => {
     const ImageComponent = item.image;
     return (
       <View style={[styles.connectionItem, item.isHighlighted && styles.connectionHighlighted]}>
@@ -110,7 +110,7 @@ const MainInboxScreen = () => {
     );
   };
 
-  const renderMessage = ({item}) => {
+  const renderMessage = ({ item }) => {
     const ImageComponent = item.image;
     return (
       <View style={styles.messageCard}>
@@ -136,14 +136,14 @@ const MainInboxScreen = () => {
                 name="checkmark-done-outline"
                 size={mvs(14)}
                 color="#8C8C8C"
-                style={{marginRight: mvs(2)}}
+                style={{ marginRight: mvs(2) }}
               />
               <Regular
                 label={item.preview}
                 fontSize={mvs(13)}
                 color="#8C8C8C"
                 numberOfLines={1}
-                style={{flex: 1}}
+                style={{ flex: 1 }}
               />
               {item.unreadCount ? (
                 <View style={styles.unreadBadge}>
@@ -169,7 +169,7 @@ const MainInboxScreen = () => {
       id: Date.now().toString(),
       text: messageText.trim(),
       sent: true,
-      time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: 'Sent', // Will be updated to 'Delivered' then 'Read'
       replyTo: replyTo,
     };
@@ -177,25 +177,25 @@ const MainInboxScreen = () => {
     setMessageText('');
     setInputHeight(mvs(40));
     setReplyTo(null);
-    
+
     // Update status to Delivered after 1 second
     setTimeout(() => {
       setChatMessages(prev =>
         prev.map(msg =>
-          msg.id === newMessage.id ? {...msg, status: 'Delivered'} : msg
+          msg.id === newMessage.id ? { ...msg, status: 'Delivered' } : msg
         )
       );
     }, 1000);
-    
+
     // Update status to Read after 2 seconds
     setTimeout(() => {
       setChatMessages(prev =>
         prev.map(msg =>
-          msg.id === newMessage.id ? {...msg, status: 'Read'} : msg
+          msg.id === newMessage.id ? { ...msg, status: 'Read' } : msg
         )
       );
     }, 2000);
-    
+
     // Simulate receiving a reply after 3 seconds
     setTimeout(() => {
       // Liam replies to the message the user just sent
@@ -203,7 +203,7 @@ const MainInboxScreen = () => {
         id: (Date.now() + 1).toString(),
         text: 'Hi Jessica, thanks for reaching out. It\'s nice to hear from you.',
         sent: false,
-        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         replyTo: newMessage, // Liam replies to the message user just sent
       };
       setChatMessages(prev => [...prev, replyMessage]);
@@ -213,7 +213,7 @@ const MainInboxScreen = () => {
   useEffect(() => {
     if (flatListRef.current && chatMessages.length > 0) {
       setTimeout(() => {
-        flatListRef.current?.scrollToEnd({animated: true});
+        flatListRef.current?.scrollToEnd({ animated: true });
       }, 100);
     }
   }, [chatMessages]);
@@ -312,14 +312,14 @@ const MainInboxScreen = () => {
         type: 'voice',
         duration: recordingTime,
         sent: true,
-        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         status: 'Read',
       };
       setChatMessages(prev => [...prev, voiceMessage]);
-      
+
       // Reset recording
       handleCancelRecording();
-      
+
       // Simulate receiving a voice message after 2 seconds
       setTimeout(() => {
         const receivedVoiceMessage = {
@@ -327,7 +327,7 @@ const MainInboxScreen = () => {
           type: 'voice',
           duration: recordingTime,
           sent: false,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
         setChatMessages(prev => [...prev, receivedVoiceMessage]);
       }, 2000);
@@ -342,7 +342,7 @@ const MainInboxScreen = () => {
   //       cropping: false,
   //       includeBase64: false,
   //     });
-      
+
   //     if (image.mime && image.mime.startsWith('video/')) {
   //       // Video
   //       const videoMessage = {
@@ -356,7 +356,7 @@ const MainInboxScreen = () => {
   //         status: 'Read',
   //       };
   //       setChatMessages(prev => [...prev, videoMessage]);
-        
+
   //       // Simulate receiving a video from other user after 2 seconds
   //       setTimeout(() => {
   //         const receivedVideoMessage = {
@@ -381,7 +381,7 @@ const MainInboxScreen = () => {
   //         status: 'Read',
   //       };
   //       setChatMessages(prev => [...prev, imageMessage]);
-        
+
   //       // Simulate receiving an image from other user after 2 seconds
   //       setTimeout(() => {
   //         const receivedImageMessage = {
@@ -409,7 +409,7 @@ const MainInboxScreen = () => {
   //       cropping: false,
   //       includeBase64: false,
   //     });
-      
+
   //     if (image.mime && image.mime.startsWith('video/')) {
   //       // Video
   //       const videoMessage = {
@@ -442,95 +442,95 @@ const MainInboxScreen = () => {
   //   }
   // };
 
-const handleOpenCamera = async () => {
-  if (isPickerOpenRef.current) return;
+  const handleOpenCamera = async () => {
+    if (isPickerOpenRef.current) return;
 
-  isPickerOpenRef.current = true;
-  setShowPlusMenu(false);
+    isPickerOpenRef.current = true;
+    setShowPlusMenu(false);
 
-  try {
-    const image = await ImagePicker.openCamera({
-      mediaType: 'any',
-      cropping: false,
-    });
+    try {
+      const image = await ImagePicker.openCamera({
+        mediaType: 'any',
+        cropping: false,
+      });
 
-    if (!image) return;
+      if (!image) return;
 
-    setChatMessages(prev => [
-      ...prev,
-      {
-        id: Date.now().toString(),
-        type: image.mime?.startsWith('video/') ? 'video' : 'image',
-        uri: image.path,
-        sent: true,
-        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-        status: 'Read',
-      },
-    ]);
-  } catch (error) {
-    if (error?.code !== 'E_PICKER_CANCELLED') {
-      console.log('Camera error:', error);
+      setChatMessages(prev => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          type: image.mime?.startsWith('video/') ? 'video' : 'image',
+          uri: image.path,
+          sent: true,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          status: 'Read',
+        },
+      ]);
+    } catch (error) {
+      if (error?.code !== 'E_PICKER_CANCELLED') {
+        console.log('Camera error:', error);
+      }
+    } finally {
+      setTimeout(() => {
+        isPickerOpenRef.current = false;
+      }, 500);
     }
-  } finally {
-    setTimeout(() => {
-      isPickerOpenRef.current = false;
-    }, 500);
-  }
-};
+  };
 
 
   const handleOpenGallery = async () => {
-  if (isPickerOpenRef.current) return;
+    if (isPickerOpenRef.current) return;
 
-  isPickerOpenRef.current = true;
-  setShowPlusMenu(false);
+    isPickerOpenRef.current = true;
+    setShowPlusMenu(false);
 
-  try {
-    const image = await ImagePicker.openPicker({
-      mediaType: 'any',
-      cropping: false,
-      includeBase64: false,
-    });
+    try {
+      const image = await ImagePicker.openPicker({
+        mediaType: 'any',
+        cropping: false,
+        includeBase64: false,
+      });
 
-    if (!image) return;
+      if (!image) return;
 
-    if (image.mime?.startsWith('video/')) {
-      setChatMessages(prev => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          type: 'video',
-          uri: image.path,
-          sent: true,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-          status: 'Read',
-        },
-      ]);
-    } else {
-      setChatMessages(prev => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          type: 'image',
-          uri: image.path,
-          sent: true,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
-          status: 'Read',
-        },
-      ]);
+      if (image.mime?.startsWith('video/')) {
+        setChatMessages(prev => [
+          ...prev,
+          {
+            id: Date.now().toString(),
+            type: 'video',
+            uri: image.path,
+            sent: true,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            status: 'Read',
+          },
+        ]);
+      } else {
+        setChatMessages(prev => [
+          ...prev,
+          {
+            id: Date.now().toString(),
+            type: 'image',
+            uri: image.path,
+            sent: true,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            status: 'Read',
+          },
+        ]);
+      }
+    } catch (error) {
+      // DO NOTHING on cancel
+      if (error?.code !== 'E_PICKER_CANCELLED') {
+        console.log('Gallery error:', error);
+      }
+    } finally {
+      // IMPORTANT: delay unlock
+      setTimeout(() => {
+        isPickerOpenRef.current = false;
+      }, 500);
     }
-  } catch (error) {
-    // DO NOTHING on cancel
-    if (error?.code !== 'E_PICKER_CANCELLED') {
-      console.log('Gallery error:', error);
-    }
-  } finally {
-    // IMPORTANT: delay unlock
-    setTimeout(() => {
-      isPickerOpenRef.current = false;
-    }, 500);
-  }
-};
+  };
 
   const handleOpenFiles = async () => {
     setShowPlusMenu(false);
@@ -538,12 +538,12 @@ const handleOpenCamera = async () => {
       const results = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      
+
       const file = results[0];
       const fileSize = file.size || 0;
       const fileSizeKB = Math.round(fileSize / 1024);
       const fileSizeMB = fileSizeKB > 1024 ? (fileSizeKB / 1024).toFixed(1) + ' mb' : fileSizeKB + ' kb';
-      
+
       const fileMessage = {
         id: Date.now().toString(),
         type: 'file',
@@ -553,11 +553,11 @@ const handleOpenCamera = async () => {
         sizeText: fileSizeMB,
         mime: file.type || 'application/pdf',
         sent: true,
-        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         status: 'Read',
       };
       setChatMessages(prev => [...prev, fileMessage]);
-      
+
       // Simulate receiving a file after 2 seconds
       setTimeout(() => {
         const receivedFileMessage = {
@@ -569,7 +569,7 @@ const handleOpenCamera = async () => {
           sizeText: Math.round(fileSizeKB * 0.1) + ' kb',
           mime: file.type || 'application/pdf',
           sent: false,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
         setChatMessages(prev => [...prev, receivedFileMessage]);
       }, 2000);
@@ -584,7 +584,7 @@ const handleOpenCamera = async () => {
 
   const handleDownloadFile = async (fileMessage) => {
     try {
-      const {uri} = fileMessage;
+      const { uri } = fileMessage;
       const canOpen = await Linking.canOpenURL(uri);
       if (canOpen) {
         await Linking.openURL(uri);
@@ -606,11 +606,11 @@ const handleOpenCamera = async () => {
       status: 'completed',
       duration: '10m 19s',
       sent: true,
-      time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: 'Read',
     };
     setChatMessages(prev => [...prev, callMessage]);
-    
+
     // Simulate receiving a completed video call from other user after 2 seconds
     setTimeout(() => {
       const receivedCallMessage = {
@@ -620,7 +620,7 @@ const handleOpenCamera = async () => {
         status: 'completed',
         duration: '10m 19s',
         sent: false,
-        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setChatMessages(prev => [...prev, receivedCallMessage]);
     }, 2000);
@@ -635,11 +635,11 @@ const handleOpenCamera = async () => {
       status: 'completed',
       duration: '10m 19s',
       sent: true,
-      time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: 'Read',
     };
     setChatMessages(prev => [...prev, callMessage]);
-    
+
     // Simulate receiving a voice call from other user after 2 seconds
     setTimeout(() => {
       const receivedCallMessage = {
@@ -649,23 +649,23 @@ const handleOpenCamera = async () => {
         status: 'completed',
         duration: '10m 19s',
         sent: false,
-        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setChatMessages(prev => [...prev, receivedCallMessage]);
     }, 2000);
   };
 
-  const renderChatMessage = ({item}) => {
+  const renderChatMessage = ({ item }) => {
     const isSent = item.sent;
     const isRead = item.status === 'Read';
     const isDelivered = item.status === 'Delivered' || item.status === 'Read';
     const isSentStatus = item.status === 'Sent';
-    
+
     // Render call log message
     if (item.type === 'call') {
       const isMissed = item.status === 'missed';
       const isVideo = item.callType === 'video';
-      
+
       return (
         <TouchableOpacity
           activeOpacity={0.7}
@@ -686,23 +686,23 @@ const handleOpenCamera = async () => {
                   <IMG.InboxVideoCall width={mvs(42)} height={mvs(42)} />
                 ) : (
                   <IMG.InboxVoiceCall width={mvs(42)} height={mvs(42)} />
-                  )}
-                </View>
+                )}
+              </View>
               <View style={styles.callLogContent}>
                 {isMissed ? (
                   <>
                     <Regular
                       label={isVideo ? 'Missed video call' : 'Missed voice call'}
-              fontSize={mvs(14)}
+                      fontSize={mvs(14)}
                       numberOfLines={10}
                       color="#404040"
-            />
-            <Regular
+                    />
+                    <Regular
                       label="Click to call back"
                       fontSize={mvs(12)}
-              numberOfLines={10}
-              color="#8C8C8C"
-                      style={{marginTop: mvs(2)}}
+                      numberOfLines={10}
+                      color="#8C8C8C"
+                      style={{ marginTop: mvs(2) }}
                     />
                   </>
                 ) : (
@@ -717,17 +717,17 @@ const handleOpenCamera = async () => {
                         label={item.duration}
                         fontSize={mvs(12)}
                         color="#8C8C8C"
-                        style={{marginTop: mvs(2)}}
+                        style={{ marginTop: mvs(2) }}
                       />
                     )}
                   </>
                 )}
-          </View>
+              </View>
             </Row>
             <Row style={styles.chatMessageFooter}>
-                  <Regular
+              <Regular
                 label={item.time}
-                    numberOfLines={10}
+                numberOfLines={10}
                 fontSize={mvs(12)}
                 color={isSent ? '#8C8C8C' : '#8C8C8C'}
               />
@@ -736,18 +736,18 @@ const handleOpenCamera = async () => {
                   name="checkmark-done"
                   size={mvs(14)}
                   color={isRead ? '#4FC3F7' : '#8C8C8C'}
-                  style={{marginLeft: mvs(4)}}
+                  style={{ marginLeft: mvs(4) }}
                 />
               )}
             </Row>
-        </View>
+          </View>
         </TouchableOpacity>
-    );
-  }
+      );
+    }
 
     // Render image message
     if (item.type === 'image') {
-  return (
+      return (
         <TouchableOpacity
           activeOpacity={1}
           onLongPress={() => handleLongPressMessage(item)}
@@ -762,7 +762,7 @@ const handleOpenCamera = async () => {
               styles.mediaBubble,
             ]}>
             <View style={styles.mediaImageContainer}>
-              <Image source={{uri: item.uri}} style={styles.mediaImage} />
+              <Image source={{ uri: item.uri }} style={styles.mediaImage} />
               <View style={styles.mediaFooterContainer}>
                 <Row style={styles.chatMessageFooter}>
                   <Regular
@@ -777,7 +777,7 @@ const handleOpenCamera = async () => {
                       name="checkmark-done"
                       size={mvs(14)}
                       color={isRead ? '#4FC3F7' : '#FFFFFF'}
-                      style={{marginLeft: mvs(4)}}
+                      style={{ marginLeft: mvs(4) }}
                     />
                   )}
                 </Row>
@@ -806,7 +806,7 @@ const handleOpenCamera = async () => {
             ]}>
             <View style={styles.mediaImageContainer}>
               <View style={styles.videoContainer}>
-                <Image source={{uri: item.uri}} style={styles.mediaImage} />
+                <Image source={{ uri: item.uri }} style={styles.mediaImage} />
                 <View style={styles.videoPlayButton}>
                   <IMG.InboxVdieolayer width={mvs(40)} height={mvs(40)} />
                 </View>
@@ -815,18 +815,18 @@ const handleOpenCamera = async () => {
             {item.text && (
               <View style={styles.videoTextContainer}>
                 <Row style={styles.videoTextRow}>
-                  <Icon name="videocam" size={mvs(14)} color="#8C8C8C" style={{marginRight: mvs(4)}} />
+                  <Icon name="videocam" size={mvs(14)} color="#8C8C8C" style={{ marginRight: mvs(4) }} />
                   <Regular
                     label={item.duration || '0:27'}
                     fontSize={mvs(12)}
                     color="#8C8C8C"
-                    style={{marginRight: mvs(8)}}
+                    style={{ marginRight: mvs(8) }}
                   />
                   <Regular
                     label={item.text}
                     fontSize={mvs(14)}
                     color={isSent ? "#404040" : "#404040"}
-                    style={{flex: 1}}
+                    style={{ flex: 1 }}
                   />
                 </Row>
               </View>
@@ -845,7 +845,7 @@ const handleOpenCamera = async () => {
                     name="checkmark-done"
                     size={mvs(14)}
                     color={isRead ? '#4FC3F7' : '#FFFFFF'}
-                    style={{marginLeft: mvs(4)}}
+                    style={{ marginLeft: mvs(4) }}
                   />
                 )}
               </Row>
@@ -859,7 +859,7 @@ const handleOpenCamera = async () => {
     if (item.type === 'file') {
       const isPDF = item.mime && item.mime.includes('pdf');
       const pageCount = '1 page';
-      
+
       return (
         <TouchableOpacity
           activeOpacity={1}
@@ -883,21 +883,21 @@ const handleOpenCamera = async () => {
                 )}
               </View>
               <View style={styles.fileContent}>
-                
+
                 <Medium
                   label={item.name}
                   fontSize={mvs(14)}
                   color={isSent ? "#404040" : "#404040"}
                   numberOfLines={1}
                 />
-                
+
                 <Regular
                   label={`${pageCount} · ${item.sizeText} · ${item.mime?.split('/')[1] || 'pdf'}`}
                   fontSize={mvs(12)}
                   color="#8C8C8C"
-                  style={{marginTop: mvs(2)}}
+                  style={{ marginTop: mvs(2) }}
                 />
-                
+
               </View>
               {!isSent && (
                 <TouchableOpacity
@@ -920,7 +920,7 @@ const handleOpenCamera = async () => {
                     name="checkmark-done"
                     size={mvs(14)}
                     color={isRead ? '#4FC3F7' : '#8C8C8C'}
-                    style={{marginLeft: mvs(4)}}
+                    style={{ marginLeft: mvs(4) }}
                   />
                 )}
               </Row>
@@ -933,7 +933,7 @@ const handleOpenCamera = async () => {
     // Render voice message
     if (item.type === 'voice') {
       const isPlayingVoice = item.isPlaying || false;
-      
+
       return (
         <TouchableOpacity
           activeOpacity={1}
@@ -951,8 +951,8 @@ const handleOpenCamera = async () => {
             <Row style={styles.voiceMessageRow}>
               <TouchableOpacity
                 onPress={() => {
-                  setChatMessages(prev => prev.map(msg => 
-                    msg.id === item.id ? {...msg, isPlaying: !isPlayingVoice} : {...msg, isPlaying: false}
+                  setChatMessages(prev => prev.map(msg =>
+                    msg.id === item.id ? { ...msg, isPlaying: !isPlayingVoice } : { ...msg, isPlaying: false }
                   ));
                 }}
                 style={styles.voicePlayButton}>
@@ -966,7 +966,7 @@ const handleOpenCamera = async () => {
                 label={formatTime(item.duration)}
                 fontSize={mvs(14)}
                 color={isSent ? "#404040" : "#404040"}
-                style={{marginLeft: mvs(8), marginRight: mvs(8), minWidth: mvs(50)}}
+                style={{ marginLeft: mvs(8), marginRight: mvs(8), minWidth: mvs(50) }}
               />
               <View style={styles.voiceWaveformContainer}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((bar, index) => {
@@ -979,7 +979,7 @@ const handleOpenCamera = async () => {
                         styles.voiceWaveformBar,
                         {
                           height: mvs(heights[index % heights.length]),
-                          backgroundColor: isPlayed 
+                          backgroundColor: isPlayed
                             ? (isSent ? colors.primary : colors.primary)
                             : (isSent ? '#D1D5DB' : '#D1D5DB'),
                         },
@@ -1008,7 +1008,7 @@ const handleOpenCamera = async () => {
                   name="checkmark-done"
                   size={mvs(14)}
                   color={isRead ? '#4FC3F7' : '#8C8C8C'}
-                  style={{marginLeft: mvs(4)}}
+                  style={{ marginLeft: mvs(4) }}
                 />
               )}
             </Row>
@@ -1016,18 +1016,18 @@ const handleOpenCamera = async () => {
         </TouchableOpacity>
       );
     }
-    
+
     // Render regular text message
     return (
       <TouchableOpacity
         activeOpacity={1}
         onLongPress={() => handleLongPressMessage(item)}
-                  style={[
+        style={[
           styles.chatMessageContainer,
           isSent ? styles.chatMessageSent : styles.chatMessageReceived,
         ]}>
-                <View
-                  style={[
+        <View
+          style={[
             styles.chatBubble,
             isSent ? styles.chatBubbleSent : styles.chatBubbleReceived,
           ]}>
@@ -1039,7 +1039,7 @@ const handleOpenCamera = async () => {
                   label={item.replyTo.sent ? 'You' : 'Liam Carter'}
                   fontSize={mvs(12)}
                   color={isSent ? '#8C8C8C' : colors.primary}
-                  style={{marginBottom: mvs(2)}}
+                  style={{ marginBottom: mvs(2) }}
                 />
                 <Regular
                   label={item.replyTo.text}
@@ -1048,15 +1048,15 @@ const handleOpenCamera = async () => {
                   numberOfLines={2}
                 />
               </View>
-                </View>
+            </View>
           )}
           <Regular
             label={item.text}
             numberOfLines={10}
-              fontSize={mvs(14)}
+            fontSize={mvs(14)}
             color={isSent ? "#404040" : "#404040"}
             style={styles.chatMessageText}
-            />
+          />
           <Row style={styles.chatMessageFooter}>
             <Regular
               label={item.time}
@@ -1069,11 +1069,11 @@ const handleOpenCamera = async () => {
                 name="checkmark-done"
                 size={mvs(14)}
                 color={isRead ? '#4FC3F7' : '#8C8C8C'}
-                style={{marginLeft: mvs(4)}}
+                style={{ marginLeft: mvs(4) }}
               />
             )}
           </Row>
-            </View>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -1083,360 +1083,363 @@ const handleOpenCamera = async () => {
 
   return (
     <View style={styles.container}>
-       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {!hasChatStarted ? (
-            // Image 1: New Match Screen
-            <View style={styles.newMatchContainer}>
-              {/* Header */}
-              <View style={styles.chatHeader}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <Icon name="chevron-back" size={mvs(24)} color={colors.textColor} />
-                </TouchableOpacity>
-                <View style={styles.chatHeaderProfile}>
-                  <View style={styles.chatHeaderAvatar}>
-                    <IMG.InboxAvatar width={mvs(40)} height={mvs(40)} />
-          </View>
-                  <Medium label="Liam Carter" fontSize={mvs(14)} color={colors.textColor} />
-        </View>
-                <Row style={styles.chatHeaderActions}>
-                  <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVideoCall}>
-                    <IMG.InboxVideo width={mvs(24)} height={mvs(24)} />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVoiceCall}>
-                    <IMG.InboxCall width={mvs(24)} height={mvs(24)} />
-                  </TouchableOpacity>
-                </Row>
+        // Image 1: New Match Screen
+        <KeyboardAvoidingView
+          style={styles.newMatchContainer}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? mvs(40) : 0}>
+          {/* Header */}
+          <View style={styles.chatHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="chevron-back" size={mvs(24)} color={colors.textColor} />
+            </TouchableOpacity>
+            <View style={styles.chatHeaderProfile}>
+              <View style={styles.chatHeaderAvatar}>
+                <IMG.InboxAvatar width={mvs(40)} height={mvs(40)} />
               </View>
-
-              {/* New Match Content */}
-              <View style={styles.newMatchContent}>
-                <View style={styles.newMatchProfileContainer}>
-                  <View style={styles.newMatchProfileBorder}>
-                    <IMG.InboxAvatar width={mvs(150)} height={mvs(150)} />
-                  </View>
-                </View>
-                <Medium
-                  label="You matched with Liam"
-                  fontSize={mvs(16)}
-                  color={colors.textColor}
-                  style={styles.newMatchTitle}
-                  />
-                  <Regular
-                  label="47 Minutes ago"
-                    fontSize={mvs(14)}
-                    color="#8C8C8C"
-                  style={styles.newMatchTime}
-                />
-              </View>
-
-              {/* Input Bar */}
-              <View style={styles.chatInputContainer}>
-                <TouchableOpacity 
-                  style={styles.chatInputIcon}
-                  onPress={() => setShowPlusMenu(!showPlusMenu)}>
-                  <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.chatInputIcon}>
-                  <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
-                </TouchableOpacity>
-                <TextInput
-                  style={[styles.chatInput, {height: inputHeight}]}
-                  placeholder="Type Here"
-                  placeholderTextColor="#D9D9D9"
-                  value={messageText}
-                  onChangeText={setMessageText}
-                  multiline
-                  onContentSizeChange={(e) => {
-                    const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
-                    setInputHeight(height);
-                  }}
-                />
-                <TouchableOpacity
-                  onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
-                  style={styles.chatInputIcon}>
-                  {messageText.trim() ? (
-                    <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
-                  ) : (
-                    <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
-                  )}
-                </TouchableOpacity>
-              </View>
-
-              {/* Recording Bottom View */}
-              {isRecording && (
-                <View style={styles.recordingBottomView}>
-                  <View style={styles.recordingWaveformContainer}>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map((bar, index) => {
-                      const heights = [8, 12, 18, 25, 30, 28, 22, 15, 10, 8, 12, 20, 28, 32, 30, 25, 18, 12, 8, 10, 15, 22, 28, 30, 25, 20, 15, 10, 8, 12];
-                      return (
-                        <View
-                          key={index}
-                          style={[
-                            styles.recordingWaveformBar,
-                            {
-                              height: mvs(heights[index % heights.length]),
-                              backgroundColor: colors.primary,
-                            },
-                          ]}
-                        />
-                      );
-                    })}
-                  </View>
-                  {/* Centered duration under waveform */}
-                  <Regular
-                    label={formatTime(recordingTime)}
-                    fontSize={mvs(16)}
-                    color={colors.black}
-                    style={styles.recordingDuration}
-                  />
-                  {/* Controls row: X  |  pause/mic  |  send */}
-                  <Row style={styles.recordingControlsRow}>
-                    <TouchableOpacity
-                      onPress={handleCancelRecording}
-                      style={styles.recordingCancelButton}>
-                      <Icon name="close" size={mvs(24)} color={colors.textColor} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={handlePauseRecording}
-                      style={styles.recordingPauseButton}>
-                      {isPaused ? (
-                        <IMG.InboxVdieolayer width={mvs(60)} height={mvs(60)} />
-                      ) : (
-                        <IMG.inboxPause width={mvs(60)} height={mvs(60)} />
-                      )}
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={handleSendVoiceMessage}
-                      style={styles.recordingSendButton}>
-                      {/* <Icon name="send" size={mvs(24)} color={colors.white} /> */}
-                      <IMG.ChatSend height={mvs(30)} width={mvs(30)}/>
-                    </TouchableOpacity>
-                  </Row>
-                </View>
-              )}
-
-              {/* Plus Menu Inline View - Below Input */}
-              {showPlusMenu && !isRecording && (
-                <View style={styles.plusMenuInlineContainer}>
-                  <Row style={styles.plusMenuRow}>
-                    <TouchableOpacity
-                      style={styles.plusMenuOption}
-                       disabled={isPickerOpenRef.current}
-                      onPress={handleOpenGallery}>
-                      <View style={styles.plusMenuIconContainer}>
-                        <IMG.InboxGallery width={mvs(50)} height={mvs(50)} />
-                      </View>
-                      <Regular label="Gallery" fontSize={mvs(12)} color={colors.textColor} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.plusMenuOption}
-                      onPress={handleOpenCamera}>
-                      <View style={styles.plusMenuIconContainer}>
-                        <IMG.InboxCamera width={mvs(50)} height={mvs(50)} />
-                      </View>
-                      <Regular label="Camera" fontSize={mvs(12)} color={colors.black} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.plusMenuOption}
-                      onPress={handleOpenFiles}>
-                      <View style={styles.plusMenuIconContainer}>
-                        <IMG.InboxFile width={mvs(50)} height={mvs(50)} />
-                      </View>
-                      <Regular label="Document" fontSize={mvs(12)} color={colors.black} />
-                    </TouchableOpacity>
-                  </Row>
-                </View>
-              )}
+              <Medium label="Liam Carter" fontSize={mvs(14)} color={colors.textColor} />
             </View>
-          ) : (
-            // Image 2: Active Chat Screen
-            <KeyboardAvoidingView
-              style={styles.chatContainer}
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-              keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}>
-              {/* Header */}
-              <View style={styles.chatHeader}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <Icon name="chevron-back" size={mvs(24)} color={colors.black} />
-                </TouchableOpacity>
-                <View style={styles.chatHeaderProfile}>
-                  <View style={styles.chatHeaderAvatar}>
-                    <IMG.InboxAvatar width={mvs(40)} height={mvs(40)} />
-          </View>
-                  <Medium label="Liam Carter" fontSize={mvs(16)} color={colors.black} />
-        </View>
-                <Row style={styles.chatHeaderActions}>
-                  <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVideoCall}>
-                    <IMG.InboxVideo width={mvs(24)} height={mvs(24)} />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVoiceCall}>
-                    <IMG.InboxCall width={mvs(24)} height={mvs(24)} />
+            <Row style={styles.chatHeaderActions}>
+              <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVideoCall}>
+                <IMG.InboxVideo width={mvs(24)} height={mvs(24)} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVoiceCall}>
+                <IMG.InboxCall width={mvs(24)} height={mvs(24)} />
               </TouchableOpacity>
             </Row>
           </View>
 
-              {/* Chat Messages */}
-              <View style={styles.chatMessagesContainer}>
-                <View style={styles.dateSeparator}>
-                  <Regular label="Today" fontSize={mvs(12)} color="#8C8C8C" />
-            </View>
-            <FlatList
-                  ref={flatListRef}
-                  data={chatMessages}
-              keyExtractor={item => item.id.toString()}
-                  renderItem={renderChatMessage}
-                  contentContainerStyle={styles.chatMessagesList}
-                  showsVerticalScrollIndicator={false}
-                />
+          {/* New Match Content */}
+          <View style={styles.newMatchContent}>
+            <View style={styles.newMatchProfileContainer}>
+              <View style={styles.newMatchProfileBorder}>
+                <IMG.InboxAvatar width={mvs(150)} height={mvs(150)} />
               </View>
+            </View>
+            <Medium
+              label="You matched with Liam"
+              fontSize={mvs(16)}
+              color={colors.textColor}
+              style={styles.newMatchTitle}
+            />
+            <Regular
+              label="47 Minutes ago"
+              fontSize={mvs(14)}
+              color="#8C8C8C"
+              style={styles.newMatchTime}
+            />
+          </View>
 
-              {/* Reply Preview */}
-              {replyTo && (
-                <View style={styles.replyPreviewContainer}>
-                  <View style={styles.replyPreviewLine} />
-                  <View style={styles.replyPreviewContent}>
-                    <Row style={styles.replyPreviewHeader}>
-                      <Regular
-                        label={replyTo.sent ? 'You' : 'Liam Carter'}
-                        fontSize={mvs(12)}
-                  color={colors.primary}
-                        style={{marginBottom: mvs(2)}}
-                />
-                      <TouchableOpacity onPress={handleCancelReply} style={styles.replyCancelButton}>
-                        <Icon name="close" size={mvs(18)} color="#8C8C8C" />
-                      </TouchableOpacity>
-              </Row>
-                    <Regular
-                      label={replyTo.text}
-                      fontSize={mvs(12)}
-                      color="#8C8C8C"
-                      numberOfLines={1}
-                    />
-                  </View>
-                </View>
+          {/* Input Bar */}
+          <View style={styles.chatInputContainer}>
+            <TouchableOpacity
+              style={styles.chatInputIcon}
+              onPress={() => setShowPlusMenu(!showPlusMenu)}>
+              <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.chatInputIcon}>
+              <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
+            </TouchableOpacity>
+            <TextInput
+              style={[styles.chatInput, { height: inputHeight }]}
+              placeholder="Type Here"
+              placeholderTextColor="#D9D9D9"
+              value={messageText}
+              onChangeText={setMessageText}
+              multiline
+              onContentSizeChange={(e) => {
+                const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
+                setInputHeight(height);
+              }}
+            />
+            <TouchableOpacity
+              onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
+              style={styles.chatInputIcon}>
+              {messageText.trim() ? (
+                <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
+              ) : (
+                <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
               )}
+            </TouchableOpacity>
+          </View>
 
-              {/* Input Bar */}
-              <View style={styles.chatInputContainer}>
-                <TouchableOpacity 
-                  style={styles.chatInputIcon}
-                  onPress={() => setShowPlusMenu(!showPlusMenu)}>
-                  <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.chatInputIcon}>
-                  <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
-                </TouchableOpacity>
-                <TextInput
-                  style={[styles.chatInput, {height: inputHeight}]}
-                  placeholder="Type Here"
-                  placeholderTextColor="#8C8C8C"
-                  value={messageText}
-                  onChangeText={setMessageText}
-                  multiline
-                  onContentSizeChange={(e) => {
-                    const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
-                    setInputHeight(height);
-                  }}
-                />
+          {/* Recording Bottom View */}
+          {isRecording && (
+            <View style={styles.recordingBottomView}>
+              <View style={styles.recordingWaveformContainer}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map((bar, index) => {
+                  const heights = [8, 12, 18, 25, 30, 28, 22, 15, 10, 8, 12, 20, 28, 32, 30, 25, 18, 12, 8, 10, 15, 22, 28, 30, 25, 20, 15, 10, 8, 12];
+                  return (
+                    <View
+                      key={index}
+                      style={[
+                        styles.recordingWaveformBar,
+                        {
+                          height: mvs(heights[index % heights.length]),
+                          backgroundColor: colors.primary,
+                        },
+                      ]}
+                    />
+                  );
+                })}
+              </View>
+              {/* Centered duration under waveform */}
+              <Regular
+                label={formatTime(recordingTime)}
+                fontSize={mvs(16)}
+                color={colors.black}
+                style={styles.recordingDuration}
+              />
+              {/* Controls row: X  |  pause/mic  |  send */}
+              <Row style={styles.recordingControlsRow}>
                 <TouchableOpacity
-                  onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
-                  style={styles.chatInputIcon}>
-                  {messageText.trim() ? (
-                   <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
+                  onPress={handleCancelRecording}
+                  style={styles.recordingCancelButton}>
+                  <Icon name="close" size={mvs(24)} color={colors.textColor} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handlePauseRecording}
+                  style={styles.recordingPauseButton}>
+                  {isPaused ? (
+                    <IMG.InboxVdieolayer width={mvs(60)} height={mvs(60)} />
                   ) : (
-                    <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
+                    <IMG.inboxPause width={mvs(60)} height={mvs(60)} />
                   )}
                 </TouchableOpacity>
-              </View>
-
-              {/* Recording Bottom View */}
-              {isRecording && (
-                <View style={styles.recordingBottomView}>
-                  <View style={styles.recordingWaveformContainer}>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map((bar, index) => {
-                      const heights = [8, 12, 18, 25, 30, 28, 22, 15, 10, 8, 12, 20, 28, 32, 30, 25, 18, 12, 8, 10, 15, 22, 28, 30, 25, 20, 15, 10, 8, 12];
-                      return (
-                        <View
-                          key={index}
-                          style={[
-                            styles.recordingWaveformBar,
-                            {
-                              height: mvs(heights[index % heights.length]),
-                              backgroundColor: colors.primary,
-                            },
-                          ]}
-                        />
-                      );
-                    })}
-                  </View>
-                  {/* Centered duration under waveform */}
-                  <Regular
-                    label={formatTime(recordingTime)}
-                    fontSize={mvs(16)}
-                    color={colors.black}
-                    style={styles.recordingDuration}
-                  />
-                  {/* Controls row: X  |  pause/mic  |  send */}
-                  <Row style={styles.recordingControlsRow}>
-                    <TouchableOpacity
-                      onPress={handleCancelRecording}
-                      style={styles.recordingCancelButton}>
-                      <Icon name="close" size={mvs(24)} color={colors.black} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={handlePauseRecording}
-                      style={styles.recordingPauseButton}>
-                      {isPaused ? (
-                        <IMG.InboxNewVoice width={mvs(60)} height={mvs(60)} />
-                      ) : (
-                        <IMG.inboxPause width={mvs(60)} height={mvs(60)} />
-                      )}
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={handleSendVoiceMessage}
-                      style={styles.recordingSendButton}>
-                      {/* <Icon name="send" size={mvs(24)} color={colors.white} /> */}
-                        <IMG.ChatSend height={mvs(30)} width={mvs(30)}/>
-                    </TouchableOpacity>
-                  </Row>
-                </View>
-              )}
-
-              {/* Plus Menu Inline View - Below Input */}
-              {showPlusMenu && !isRecording && (
-                <View style={styles.plusMenuInlineContainer}>
-                  <Row style={styles.plusMenuRow}>
-                    <TouchableOpacity
-                      style={styles.plusMenuOption}
-                      onPress={handleOpenGallery}>
-                      <View style={styles.plusMenuIconContainer}>
-                        <IMG.InboxGallery width={mvs(50)} height={mvs(50)} />
-                      </View>
-                      <Regular label="Gallery" fontSize={mvs(12)} color={colors.textColor} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.plusMenuOption}
-                      onPress={handleOpenCamera}>
-                      <View style={styles.plusMenuIconContainer}>
-                        <IMG.InboxCamera width={mvs(50)} height={mvs(50)} />
-                      </View>
-                      <Regular label="Camera" fontSize={mvs(12)} color={colors.textColor} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.plusMenuOption}
-                      onPress={handleOpenFiles}>
-                      <View style={styles.plusMenuIconContainer}>
-                        <IMG.InboxFile width={mvs(50)} height={mvs(50)} />
-                      </View>
-                      <Regular label="Document" fontSize={mvs(12)} color={colors.textColor} />
-                    </TouchableOpacity>
-                  </Row>
-                </View>
-              )}
-            </KeyboardAvoidingView>
+                <TouchableOpacity
+                  onPress={handleSendVoiceMessage}
+                  style={styles.recordingSendButton}>
+                  {/* <Icon name="send" size={mvs(24)} color={colors.white} /> */}
+                  <IMG.ChatSend height={mvs(30)} width={mvs(30)} />
+                </TouchableOpacity>
+              </Row>
+            </View>
           )}
+
+          {/* Plus Menu Inline View - Below Input */}
+          {showPlusMenu && !isRecording && (
+            <View style={styles.plusMenuInlineContainer}>
+              <Row style={styles.plusMenuRow}>
+                <TouchableOpacity
+                  style={styles.plusMenuOption}
+                  disabled={isPickerOpenRef.current}
+                  onPress={handleOpenGallery}>
+                  <View style={styles.plusMenuIconContainer}>
+                    <IMG.InboxGallery width={mvs(50)} height={mvs(50)} />
+                  </View>
+                  <Regular label="Gallery" fontSize={mvs(12)} color={colors.textColor} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.plusMenuOption}
+                  onPress={handleOpenCamera}>
+                  <View style={styles.plusMenuIconContainer}>
+                    <IMG.InboxCamera width={mvs(50)} height={mvs(50)} />
+                  </View>
+                  <Regular label="Camera" fontSize={mvs(12)} color={colors.black} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.plusMenuOption}
+                  onPress={handleOpenFiles}>
+                  <View style={styles.plusMenuIconContainer}>
+                    <IMG.InboxFile width={mvs(50)} height={mvs(50)} />
+                  </View>
+                  <Regular label="Document" fontSize={mvs(12)} color={colors.black} />
+                </TouchableOpacity>
+              </Row>
+            </View>
+          )}
+        </KeyboardAvoidingView>
+      ) : (
+        // Image 2: Active Chat Screen
+        <KeyboardAvoidingView
+          style={styles.chatContainer}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? mvs(10) : 0}>
+          {/* Header */}
+          <View style={styles.chatHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="chevron-back" size={mvs(24)} color={colors.black} />
+            </TouchableOpacity>
+            <View style={styles.chatHeaderProfile}>
+              <View style={styles.chatHeaderAvatar}>
+                <IMG.InboxAvatar width={mvs(40)} height={mvs(40)} />
+              </View>
+              <Medium label="Liam Carter" fontSize={mvs(16)} color={colors.black} />
+            </View>
+            <Row style={styles.chatHeaderActions}>
+              <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVideoCall}>
+                <IMG.InboxVideo width={mvs(24)} height={mvs(24)} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.chatHeaderIcon} onPress={handleVoiceCall}>
+                <IMG.InboxCall width={mvs(24)} height={mvs(24)} />
+              </TouchableOpacity>
+            </Row>
+          </View>
+
+          {/* Chat Messages */}
+          <View style={styles.chatMessagesContainer}>
+            <View style={styles.dateSeparator}>
+              <Regular label="Today" fontSize={mvs(12)} color="#8C8C8C" />
+            </View>
+            <FlatList
+              ref={flatListRef}
+              data={chatMessages}
+              keyExtractor={item => item.id.toString()}
+              renderItem={renderChatMessage}
+              contentContainerStyle={styles.chatMessagesList}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+
+          {/* Reply Preview */}
+          {replyTo && (
+            <View style={styles.replyPreviewContainer}>
+              <View style={styles.replyPreviewLine} />
+              <View style={styles.replyPreviewContent}>
+                <Row style={styles.replyPreviewHeader}>
+                  <Regular
+                    label={replyTo.sent ? 'You' : 'Liam Carter'}
+                    fontSize={mvs(12)}
+                    color={colors.primary}
+                    style={{ marginBottom: mvs(2) }}
+                  />
+                  <TouchableOpacity onPress={handleCancelReply} style={styles.replyCancelButton}>
+                    <Icon name="close" size={mvs(18)} color="#8C8C8C" />
+                  </TouchableOpacity>
+                </Row>
+                <Regular
+                  label={replyTo.text}
+                  fontSize={mvs(12)}
+                  color="#8C8C8C"
+                  numberOfLines={1}
+                />
+              </View>
+            </View>
+          )}
+
+          {/* Input Bar */}
+          <View style={styles.chatInputContainer}>
+            <TouchableOpacity
+              style={styles.chatInputIcon}
+              onPress={() => setShowPlusMenu(!showPlusMenu)}>
+              <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.chatInputIcon}>
+              <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
+            </TouchableOpacity>
+            <TextInput
+              style={[styles.chatInput, { height: inputHeight }]}
+              placeholder="Type Here"
+              placeholderTextColor="#8C8C8C"
+              value={messageText}
+              onChangeText={setMessageText}
+              multiline
+              onContentSizeChange={(e) => {
+                const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
+                setInputHeight(height);
+              }}
+            />
+            <TouchableOpacity
+              onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
+              style={styles.chatInputIcon}>
+              {messageText.trim() ? (
+                <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
+              ) : (
+                <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
+              )}
+            </TouchableOpacity>
+          </View>
+
+          {/* Recording Bottom View */}
+          {isRecording && (
+            <View style={styles.recordingBottomView}>
+              <View style={styles.recordingWaveformContainer}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map((bar, index) => {
+                  const heights = [8, 12, 18, 25, 30, 28, 22, 15, 10, 8, 12, 20, 28, 32, 30, 25, 18, 12, 8, 10, 15, 22, 28, 30, 25, 20, 15, 10, 8, 12];
+                  return (
+                    <View
+                      key={index}
+                      style={[
+                        styles.recordingWaveformBar,
+                        {
+                          height: mvs(heights[index % heights.length]),
+                          backgroundColor: colors.primary,
+                        },
+                      ]}
+                    />
+                  );
+                })}
+              </View>
+              {/* Centered duration under waveform */}
+              <Regular
+                label={formatTime(recordingTime)}
+                fontSize={mvs(16)}
+                color={colors.black}
+                style={styles.recordingDuration}
+              />
+              {/* Controls row: X  |  pause/mic  |  send */}
+              <Row style={styles.recordingControlsRow}>
+                <TouchableOpacity
+                  onPress={handleCancelRecording}
+                  style={styles.recordingCancelButton}>
+                  <Icon name="close" size={mvs(24)} color={colors.black} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handlePauseRecording}
+                  style={styles.recordingPauseButton}>
+                  {isPaused ? (
+                    <IMG.InboxNewVoice width={mvs(60)} height={mvs(60)} />
+                  ) : (
+                    <IMG.inboxPause width={mvs(60)} height={mvs(60)} />
+                  )}
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handleSendVoiceMessage}
+                  style={styles.recordingSendButton}>
+                  {/* <Icon name="send" size={mvs(24)} color={colors.white} /> */}
+                  <IMG.ChatSend height={mvs(30)} width={mvs(30)} />
+                </TouchableOpacity>
+              </Row>
+            </View>
+          )}
+
+          {/* Plus Menu Inline View - Below Input */}
+          {showPlusMenu && !isRecording && (
+            <View style={styles.plusMenuInlineContainer}>
+              <Row style={styles.plusMenuRow}>
+                <TouchableOpacity
+                  style={styles.plusMenuOption}
+                  onPress={handleOpenGallery}>
+                  <View style={styles.plusMenuIconContainer}>
+                    <IMG.InboxGallery width={mvs(50)} height={mvs(50)} />
+                  </View>
+                  <Regular label="Gallery" fontSize={mvs(12)} color={colors.textColor} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.plusMenuOption}
+                  onPress={handleOpenCamera}>
+                  <View style={styles.plusMenuIconContainer}>
+                    <IMG.InboxCamera width={mvs(50)} height={mvs(50)} />
+                  </View>
+                  <Regular label="Camera" fontSize={mvs(12)} color={colors.textColor} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.plusMenuOption}
+                  onPress={handleOpenFiles}>
+                  <View style={styles.plusMenuIconContainer}>
+                    <IMG.InboxFile width={mvs(50)} height={mvs(50)} />
+                  </View>
+                  <Regular label="Document" fontSize={mvs(12)} color={colors.textColor} />
+                </TouchableOpacity>
+              </Row>
+            </View>
+          )}
+        </KeyboardAvoidingView>
+      )}
 
       {/* Message Options Modal */}
       <Modal
@@ -1465,7 +1468,7 @@ const handleOpenCamera = async () => {
                     <Row style={styles.messageModalOptionRow}>
                       <Regular label="Reply" fontSize={mvs(14)} color={colors.black} />
                       {/* <Icon name="arrow-undo" size={mvs(18)} color={colors.black} /> */}
-                      <IMG.InboxBackIcon height={mvs(16)} width={mvs(16)}/>
+                      <IMG.InboxBackIcon height={mvs(16)} width={mvs(16)} />
                     </Row>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -1494,7 +1497,7 @@ const handleOpenCamera = async () => {
                     <Row style={styles.messageModalOptionRow}>
                       <Regular label="Reply" fontSize={mvs(14)} color={colors.black} />
                       {/* <Icon name="arrow-undo" size={mvs(18)} color={colors.black} /> */}
-                      <IMG.InboxBackIcon height={mvs(16)} width={mvs(16)}/>
+                      <IMG.InboxBackIcon height={mvs(16)} width={mvs(16)} />
                     </Row>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -1505,8 +1508,8 @@ const handleOpenCamera = async () => {
                       <IMG.InboxDeleteIcon width={mvs(18)} height={mvs(18)} />
                     </Row>
                   </TouchableOpacity>
-        </>
-      )}
+                </>
+              )}
             </View>
           )}
         </TouchableOpacity>
@@ -1588,7 +1591,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(16),
     // paddingVertical: mvs(2),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 6,
     elevation: 3,
@@ -1668,7 +1671,7 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(10),
     marginBottom: mvs(8),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 1,
@@ -1680,8 +1683,8 @@ const styles = StyleSheet.create({
     width: mvs(52),
     height: mvs(52),
     marginRight: mvs(12),
-    borderRadius:mvs(100),
-    backgroundColor:'white',
+    borderRadius: mvs(100),
+    backgroundColor: 'white',
     position: 'relative',
   },
   messageAvatarWrapper: {
@@ -1737,7 +1740,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(30),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1745,8 +1748,8 @@ const styles = StyleSheet.create({
   modalHeader: {
     alignItems: 'center',
     marginBottom: mvs(20),
-    justifyContent:"center",
-    alignSelf:'center'
+    justifyContent: "center",
+    alignSelf: 'center'
   },
   modalTitle: {
     marginLeft: mvs(12),
@@ -1781,8 +1784,8 @@ const styles = StyleSheet.create({
   nextButton: {
     borderRadius: mvs(40),
     backgroundColor: colors.primary,
-    width:"50%",
-    alignSelf:'center',
+    width: "50%",
+    alignSelf: 'center',
   },
   // Empty connections styles
   emptyConnectionsContainer: {
@@ -1802,8 +1805,8 @@ const styles = StyleSheet.create({
     borderRadius: mvs(24),
     padding: mvs(10),
     backgroundColor: '#F2F2F7',
-    borderWidth:1,
-    borderColor:"#D9D9D9",
+    borderWidth: 1,
+    borderColor: "#D9D9D9",
     marginRight: mvs(10),
   },
   emptyConnectionCardInner: {
@@ -1811,7 +1814,7 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: mvs(20),
     // backgroundColor: colors.white,
-    backgroundColor:"#F2F2F7",
+    backgroundColor: "#F2F2F7",
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1838,13 +1841,14 @@ const styles = StyleSheet.create({
   // New Match Screen Styles
   newMatchContainer: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    backgroundColor: colors.white,
   },
   newMatchContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: mvs(20),
+    backgroundColor: '#F5F5F9',
   },
   newMatchProfileContainer: {
     marginBottom: mvs(14),
@@ -1868,7 +1872,7 @@ const styles = StyleSheet.create({
   // Chat Screen Styles
   chatContainer: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    backgroundColor: colors.white,
   },
   chatHeader: {
     flexDirection: 'row',
@@ -1902,6 +1906,7 @@ const styles = StyleSheet.create({
   chatMessagesContainer: {
     flex: 1,
     paddingTop: mvs(12),
+    backgroundColor: '#F5F5F9',
   },
   dateSeparator: {
     alignItems: 'center',
@@ -1928,7 +1933,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(8),
   },
   chatBubbleSent: {
-    backgroundColor:"#E6E8FF",
+    backgroundColor: "#E6E8FF",
     // backgroundColor: colors.primary,
     borderBottomRightRadius: mvs(4),
   },
@@ -1962,11 +1967,11 @@ const styles = StyleSheet.create({
   chatInput: {
     flex: 1,
     // backgroundColor: '#F5F5F9',
-    backgroundColor:"white",
+    backgroundColor: "white",
     borderRadius: mvs(20),
     paddingHorizontal: mvs(16),
-    borderWidth:2,
-    borderColor:"#F5F5F9",
+    borderWidth: 2,
+    borderColor: "#F5F5F9",
     paddingVertical: mvs(8),
     fontSize: mvs(14),
     color: colors.inputText,
@@ -2027,9 +2032,9 @@ const styles = StyleSheet.create({
     borderRadius: mvs(12),
     paddingVertical: mvs(8),
     minWidth: mvs(250),
-    minHeight:mvs(120),
+    minHeight: mvs(120),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -2060,7 +2065,7 @@ const styles = StyleSheet.create({
     padding: mvs(24),
     width: '80%',
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -2127,7 +2132,7 @@ const styles = StyleSheet.create({
   },
   callLogContent: {
     // flex: 1,
-    width:"100%",
+    width: "100%",
   },
   // Plus Menu Inline Styles
   plusMenuInlineContainer: {
@@ -2180,7 +2185,7 @@ const styles = StyleSheet.create({
   },
   mediaTimestamp: {
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: {width: 0, height: 1},
+    textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
   },
   videoContainer: {
@@ -2192,7 +2197,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: [{translateX: -mvs(20)}, {translateY: -mvs(20)}],
+    transform: [{ translateX: -mvs(20) }, { translateY: -mvs(20) }],
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -2212,7 +2217,7 @@ const styles = StyleSheet.create({
   },
   fileRow: {
     alignItems: 'flex-start',
-    width:'100%',
+    width: '100%',
     marginBottom: mvs(8),
   },
   fileIconContainer: {

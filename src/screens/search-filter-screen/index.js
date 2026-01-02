@@ -186,7 +186,7 @@ const SearchFilterScreen = () => {
     <View style={styles.container}>
 
       <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
-      <StatusBar backgroundColor={colors.bgColor} barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* Header */}
       <Row style={styles.headerRow}>
@@ -1141,7 +1141,8 @@ export default SearchFilterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2F2F7',
+    // backgroundColor: '#F2F2F7',
+    backgroundColor:colors.helixBackground
   },
   headerRow: {
     paddingHorizontal: mvs(20),
@@ -1298,7 +1299,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: colors.white,
+    backgroundColor: colors.helixBackground,
     marginRight: mvs(8),
   },
   applyButton: {

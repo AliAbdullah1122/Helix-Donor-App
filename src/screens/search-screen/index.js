@@ -482,13 +482,13 @@ const renderMarker = marker => (
   return (
     <View style={styles.container}>
           <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-120): 0}} />
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* Search Input */}
      
 
       {/* Map Section or Location Access Prompt */}
-      {!!hasLocationAccess ? (
+      {hasLocationAccess ? (
         <>
           <View style={styles.mapContainer}>
             {/* <MapView
@@ -740,7 +740,7 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.helixBackground,
   },
   // searchContainer: {
   //   paddingHorizontal: mvs(20),

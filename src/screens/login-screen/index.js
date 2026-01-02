@@ -76,7 +76,7 @@ const LoginScreen = props => {
     <View style={styles.container}>
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false} bounces={false}>
+      <KeyboardAvoidScrollview contentContainerStyle={styles.scrollContainer}>
         <View style={styles.imgView}>
           {/* <Image
             source={IMG.HelixWrittenLogo}
@@ -89,44 +89,44 @@ const LoginScreen = props => {
 
         <View style={styles.centerSection}>
           <View style={styles.contentContainerStyle}>
-            <KeyboardAvoidScrollview
-              contentContainerStyle={styles.keyboradscrollcontent}>
-              <View style={styles.contentContainerStyleNew}>
-                <Formik
-                  initialValues={initialValues}
-                  validationSchema={LoginSchema}
-                  onSubmit={handleFormSubmit}>
-                  {({
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    touched,
-                    values,
-                    errors,
-                  }) => {
-                    console.log('Formik errors:', errors);
-                    console.log('Formik values:', values);
+            {/* <KeyboardAvoidScrollview
+              contentContainerStyle={styles.keyboradscrollcontent}> */}
+            <View style={styles.contentContainerStyleNew}>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={LoginSchema}
+                onSubmit={handleFormSubmit}>
+                {({
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  touched,
+                  values,
+                  errors,
+                }) => {
+                  console.log('Formik errors:', errors);
+                  console.log('Formik values:', values);
 
-                    return (
-                      <>
-                        <PrimaryInput
-                          // isEmailInput
-                          keyboardType={'email-address'}
-                          error={touched?.email ? errors.email : ''}
-                          placeholder={'Enter Email'}
-                          onChangeText={(text) => {
-                            handleChange('email')(text);
-                            if (error) {
-                              setError('');
-                            }
-                          }}
-                          onBlur={handleBlur('email')}
-                          value={values.email}
-                          containerStyle={styles.emailInputContainer}
-                        />
+                  return (
+                    <>
+                      <PrimaryInput
+                        // isEmailInput
+                        keyboardType={'email-address'}
+                        error={touched?.email ? errors.email : ''}
+                        placeholder={'Enter Email'}
+                        onChangeText={(text) => {
+                          handleChange('email')(text);
+                          if (error) {
+                            setError('');
+                          }
+                        }}
+                        onBlur={handleBlur('email')}
+                        value={values.email}
+                        containerStyle={styles.emailInputContainer}
+                      />
 
-                        {/* Error Message */}
-                        {/* {error ? (
+                      {/* Error Message */}
+                      {/* {error ? (
                           <View style={styles.errorContainer}>
                             <View style={styles.errorIconContainer}>
                               <Icon name="alert-circle" size={mvs(14)} color="#FFFFFF" />
@@ -140,22 +140,22 @@ const LoginScreen = props => {
                           </View>
                         ) : null} */}
 
-                        <PrimaryButton
-                          containerStyle={styles.continueButton}
-                          loading={loading}
-                          // onPress={handleSubmit}
-                          onPress={() => navigate("OtpScreen")}
-                          title={'Continue'}
-                        />
+                      <PrimaryButton
+                        containerStyle={styles.continueButton}
+                        loading={loading}
+                        // onPress={handleSubmit}
+                        onPress={() => navigate("OtpScreen")}
+                        title={'Continue'}
+                      />
 
 
-                      </>
-                    );
-                  }}
-                </Formik>
+                    </>
+                  );
+                }}
+              </Formik>
 
-              </View>
-            </KeyboardAvoidScrollview>
+            </View>
+            {/* </KeyboardAvoidScrollview> */}
           </View>
           <View style={styles.dividerRow}>
             <View style={styles.divider} />
@@ -216,7 +216,7 @@ const LoginScreen = props => {
             <Regular label={'.'} color={'#8C8C8C'} fontSize={mvs(12)} style={{ fontWeight: "400" }} />
           </Regular>
         </View>
-      </ScrollView>
+      </KeyboardAvoidScrollview>
     </View>
   );
 };

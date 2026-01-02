@@ -1,8 +1,8 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
 import {
   TouchableOpacity,
@@ -13,14 +13,14 @@ import {
   Platform,
 } from 'react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -37,7 +37,7 @@ const ContactInformationScreen = props => {
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [selectedGender, setSelectedGender] = React.useState('Male');
 
-const navigation = useNavigation();
+  const navigation = useNavigation();
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -45,28 +45,28 @@ const navigation = useNavigation();
     password: '',
     confirmPassword: '',
   };
-    const FullverifyOtp = async () => {
-      try {
-        setLoading(true);
-        const payload = {
-          otp: parseInt(otpValue), 
-          reset: false, 
-        };
-        const res = await verifyOtp(payload);
-        if (res?.success) {
-          setOtpModalVisible(false);
-          navigate("Login");
-        }
-      } catch (error) {
-        Alert.alert('Error', 'An error occurred while verifying OTP');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const handleFormSubmit = async (values,{ resetForm }) => {
+  const FullverifyOtp = async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
+      const payload = {
+        otp: parseInt(otpValue),
+        reset: false,
+      };
+      const res = await verifyOtp(payload);
+      if (res?.success) {
+        setOtpModalVisible(false);
+        navigate("Login");
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while verifying OTP');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
       const apiBody = {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -75,10 +75,10 @@ const navigation = useNavigation();
       };
       console.log('API Body:', apiBody);
       const response = await signUpForm(apiBody);
-      if (response.success) { 
+      if (response.success) {
         console.log('API Response:', response);
-        resetForm(); 
-        setOtpModalVisible(true); 
+        resetForm();
+        setOtpModalVisible(true);
       }
       console.log('response', response);
     } catch (error) {
@@ -87,105 +87,105 @@ const navigation = useNavigation();
       setLoading(false); // Set loading to false after submission (success or error)
     }
   };
-  const Nationality = [{id: 'Pakistan'}, {id: 'United Kingdom'}, {id: 'France'}, {id: 'America'}];
+  const Nationality = [{ id: 'Pakistan' }, { id: 'United Kingdom' }, { id: 'France' }, { id: 'America' }];
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-               {/* <Header1x2x title={'Driver Registration'} /> */}
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      {/* <Header1x2x title={'Driver Registration'} /> */}
 
-      <ScrollView>
-               <Row style={{alignItems:"center",marginHorizontal:mvs(0),marginVertical:mvs(10)}}>
+      <KeyboardAvoidScrollview contentContainerStyle={styles.keyboradscrollcontent}>
+        <Row style={{ alignItems: "center", marginHorizontal: mvs(0), marginVertical: mvs(10) }}>
 
-        <IMG.Progress1
-          width="100%" height={mvs(20)}
-        
-        />
-        
+          <IMG.Progress1
+            width="100%" height={mvs(20)}
+
+          />
+
 
         </Row>
         {/* <View style={{marginHorizontal:mvs(20),marginTop:mvs(20)}}>
 
          <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
          </View> */}
-           <View style={{paddingHorizontal:mvs(0)}}>
-                 <Medium  color={"#404040"} fontSize={mvs(14)} style={{textDecorationLine:"underline",alignSelf:"flex-end"}}/>
-                 </View>
-                 <View style={{marginHorizontal:mvs(0),marginTop:mvs(20)}}>
-                  <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"}/>
-                 </View>
-       
-        <View style={{marginHorizontal:mvs(0),marginTop:mvs(10),marginBottom:mvs(10)}}>
-        <Medium
-          label={'How can we contact you?'}
-          color={colors.textColor}
-          fontSize={mvs(18)}
-        />
-        <Regular
-          label={'Your information is required for account management and will never be shared with other users.'}
-          color={"#8C8C8C"}
-          numberOfLines={3}
-          fontSize={mvs(14)}
-          style={{marginTop:mvs(8)}}
-        />
+        <View style={{ paddingHorizontal: mvs(0) }}>
+          <Medium color={"#404040"} fontSize={mvs(14)} style={{ textDecorationLine: "underline", alignSelf: "flex-end" }} />
+        </View>
+        <View style={{ marginHorizontal: mvs(0), marginTop: mvs(20) }}>
+          <Regular label={'Stage 1 of 6'} fontSize={mvs(12)} color={"#8C8C8C"} />
+        </View>
+
+        <View style={{ marginHorizontal: mvs(0), marginTop: mvs(10), marginBottom: mvs(10) }}>
+          <Medium
+            label={'How can we contact you?'}
+            color={colors.textColor}
+            fontSize={mvs(18)}
+          />
+          <Regular
+            label={'Your information is required for account management and will never be shared with other users.'}
+            color={"#8C8C8C"}
+            numberOfLines={3}
+            fontSize={mvs(14)}
+            style={{ marginTop: mvs(8) }}
+          />
         </View>
         <View style={styles.contentContainerStyle}>
-          <KeyboardAvoidScrollview
-            contentContainerStyle={styles.keyboradscrollcontent}>
-            <View style={styles.contentContainerStyleNew}>
-              <Formik
-                initialValues={initialValues}
-                // validationSchema={SignupSchema} // Apply the validation schema
-                onSubmit={handleFormSubmit}>
-                {({
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  touched,
-                  values,
-                  errors,
-                }) => (
-                  <>
-                    {console.log('errors', errors)}
-                    <PrimaryInput
-                      error={touched?.firstName ? errors.firstName : ''}
-                      placeholder={'Enter Email'}
-                      onChangeText={handleChange('firstName')}
-                      onBlur={handleBlur('firstName')}
-                      label="Contact Email"
-                      isRequired
-                      // style={{backgroundColor:colors.red}}
-                      value={values.firstName}
-                      containerStyle={{borderColor:'#18181B0F'}}
-                    />
-                   
-                    <PrimaryInput
+          {/* <KeyboardAvoidScrollview
+            contentContainerStyle={styles.keyboradscrollcontent}> */}
+          <View style={styles.contentContainerStyleNew}>
+            <Formik
+              initialValues={initialValues}
+              // validationSchema={SignupSchema} // Apply the validation schema
+              onSubmit={handleFormSubmit}>
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                touched,
+                values,
+                errors,
+              }) => (
+                <>
+                  {console.log('errors', errors)}
+                  <PrimaryInput
+                    error={touched?.firstName ? errors.firstName : ''}
+                    placeholder={'Enter Email'}
+                    onChangeText={handleChange('firstName')}
+                    onBlur={handleBlur('firstName')}
+                    label="Contact Email"
+                    isRequired
+                    // style={{backgroundColor:colors.red}}
+                    value={values.firstName}
+                    containerStyle={{ borderColor: '#18181B0F' }}
+                  />
+
+                  <PrimaryInput
                     isPhoneInput
-  countryCode="+1"
-                      // isCountry
-                      label="Phone Number"
-                      error={touched?.firstName ? errors.firstName : ''}
-                      placeholder={'(555) 123-4567'}
-                      onChangeText={handleChange('firstName')}
-                      onBlur={handleBlur('firstName')}
-                      value={values.firstName}
-                      keyboardType="phone-pad"
-                      // isRequired
-                      containerStyle={{borderColor:'#18181B0F'}}
-                    />
-                   
-                    <PrimaryInput
-                      label="Current Address"
-                      error={touched?.firstName ? errors.firstName : ''}
-                      placeholder={'Enter your Address'}
-                      onChangeText={handleChange('firstName')}
-                      onBlur={handleBlur('firstName')}
-                      value={values.firstName}
-                      // containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
-                      containerStyle={[styles.inputContainer, {borderRadius:mvs(24),height: mvs(100), alignItems: 'flex-start',paddingTop:mvs(10)}]}
-                    />
-                    
-                    
-{/* <View style={{marginTop:mvs(20)}}>
+                    countryCode="+1"
+                    // isCountry
+                    label="Phone Number"
+                    error={touched?.firstName ? errors.firstName : ''}
+                    placeholder={'(555) 123-4567'}
+                    onChangeText={handleChange('firstName')}
+                    onBlur={handleBlur('firstName')}
+                    value={values.firstName}
+                    keyboardType="phone-pad"
+                    // isRequired
+                    containerStyle={{ borderColor: '#18181B0F' }}
+                  />
+
+                  <PrimaryInput
+                    label="Current Address"
+                    error={touched?.firstName ? errors.firstName : ''}
+                    placeholder={'Enter your Address'}
+                    onChangeText={handleChange('firstName')}
+                    onBlur={handleBlur('firstName')}
+                    value={values.firstName}
+                    // containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
+                    containerStyle={[styles.inputContainer, { borderRadius: mvs(24), height: mvs(100), alignItems: 'flex-start', paddingTop: mvs(10) }]}
+                  />
+
+
+                  {/* <View style={{marginTop:mvs(20)}}>
 <PrimaryInput
                     isCountry
                       error={touched?.firstName ? errors.firstName : ''}
@@ -198,62 +198,62 @@ const navigation = useNavigation();
                     <Regular style={{marginBottom:mvs(0)}} fontSize={mvs(13)} color={colors.black} label={'We will verified your number'}/>
                     </View> */}
 
-                   
-                  
-                   
-                  </>
-                )}
-              </Formik>
-              
-            </View>
-          </KeyboardAvoidScrollview>
-        </View>
-      </ScrollView>
 
-      <View style={{marginHorizontal: mvs(20), marginBottom: mvs(40)}}>
+
+
+                </>
+              )}
+            </Formik>
+
+          </View>
+          {/* </KeyboardAvoidScrollview> */}
+        </View>
+      </KeyboardAvoidScrollview>
+
+      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
         <Regular
           label={'Your contact details are strictly confidential.'}
           fontSize={mvs(14)}
           color={'#8C8C8C'}
-          style={{textAlign: 'center', marginTop: mvs(10)}}
+          style={{ textAlign: 'center', marginTop: mvs(10) }}
         />
       </View>
 
-      <View style={{marginHorizontal:mvs(0), marginBottom: mvs(40)}}>
+      <View style={{ marginHorizontal: mvs(0), marginBottom: mvs(40) }}>
         <Row>
-       <PrimaryButton
-                      containerStyle={{
-                        borderRadius: mvs(50),
-                        height: mvs(43),
-                        marginVertical: mvs(0),
-                        backgroundColor:colors.transparent,
-                        width:"33%",
-                        borderWidth:1.8,
-                        borderColor:colors.primary,
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: colors.transparent,
+              width: "33%",
+              borderWidth: 1.8,
+              borderColor: colors.primary,
 
-                      }}
-                      loading={loading}
-                      textStyle={{color:colors.primary}}
-                      // onPress={handleSubmit}
-                       onPress={() => navigation.goBack()}
-                      title={'Back'}
-                    />
-       <PrimaryButton
-                      containerStyle={{
-                        borderRadius: mvs(50),
-                        height: mvs(43),
-                        marginVertical: mvs(0),
-                        backgroundColor:"#3A3E90",
-                         width:"33%"
-                      }}
-                      loading={loading}
-                      // onPress={handleSubmit}
-                      onPress={()=>navigate("VerificationScreen")}
-                      title={'Continue'}
-                    />
-                    </Row>
-                    </View>
-    
+            }}
+            loading={loading}
+            textStyle={{ color: colors.primary }}
+            // onPress={handleSubmit}
+            onPress={() => navigation.goBack()}
+            title={'Back'}
+          />
+          <PrimaryButton
+            containerStyle={{
+              borderRadius: mvs(50),
+              height: mvs(43),
+              marginVertical: mvs(0),
+              backgroundColor: "#3A3E90",
+              width: "33%"
+            }}
+            loading={loading}
+            // onPress={handleSubmit}
+            onPress={() => navigate("VerificationScreen")}
+            title={'Continue'}
+          />
+        </Row>
+      </View>
+
     </View>
   );
 };

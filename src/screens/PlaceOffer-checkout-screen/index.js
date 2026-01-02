@@ -47,7 +47,7 @@ const PlaceofferCheckoutScreen = props => {
   return (
     <View style={styles.container}>
        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 
         contentContainerStyle={styles.scrollContainer} 

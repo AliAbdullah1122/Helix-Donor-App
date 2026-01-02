@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import * as IMG from 'assets/images';
 
 import {
@@ -21,16 +21,16 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import PhoneInput from 'react-native-phone-number-input';
 import Regular from 'typography/regular-text';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import Medium from 'typography/medium-text';
-import {Row} from '../row';
-import {useAppSelector} from 'hooks/use-store';
+import { Row } from '../row';
+import { useAppSelector } from 'hooks/use-store';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {t} from 'i18next';
-import {menue} from 'assets/images';
-import {DatePicker} from '../date-picker';
+import { t } from 'i18next';
+import { menue } from 'assets/images';
+import { DatePicker } from '../date-picker';
 import moment from 'moment';
 import DropdownModalNew from 'components/molecules/modals/new-dropdown-modal';
 import DropdownModalComplainTypeSelection from 'components/molecules/modals/dropdown-modal-complain-type-selection';
@@ -62,17 +62,17 @@ type props = {
   defaultCode?: 'PK';
   layout?: 'first';
   isPhoneInput?: boolean;
-countryCode?: string;
+  countryCode?: string;
 
   isPassword?: boolean;
   isFulName?: boolean;
   isVehicleType?: boolean;
-isAddressInput?: boolean;
- isCalendarInput?: boolean;
- isIDcard?: boolean;
-isEmailInput?: boolean;
-isPasswordInput?: boolean;
- isCountry?: boolean;
+  isAddressInput?: boolean;
+  isCalendarInput?: boolean;
+  isIDcard?: boolean;
+  isEmailInput?: boolean;
+  isPasswordInput?: boolean;
+  isCountry?: boolean;
 
   isCalendar?: boolean;
   editable?: boolean;
@@ -83,10 +83,11 @@ isPasswordInput?: boolean;
   maximumDate?: Date;
   keyboardType?: KeyboardTypeOptions | undefined;
   onBlur?: (e?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  multiline?: boolean;
 };
 export const InputPresciption = (props: props) => {
   const [secure, setSecure] = useState(true);
-  const {language} = useAppSelector(s => s.user);
+  const { language } = useAppSelector(s => s.user);
   const {
     onChangeText,
     value,
@@ -101,14 +102,14 @@ export const InputPresciption = (props: props) => {
     keyboardType,
     error,
     editable = true,
-    onBlur = () => {},
-    onPressIn = () => {},
-    onPressMinus = () => {},
+    onBlur = () => { },
+    onPressIn = () => { },
+    onPressMinus = () => { },
     isRequired = false,
   } = props;
   return (
     <>
-      <Row style={{alignItems: 'center'}}>
+      <Row style={{ alignItems: 'center' }}>
         <Medium label={label} style={[styles.labelStyle, labelStyle]} />
         <TouchableOpacity onPress={onPressMinus}>
           <AntDesign name="minuscircle" color={colors.primary} size={mvs(14)} />
@@ -128,7 +129,7 @@ export const InputPresciption = (props: props) => {
           style={[
             styles.textInput,
             style,
-            {textAlign: I18nManager.isRTL ? 'right' : 'left'},
+            { textAlign: I18nManager.isRTL ? 'right' : 'left' },
           ]}
         />
         {isPassword && (
@@ -154,7 +155,7 @@ const PrimaryInput = (props: props) => {
   const [isDatePickerVisible, setDatePickerVisible] = useState(false); // Add state for DateTimePickerModal
 
   const [secure, setSecure] = useState(true);
-  const {language} = useAppSelector(s => s.user);
+  const { language } = useAppSelector(s => s.user);
 
   const {
     onChangeText,
@@ -174,21 +175,22 @@ const PrimaryInput = (props: props) => {
     isIDcard,
     isCalendarInput,
     isAddressInput,
-isEmailInput,
-isVehicleType,
-isPasswordInput,
+    isEmailInput,
+    isVehicleType,
+    isPasswordInput,
 
-isCountry,
+    isCountry,
     height,
     isCalendar,
     keyboardType,
     error,
     mainContainer,
     editable = true,
-    onBlur = () => {},
-    onPressIn = () => {},
+    onBlur = () => { },
+    onPressIn = () => { },
     isRequired = false,
     maximumDate,
+    multiline, // Add multiline to destructured props
   } = props;
   const showDatePicker = () => {
     setDatePickerVisible(true);
@@ -209,11 +211,11 @@ isCountry,
         </Medium>
       )}
       <View style={[styles.Container, containerStyle]}>
-         {isFulName && (
+        {isFulName && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.Profile1}
@@ -221,14 +223,14 @@ isCountry,
               style={{width:mvs(20),height:mvs(20)}}
 
             /> */}
-             <IMG.profileNewSvg width={mvs(20)} height={mvs(20)} />
+            <IMG.profileNewSvg width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         )}
-         {isIDcard && (
+        {isIDcard && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.IDInput}
@@ -236,15 +238,15 @@ isCountry,
               style={{width:mvs(20),height:mvs(20)}}
 
             /> */}
-              <IMG.IDSvg width={mvs(20)} height={mvs(20)} />
+            <IMG.IDSvg width={mvs(20)} height={mvs(20)} />
 
           </TouchableOpacity>
         )}
-         {isCalendarInput && (
+        {isCalendarInput && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.calendarInput}
@@ -252,14 +254,14 @@ isCountry,
               style={{width:mvs(20),height:mvs(20)}}
 
             /> */}
-              <IMG.calendaroutline width={mvs(20)} height={mvs(20)} />
+            <IMG.calendaroutline width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         )}
         {isEmailInput && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.mail}
@@ -268,14 +270,14 @@ isCountry,
 
             /> */}
 
-             <IMG.mailNew width={mvs(20)} height={mvs(20)} />
+            <IMG.mailNew width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         )}
         {isPasswordInput && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.lock}
@@ -283,14 +285,14 @@ isCountry,
               style={{width:mvs(20),height:mvs(20)}}
 
             /> */}
-             <IMG.locknEWsVG width={mvs(20)} height={mvs(20)} />
+            <IMG.locknEWsVG width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         )}
-         {isAddressInput && (
+        {isAddressInput && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.AddressInput}
@@ -301,11 +303,11 @@ isCountry,
             <IMG.AddressSvg width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         )}
-         {isCountry && (
+        {isCountry && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.countryInput}
@@ -313,14 +315,14 @@ isCountry,
               style={{width:mvs(25),height:mvs(25)}}
 
             /> */}
-             <IMG.MobileSvg width={mvs(25)} height={mvs(25)} />
+            <IMG.MobileSvg width={mvs(25)} height={mvs(25)} />
           </TouchableOpacity>
         )}
-         {isVehicleType && (
+        {isVehicleType && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
-            >
+          // onPress={() => setSecure(!secure)}
+          >
             {/* <Image
               // size={25}
               source={IMG.countryInput}
@@ -328,7 +330,7 @@ isCountry,
               style={{width:mvs(25),height:mvs(25)}}
 
             /> */}
-             <IMG.automotive width={mvs(20)} height={mvs(20)} />
+            <IMG.automotive width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         )}
 
@@ -380,10 +382,11 @@ isCountry,
             placeholderTextColor={colors.placeholder}
             onChangeText={onChangeText}
             placeholder={placeholder}
+            multiline={multiline}
             style={[
               styles.textInput,
               style,
-              {textAlign: I18nManager.isRTL ? 'right' : 'left'},
+              { textAlign: I18nManager.isRTL ? 'right' : 'left' },
             ]}
           />
         )}
@@ -416,29 +419,29 @@ isCountry,
         maximumDate={maximumDate}
         onCancel={hideDatePicker}
       />
-      <Row style={{justifyContent:"flex-start",alignItems:"center",marginTop:mvs(10)}}>
-          {/* <Image source={IMG.alertcircle} resizeMode='contain' style={{height:mvs(18),width:mvs(18)}}/> */}
-          {error ? (
-    <Image
-      source={IMG.alertcircle}
-      resizeMode="contain"
-      style={{ height: mvs(12), width: mvs(12) }}
-      // style={{ height: mvs(18), width: mvs(18) }}
-    />
-  ) : null}
-          <Regular
-        numberOfLines={numberOfLines}
-        label={error ? error : ''}
-        style={[
-          styles.errorLabel,
-          errorStyle,
-          {
-            height: height,
-          },
-        ]}
-      />
+      <Row style={{ justifyContent: "flex-start", alignItems: "center", marginTop: mvs(10) }}>
+        {/* <Image source={IMG.alertcircle} resizeMode='contain' style={{height:mvs(18),width:mvs(18)}}/> */}
+        {error ? (
+          <Image
+            source={IMG.alertcircle}
+            resizeMode="contain"
+            style={{ height: mvs(12), width: mvs(12) }}
+          // style={{ height: mvs(18), width: mvs(18) }}
+          />
+        ) : null}
+        <Regular
+          numberOfLines={numberOfLines}
+          label={error ? error : ''}
+          style={[
+            styles.errorLabel,
+            errorStyle,
+            {
+              height: height,
+            },
+          ]}
+        />
       </Row>
-      
+
 
     </View>
   );
@@ -448,7 +451,7 @@ export default React.memo(PrimaryInput);
 export const CommentInput = (props: props) => {
   const {
     onChangeText,
-    onPress = () => {},
+    onPress = () => { },
     value,
     style,
     placeholder = 'Write Message',
@@ -456,7 +459,7 @@ export const CommentInput = (props: props) => {
     isPassword,
     keyboardType,
     error,
-    onBlur = () => {},
+    onBlur = () => { },
   } = props;
   return (
     <>
@@ -485,7 +488,7 @@ export const CommentInput = (props: props) => {
 export const MessageInput = (props: props) => {
   const {
     onChangeText,
-    onPress = () => {},
+    onPress = () => { },
     value,
     style,
     placeholder = 'Write Message',
@@ -494,13 +497,13 @@ export const MessageInput = (props: props) => {
     keyboardType,
     error,
     sendMessage,
-    onBlur = () => {},
+    onBlur = () => { },
   } = props;
-  
+
   return (
     <>
       <Row style={[styles.messageContainer, containerStyle]}>
-        <Row style={{flex: 1}}>
+        <Row style={{ flex: 1 }}>
           <TouchableOpacity style={styles.PasswordIcon} onPress={onPress}>
             <Image source={IMG.attachment} style={styles.imglogo} />
           </TouchableOpacity>
@@ -551,7 +554,7 @@ export const MessageInput = (props: props) => {
 //           placeholder={placeholder}
 //           style={[styles.textInput, style]}
 //         />
-      
+
 //         {/* <TouchableOpacity style={styles.PasswordIcon} onPress={onPress}>
 //           <Entypo size={20} name={'attachment'} color={colors.attachmentgray} />
 //         </TouchableOpacity> */}
@@ -571,7 +574,7 @@ export const InputWithIcon = (props: props & {
   const {
     items = [],
     onChangeText,
-    onBlur = () => {},
+    onBlur = () => { },
     value,
     style,
     containerStyle,
@@ -586,12 +589,12 @@ export const InputWithIcon = (props: props & {
     buildOptions = [],
     selectedHairColor = null,
     selectedBuild = null,
-    onHairColorChange = () => {},
-    onBuildChange = () => {},
+    onHairColorChange = () => { },
+    onBuildChange = () => { },
   } = props;
-  
+
   return (
-    <View style={[styleo,{ position: 'relative', zIndex: visible ? 1000 : 1}]}>
+    <View style={[styleo, { position: 'relative', zIndex: visible ? 1000 : 1 }]}>
       {label && (
         <Regular label={label} style={styles.labelStyle}>
           {isRequired ? <Regular color={colors.red} label={' *'} /> : null}
@@ -609,11 +612,11 @@ export const InputWithIcon = (props: props & {
           label={
             items?.find(x => x?.id == id)?.title ||
             items?.find(x => x?.id == id)?.name ||
-            placeholder 
+            placeholder
           }
           color={'#D9D9D9'}
           // color={colors.black}
-          style={{fontWeight:'400'}}
+          style={{ fontWeight: '400' }}
           fontSize={mvs(14)}
         />
         <Feather size={25} name={visible ? 'chevron-up' : 'chevron-down'} color={'#8C8C8C'} />
@@ -635,7 +638,7 @@ export const InputWithIconNew = (props: props) => {
   const {
     items = [],
     onChangeText,
-    onBlur = () => {},
+    onBlur = () => { },
     value,
     style,
     containerStyle,
@@ -686,7 +689,7 @@ export const InputWithIcon2 = (props: props) => {
   const {
     items = [],
     onChangeText,
-    onBlur = () => {},
+    onBlur = () => { },
     value,
     style,
     containerStyle,
@@ -740,7 +743,7 @@ export const InputWithIcon3 = (props: props) => {
   const {
     items = [],
     onChangeText,
-    onBlur = () => {},
+    onBlur = () => { },
     value,
     label2,
     style,
@@ -789,8 +792,8 @@ export const InputWithIcon3 = (props: props) => {
 export const PrimaryPhoneInput = (props: props) => {
   const phoneRef = useRef<PhoneInput>(null);
   const {
-    onChangeText = t => {},
-    getCallingCode = t => {},
+    onChangeText = t => { },
+    getCallingCode = t => { },
     value,
     style,
     label,
@@ -851,7 +854,7 @@ export const SearchInput = (props: props) => {
       <TouchableOpacity
         disabled={disabledSearch}
         style={styles.searchIcon}
-        onPress={() => {}}>
+        onPress={() => { }}>
         <Feather size={mvs(22)} name={'search'} color={colors.grey} />
       </TouchableOpacity>
       <TextInput
@@ -867,8 +870,8 @@ export const SearchInput = (props: props) => {
       <TouchableOpacity
         disabled={disabledSearch}
         style={styles.searchIcon}
-        onPress={() => {}}>
-        <Image source={menue} style={{height: mvs(15), width: mvs(25)}} />
+        onPress={() => { }}>
+        <Image source={menue} style={{ height: mvs(15), width: mvs(25) }} />
       </TouchableOpacity>
     </View>
   );
@@ -878,7 +881,7 @@ export const InputWithIconComplainTypeSelection = (props: props) => {
   const {
     items = [],
     onChangeText,
-    onBlur = () => {},
+    onBlur = () => { },
     value,
     style,
     containerStyle,
@@ -915,7 +918,7 @@ export const InputWithIconComplainTypeSelection = (props: props) => {
         }</>  */}
         <Entypo
           size={25}
-          style={{transform: [{rotate: visible ? '90deg' : '0deg'}]}}
+          style={{ transform: [{ rotate: visible ? '90deg' : '0deg' }] }}
           name={'chevron-small-right'}
           color={colors.black}
         />
@@ -934,7 +937,7 @@ export const InputWithIconComplainTypeSelection = (props: props) => {
 };
 export const TextAreaInput = (props: props) => {
   const [secure, setSecure] = useState(true);
-  const {language} = useAppSelector(s => s.user);
+  const { language } = useAppSelector(s => s.user);
   const {
     onChangeText,
     value,
@@ -951,8 +954,8 @@ export const TextAreaInput = (props: props) => {
     error,
     mainContainer,
     editable = true,
-    onBlur = () => {},
-    onPressIn = () => {},
+    onBlur = () => { },
+    onPressIn = () => { },
     isRequired = false,
   } = props;
   return (
@@ -978,7 +981,7 @@ export const TextAreaInput = (props: props) => {
           style={[
             styles.areatextInput,
             style,
-            {textAlign: I18nManager.isRTL ? 'right' : 'left'},
+            { textAlign: I18nManager.isRTL ? 'right' : 'left' },
           ]}
         />
         {isPassword && (
@@ -995,7 +998,7 @@ export const TextAreaInput = (props: props) => {
         {isCalendar && (
           <TouchableOpacity
             style={styles.PasswordIcon}
-            // onPress={() => setSecure(!secure)}
+          // onPress={() => setSecure(!secure)}
           >
             <FontAwesome size={20} name={'calendar'} color={colors.black} />
           </TouchableOpacity>
@@ -1069,18 +1072,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderWidth: mvs(1),
     borderColor: colors.borderColor,
-    
+
   },
-messageContainer: {
-  alignItems: 'center', // Changed from 'flex-start'
-  borderRadius: mvs(10),
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  backgroundColor: '#F6F6F6',
-  marginTop: mvs(5),
-  flex: 1,
-  minHeight: mvs(40), // Minimum height
-},
+  messageContainer: {
+    alignItems: 'center', // Changed from 'flex-start'
+    borderRadius: mvs(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#F6F6F6',
+    marginTop: mvs(5),
+    flex: 1,
+    minHeight: mvs(40), // Minimum height
+  },
   phoneContainer: {
     width: '100%',
     borderWidth: 1,
@@ -1090,21 +1093,21 @@ messageContainer: {
     borderRadius: mvs(10),
     overflow: 'hidden',
   },
-  textContainerStyle: {backgroundColor: colors.white},
-textInput: {
-  color: colors.inputText,
-  fontSize: mvs(14),
-  // fontSize: mvs(16),
-  marginLeft:mvs(8),
-  fontWeight:'400',
-      fontFamily: fonts.regular,
+  textContainerStyle: { backgroundColor: colors.white },
+  textInput: {
+    color: colors.inputText,
+    fontSize: mvs(14),
+    // fontSize: mvs(16),
+    marginLeft: mvs(8),
+    fontWeight: '400',
+    fontFamily: fonts.regular,
     letterSpacing: 0,
     // letterSpacing: 0.2,
-  flex: 1,
-  padding: mvs(0),
-  maxHeight: mvs(120), // Optional: set a maximum height
-  // Remove fixed height
-},
+    flex: 1,
+    padding: mvs(0),
+    maxHeight: mvs(120), // Optional: set a maximum height
+    // Remove fixed height
+  },
   textInputStyle: {
     color: colors.primary,
     height: mvs(56),
@@ -1119,7 +1122,7 @@ textInput: {
   labelStyle: {
     alignSelf: 'flex-start',
     color: "#8C8C8C",
-    fontSize:mvs(14),
+    fontSize: mvs(14),
     marginBottom: mvs(6),
     paddingHorizontal: mvs(5),
   },
@@ -1136,7 +1139,7 @@ textInput: {
     // marginBottom: mvs(5),
     // textAlign:'center',
     height: mvs(12),
-    fontWeight:"400",
+    fontWeight: "400",
     // height: mvs(15),
 
     marginHorizontal: mvs(5),
@@ -1173,39 +1176,39 @@ textInput: {
     marginBottom: mvs(10),
     marginHorizontal: mvs(5),
   },
-    sendIcon: {
-      width: mvs(50),
-      height: mvs(52),
-      backgroundColor: colors.primary,
-      borderRadius: mvs(10),
-      marginLeft: mvs(10),
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+  sendIcon: {
+    width: mvs(50),
+    height: mvs(52),
+    backgroundColor: colors.primary,
+    borderRadius: mvs(10),
+    marginLeft: mvs(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    phoneContainerNew: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  width: '100%',
-},
+  phoneContainerNew: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
 
-countryCodeBox: {
-  paddingHorizontal: mvs(12),
-  justifyContent: 'center',
-  alignItems: 'center',
-},
+  countryCodeBox: {
+    paddingHorizontal: mvs(12),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-divider: {
-  height: '60%',
-  width: 1,
-  backgroundColor: '#D1D5DB',
-  marginHorizontal: mvs(8),
-},
+  divider: {
+    height: '60%',
+    width: 1,
+    backgroundColor: '#D1D5DB',
+    marginHorizontal: mvs(8),
+  },
 
-phoneInput: {
-  flex: 1,
-  fontSize: mvs(14),
-  color: colors.black,
-},
+  phoneInput: {
+    flex: 1,
+    fontSize: mvs(14),
+    color: colors.black,
+  },
 
 });

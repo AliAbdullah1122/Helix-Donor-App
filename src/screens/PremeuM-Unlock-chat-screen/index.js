@@ -91,7 +91,7 @@ const PremiumUnlockChatScreen = () => {
       <SafeAreaView
         style={{marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0}}
       />
-      <StatusBar barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* Header */}
       <View style={styles.header}>
@@ -175,7 +175,7 @@ const PremiumUnlockChatScreen = () => {
                       {/* <Regular style={styles.popularText}>MOST POPULAR</Regular> */}
                       <Regular
                       label={'MOST POPULAR'}
-                      fontSize={mvs(12)}
+                     fontSize={mvs(11)}
 
                 style={styles.popularText}
                     />
@@ -280,7 +280,7 @@ export default PremiumUnlockChatScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,
+    backgroundColor: colors.helixBackground,
     paddingHorizontal: mvs(12),
     paddingTop: mvs(40),
   },

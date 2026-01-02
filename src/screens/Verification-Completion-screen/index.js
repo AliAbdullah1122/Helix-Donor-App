@@ -168,7 +168,7 @@ const navigation = useNavigation();
                       <Icon
                         name="checkmark"
                         size={mvs(14)}
-                        color={colors.white}
+                        color={colors.helixPrimary}
                       />
                     )}
                   </TouchableOpacity>

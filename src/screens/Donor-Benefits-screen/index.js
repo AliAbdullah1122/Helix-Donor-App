@@ -4,7 +4,7 @@ import { mvs } from 'config/metrices';
 import { Formik } from 'formik';
 import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, Platform} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, Platform } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
@@ -123,10 +123,11 @@ const DonorBenefitsScreen = props => {
   return (
     <View style={styles.container}>
       {/* <Header1x2x title={'Driver Registration'} /> */}
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-               {/* <Header1x2x title={'Driver Registration'} /> */}
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      {/* <Header1x2x title={'Driver Registration'} /> */}
 
-      <ScrollView>
+      <KeyboardAvoidScrollview
+        contentContainerStyle={styles.keyboradscrollcontent}>
         <Row style={{ alignItems: "center", marginHorizontal: mvs(12), marginVertical: mvs(10) }}>
 
           <IMG.Progress5
@@ -188,47 +189,47 @@ const DonorBenefitsScreen = props => {
 
 
         <View style={styles.contentContainerStyle}>
-          <KeyboardAvoidScrollview
-            contentContainerStyle={styles.keyboradscrollcontent}>
-            <View style={styles.contentContainerStyleNew}>
-              {/* Compensation Fields - Show when interested */}
-              {isInterestedInCompensation && (
-                <>
-                  {/* Asking Compensation */}
-                  {/* <View style={{ marginTop: mvs(0) }}>
-                    <Medium
-                      label="Asking Compensation"
-                      fontSize={mvs(14)}
-                      color={colors.textColorSecondary}
-                      style={{ marginBottom: mvs(12) }}
-                    />
-                    <PrimaryInput
-                      placeholder="Enter amount"
-                      value={askingCompensation}
-                      onChangeText={setAskingCompensation}
-                      keyboardType="numeric"
-                      containerStyle={styles.amountInput}
-                    />
-                    <Regular
-                      label="(This is your standard requested compensation amount.)"
-                      fontSize={mvs(12)}
-                      numberOfLines={10}
-                      color={"#8C8C8C"}
-                      style={{ marginTop: mvs(-22) }}
-                    />
-                  </View> */}
+          {/* <KeyboardAvoidScrollview
+             contentContainerStyle={styles.keyboradscrollcontent}> */}
+          <View style={styles.contentContainerStyleNew}>
+            {/* Compensation Fields - Show when interested */}
+            {isInterestedInCompensation && (
+              <>
+                {/* Asking Compensation */}
+                <View style={{ marginTop: mvs(0), marginBottom: mvs(20) }}>
+                  <Medium
+                    label="Asking Compensation"
+                    fontSize={mvs(14)}
+                    color={colors.textColorSecondary}
+                    style={{ marginBottom: mvs(12) }}
+                  />
+                  <PrimaryInput
+                    placeholder="Enter amount"
+                    value={askingCompensation}
+                    onChangeText={setAskingCompensation}
+                    keyboardType="numeric"
+                    containerStyle={styles.amountInput}
+                  />
+                  <Light
+                    label="(This is your standard requested compensation amount.)"
+                    fontSize={mvs(14)}
+                    numberOfLines={10}
+                    color={'#333333'}
+                    style={{ marginTop: mvs(-22) }}
+                  />
+                </View>
 
-                  {/* Allow Bidding Toggle */}
-                  <View style={{ marginTop: mvs(-20) }}>
-                    <View style={styles.biddingToggleContainer}>
-                      <Regular
-                        label="Allow Bidding / Auction?"
-                        fontSize={mvs(14)}
-                        numberOfLines={10}
-                        color={colors.textColor}
-                        style={{ marginRight: mvs(12), flex: 1 }}
-                      />
-                      {/* <ToggleSwitch
+                {/* Allow Bidding Toggle */}
+                <View style={{ marginTop: mvs(-20) }}>
+                  <View style={styles.biddingToggleContainer}>
+                    <Regular
+                      label="Allow Bidding / Auction?"
+                      fontSize={mvs(14)}
+                      numberOfLines={10}
+                      color={colors.textColor}
+                      style={{ marginRight: mvs(12), flex: 1 }}
+                    />
+                    {/* <ToggleSwitch
                         isOn={allowBidding}
                         onToggle={setAllowBidding}
                         onColor={colors.primary}
@@ -236,115 +237,115 @@ const DonorBenefitsScreen = props => {
                         circleColor={colors.white}
                         size="medium"
                       /> */}
-                      <View style={styles.compensationToggleContainer}>
-                        {/* NO */}
-                        <Regular
-                          label="No"
-                          fontSize={mvs(14)}
-                          color={allowBidding ? '#D9D9D9' : '#404040'}
-                          style={{ marginRight: mvs(10), fontWeight: '400' }}
-                        />
+                    <View style={styles.compensationToggleContainer}>
+                      {/* NO */}
+                      <Regular
+                        label="No"
+                        fontSize={mvs(14)}
+                        color={allowBidding ? '#D9D9D9' : '#404040'}
+                        style={{ marginRight: mvs(10), fontWeight: '400' }}
+                      />
 
-                        <ExactToggle
-                          isOn={allowBidding}
-                          onToggle={setAllowBidding}
-                          onColor={colors.primary}
-                          offColor="#D9D9D9"
-                          circleColor={colors.white}
-                        />
+                      <ExactToggle
+                        isOn={allowBidding}
+                        onToggle={setAllowBidding}
+                        onColor={colors.primary}
+                        offColor="#D9D9D9"
+                        circleColor={colors.white}
+                      />
 
-                        {/* YES */}
-                        <Regular
-                          label="Yes"
+                      {/* YES */}
+                      <Regular
+                        label="Yes"
+                        fontSize={mvs(14)}
+                        color={allowBidding ? '#404040' : '#D9D9D9'}
+                        style={{ marginLeft: mvs(10), fontWeight: '400' }}
+                      />
+                    </View>
+
+                  </View>
+
+                  {/* Bidding Fields - Show when bidding is allowed */}
+                  {allowBidding && (
+                    <>
+                      <View style={{ marginTop: mvs(0) }}>
+                        <Medium
+                          label="Minimum Accepted Compensation"
                           fontSize={mvs(14)}
-                          color={allowBidding ? '#404040' : '#D9D9D9'}
-                          style={{ marginLeft: mvs(10), fontWeight: '400' }}
+                          color={colors.textColorSecondary}
+                          numberOfLines={10}
+                          style={{ marginBottom: mvs(7), marginLeft: mvs(8) }}
+                        />
+                        <PrimaryInput
+                          placeholder="Enter amount"
+                          value={minimumCompensation}
+                          onChangeText={setMinimumCompensation}
+                          keyboardType="numeric"
+                          containerStyle={styles.amountInput}
                         />
                       </View>
 
-                    </View>
-
-                    {/* Bidding Fields - Show when bidding is allowed */}
-                    {allowBidding && (
-                      <>
-                        <View style={{ marginTop: mvs(0) }}>
-                          <Medium
-                            label="Minimum Accepted Compensation"
-                            fontSize={mvs(14)}
-                            color={colors.textColorSecondary}
-                            numberOfLines={10}
-                            style={{ marginBottom: mvs(7),marginLeft:mvs(8) }}
-                          />
-                          <PrimaryInput
-                            placeholder="Enter amount"
-                            value={minimumCompensation}
-                            onChangeText={setMinimumCompensation}
-                            keyboardType="numeric"
-                            containerStyle={styles.amountInput}
-                          />
-                        </View>
-
-                        <View style={{ marginTop: mvs(0) }}>
-                          <Medium
-                            label='"Buy Now" Compensation (Maximum)'
-                            fontSize={mvs(14)}
-                            numberOfLines={10}
-                            color={colors.textColorSecondary}
-                             style={{ marginBottom: mvs(7),marginLeft:mvs(8) }}
-                          />
-                          <PrimaryInput
-                            placeholder="Enter amount"
-                            value={buyNowCompensation}
-                            onChangeText={setBuyNowCompensation}
-                            keyboardType="numeric"
-                            containerStyle={styles.amountInput}
-                          />
-                          <Light
-                            label="(The amount at which you immediately accept an agreement.)"
-                            fontSize={mvs(14)}
-                            numberOfLines={10}
-                            color={"#333333"}
-                            style={{ marginTop: mvs(-22),fontWeight:'300' ,marginLeft:mvs(0)}}
-                          />
-                        </View>
-                      </>
-                    )}
-                  </View>
-                </>
-              )}
-            </View>
-          </KeyboardAvoidScrollview>
+                      <View style={{ marginTop: mvs(0) }}>
+                        <Medium
+                          label='"Buy Now" Compensation (Maximum)'
+                          fontSize={mvs(14)}
+                          numberOfLines={10}
+                          color={colors.textColorSecondary}
+                          style={{ marginBottom: mvs(7), marginLeft: mvs(8) }}
+                        />
+                        <PrimaryInput
+                          placeholder="Enter amount"
+                          value={buyNowCompensation}
+                          onChangeText={setBuyNowCompensation}
+                          keyboardType="numeric"
+                          containerStyle={styles.amountInput}
+                        />
+                        <Light
+                          label="(The amount at which you immediately accept an agreement.)"
+                          fontSize={mvs(14)}
+                          numberOfLines={10}
+                          color={"#333333"}
+                          style={{ marginTop: mvs(-22), fontWeight: '300', marginLeft: mvs(0) }}
+                        />
+                      </View>
+                    </>
+                  )}
+                </View>
+              </>
+            )}
+          </View>
+          {/* </KeyboardAvoidScrollview> */}
         </View>
-      </ScrollView>
+      </KeyboardAvoidScrollview>
 
 
-{isInterestedInCompensation && (
-  // Legal Disclaimer
-  <View style={{ marginHorizontal: mvs(12), marginTop: mvs(20), marginBottom: mvs(10) }}>
-    <Regular
-      label="Helix does not provide legal advice."
-      fontSize={mvs(14)}
-      numberOfLines={10}
-      color={"#8C8C8C"}
-      style={{ lineHeight: mvs(16) }}
-    />
-    <Regular
-      label="You are responsible for verifying that gamete compensation is legal in your jurisdiction."
-      fontSize={mvs(14)}
-      numberOfLines={10}
-      color={"#8C8C8C"}
-      style={{ lineHeight: mvs(16), marginVertical: mvs(10) }}
-    />
-    <Regular
-      label="Please abide by the laws of your country."
-      fontSize={mvs(14)}
-      numberOfLines={10}
-      color={"#8C8C8C"}
-      style={{ lineHeight: mvs(16) }}
-    />
-  </View>
-)}
-      <View style={{ marginHorizontal: mvs(20), marginBottom: mvs(40) }}>
+      {isInterestedInCompensation && (
+        // Legal Disclaimer
+        <View style={{ marginHorizontal: mvs(12), marginTop: mvs(20), marginBottom: mvs(10) }}>
+          <Regular
+            label="Helix does not provide legal advice."
+            fontSize={mvs(14)}
+            numberOfLines={10}
+            color={"#8C8C8C"}
+            style={{ lineHeight: mvs(16) }}
+          />
+          <Regular
+            label="You are responsible for verifying that gamete compensation is legal in your jurisdiction."
+            fontSize={mvs(14)}
+            numberOfLines={10}
+            color={"#8C8C8C"}
+            style={{ lineHeight: mvs(16), marginVertical: mvs(10) }}
+          />
+          <Regular
+            label="Please abide by the laws of your country."
+            fontSize={mvs(14)}
+            numberOfLines={10}
+            color={"#8C8C8C"}
+            style={{ lineHeight: mvs(16) }}
+          />
+        </View>
+      )}
+      <View style={{ marginHorizontal: mvs(12), marginBottom: mvs(40) }}>
         <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
           <PrimaryButton
             containerStyle={{

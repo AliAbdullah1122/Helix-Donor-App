@@ -91,7 +91,7 @@ const navigation = useNavigation();
      <SafeAreaView
              style={{marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0}}
            />
-           <StatusBar barStyle="dark-content" />
+           <StatusBar  backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* Header */}
       <View style={styles.header}>
@@ -173,7 +173,7 @@ const navigation = useNavigation();
                       {/* <Regular style={styles.popularText}>MOST POPULAR</Regular> */}
                       <Regular
                       label={'MOST POPULAR'}
-                      fontSize={mvs(12)}
+                    fontSize={mvs(11)}
 
                 style={styles.popularText}
                     />
@@ -274,7 +274,7 @@ export default PremiumUnlockImageScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.white,
+    backgroundColor: colors.helixBackground,
     paddingHorizontal: mvs(20),
     paddingTop: mvs(40),
   },

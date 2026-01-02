@@ -341,6 +341,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: colors.white,
+        backgroundColor: colors.helixBackground,
     marginRight: mvs(8),
   },
   saveButton: {

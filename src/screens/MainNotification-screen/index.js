@@ -67,7 +67,7 @@ const MainNotificationScreen = props => {
   return (
     <View style={styles.container}>
         <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-      <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" translucent />
       
       {/* Header */}
       <Row style={styles.header}>

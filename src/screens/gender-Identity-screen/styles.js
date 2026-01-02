@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.helixBackground,
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(12),
   },
   scrollContainer: {
     flexGrow: 1,

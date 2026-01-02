@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect, useRef} from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -11,15 +11,15 @@ import {
   Animated,
 } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import * as IMG from 'assets/images';
-import {Row} from 'components/atoms/row';
+import { Row } from 'components/atoms/row';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {PrimaryButton} from 'components/atoms/buttons';
+import { PrimaryButton } from 'components/atoms/buttons';
 import { navigate } from 'navigation/navigation-ref';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
@@ -34,7 +34,7 @@ const ChatMainScreen = () => {
   const [showSafetyToolkitModal, setShowSafetyToolkitModal] = useState(false);
   const [showMessageOptionsModal, setShowMessageOptionsModal] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
-  const [modalPosition, setModalPosition] = useState({x: 0, y: 0});
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const [swipedMessageId, setSwipedMessageId] = useState(null);
   const [showBlockConfirmModal, setShowBlockConfirmModal] = useState(false);
   const [showBlockedModal, setShowBlockedModal] = useState(false);
@@ -46,20 +46,21 @@ const ChatMainScreen = () => {
   const [showUnmatchConfirmModal, setShowUnmatchConfirmModal] = useState(false);
   const swipeableRefs = useRef({});
   const swipeableDotRefs = useRef({});
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     // Check if user has seen guidelines before (you can use AsyncStorage for persistence)
     // For now, show modal on first visit
-    setShowGuidelinesModal(false);
+    setShowGuidelinesModal(true);
     setCurrentGuidelineStep(1);
   }, []);
 
   const connections = useMemo(
     () => [
-      {id: 1, name: 'Nathan', image: IMG.SearchImage1},
-      {id: 2, name: 'Ethan', image: IMG.SearchImage2, isHighlighted: true},
-      {id: 3, name: 'Liam', image: IMG.SearchImage3, isOnline: true},
-      {id: 4, name: 'Jack', image: IMG.SearchImage1},
+      { id: 1, name: 'Nathan', image: IMG.SearchImage1 },
+      { id: 2, name: 'Ethan', image: IMG.SearchImage3, isHighlighted: true },
+      { id: 3, name: 'Liam', image: IMG.SearchImage2, isOnline: true },
+      { id: 4, name: 'Jack', image: IMG.SearchImage1 },
     ],
     [],
   );
@@ -71,7 +72,7 @@ const ChatMainScreen = () => {
         name: 'Nathan',
         preview: 'Thanks, Talk to you tomorrow then.',
         time: '01:13 PM',
-        image: IMG.SearchImage1,
+        image: IMG.Messagwimg1,
         isOnline: true,
         isUnread: false,
       },
@@ -80,7 +81,7 @@ const ChatMainScreen = () => {
         name: 'Liam Carter',
         preview: 'Hey!',
         time: '11:23 AM',
-        image: IMG.SearchImage2,
+        image: IMG.Messagwimg2,
         unreadCount: 1,
       },
       {
@@ -88,37 +89,56 @@ const ChatMainScreen = () => {
         name: 'Ethan Campbell',
         preview: 'I had a few doubts, if we can conne...',
         time: 'Yesterday',
-        image: IMG.SearchImage3,
+        image: IMG.Messagwimg3,
       },
       {
         id: 4,
         name: 'Jack Mitchell',
         preview: 'Thanks for sharing your story, it\'s really...',
         time: '20/05/2024',
-        image: IMG.SearchImage1,
+        image: IMG.Messagwimg4,
       },
     ],
     [],
   );
 
-  const renderConnection = ({item}) => {
+  // const renderConnection = ({item}) => {
+  //   const ImageComponent = item.image;
+  //   return (
+  //     <View style={[styles.connectionItem, item.isHighlighted && styles.connectionHighlighted]}>
+  //       <View style={styles.connectionImageWrapper}>
+  //         <ImageComponent width={mvs(100)} height={mvs(128)} />
+  //       </View>
+  //       {item.isHighlighted && (
+  //         <View style={styles.connectionHeart}>
+  //           <IMG.chatMainHeart width={mvs(31)} height={mvs(28)} />
+  //         </View>
+  //       )}
+  //       {/* {item.isOnline && <View style={styles.connectionOnlineDot} />} */}
+  //     </View>
+  //   );
+  // };
+  const renderConnection = ({ item }) => {
     const ImageComponent = item.image;
+
     return (
-      <View style={[styles.connectionItem, item.isHighlighted && styles.connectionHighlighted]}>
+      <View style={styles.connectionContainer}>
+        {item.isHighlighted && <View style={styles.glowBackground} />}
+
         <View style={styles.connectionImageWrapper}>
           <ImageComponent width={mvs(100)} height={mvs(128)} />
         </View>
+
         {item.isHighlighted && (
           <View style={styles.connectionHeart}>
             <IMG.chatMainHeart width={mvs(31)} height={mvs(28)} />
           </View>
         )}
-        {/* {item.isOnline && <View style={styles.connectionOnlineDot} />} */}
       </View>
     );
   };
 
-  const renderMessage = ({item}) => {
+  const renderMessage = ({ item }) => {
     const ImageComponent = item.image;
     return (
       <Swipeable
@@ -143,7 +163,7 @@ const ChatMainScreen = () => {
             setSwipedMessageId(null);
           }
         }}>
-        <TouchableOpacity onPress={()=>navigate("MainInboxScreen")} style={styles.messageCard}>
+        <TouchableOpacity onPress={() => navigate("MainInboxScreen")} style={styles.messageCard}>
           <Row style={styles.messageRow}>
             <View style={styles.messageAvatarContainer}>
               <View style={styles.messageAvatarWrapper}>
@@ -166,14 +186,14 @@ const ChatMainScreen = () => {
                   name="checkmark-done-outline"
                   size={mvs(14)}
                   color="#8C8C8C"
-                  style={{marginRight: mvs(2)}}
+                  style={{ marginRight: mvs(2) }}
                 />
                 <Regular
                   label={item.preview}
                   fontSize={mvs(14)}
                   color="#989899"
                   numberOfLines={1}
-                  style={{flex: 1}}
+                  style={{ flex: 1 }}
                 />
                 {item.unreadCount ? (
                   <View style={styles.unreadBadge}>
@@ -197,15 +217,16 @@ const ChatMainScreen = () => {
       setCurrentGuidelineStep(currentGuidelineStep + 1);
     } else {
       // Step 3 - Proceed button
-      setShowGuidelinesModal(false);
-      setShowEmptyConnections(false);
-      setHasSeenGuidelines(true);
+      setShowGuidelinesModal(true);
+      setShowEmptyConnections(true);
+      setHasSeenGuidelines(false);
       setCurrentGuidelineStep(1); // Reset for next time
     }
   };
 
   const handleStartSwiping = () => {
     setShowEmptyConnections(false);
+    setShowGuidelinesModal(false);
   };
 
   const handleOpenSafetyToolkit = () => {
@@ -308,6 +329,9 @@ const ChatMainScreen = () => {
       extrapolate: 'clamp',
     });
 
+
+
+
     return (
       <View style={styles.swipeableDotContainer}>
         <TouchableOpacity
@@ -349,24 +373,40 @@ const ChatMainScreen = () => {
   if (showEmptyConnections) {
     return (
       <View style={styles.container}>
-     
-        <StatusBar backgroundColor="#F5F5F9" barStyle="dark-content" />
+
+        <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+
         <View style={styles.emptyConnectionsContainer}>
           <View style={styles.sectionHeader}>
             <Medium label="Your Connections" fontSize={mvs(16)} color={colors.textColor} />
           </View>
-          
+
           {/* Empty connection cards */}
           <View style={styles.emptyConnectionsCardsContainer}>
-            {[1, 2, 3, 4].map((item, index) => (
-              <View key={index} style={styles.emptyConnectionCard}>
-                <View style={styles.emptyConnectionCardInner}>
-                  {index === 0 && (
-                    <IMG.ChatWhiteheart width={mvs(40)} height={mvs(40)} />
-                  )}
-                </View>
-              </View>
-            ))}
+
+            {[1, 2, 3, 4].map((item, index) => {
+              const isSelected = selectedCard === index;
+              return (
+                <TouchableOpacity
+                  key={index}
+                  activeOpacity={0.8}
+                  onPress={() => setSelectedCard(index)}
+                  style={[
+                    styles.emptyConnectionCard,
+                    isSelected && styles.selectedCard,
+                  ]}
+                >
+                  {/* <View key={index} style={styles.emptyConnectionCard}> */}
+                  <View style={styles.emptyConnectionCardInner}>
+                    {index === 0 && (
+                      <IMG.ChatWhiteheart width={mvs(40)} height={mvs(40)} />
+                    )}
+                  </View>
+                  {/* </View> */}
+                </TouchableOpacity>
+              )
+            })}
           </View>
 
           <View style={styles.emptyStateContainer}>
@@ -398,7 +438,7 @@ const ChatMainScreen = () => {
 
   return (
     <View style={styles.container}>
-          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Guidelines Modal */}
@@ -406,7 +446,7 @@ const ChatMainScreen = () => {
         visible={showGuidelinesModal}
         transparent={true}
         animationType="fade"
-        onRequestClose={() => {}}>
+        onRequestClose={() => { }}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
             <Row style={styles.modalHeader}>
@@ -515,7 +555,7 @@ const ChatMainScreen = () => {
             <Row style={styles.searchRow}>
               <View style={styles.searchInputContainer}>
                 {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
-                <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
+                <IMG.SearchNew width={mvs(18)} height={mvs(18)} />
                 <TextInput
                   style={styles.searchInput}
                   placeholder="Search"
@@ -547,17 +587,17 @@ const ChatMainScreen = () => {
             {/* Messages / Archived header */}
             <Row style={styles.messagesHeaderRow}>
               <Medium label="Messages" fontSize={mvs(16)} color={colors.textColor} />
-              <TouchableOpacity onPress={()=>navigate("ArchiveChatScreen")}>
-              <Row style={styles.archivedRow}>
+              <TouchableOpacity onPress={() => navigate("ArchiveChatScreen")}>
+                <Row style={styles.archivedRow}>
 
-                <IMG.chatArchive width={mvs(18)} height={mvs(18)} />
-                <Medium
-                  label="Archived"
-                  fontSize={mvs(14)}
-                  color={colors.textColor}
-                  style={{marginLeft: mvs(4)}}
-                />
-              </Row>
+                  <IMG.chatArchive width={mvs(18)} height={mvs(18)} />
+                  <Medium
+                    label="Archived"
+                    fontSize={mvs(14)}
+                    color={colors.textColor}
+                    style={{ marginLeft: mvs(4) }}
+                  />
+                </Row>
               </TouchableOpacity>
             </Row>
 
@@ -599,17 +639,17 @@ const ChatMainScreen = () => {
               <Row style={styles.safetyOptionContent}>
                 {/* <Icon name="flag" size={mvs(20)} color="#FF3B30" /> */}
                 <View style={styles.safetyOptionText}>
-                  <Row style={{justifyContent:"flex-start"}}>
-                  <Medium
-                    label="🚩 "
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                  />
-                  <Medium
-                    label="Report an Issue"
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                  />
+                  <Row style={{ justifyContent: "flex-start" }}>
+                    <Medium
+                      label="🚩 "
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                    />
+                    <Medium
+                      label="Report an Issue"
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                    />
                   </Row>
                   <Light
                     label="Report a user or incident."
@@ -627,18 +667,18 @@ const ChatMainScreen = () => {
               <Row style={styles.safetyOptionContent}>
                 {/* <Icon name="book" size={mvs(20)} color="#27AE60" /> */}
                 <View style={styles.safetyOptionText}>
-                   <Row style={{justifyContent:"flex-start"}}>
-                  <Medium
-                    label="📚  "
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                  />
-                  <Medium
-                    label="Safety & Education Centre"
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                  />
-                   </Row>
+                  <Row style={{ justifyContent: "flex-start" }}>
+                    <Medium
+                      label="📚  "
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                    />
+                    <Medium
+                      label="Safety & Education Centre"
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                    />
+                  </Row>
                   <Light
                     label="Guides and resources to stay safe."
                     fontSize={mvs(14)}
@@ -655,18 +695,18 @@ const ChatMainScreen = () => {
               <Row style={styles.safetyOptionContent}>
                 {/* <Icon name="construct" size={mvs(20)} color="#8C8C8C" /> */}
                 <View style={styles.safetyOptionText}>
-                    <Row style={{justifyContent:"flex-start"}}>
-                  <Medium
-                    label="🛠️  "
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                  />
-                  <Medium
-                    label="Safety Tools"
-                    fontSize={mvs(14)}
-                    color={colors.textColor}
-                  />
-                     </Row>
+                  <Row style={{ justifyContent: "flex-start" }}>
+                    <Medium
+                      label="🛠️  "
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                    />
+                    <Medium
+                      label="Safety Tools"
+                      fontSize={mvs(14)}
+                      color={colors.textColor}
+                    />
+                  </Row>
                   <Light
                     label="Access emergency contacts and location sharing."
                     fontSize={mvs(12)}
@@ -855,7 +895,7 @@ const ChatMainScreen = () => {
               label={`Would you also like to report ${selectedMessage?.name || 'this user'}?`}
               fontSize={mvs(14)}
               color={colors.textColor}
-              style={[styles.blockModalMessage, {marginTop: mvs(12)}]}
+              style={[styles.blockModalMessage, { marginTop: mvs(12) }]}
               numberOfLines={10}
             />
             <Row style={styles.blockModalButtons}>
@@ -900,16 +940,16 @@ const ChatMainScreen = () => {
               label={`Why are you reporting ${selectedMessage?.name || 'this user'}?`}
               fontSize={mvs(16)}
               color={colors.textColor}
-              style={{...styles.reportModalTitle,textAlign:'center'}}
+              style={{ ...styles.reportModalTitle, textAlign: 'center' }}
             />
             <Light
               label="Your feedback helps keep our community safe. Please select a reason below."
               fontSize={mvs(14)}
               color={colors.textColorSecondary}
-              style={{...styles.reportModalSubtitle,textAlign:'center'}}
+              style={{ ...styles.reportModalSubtitle, textAlign: 'center' }}
               numberOfLines={10}
             />
-            
+
             {/* Report Reasons */}
             {['Spam or Scam', 'Inappropriate Profile or Photos', 'Abusive or Threatening Behavior', 'Misleading Profile / Catfishing', 'Something Else...'].map((reason, index) => (
               <TouchableOpacity
@@ -925,7 +965,7 @@ const ChatMainScreen = () => {
                   label={reason}
                   fontSize={mvs(14)}
                   color={colors.textColor}
-                  style={{flex: 1, marginLeft: mvs(12)}}
+                  style={{ flex: 1, marginLeft: mvs(12) }}
                 />
               </TouchableOpacity>
             ))}
@@ -961,8 +1001,8 @@ const ChatMainScreen = () => {
                   (!selectedReportReason || (selectedReportReason === 'Something Else...' && !reportConcern.trim())) && styles.reportSubmitButtonDisabled,
                 ]}
                 onPress={handleSubmitReport}
-                // disabled={!selectedReportReason || (selectedReportReason === 'Something Else...' && !reportConcern.trim())}
-                >
+              // disabled={!selectedReportReason || (selectedReportReason === 'Something Else...' && !reportConcern.trim())}
+              >
                 <Medium
                   label="Submit Report"
                   fontSize={mvs(16)}
@@ -1124,7 +1164,8 @@ export default ChatMainScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F9',
+    // backgroundColor: '#F5F5F9',
+    backgroundColor: colors.helixBackground
   },
   searchContainer: {
     paddingHorizontal: mvs(20),
@@ -1143,10 +1184,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: mvs(26),
     paddingHorizontal: mvs(16),
-    height:mvs(46),
+    height: mvs(46),
     // paddingVertical: mvs(2),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 6,
     elevation: 3,
@@ -1171,19 +1212,46 @@ const styles = StyleSheet.create({
   connectionsList: {
     paddingHorizontal: mvs(20),
     paddingBottom: mvs(12),
+    paddingVertical:mvs(6)
   },
   connectionItem: {
     width: mvs(100),
     height: mvs(128),
     marginRight: mvs(10),
+    borderRadius: mvs(24),
     justifyContent: 'center',
+    // paddingVertical:mvs(6),
     alignItems: 'center',
+  },
+  connectionContainer: {
+    width: mvs(104),
+    height: mvs(132),
+    marginRight: mvs(12),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  glowBackground: {
+    position: 'absolute',
+    width: mvs(100),
+    height: mvs(112),
+    borderRadius: mvs(20),
+    backgroundColor: colors.primary,
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 6, // Stronger shadow
+    shadowRadius: 10,
+    elevation: 8,
+    alignSelf: 'center',
   },
   connectionImageWrapper: {
     width: mvs(100),
     height: mvs(128),
     borderRadius: mvs(30),
     overflow: 'hidden',
+    backgroundColor: "white"
   },
   connectionHighlighted: {
     // borderWidth: 2,
@@ -1226,7 +1294,7 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(10),
     marginBottom: mvs(8),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 1,
@@ -1238,8 +1306,8 @@ const styles = StyleSheet.create({
     width: mvs(52),
     height: mvs(52),
     marginRight: mvs(12),
-    borderRadius:mvs(100),
-    backgroundColor:'white',
+    borderRadius: mvs(100),
+    backgroundColor: 'white',
     position: 'relative',
   },
   messageAvatarWrapper: {
@@ -1295,7 +1363,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(30),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1303,8 +1371,8 @@ const styles = StyleSheet.create({
   modalHeader: {
     alignItems: 'center',
     marginBottom: mvs(20),
-    justifyContent:"center",
-    alignSelf:'center'
+    justifyContent: "center",
+    alignSelf: 'center'
   },
   modalTitle: {
     marginLeft: mvs(12),
@@ -1339,8 +1407,8 @@ const styles = StyleSheet.create({
   nextButton: {
     borderRadius: mvs(40),
     backgroundColor: colors.primary,
-    width:"50%",
-    alignSelf:'center',
+    width: "50%",
+    alignSelf: 'center',
   },
   // Empty connections styles
   emptyConnectionsContainer: {
@@ -1358,18 +1426,28 @@ const styles = StyleSheet.create({
     width: mvs(100),
     height: mvs(128),
     borderRadius: mvs(24),
-    padding: mvs(10),
-    backgroundColor: '#F2F2F7',
-    borderWidth:1,
-    borderColor:"#D9D9D9",
+    padding: mvs(4),
+
+    // backgroundColor: '#F2F2F7',
+    // borderWidth:1,
+    borderColor: "#D9D9D9",
     marginRight: mvs(10),
   },
+  selectedCard: {
+    borderColor: "#D9D9D9",
+    borderWidth: 1,
+    backgroundColor: 'white',
+  },
+  // selectedCardInner: {
+  //   backgroundColor: '#E8EDFF',
+  // },
+
   emptyConnectionCardInner: {
     width: '100%',
     height: '100%',
     borderRadius: mvs(20),
     // backgroundColor: colors.white,
-    backgroundColor:"#F2F2F7",
+    backgroundColor: "#F2F2F7",
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1407,7 +1485,7 @@ const styles = StyleSheet.create({
     padding: mvs(20),
 
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1477,7 +1555,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(16),
     paddingVertical: mvs(8),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1510,7 +1588,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(20),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1543,8 +1621,8 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(14),
     borderRadius: mvs(40),
     // backgroundColor: '#FF3B30',
-    borderColor:"#FF5F57",
-    borderWidth:1,
+    borderColor: "#FF5F57",
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1576,7 +1654,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(20),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1645,8 +1723,8 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(14),
     borderRadius: mvs(40),
     backgroundColor: colors.white,
-    borderWidth:2,
-    borderColor:colors.primary,
+    borderWidth: 2,
+    borderColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1660,7 +1738,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(20),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1690,7 +1768,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(20),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -1723,8 +1801,8 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(14),
     borderRadius: mvs(40),
     // backgroundColor: '#FF5F57',
-    borderWidth:1,
-    borderColor:"#FF5F57",
+    borderWidth: 1,
+    borderColor: "#FF5F57",
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1735,7 +1813,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(20),
     padding: mvs(24),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,

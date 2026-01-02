@@ -1239,14 +1239,14 @@ headerOverlay: {
 },
 
 nameLocationContainer: {
-  marginTop: mvs(205),
+  marginTop:Platform.OS==='ios'? mvs(205) :mvs(190),
 
 
 },
 
 editButtonContainer: {
   alignItems: 'center',
-  marginTop:mvs(14)
+  marginTop:Platform.OS==='ios'?mvs(14): mvs(5)
   // marginBottom:mvs(20)
 },
 

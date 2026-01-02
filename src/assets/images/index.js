@@ -386,3 +386,7 @@ export {default as EditNewImage} from './EditNewImage.svg';
 export {default as LegalResource} from './LegalResource.svg';
 export {default as SearchResultImg1} from './SearchResultImg1.svg';
 export {default as SearchResultImg2} from './SearchResultImg2.svg';
+export {default as Messagwimg1} from './Messagwimg1.svg';
+export {default as Messagwimg2} from './Messagwimg2.svg';
+export {default as Messagwimg3} from './Messagwimg3.svg';
+export {default as Messagwimg4} from './Messagwimg4.svg';

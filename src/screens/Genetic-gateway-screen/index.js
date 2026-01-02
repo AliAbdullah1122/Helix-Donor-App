@@ -121,7 +121,6 @@ const GeneticGatewayScreen = props => {
     { id: 'MCCC1', name: '3-Methylcrotonyl-CoA Carboxylase Deficiency, MCCC1-Related (MCCC1)', gene: 'MCCC1' },
     { id: 'MCCC2', name: '3-Methylcrotonyl-CoA Carboxylase Deficiency, MCCC2-Related (MCCC2)', gene: 'MCCC2' },
     { id: 'OPA3', name: '3-Methylglutaconic Aciduria Type IIL also known as Costeff Optic Atrophy (OPA3)', gene: 'OPA3' },
-    { id: 'CFTR', name: 'Cystic Fibrosis (CFTR)', gene: 'CFTR' },
   ];
 
   const handleSearch = (text) => {

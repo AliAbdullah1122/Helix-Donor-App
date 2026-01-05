@@ -1,18 +1,17 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as IMG from 'assets/images';
 import React from 'react';
-import {View, StatusBar, Image} from 'react-native';
+import { View, StatusBar } from 'react-native';
+import Video from 'react-native-video';
 import RootStackParamList from '../../types/navigation-types/root-stack';
-import {useAppDispatch} from 'hooks/use-store';
 import styles from './styles';
-import {mvs} from 'config/metrices';
-import {UTILS} from 'utils';
-import {STORAGEKEYS} from 'config/constants';
+import { UTILS } from 'utils';
+import { STORAGEKEYS } from 'config/constants';
 
 type props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const Splash = (props: props) => {
-  const {navigation} = props;
+  const { navigation } = props;
 
   React.useEffect(() => {
     (async () => {
@@ -26,16 +25,16 @@ const Splash = (props: props) => {
               console.log('user', user);
               screen = 'TabBar';
             }
-            
+
           });
         } else {
           await UTILS.setItem('hasLaunched', 'true');
           screen = 'HelixWelcome';
         }
         setTimeout(() => {
-              navigation?.replace(screen);
-            }, 2000);
-      } catch (error) {}
+          navigation?.replace(screen);
+        }, 8000); // Increased timeout to allow video to play a bit
+      } catch (error) { }
     })();
   }, []);
 
@@ -45,10 +44,12 @@ const Splash = (props: props) => {
         backgroundColor={styles.container.backgroundColor}
         barStyle="light-content"
       />
-      <Image
-        source={IMG.helixLogo}
-        resizeMode="contain"
-        style={{width: mvs(262), height: mvs(102)}}
+      <Video
+        source={IMG.SplashVideo}
+        style={{ width: '100%', height: '100%' }}
+        resizeMode="cover"
+        shutDownOnDeactivate={true}
+      // controls={false}
       />
     </View>
   );

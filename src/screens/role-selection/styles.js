@@ -60,14 +60,16 @@ const styles = StyleSheet.create({
   },
   serviceIconContainerRight: {
     marginRight: 0,
-    marginLeft: mvs(16),
+    marginLeft: mvs(9),
   },
   serviceIcon: {
     width: mvs(60),
     height: mvs(60),
   },
   serviceTextContainer: {
-    flex: 1,
+    flex: Platform.OS==='ios'?1:1,
+    // width:mvs(240),
+    // backgroundColor:"red"
   },
   serviceTitle: {
     marginBottom: mvs(8),

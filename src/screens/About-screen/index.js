@@ -6,7 +6,7 @@ import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
 import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
-import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
+import PrimaryInput, { InputWithIcon, InputWithIconAdjective } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
 import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
@@ -59,7 +59,7 @@ const AboutScreen = props => {
   };
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
       {/* Header */}
@@ -136,7 +136,7 @@ const AboutScreen = props => {
             color={colors.textColorSecondary}
             style={styles.sectionTitle}
           />
-          <InputWithIcon
+          <InputWithIconAdjective
             placeholder="Enter adjectives..."
             value={adjectives}
             onChangeText={(text) => {
@@ -144,6 +144,7 @@ const AboutScreen = props => {
                 setAdjectives(text);
               }
             }}
+            style={{color:colors.textColor}}
             containerStyle={styles.inputContainer}
             rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
             maxLength={maxCharacters}

@@ -34,7 +34,7 @@ const GetStartedScreen = props => {
     // Navigate to gender identity screen after 3 seconds
     const timer = setTimeout(() => {
       navigate('GenderIdentityScreen');
-    }, 1000);
+    }, 5000);
 
     // Cleanup
     return () => {
@@ -59,13 +59,17 @@ const GetStartedScreen = props => {
           styles.middleSection,
           isLandscape && styles.landscapeMiddleSection
         ]}>
-          <Image 
+          {/* <Image 
             source={IMG.GetStarted} 
             style={[
               styles.imgStyle,
               isLandscape && styles.landscapeImgStyle
             ]} 
-          />
+          /> */}
+          <IMG.LetsStartSvg style={[
+              styles.imgStyle,
+              isLandscape && styles.landscapeImgStyle
+            ]}  />
         </View>
 
        

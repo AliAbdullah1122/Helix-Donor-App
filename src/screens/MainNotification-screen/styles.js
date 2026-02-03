@@ -304,6 +304,8 @@ elevation: 4,
   },
   scrollView: {
     flex: 1,
+    paddingVertical:mvs(15),
+    // paddingHorizontal:mvs(10)
   },
   scrollContent: {
     paddingHorizontal: mvs(20),
@@ -315,6 +317,7 @@ elevation: 4,
   sectionTitle: {
     marginBottom: mvs(12),
     textTransform: 'uppercase',
+    fontWeight:"600"
   },
   multilineInput: {
     borderRadius: mvs(16),

@@ -67,13 +67,14 @@ const styles = StyleSheet.create({
     height: mvs(60),
   },
   serviceTextContainer: {
-    flex: Platform.OS==='ios'?1:1,
+    flex: Platform.OS==='ios'?0.94:1,
     // width:mvs(240),
     // backgroundColor:"red"
   },
   serviceTitle: {
     marginBottom: mvs(8),
     color: '#404040',
+    fontWeight:"400"
   },
   serviceDescription: {
     lineHeight: mvs(20),

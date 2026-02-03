@@ -35,16 +35,24 @@ const GenderIdentityScreen = props => {
     },
   ];
 
-  const handleContinue = () => {
-    // Handle continue action
+  // const handleContinue = () => {
+  //   // Handle continue action
 
-    console.log('Selected gender:', selectedGender);
-    navigate("ServiceTypeScreen")
-  };
+  //   console.log('Selected gender:', selectedGender);
+  //   navigate("ServiceTypeScreen")
+  // };
+  const handleContinue = () => {
+  console.log('Selected gender:', selectedGender);
+
+  navigate('ServiceTypeScreen', {
+    gender: selectedGender,
+  });
+};
+
 
   return (
     <View style={styles.container}>
-                  <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+                   <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 

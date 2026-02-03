@@ -14,6 +14,8 @@ import { useNavigation } from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+import { setSubscribed } from 'store/reducers/user-reducer';
 
 const PlaceofferCheckoutScreen = props => {
   const [offerValue, setOfferValue] = useState('');
@@ -21,7 +23,7 @@ const PlaceofferCheckoutScreen = props => {
   const [showCharityModal, setShowCharityModal] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const navigation = useNavigation();
-
+ const dispatch = useDispatch();
   // Static data - can be made dynamic later
   const currentHighestOffer = 870.00; // Can be 860 or 870 based on state
   const yourHighestOffer = 860.00;
@@ -34,10 +36,12 @@ const PlaceofferCheckoutScreen = props => {
   const isButtonEnabled = offerValue.trim() !== '' && isOfferValid;
 
   const handlePlaceOffer = () => {
-    // if (isButtonEnabled) {
-    //   setShowSubmitModal(true);
-    // }
-    navigate("ResourcesScreen")
+
+              dispatch(setSubscribed(true));
+              navigation.goBack()
+
+   
+    // navigate("ResourcesScreen")
   };
 
   const handleBuyNow = () => {
@@ -46,7 +50,7 @@ const PlaceofferCheckoutScreen = props => {
 
   return (
     <View style={styles.container}>
-       <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+        <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 
@@ -119,14 +123,16 @@ const PlaceofferCheckoutScreen = props => {
             <TouchableOpacity style={styles.paymentButton}>
               <Row style={styles.paymentButtonContent}>
                 {IMG.google && (
-                  <Image
-                    source={IMG.google}
-                    resizeMode="contain"
-                    style={styles.paymentIcon}
-                  />
+                  // <Image
+                  //   source={IMG.google}
+                  //   resizeMode="contain"
+                  //   style={styles.paymentIcon}
+                  // />
+                   <IMG.GoogleSvg width={mvs(18)} height={mvs(18)}/>
                 )}
                 {!IMG.google && (
                   <Bold label="G" fontSize={mvs(20)} color={colors.textColor} />
+                  // <IMG.GoogleSvg width={mvs(18)} height={mvs(18)}/>
                 )}
                 <Regular
                   label="Pay"
@@ -140,11 +146,12 @@ const PlaceofferCheckoutScreen = props => {
             <TouchableOpacity style={styles.paymentButton}>
               <Row style={styles.paymentButtonContent}>
                 {IMG.apple && (
-                  <Image
-                    source={IMG.apple}
-                    resizeMode="contain"
-                    style={styles.paymentIcon}
-                  />
+                  // <Image
+                  //   source={IMG.apple}
+                  //   resizeMode="contain"
+                  //   style={styles.paymentIcon}
+                  // />
+                     <IMG.AppleSvg width={mvs(18)} height={mvs(18)}/>
                 )}
                 {!IMG.apple && (
                   <Icon name="logo-apple" size={mvs(20)} color={colors.textColor} />
@@ -178,7 +185,8 @@ const PlaceofferCheckoutScreen = props => {
       <View style={{...styles.actionButtonsContainer,width:"90%",alignSelf:'center'}}>
         <TouchableOpacity 
           style={styles.payButton}
-          onPress={handlePlaceOffer}>
+          onPress={handlePlaceOffer}
+          >
           <Medium
             label="Pay $29.99"
             fontSize={mvs(16)}

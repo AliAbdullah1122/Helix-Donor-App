@@ -69,7 +69,7 @@ const SearchOccupationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+       <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
            <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
            
 
@@ -196,7 +196,8 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     // paddingHorizontal: mvs(20),
-    paddingVertical: mvs(12),
+    // paddingVertical: mvs(12),
+    paddingVertical:mvs(20),
 
   },
   searchInputContainer: {
@@ -230,6 +231,7 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
     paddingHorizontal: mvs(20),
+    paddingVertical:mvs(10),
   },
   sectionTitle: {
     marginBottom: mvs(12),

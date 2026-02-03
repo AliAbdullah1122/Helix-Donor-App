@@ -36,6 +36,7 @@ import DropdownModalNew from 'components/molecules/modals/new-dropdown-modal';
 import DropdownModalComplainTypeSelection from 'components/molecules/modals/dropdown-modal-complain-type-selection';
 import DropdownModalNationality from 'components/molecules/modals/dropdown-modal-nationlity';
 import fonts from 'assets/fonts';
+import DropdownModalAdjective from 'components/molecules/modals/dropdown-modal-adjective';
 
 type props = {
   isRequired?: boolean;
@@ -52,8 +53,11 @@ type props = {
   items?: any[];
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
+  placeholderColor?: string;
+
   labelStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  stylelable?: StyleProp<ViewStyle>;
   styleo?: StyleProp<ViewStyle>;
   mainContainer?: StyleProp<ViewStyle>;
   errorStyle?: StyleProp<ViewStyle>;
@@ -186,6 +190,7 @@ const PrimaryInput = (props: props) => {
     error,
     mainContainer,
     editable = true,
+    placeholderColor = colors.placeholder,
     onBlur = () => { },
     onPressIn = () => { },
     isRequired = false,
@@ -355,7 +360,7 @@ const PrimaryInput = (props: props) => {
           <View style={styles.phoneContainerNew}>
 
             <View style={styles.countryCodeBox}>
-              <Regular label={countryCode} />
+              <Regular  color={colors.textColor} label={countryCode} />
             </View>
 
             <View style={styles.divider} />
@@ -379,7 +384,8 @@ const PrimaryInput = (props: props) => {
             keyboardType={keyboardType}
             secureTextEntry={isPassword && secure}
             value={value}
-            placeholderTextColor={colors.placeholder}
+            // placeholderTextColor={colors.placeholder}
+            placeholderTextColor={placeholderColor}
             onChangeText={onChangeText}
             placeholder={placeholder}
             multiline={multiline}
@@ -422,12 +428,13 @@ const PrimaryInput = (props: props) => {
       <Row style={{ justifyContent: "flex-start", alignItems: "center", marginTop: mvs(10) }}>
         {/* <Image source={IMG.alertcircle} resizeMode='contain' style={{height:mvs(18),width:mvs(18)}}/> */}
         {error ? (
-          <Image
-            source={IMG.alertcircle}
-            resizeMode="contain"
-            style={{ height: mvs(12), width: mvs(12) }}
-          // style={{ height: mvs(18), width: mvs(18) }}
-          />
+          // <Image
+          //   source={IMG.alertcircle}
+          //   resizeMode="contain"
+          //   style={{ height: mvs(12), width: mvs(12) }}
+          // // style={{ height: mvs(18), width: mvs(18) }}
+          // />
+          <IMG.AlertSvg width={mvs(16)} height={mvs(16)} />
         ) : null}
         <Regular
           numberOfLines={numberOfLines}
@@ -569,6 +576,154 @@ export const InputWithIcon = (props: props & {
   selectedBuild?: any;
   onHairColorChange?: ((id: any) => void) | (() => void);
   onBuildChange?: ((id: any) => void) | (() => void);
+    iconColor?: string; 
+}) => {
+  const [visible, setVisible] = React.useState(false);
+  const {
+    items = [],
+    onChangeText,
+    onBlur = () => { },
+    value,
+    style,
+    containerStyle,
+    id,
+    placeholder,
+    stylelable,
+    editable,
+    error,
+    label,
+    styleo,
+    isRequired = false,
+    hairColorOptions = [],
+    buildOptions = [],
+    selectedHairColor = null,
+    selectedBuild = null,
+    onHairColorChange = () => { },
+    onBuildChange = () => { },
+     iconColor = '#8C8C8C', 
+  } = props;
+
+  return (
+    <View style={[styleo, { position: 'relative', zIndex: visible ? 1000 : 1 }]}>
+      {label && (
+        <Medium label={label} style={[styles.labelStyle,stylelable]}>
+          {isRequired ? <Regular color={colors.red} label={' *'} /> : null}
+        </Medium>
+      )}
+      <TouchableOpacity
+        disabled={editable}
+        onPress={() => {
+          // Toggle dropdown visibility so tapping the input opens/closes the list
+          setVisible(prev => !prev);
+          onBlur();
+        }}
+        style={[styles.dropDownContainer, containerStyle]}>
+        <Regular
+          label={
+            items?.find(x => x?.id == id)?.title ||
+            items?.find(x => x?.id == id)?.name ||
+            placeholder
+          }
+          color={'#D9D9D9'}
+          // color={colors.black}
+          style={{ fontWeight: '400' }}
+          fontSize={mvs(14)}
+        />
+        <Feather size={25} name={visible ? 'chevron-up' : 'chevron-down'}  color={iconColor}/>
+      </TouchableOpacity>
+      <Regular label={error ? `${t(error)}` : ''} style={styles.errorLabel} />
+      <DropdownModalNationality
+        onClose={() => setVisible(false)}
+        onChangeText={onChangeText}
+        value={id}
+        visible={visible}
+        items={items}
+        label={label}
+      />
+    </View>
+  );
+};
+export const InputWithIconEdiTpHSYCIAL = (props: props & {
+  hairColorOptions?: any[];
+  buildOptions?: any[];
+  selectedHairColor?: any;
+  selectedBuild?: any;
+  onHairColorChange?: ((id: any) => void) | (() => void);
+  onBuildChange?: ((id: any) => void) | (() => void);
+    iconColor?: string; 
+}) => {
+  const [visible, setVisible] = React.useState(false);
+  const {
+    items = [],
+    onChangeText,
+    onBlur = () => { },
+    value,
+    style,
+    containerStyle,
+    id,
+    placeholder,
+    stylelable,
+    editable,
+    error,
+    label,
+    styleo,
+    isRequired = false,
+    hairColorOptions = [],
+    buildOptions = [],
+    selectedHairColor = null,
+    selectedBuild = null,
+    onHairColorChange = () => { },
+    onBuildChange = () => { },
+     iconColor = '#8C8C8C', 
+  } = props;
+
+  return (
+    <View style={[styleo, { position: 'relative', zIndex: visible ? 1000 : 1 }]}>
+      {label && (
+        <Medium label={label} style={[styles.labelStyle,stylelable]}>
+          {isRequired ? <Regular color={colors.red} label={' *'} /> : null}
+        </Medium>
+      )}
+      <TouchableOpacity
+        disabled={editable}
+        onPress={() => {
+          // Toggle dropdown visibility so tapping the input opens/closes the list
+          setVisible(prev => !prev);
+          onBlur();
+        }}
+        style={[styles.dropDownContainer, containerStyle]}>
+        <Regular
+          label={
+            items?.find(x => x?.id == id)?.title ||
+            items?.find(x => x?.id == id)?.name ||
+            placeholder
+          }
+          color={'#D9D9D9'}
+          // color={colors.black}
+          style={{ fontWeight: '400' }}
+          fontSize={mvs(14)}
+        />
+        <Feather size={25} name={visible ? 'chevron-up' : 'chevron-down'}  color={iconColor}/>
+      </TouchableOpacity>
+      <Regular label={error ? `${t(error)}` : ''} style={styles.errorLabel} />
+      <DropdownModalNationality
+        onClose={() => setVisible(false)}
+        onChangeText={onChangeText}
+        value={id}
+        visible={visible}
+        items={items}
+        label={label}
+      />
+    </View>
+  );
+};
+export const InputWithIconAdjective = (props: props & {
+  hairColorOptions?: any[];
+  buildOptions?: any[];
+  selectedHairColor?: any;
+  selectedBuild?: any;
+  onHairColorChange?: ((id: any) => void) | (() => void);
+  onBuildChange?: ((id: any) => void) | (() => void);
 }) => {
   const [visible, setVisible] = React.useState(false);
   const {
@@ -610,22 +765,20 @@ export const InputWithIcon = (props: props & {
         style={[styles.dropDownContainer, containerStyle]}>
         <Regular
           label={
-            items?.find(x => x?.id == id)?.title ||
-            items?.find(x => x?.id == id)?.name ||
-            placeholder
+            value || placeholder
           }
-          color={'#D9D9D9'}
-          // color={colors.black}
+          // color={'#D9D9D9'}
+          color={colors.textColor}
           style={{ fontWeight: '400' }}
           fontSize={mvs(14)}
         />
         <Feather size={25} name={visible ? 'chevron-up' : 'chevron-down'} color={'#8C8C8C'} />
       </TouchableOpacity>
       <Regular label={error ? `${t(error)}` : ''} style={styles.errorLabel} />
-      <DropdownModalNationality
+      <DropdownModalAdjective
         onClose={() => setVisible(false)}
         onChangeText={onChangeText}
-        value={id}
+        value={value}
         visible={visible}
         items={items}
         label={label}

@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    paddingVertical:mvs(15)
   },
   scrollContent: {
     // paddingHorizontal: mvs(20),
@@ -169,12 +170,13 @@ const styles = StyleSheet.create({
   sectionTitle: {
     marginBottom: mvs(16),
     textTransform: 'uppercase',
-    fontWeight: "600"
+    fontWeight: Platform.OS==='ios'? "600":"700"
   },
   inputContainer: {
     backgroundColor: colors.white,
     // marginBottom: mvs(12),
     color: colors.inputText
+    
   },
   addressInputContainer: {
     minHeight: mvs(100),

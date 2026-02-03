@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect, useCallback} from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -10,33 +10,48 @@ import {
   Dimensions,
   TextInput,
   PermissionsAndroid,
+  Keyboard,
+  KeyboardAvoidingView,
+  Pressable,
 } from 'react-native';
-import MapView, {Marker,PROVIDER_GOOGLE} from 'react-native-maps';
-import {mvs} from 'config/metrices';
-import {colors} from 'config/colors';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { mvs } from 'config/metrices';
+import { colors } from 'config/colors';
 import * as IMG from 'assets/images';
-import {Row} from 'components/atoms/row';
+import { Row } from 'components/atoms/row';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
-import {navigate} from 'navigation/navigation-ref';
+import { navigate } from 'navigation/navigation-ref';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Linking, Platform, AppState} from 'react-native';
+import { Linking, Platform, AppState } from 'react-native';
 import {
   request,
   check,
   PERMISSIONS,
   RESULTS,
 } from 'react-native-permissions';
-import {useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
-const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+// Max height for the search suggestions card so it doesn't overlap members section
+const SEARCH_CARD_MAX_HEIGHT = SCREEN_HEIGHT - mvs(250);
+// 250 = approx height of members section + search input + top padding
+
 
 const SearchScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  const reduxState = useSelector(state => state);
+  console.log('Redux State:', reduxState);
+
+  const subscribed = useSelector(state => state.user.subscribed);
+  console.log('Subscribed search:', subscribed);
 
   // Suggested searches data
   const suggestedSearches = useMemo(
@@ -73,17 +88,18 @@ const SearchScreen = () => {
       'Body Build: Slim',
       'Green eyes',
       'Red hair',
+      'Negative for: Cystic Fibrosis (CFTR)'
     ],
     [],
   );
 
   const combinedSearchData = useMemo(() => {
-  return [
-    ...allSuggestions,
-    ...recentSearches,
-    ...suggestedSearches,
-  ];
-}, [allSuggestions, recentSearches, suggestedSearches]);
+    return [
+      ...allSuggestions,
+      ...recentSearches,
+      ...suggestedSearches,
+    ];
+  }, [allSuggestions, recentSearches, suggestedSearches]);
 
 
   // Filtered suggestions based on search text
@@ -96,12 +112,12 @@ const SearchScreen = () => {
   //   );
   // }, [searchText, allSuggestions]);
   const filteredSuggestions = useMemo(() => {
-  if (!searchText.trim()) return [];
+    if (!searchText.trim()) return [];
 
-  return combinedSearchData.filter(item =>
-    item.toLowerCase().includes(searchText.toLowerCase()),
-  );
-}, [searchText, combinedSearchData]);
+    return combinedSearchData.filter(item =>
+      item.toLowerCase().includes(searchText.toLowerCase()),
+    );
+  }, [searchText, combinedSearchData]);
 
 
   // const [region, setRegion] = useState({
@@ -146,16 +162,16 @@ const SearchScreen = () => {
   //   ],
   //   [],
   // );
-const mapMarkers = useMemo(
+  const mapMarkers = useMemo(
     () => [
       {
         id: 1,
-        coordinate: {latitude: 40.7128, longitude: -74.006},
+        coordinate: { latitude: 40.7128, longitude: -74.006 },
         profileImage: IMG.MapUser1,
       },
       {
         id: 2,
-        coordinate: {latitude: 40.7589, longitude: -73.9851},
+        coordinate: { latitude: 40.7589, longitude: -73.9851 },
         profileImage: IMG.MapMoreUser,
       },
     ],
@@ -172,83 +188,100 @@ const mapMarkers = useMemo(
   //   ],
   //   [],
   // );
-const membersNearby = [
-  {
-    id: 1,
-    name: 'Nathan',
-    age: 32,
-    location: 'Denver, Colorado',
-    flag: '🇺🇸',
-    donorType: 'Donor (Offering: Sperm)',
-    options: 'Private Donor, Donor + Co-Parenting',
-    image: IMG.SearchImage1, // image from membersNearbyBase
-    badge: 'Xytex',
-    price: "$800.00 USD",
-    mutualMatch: false,
-    Subscription: false,
-    isOnline: false, // from membersNearbyBase (default false)
-  },
-  {
-    id: 2,
-    name: 'Sarah',
-    age: 28,
-    location: 'New York, New York',
-    flag: '🇺🇸',
-    donorType: 'Donor (Offering: Eggs)',
-    options: 'Private Donor',
-    image: IMG.SearchImage2, // image from membersNearbyBase
-    badge: 'New',
-    price: "$800.00 USD",
-    mutualMatch: false,
-    Subscription: true,
-    isOnline: true, // from membersNearbyBase
-  },
-  {
-    id: 3,
-    name: 'Lyon',
-    age: 29,
-    location: 'New York, New York',
-    flag: '🇺🇸',
-    donorType: 'Donor (Offering: Sperm)',
-    options: 'Private Donor',
-    image: IMG.SearchImage3, // image from membersNearbyBase
-    badge: 'New',
-    price: "$800.00 USD",
-    mutualMatch: true,
-    Subscription: true,
-    isOnline: false, // default
-  },
-  {
-    id: 4,
-    name: 'Harry', // no profile in profiles array for id 4, keep default values
-    age: null,
-    location: null,
-    flag: null,
-    donorType: null,
-    options: null,
-    image: IMG.SearchImage1, // from membersNearbyBase
-    badge: null,
-    price: null,
-    mutualMatch: false,
-    Subscription: false,
-    isOnline: false,
-  },
-  {
-    id: 5,
-    name: 'Liam', // no profile in profiles array for id 5
-    age: null,
-    location: null,
-    flag: null,
-    donorType: null,
-    options: null,
-    image: IMG.SearchImage2, // from membersNearbyBase
-    badge: null,
-    price: null,
-    mutualMatch: false,
-    Subscription: false,
-    isOnline: false,
-  },
-];
+  const membersNearby = [
+    {
+      id: 1,
+      name: 'Nathan',
+      age: 32,
+      location: 'Denver, Colorado',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Sperm)',
+      options: 'Private Donor, Donor + Co-Parenting',
+      image: IMG.SearchImage1, // SvgComponent
+      imageName: 'SearchImage1.svg',
+      image2: IMG.HomeImageOng, // PNG
+      image2Name: 'HomeImageOng.png',
+      // image from membersNearbyBase
+      badge: 'Xytex',
+      price: "$800.00 USD",
+      // userstatus:'paid',
+      mutualMatch: false,
+      Subscription: false,
+      isOnline: false, // from membersNearbyBase (default false)
+    },
+    {
+      id: 2,
+      name: 'Sarah',
+      age: 28,
+      location: 'New York, New York',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Eggs)',
+      options: 'Private Donor',
+      image: IMG.SearchImage2,
+      imageName: 'SearchImage2.svg',
+      image2: IMG.HomeImageOnline,
+      image2Name: 'HomeImageOnline.jpg', // image from membersNearbyBase
+      badge: 'New',
+      price: "$800.00 USD",
+      mutualMatch: false,
+      Subscription: true,
+      isOnline: true, // from membersNearbyBase
+    },
+    {
+      id: 3,
+      name: 'Lyon',
+      age: 29,
+      location: 'New York, New York',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Sperm)',
+      options: 'Private Donor',
+      image: IMG.SearchImage3,
+      imageName: 'SearchImage3.svg', // image from membersNearbyBase
+      image2: IMG.HomeImagethree,
+      image2Name: 'HomeImagethree.png',
+      badge: 'New',
+      price: "$800.00 USD",
+      mutualMatch: true,
+      Subscription: true,
+      isOnline: false, // default
+    },
+    {
+      id: 4,
+      name: 'Harry', // no profile in profiles array for id 4, keep default values
+      age: null,
+      location: null,
+      flag: null,
+      donorType: null,
+      options: null,
+      image: IMG.SearchImage1, // SvgComponent
+      imageName: 'SearchImage1.svg',
+      image2: IMG.HomeImageOng, // PNG
+      image2Name: 'HomeImageOng.png', // from membersNearbyBase
+      badge: null,
+      price: null,
+      mutualMatch: false,
+      Subscription: false,
+      isOnline: false,
+    },
+    {
+      id: 5,
+      name: 'Lyon',
+      age: 29,
+      location: 'New York, New York',
+      flag: '🇺🇸',
+      donorType: 'Donor (Offering: Sperm)',
+      options: 'Private Donor',
+      image: IMG.SearchImage3,
+      imageName: 'SearchImage3.svg', // image from membersNearbyBase
+      image2: IMG.HomeImagethree,
+      image2Name: 'HomeImagethree.png',
+      badge: 'New',
+      price: "$800.00 USD",
+      mutualMatch: true,
+      Subscription: true,
+      isOnline: false, // default
+    },
+  ];
   const handleMarkerPress = () => {
     navigate('SearchScreenTap');
   };
@@ -308,53 +341,53 @@ const membersNearby = [
   //     </Marker>
   //   );
   // };
-//  const renderMarker = marker => (
-//     <Marker
-//       key={marker.id}
-//       coordinate={marker.coordinate}
-//        anchor={{x: 0.5, y: 0.9}}
-//       tracksViewChanges={false}
-//       onPress={() => navigate('SearchScreenTap')}>
-//       <View style={styles.markerContainer}>
-//         <Image source={marker.profileImage} resizeMode='contain' style={{...styles.profileImage,width:mvs(97),height:mvs(60)}} />
-//         <View style={styles.pinLine} />
-//         <View style={styles.pinDot} />
-//       </View>
-//     </Marker>
-//   );
-// const renderMarker = marker => (
-//   <Marker
-//     key={marker.id}
-//     coordinate={marker.coordinate}
-//     image={marker.profileImage}   // 🔥 MUST BE PNG
-//     anchor={{x: 0.5, y: 1}}
-//     tracksViewChanges={false}
-//     onPress={() => navigate('SearchScreenTap')}
-//   />
-  
-  
-// );
-const renderMarker = marker => (
-  <Marker
-    key={marker.id}
-    coordinate={marker.coordinate}
-    anchor={{ x: 0.5, y: 1 }}
-    onPress={() => navigate('SearchScreenTap')}
-  >
-    <View style={styles.markerContainer}>
-      <Image
-        source={marker.profileImage}
-        style={styles.markerProfileImage}
-         resizeMode="contain"
-      />
-      <View style={styles.pinLine} />
-      <View style={styles.pinDot} />
-    </View>
-  </Marker>
-);
+  //  const renderMarker = marker => (
+  //     <Marker
+  //       key={marker.id}
+  //       coordinate={marker.coordinate}
+  //        anchor={{x: 0.5, y: 0.9}}
+  //       tracksViewChanges={false}
+  //       onPress={() => navigate('SearchScreenTap')}>
+  //       <View style={styles.markerContainer}>
+  //         <Image source={marker.profileImage} resizeMode='contain' style={{...styles.profileImage,width:mvs(97),height:mvs(60)}} />
+  //         <View style={styles.pinLine} />
+  //         <View style={styles.pinDot} />
+  //       </View>
+  //     </Marker>
+  //   );
+  // const renderMarker = marker => (
+  //   <Marker
+  //     key={marker.id}
+  //     coordinate={marker.coordinate}
+  //     image={marker.profileImage}   // 🔥 MUST BE PNG
+  //     anchor={{x: 0.5, y: 1}}
+  //     tracksViewChanges={false}
+  //     onPress={() => navigate('SearchScreenTap')}
+  //   />
 
 
-  const renderMemberCard = ({item}) => {
+  // );
+  const renderMarker = marker => (
+    <Marker
+      key={marker.id}
+      coordinate={marker.coordinate}
+      anchor={{ x: 0.5, y: 1 }}
+      onPress={() => navigate('SearchScreenTap')}
+    >
+      <View style={styles.markerContainer}>
+        <Image
+          source={marker.profileImage}
+          style={styles.markerProfileImage}
+          resizeMode="contain"
+        />
+        <View style={styles.pinLine} />
+        <View style={styles.pinDot} />
+      </View>
+    </Marker>
+  );
+
+
+  const renderMemberCard = ({ item }) => {
     const ImageComponent = item.image;
     return (
       // <TouchableOpacity style={styles.memberCard}>
@@ -366,13 +399,13 @@ const renderMarker = marker => (
       </TouchableOpacity>
     );
   };
-//  const renderMember = ({item}) => (
-//     <TouchableOpacity
-//       style={styles.memberCard}
-//       onPress={() => navigate('ProfileDetailsHomeScreen', {item})}>
-//       <Image source={item.image} style={styles.memberImage} />
-//     </TouchableOpacity>
-//   );
+  //  const renderMember = ({item}) => (
+  //     <TouchableOpacity
+  //       style={styles.memberCard}
+  //       onPress={() => navigate('ProfileDetailsHomeScreen', {item})}>
+  //       <Image source={item.image} style={styles.memberImage} />
+  //     </TouchableOpacity>
+  //   );
   const handleOpenSettings = () => {
     if (Platform.OS === 'ios') {
       Linking.openURL('app-settings:');
@@ -383,7 +416,7 @@ const renderMarker = marker => (
 
   // useEffect(() => {
   //   checkLocationPermission();
-    
+
   //   // Listen for app state changes (when user returns from settings)
   //   const subscription = AppState.addEventListener('change', nextAppState => {
   //     if (nextAppState === 'active') {
@@ -395,12 +428,27 @@ const renderMarker = marker => (
   //     subscription?.remove();
   //   };
   // }, []);
-   useEffect(() => {
+  useEffect(() => {
     checkLocationPermission();
     const sub = AppState.addEventListener('change', s => {
       if (s === 'active') checkLocationPermission();
     });
-    return () => sub.remove();
+
+    // Keyboard listeners for Android
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => setKeyboardVisible(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => setKeyboardVisible(false)
+    );
+
+    return () => {
+      sub.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
   }, []);
 
   useFocusEffect(
@@ -415,6 +463,8 @@ const renderMarker = marker => (
       checkLocationPermission();
     }, []),
   );
+
+  // 250 = approx height of members section + search input + top padding
 
   // const checkLocationPermission = async () => {
   //   try {
@@ -454,235 +504,94 @@ const renderMarker = marker => (
   //   }
   // };
   const checkLocationPermission = async () => {
-  try {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-      setHasLocationAccess(granted);
-    } else {
-      const status = await check(
-        PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
-      );
-
-      if (status === RESULTS.DENIED) {
-        const req = await request(
+    try {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.check(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        setHasLocationAccess(granted);
+      } else {
+        const status = await check(
           PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
         );
-        setHasLocationAccess(req === RESULTS.GRANTED);
-      } else {
-        setHasLocationAccess(status === RESULTS.GRANTED);
-      }
-    }
-  } catch (e) {
-    setHasLocationAccess(false);
-  }
-};
 
+        if (status === RESULTS.DENIED) {
+          const req = await request(
+            PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+          );
+          setHasLocationAccess(req === RESULTS.GRANTED);
+        } else {
+          setHasLocationAccess(status === RESULTS.GRANTED);
+        }
+      }
+    } catch (e) {
+      setHasLocationAccess(false);
+    }
+  };
+  const showSuggestions =
+    (isSearchFocused || keyboardVisible) && filteredSuggestions.length > 0;
   return (
-    <View style={styles.container}>
-          <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-120): 0}} />
-      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 80}>
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-120) : 0 }} />
+      {/* <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" /> */}
+      <StatusBar
+        backgroundColor="transparent" // or colors.helixBackground if you want
+        barStyle="dark-content"
+        translucent={true} // important for Android
+      />
 
       {/* Search Input */}
-     
+
 
       {/* Map Section or Location Access Prompt */}
       {hasLocationAccess ? (
         <>
           <View style={styles.mapContainer}>
-            {/* <MapView
-              style={styles.map}
-              region={region}
-              onRegionChangeComplete={setRegion}
-              showsUserLocation={false}
-              showsMyLocationButton
-              showsCompass
-              pitchEnabled
-              zoomEnabled
-              scrollEnabled>
-              {mapMarkers.map(renderMarker)}
-            </MapView> */}
             <MapView
-            // provider={PROVIDER_GOOGLE}
-             provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
-            style={{ flex: 1 }}
-            // style={StyleSheet.absoluteFillObject}
-            initialRegion={initialRegion}
-            rotateEnabled={false}
-            pitchEnabled={false}>
-            {mapMarkers.map(renderMarker)}
-          </MapView>
-          {/* <MapView
-    style={{ flex: 1 }}
-    provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
-    initialRegion={initialRegion}
-    rotateEnabled={false}
-    pitchEnabled={false}
-    showsUserLocation={true}
-    showsMyLocationButton={Platform.OS === 'android'}
-  >
-    {mapMarkers.map(renderMarker)}
-  </MapView> */}
-             <View style={styles.searchContainer}>
-        <View style={styles.searchInputContainer}>
-          {/* <Icon name="search" size={mvs(20)} color="#8C8C8C" /> */}
-          <IMG.SearchNew width={mvs(18)} height={mvs(18)}/>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search by Ancestry, etc."
-            placeholderTextColor={colors.placeholder}
-            value={searchText}
-            onChangeText={setSearchText}
-            onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
-          />
-          {searchText.length > 0 && (
-            <TouchableOpacity
-              onPress={() => setSearchText('')}
-              style={styles.clearButton}>
-              <Icon name="close-circle" size={mvs(20)} color="#8C8C8C" />
-            </TouchableOpacity>
+              provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
+              style={StyleSheet.absoluteFill}
+              initialRegion={initialRegion}
+              // rotateEnabled={false}
+              // pitchEnabled={false}
+              scrollEnabled={!isSearchFocused && !keyboardVisible}
+              zoomEnabled={!isSearchFocused && !keyboardVisible}
+              pitchEnabled={!isSearchFocused && !keyboardVisible}
+              rotateEnabled={!isSearchFocused && !keyboardVisible}
+            >
+              {mapMarkers.map(renderMarker)}
+            </MapView>
+          </View>
+
+          {showSuggestions && (
+            <Pressable
+              style={StyleSheet.absoluteFill}
+              onPress={Keyboard.dismiss}
+              pointerEvents="auto"
+            />
           )}
-          <View style={styles.searchDivider} />
-          <TouchableOpacity onPress={()=>navigate("SearchFilterScreen")}>
-            <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
-          </TouchableOpacity>
-        </View>
 
-        {/* Search Suggestions Card */}
-        {(isSearchFocused || searchText.length > 0) && (
-          <View style={styles.searchSuggestionsCard}>
-            {/* Filtered Suggestions - Show when user types */}
-            {/* {searchText.length > 0 && filteredSuggestions.length > 0 && (
-              <>
-                <View style={styles.suggestionsSection}>
-                  <Regular
-                    label="Suggestions"
-                    fontSize={mvs(14)}
-                    color="#8C8C8C"
-                    style={styles.sectionTitle}
-                  />
-                  {filteredSuggestions.map((item, index) => (
-                    <TouchableOpacity
-                      key={index}
-                      style={styles.suggestionItem}
-                      onPress={() => setSearchText(item)}>
-                      <Regular
-                        label={item}
-                        fontSize={mvs(14)}
-                        color="#333333"
-                      />
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </>
-            )} */}
-            {searchText.length > 0 && (
-  <View style={styles.suggestionsSection}>
-    <Regular
-      label="Search Results"
-      fontSize={mvs(14)}
-      color="#8C8C8C"
-      style={styles.sectionTitle}
-    />
-
-    {filteredSuggestions.length > 0 ? (
-      filteredSuggestions.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.suggestionItem}
-          onPress={() => setSearchText(item)}>
-          <Regular
-            label={item}
-            fontSize={mvs(14)}
-            color="#333333"
-          />
-        </TouchableOpacity>
-      ))
-    ) : (
-      <Regular
-        label="No results found"
-        fontSize={mvs(14)}
-        color="#8C8C8C"
-      />
-    )}
-  </View>
-)}
-
-
-            {/* Suggested Searches - Show when search is empty or focused */}
-            {searchText.length === 0 && (
-              <>
-                <View style={styles.suggestionsSection}>
-                  <Regular
-                    label="Suggested Searches"
-                    fontSize={mvs(14)}
-                    color="#8C8C8C"
-                    style={styles.sectionTitle}
-                  />
-                  {suggestedSearches.map((item, index) => (
-                    <TouchableOpacity
-                      key={index}
-                      style={styles.suggestionItem}
-                      onPress={() => setSearchText(item)}>
-                      <Regular
-                        label={item}
-                        fontSize={mvs(14)}
-                        color="#404040"
-                      />
-                    </TouchableOpacity>
-                  ))}
-                </View>
-
-                {/* Divider */}
-                <View style={styles.suggestionsDivider} />
-
-                {/* Recent Searches */}
-                <View style={styles.suggestionsSection}>
-                  <Regular
-                    label="Recent Searches"
-                    fontSize={mvs(14)}
-                    color="#8C8C8C"
-                    style={styles.sectionTitle}
-                  />
-                  {recentSearches.map((item, index) => (
-                    <TouchableOpacity
-                      key={index}
-                      style={styles.suggestionItem}
-                      onPress={() => setSearchText(item)}>
-                      <Regular
-                        label={item}
-                        fontSize={mvs(14)}
-                        color="#333333"
-                      />
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </>
-            )}
-          </View>
-        )}
-      </View>
-            {/* Location Indicator - Outside MapView */}
-            <View style={styles.locationIndicator}>
-              <IMG.searchNavigate width={mvs(16)} height={mvs(16)} />
-              <Regular
-                label="New York City"
-                fontSize={mvs(14)}
-                color="#333333"
-                style={{marginLeft: mvs(6)}}
-              />
-            </View>
+          <View style={styles.locationIndicator}>
+            <IMG.searchNavigate width={mvs(24)} height={mvs(24)} />
+            <Medium
+              label="New York City"
+              fontSize={mvs(16)}
+              color={colors.textColor}
+              style={{ marginLeft: mvs(6), fontWeight: "500" }}
+            />
           </View>
 
-          {/* Members Nearby Section */}
-          <View style={styles.membersSection}>
+          <View style={{...styles.membersSection,
+              top: Platform.OS === 'android' && keyboardVisible ? mvs(-300) : undefined,
+            }}>
             <View style={styles.membersHandle} />
             <Medium
               label="Members Nearby"
-              fontSize={mvs(18)}
-              color="#333333"
+              fontSize={mvs(16)}
+              // color="#333333"
+              color={colors.textColor}
               style={styles.membersTitle}
             />
             <FlatList
@@ -694,6 +603,136 @@ const renderMarker = marker => (
               contentContainerStyle={styles.membersList}
             />
           </View>
+
+          <View style={styles.searchContainer}>
+            <View style={styles.searchInputContainer}>
+              <IMG.SearchNew width={mvs(18)} height={mvs(18)} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search by Ancestry, etc."
+                placeholderTextColor={colors.placeholder}
+                value={searchText}
+                onChangeText={setSearchText}
+                onFocus={() => {
+                  if (!subscribed) {
+                    navigate('PremiumUnlockSearchScreen');
+                  } else {
+                    setIsSearchFocused(true);
+                  }
+                }}
+                onBlur={() => setIsSearchFocused(false)}
+              />
+              {searchText.length > 0 && (
+                <TouchableOpacity
+                  onPress={() => setSearchText('')}
+                  style={styles.clearButton}>
+                  <Icon name="close-circle" size={mvs(20)} color="#8C8C8C" />
+                </TouchableOpacity>
+              )}
+              <View style={styles.searchDivider} />
+              <TouchableOpacity onPress={() => navigate("SearchFilterScreen")}>
+                <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
+              </TouchableOpacity>
+            </View>
+
+            {(isSearchFocused || searchText.length > 0) && (
+              <View
+                pointerEvents="auto"
+                style={[
+                  styles.searchSuggestionsCard,
+                  Platform.OS === 'android' && keyboardVisible && { height: mvs(300) }
+                ]}>
+                <ScrollView
+                  contentContainerStyle={styles.searchSuggestionsContent}
+                  keyboardShouldPersistTaps="handled"
+                  showsVerticalScrollIndicator={true}
+                  nestedScrollEnabled={true}
+                  scrollEnabled={true}
+                  removeClippedSubviews={false}>
+                  {searchText.length > 0 && (
+                    <View style={styles.suggestionsSection}>
+                      <Regular
+                        label="Search Results"
+                        fontSize={mvs(14)}
+                        color="#8C8C8C"
+                        style={styles.sectionTitle}
+                      />
+                      {filteredSuggestions.length > 0 ? (
+                        filteredSuggestions.map((item, index) => (
+                          <Pressable
+                            key={index}
+                            style={styles.suggestionItem}
+                            onPress={() => setSearchText(item)}
+                            delayPressIn={100}>
+                            <Regular
+                              label={item}
+                              fontSize={mvs(14)}
+                              color="#333333"
+                            />
+                          </Pressable>
+                        ))
+                      ) : (
+                        <Regular
+                          label="No results found"
+                          fontSize={mvs(14)}
+                          color="#8C8C8C"
+                        />
+                      )}
+                    </View>
+                  )}
+
+                  {searchText.length === 0 && (
+                    <>
+                      <View style={styles.suggestionsSection}>
+                        <Regular
+                          label="Suggested Searches"
+                          fontSize={mvs(14)}
+                          color="#8C8C8C"
+                          style={styles.sectionTitle}
+                        />
+                        {suggestedSearches.map((item, index) => (
+                          <Pressable
+                            key={index}
+                            style={styles.suggestionItem}
+                            onPress={() => setSearchText(item)}
+                            delayPressIn={100}>
+                            <Regular
+                              label={item}
+                              fontSize={mvs(14)}
+                              color="#404040"
+                            />
+                          </Pressable>
+                        ))}
+                      </View>
+                      <View style={styles.suggestionsDivider} />
+                      <View style={styles.suggestionsSection}>
+                        <Regular
+                          label="Recent Searches"
+                          fontSize={mvs(14)}
+                          color="#8C8C8C"
+                          style={styles.sectionTitle}
+                        />
+                        {recentSearches.map((item, index) => (
+                          <Pressable
+                            key={index}
+                            style={styles.suggestionItem}
+                            onPress={() => setSearchText(item)}
+                            delayPressIn={100}>
+                            <Regular
+                              label={item}
+                              fontSize={mvs(14)}
+                              color="#333333"
+                            />
+                          </Pressable>
+                        ))}
+                      </View>
+                    </>
+                  )}
+                </ScrollView>
+              </View>
+            )}
+          </View>
+          {/* )} */}
         </>
       ) : (
         <View style={styles.locationPromptContainer}>
@@ -719,7 +758,7 @@ const renderMarker = marker => (
               color="#8C8C8C"
               style={styles.locationPromptText}
             />
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.locationPromptButton}
               onPress={handleOpenSettings}>
               <Medium
@@ -731,7 +770,7 @@ const renderMarker = marker => (
           </View>
         </View>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -749,13 +788,21 @@ const styles = StyleSheet.create({
   //   backgroundColor: colors.white,
   //   zIndex: 10,
   // },
+  //   searchContainer: {
+  //   position: 'absolute',
+  //   top: Platform.OS==='ios'? mvs(100):mvs(20),
+  //   left: mvs(20),
+  //   right: mvs(20),
+  //   zIndex: 20,
+  // },
   searchContainer: {
-  position: 'absolute',
-  top: Platform.OS==='ios'? mvs(100):mvs(20),
-  left: mvs(20),
-  right: mvs(20),
-  zIndex: 20,
-},
+    position: 'absolute',
+    top: Platform.OS === 'android' ? StatusBar.currentHeight + mvs(30) : mvs(70),
+    left: mvs(20),
+    right: mvs(20),
+    zIndex: 110,
+  },
+
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -763,9 +810,9 @@ const styles = StyleSheet.create({
     borderRadius: mvs(40),
     paddingHorizontal: mvs(16),
     // paddingVertical: mvs(2),
-    height:mvs(46),
+    height: mvs(46),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
@@ -787,7 +834,9 @@ const styles = StyleSheet.create({
     marginHorizontal: mvs(12),
   },
   mapContainer: {
-    flex: 1,
+    // flex: 1,
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 1,
     // position: 'relative',
     // backgroundColor: '#f5f5f5',
   },
@@ -835,11 +884,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#999999',
   },
   pinDot: {
-  width: mvs(10),
-  height: mvs(10),
-  borderRadius: mvs(5),
-  backgroundColor: colors.primary,
-},
+    width: mvs(10),
+    height: mvs(10),
+    borderRadius: mvs(5),
+    backgroundColor: colors.primary,
+  },
 
   pinImage: {
     width: mvs(20),
@@ -847,12 +896,12 @@ const styles = StyleSheet.create({
   },
   locationIndicator: {
     position: 'absolute',
-    top:Platform.OS==='ios'? mvs(155):mvs(70),
+    top: Platform.OS === 'ios' ? mvs(120) : mvs(110),
     left: mvs(20),
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: colors.white,
-    paddingHorizontal: mvs(12),
+    paddingHorizontal: mvs(5),
     paddingVertical: mvs(8),
     borderRadius: mvs(20),
     // shadowColor: '#000',
@@ -866,7 +915,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
+    // marginTop:-1000,
     right: 0,
+    // top: 1000,
     backgroundColor: colors.white,
     borderTopLeftRadius: mvs(20),
     borderTopRightRadius: mvs(20),
@@ -874,7 +925,7 @@ const styles = StyleSheet.create({
     paddingBottom: mvs(20),
     maxHeight: mvs(300),
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: -2},
+    shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 5,
@@ -882,7 +933,7 @@ const styles = StyleSheet.create({
   },
   membersHandle: {
     width: mvs(72),
-    marginVertical:mvs(10),
+    marginVertical: mvs(10),
     height: mvs(4),
     backgroundColor: '#404040',
     borderRadius: mvs(2),
@@ -916,14 +967,14 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   markerProfileImage: {
-  width: mvs(94),        // 🔥 BIGGER
-  height: mvs(70),
-  resizeMode:'contain'
-  // borderRadius: mvs(35),
-  // borderWidth: 3,
-  // borderColor: colors.white,
-  // backgroundColor: colors.white,
-},
+    width: mvs(94),        // 🔥 BIGGER
+    height: mvs(70),
+    resizeMode: 'contain'
+    // borderRadius: mvs(35),
+    // borderWidth: 3,
+    // borderColor: colors.white,
+    // backgroundColor: colors.white,
+  },
 
   memberImageSvg: {
     borderRadius: mvs(35),
@@ -978,14 +1029,20 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: mvs(12),
     marginTop: mvs(12),
-    paddingVertical: mvs(12),
-    paddingHorizontal: mvs(20),
+    //  marginTop: mvs(60), 
+    // maxHeight: mvs(380),
+    maxHeight: SEARCH_CARD_MAX_HEIGHT,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
-    zIndex: 20,
+    elevation: 10,
+    zIndex: 120,
+  },
+  searchSuggestionsContent: {
+    paddingVertical: mvs(12),
+    paddingHorizontal: mvs(20),
+    paddingBottom: Platform.OS === 'android' ? mvs(10) : mvs(10)
   },
   suggestionsSection: {
     marginBottom: mvs(8),

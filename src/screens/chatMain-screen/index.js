@@ -55,6 +55,15 @@ const ChatMainScreen = () => {
     setCurrentGuidelineStep(1);
   }, []);
 
+  useEffect(() => {
+    if (showEmptyConnections) {
+      const timer = setTimeout(() => {
+        handleStartSwiping();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showEmptyConnections]);
+
   const connections = useMemo(
     () => [
       { id: 1, name: 'Nathan', image: IMG.SearchImage1 },
@@ -131,7 +140,7 @@ const ChatMainScreen = () => {
 
         {item.isHighlighted && (
           <View style={styles.connectionHeart}>
-            <IMG.chatMainHeart width={mvs(31)} height={mvs(28)} />
+            <IMG.HeartConnection width={mvs(31)} height={mvs(28)} />
           </View>
         )}
       </View>
@@ -374,7 +383,7 @@ const ChatMainScreen = () => {
     return (
       <View style={styles.container}>
 
-        <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+        <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
         <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
         <View style={styles.emptyConnectionsContainer}>
@@ -424,12 +433,6 @@ const ChatMainScreen = () => {
               color="#8C8C8C"
               style={styles.emptyStateText}
             />
-            <PrimaryButton
-              containerStyle={styles.startSwipingButton}
-              loading={false}
-              onPress={handleStartSwiping}
-              title="Start Swiping"
-            />
           </View>
         </View>
       </View>
@@ -438,7 +441,7 @@ const ChatMainScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {/* Guidelines Modal */}
@@ -1212,7 +1215,7 @@ const styles = StyleSheet.create({
   connectionsList: {
     paddingHorizontal: mvs(20),
     paddingBottom: mvs(12),
-    paddingVertical:mvs(6)
+    paddingVertical: mvs(6)
   },
   connectionItem: {
     width: mvs(100),
@@ -1465,6 +1468,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: mvs(32),
     paddingHorizontal: mvs(40),
+    width: "100%",
+    // backgroundColor:'red'
   },
   startSwipingButton: {
     borderRadius: mvs(40),
@@ -1790,7 +1795,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: mvs(14),
     borderRadius: mvs(40),
-    borderWidth: 2,
+    borderWidth: 1.6,
     borderColor: colors.primary,
     backgroundColor: colors.white,
     alignItems: 'center',
@@ -1801,7 +1806,7 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(14),
     borderRadius: mvs(40),
     // backgroundColor: '#FF5F57',
-    borderWidth: 1,
+    borderWidth: 1.6,
     borderColor: "#FF5F57",
     alignItems: 'center',
     justifyContent: 'center',

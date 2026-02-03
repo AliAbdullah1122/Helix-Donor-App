@@ -42,7 +42,7 @@ const MainProfileScreen = () => {
   const profile = profiles[0];
 
   // Expand / collapse states for detail sections
-  const [aboutExpanded, setAboutExpanded] = useState(true);
+  const [aboutExpanded, setAboutExpanded] = useState(false);
   const [photosExpanded, setPhotosExpanded] = useState(true);
   const [physicalExpanded, setPhysicalExpanded] = useState(true);
   const [educationExpanded, setEducationExpanded] = useState(true);
@@ -52,7 +52,7 @@ const MainProfileScreen = () => {
 
   return (
     <View style={{flex: 1}}>
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0,backgroundColor:colors.primary}} />
+        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-80): 0,backgroundColor:colors.primary}} />
       <StatusBar backgroundColor={colors.primary} barStyle="light-content" translucent />
 
       <ScrollView
@@ -90,8 +90,8 @@ const MainProfileScreen = () => {
       <TouchableOpacity
         onPress={() => navigate('AccountRoleScreen')}
         style={styles.editProfileButton}>
-        <IMG.EditNewImage width={mvs(16)} height={mvs(16)} />
-        <Medium label="Edit Profile" fontSize={mvs(14)} color={colors.black} style={{marginLeft: mvs(8)}} />
+        <IMG.EditIconSvg width={mvs(16)} height={mvs(16)} />
+        <Medium label="Edit Profile" fontSize={mvs(16)} color={"#404040"} style={{marginLeft: mvs(8)}} />
       </TouchableOpacity>
       </View>
     </View>
@@ -243,7 +243,7 @@ const MainProfileScreen = () => {
               width: '100%',
             }}
           />
-          <Row style={styles.infoRow}>
+          {/* <Row style={styles.infoRow}>
             <View style={styles.infoColumn}>
               <Medium
                 label={'My Role'}
@@ -286,7 +286,7 @@ const MainProfileScreen = () => {
                 style={{marginTop: mvs(4), textAlign:"right"}}
               />
             </View>
-          </Row>
+          </Row> */}
           <View
             style={{
               marginTop: mvs(6),
@@ -315,11 +315,15 @@ const MainProfileScreen = () => {
 
         {/* White expandable cards */}
         {/* ABOUT card */}
-        <View style={styles.sectionCard}>
+        
+        <View style={{...styles.sectionCard,
+          //  paddingVertical:aboutExpanded? mvs(12):mvs(20)
+           }}>
           <TouchableOpacity
+          // style={{paddingBottom:mvs(20)}}
             activeOpacity={0.8}
             onPress={() => setAboutExpanded(prev => !prev)}>
-            <Row style={styles.sectionHeader}>
+            <Row style={{...styles.sectionHeader,marginBottom:mvs(20)}}>
               <Row style={{alignItems: 'center'}}>
               
                 <IMG.ProfileUser width={mvs(16)} height={mvs(16)} />
@@ -331,9 +335,25 @@ const MainProfileScreen = () => {
                   style={{marginLeft: mvs(8)}}
                 />
               </Row>
-                <TouchableOpacity onPress={()=>navigate("AboutScreen")}>
-              <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
-              </TouchableOpacity>
+             <>
+           {aboutExpanded ? (
+               <TouchableOpacity 
+                onPress={()=>navigate("AboutScreen")}
+                //  onPress={() => setAboutExpanded(prev => !prev)}
+                >
+  <IMG.MainProfileEdit width={mvs(16)} height={mvs(16)} />
+   </TouchableOpacity>
+) : (
+   <TouchableOpacity 
+                // onPress={()=>navigate("AboutScreen")}
+                 onPress={() => setAboutExpanded(prev => !prev)}
+                >
+  <IMG.ArrowUpAbout width={mvs(16)} height={mvs(16)} />
+   </TouchableOpacity>
+)}
+</>
+
+              {/* </TouchableOpacity> */}
             </Row>
           </TouchableOpacity>
           {aboutExpanded && (
@@ -946,94 +966,147 @@ const MainProfileScreen = () => {
             </Row>
           </TouchableOpacity>
           {geneticExpanded && (
-            <View style={styles.sectionBody}>
-              <Row style={{ alignItems: 'center',justifyContent:"flex-start", marginBottom: mvs(6) }}>
-                    <Medium
-                      label={'\u26A0'}
-                      fontSize={mvs(14)}
-                      color={'#EAB308'}
-                    />
-                    <Medium
-                      label={'ADVISORY'}
-                      fontSize={mvs(14)}
-                      style={{marginLeft:mvs(5)}}
+              <View style={styles.sectionBody}>
+                    <Row style={{ alignItems: 'center', justifyContent: "flex-start", marginBottom: mvs(6) }}>
+                      <Medium
+                        // label={'⚠️ ADVISORY'}
+                  label={'\u26A0 '}
+                        fontSize={mvs(16)}
+                        color={'#FFCC00'}
+                      />
+                      <Medium
+                        label={'ADVISORY'}
+                        fontSize={mvs(14)}
+                        // color={'#EAB308'}
                       color={colors.primary || '#EAB308'}
+                      />
+                    </Row>
+                    <Regular
+                      label="This donor is a carrier of one or more genetic conditions."
+                      fontSize={mvs(14)}
+                      color={'#2B3467'}
+                      numberOfLines={10}
+                      style={{ marginBottom: mvs(10) }}
                     />
-                  </Row>
-              <Regular
-                label="This donor is a carrier of one or more genetic conditions."
-                fontSize={mvs(14)}
-                color={colors.primary}
-                numberOfLines={10}
-                style={{marginBottom: mvs(10)}}
-              />
-              <Medium
-                label="Expanded Carrier Screen (283 Genes)"
-                fontSize={mvs(14)}
-                color={colors.primary}
-                style={{
-                  alignSelf: 'center',
-                  marginBottom: mvs(10),
-                }}
-              />
-              <Medium
-                label="POSITIVE CARRIER STATUS"
-                fontSize={mvs(14)}
-                color={colors.primary}
-                style={{marginBottom: mvs(4)}}
-              />
-              <Regular
-                label="Limb-Girdle Muscular Dystrophy, Type 2A (CAPN3): Carrier"
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-                style={{marginBottom: mvs(4)}}
-              />
-              <Regular
-                label="• One pathogenic variant, c.1465C>T, p.R489W, was detected."
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-              />
-              <Regular
-                label="• Carriers are not expected to show symptoms."
-                fontSize={mvs(14)}
-                color={colors.primary}
-                style={{marginBottom: mvs(10)}}
-              />
-              <Medium
-                label="NEGATIVE RESULTS"
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-                style={{marginBottom: mvs(4)}}
-              />
-              <Regular
-                label="Cystic Fibrosis (CFTR): Reduced Risk"
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-              />
-              <Regular
-                label="Spinal Muscular Atrophy (SMN1): Reduced Risk (2 copies of SMN1 detected)"
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-              />
-              <Regular
-                label="Tay-Sachs Disease (HEXA): Reduced Risk (Normal enzyme analysis)"
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-              />
-              <Regular
-                label="Sickle Cell Disease (HBB): Reduced Risk"
-                fontSize={mvs(14)}
-                                numberOfLines={10}
-                color={colors.primary}
-                style={{marginBottom: mvs(12)}}
-              />
-            </View>
+
+                    <View
+                      style={{
+                        marginTop: mvs(6),
+                        marginBottom: mvs(16),
+                        
+                        borderBottomWidth:1,
+                        // borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderBottomColor: '#E6E8FF',
+                      }}
+                    />
+
+                    <Medium
+                      label="Expanded Carrier Screen (283 Genes)"
+                      fontSize={mvs(14)}
+                      color={'#2B3467'}
+                      style={{
+                        alignSelf: 'center',
+                        marginBottom: mvs(16),
+                      }}
+                    />
+
+                    <Medium
+                      label="POSITIVE CARRIER STATUS"
+                      fontSize={mvs(14)}
+                      color={'#2B3467'}
+                      style={{ marginBottom: mvs(8) }}
+                    />
+                    <Regular
+                      label="Limb-Girdle Muscular Dystrophy, Type 2A (CAPN3): Carrier"
+                      fontSize={mvs(14)}
+                      color={'#2B3467'}
+                      numberOfLines={10}
+                      style={{ marginBottom: mvs(4) }}
+                    />
+                    <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(2) }}>
+                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular
+                        label="One pathogenic variant, c.1465C>T, p.R489W, was detected."
+                        fontSize={mvs(14)}
+                        color={'#2B3467'}
+                        numberOfLines={10}
+                        style={{ flex: 1 }}
+                      />
+                    </Row>
+                    <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(16) }}>
+                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular
+                        label="Carriers are not expected to show symptoms."
+                        fontSize={mvs(14)}
+                        color={'#2B3467'}
+                        numberOfLines={10}
+                        style={{ flex: 1 }}
+                      />
+                    </Row>
+
+                    <Medium
+                      label="NEGATIVE RESULTS"
+                      fontSize={mvs(14)}
+                      color={'#2B3467'}
+                      style={{ marginBottom: mvs(8) }}
+                    />
+                    <Row style={{ alignItems: 'flex-start',  paddingLeft: mvs(8),marginBottom: mvs(4) }}>
+                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular
+                        label="Cystic Fibrosis (CFTR): Reduced Risk"
+                        fontSize={mvs(14)}
+                        color={'#2B3467'}
+                        numberOfLines={10}
+                        style={{ flex: 1 }}
+                      />
+                    </Row>
+                    <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(4) }}>
+                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular
+                        label="Spinal Muscular Atrophy (SMN1): Reduced Risk (2 copies of SMN1 detected)"
+                        fontSize={mvs(14)}
+                        color={'#2B3467'}
+                        numberOfLines={10}
+                        style={{ flex: 1 }}
+                      />
+                    </Row>
+                    <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(4) }}>
+                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular
+                        label="Tay-Sachs Disease (HEXA): Reduced Risk (Normal enzyme analysis)"
+                        fontSize={mvs(14)}
+                        color={'#2B3467'}
+                        numberOfLines={10}
+                        style={{ flex: 1 }}
+                      />
+                    </Row>
+                    <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(16) }}>
+                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular
+                        label="Sickle Cell Disease (HBB): Reduced Risk"
+                        fontSize={mvs(14)}
+                        color={'#2B3467'}
+                        numberOfLines={10}
+                        style={{ flex: 1 }}
+                      />
+                    </Row>
+
+                    <TouchableOpacity
+                      activeOpacity={0.9}
+                      style={{
+                        marginTop: mvs(4),
+                        backgroundColor: '#3A3E90',
+                        borderRadius: mvs(22),
+                        paddingVertical: mvs(12),
+                        alignItems: 'center',
+                      }}>
+                      <Medium
+                        label="Download Full Genetics Report"
+                        fontSize={mvs(14)}
+                        color={colors.white}
+                      />
+                    </TouchableOpacity>
+                  </View>
           )}
         </View>
 
@@ -1188,6 +1261,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     width:"100%",
+    height:mvs(43),
+    // backgroundColor:"#D9D9D9",
     backgroundColor: colors.white,
     borderRadius: mvs(24),
     paddingHorizontal: mvs(16),
@@ -1200,7 +1275,7 @@ const styles = StyleSheet.create({
     // left: 0,
     // right: 0,
     // bottom: 0,
-    marginTop: mvs(12),
+    marginTop:Platform.OS==='ios'? mvs(100):mvs(30),
     paddingHorizontal:mvs(12),
   },
   scrollContent: {
@@ -1233,13 +1308,13 @@ headerOverlay: {
   right: 0,
   bottom: 0,
   justifyContent: 'space-between',
-  paddingTop: mvs(40),
+  paddingTop:Platform.OS==='ios'?  mvs(75) :mvs(55),
   // paddingBottom: mvs(20),
   paddingHorizontal: mvs(12),
 },
 
 nameLocationContainer: {
-  marginTop:Platform.OS==='ios'? mvs(205) :mvs(190),
+  marginTop:Platform.OS==='ios'? mvs(258) :mvs(200),
 
 
 },

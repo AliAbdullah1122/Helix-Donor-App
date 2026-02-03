@@ -135,7 +135,7 @@ const MatchMakingScreen = props => {
   return (
     <View style={styles.container}>
 
-              <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+               <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
 
       <ScrollView
@@ -180,7 +180,8 @@ const MatchMakingScreen = props => {
           </View>
 
           <View style={styles.heartContainer}>
-            <IMG.MatchWhiteHeart width={mvs(68)} height={mvs(61)} />
+            {/* <IMG.MatchWhiteHeart width={mvs(68)} height={mvs(61)} /> */}
+            <Image resizeMode='contain' source={IMG.WhiteheartPng} style={{ width: mvs(68), height: mvs(61) }}/>
           </View>
 
           <View style={styles.profileCard}>

@@ -19,6 +19,7 @@ import Regular from 'typography/regular-text';
 import fonts from 'assets/fonts';
 import { navigate } from 'navigation/navigation-ref';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 
 const plans = [
@@ -83,6 +84,7 @@ const features = [
 
 const PremiumUnlockSearchScreen = () => {
   const [selectedPlan, setSelectedPlan] = useState('1');
+  const navigation = useNavigation();
 
   const selectedPlanData = plans.find(plan => plan.id === selectedPlan);
   const subscribeText = `Subscribe for ${selectedPlanData?.price} ${selectedPlanData?.sub}`;
@@ -103,7 +105,7 @@ const PremiumUnlockSearchScreen = () => {
           color={"#404040"}
           style={styles.headerTitle}
         />
-        <TouchableOpacity style={styles.closeBtn}>
+        <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.closeBtn}>
           <Text style={styles.closeText}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -259,7 +261,10 @@ const PremiumUnlockSearchScreen = () => {
         </View>
 
         {/* Subscribe Button */}
-        <TouchableOpacity style={styles.subscribeBtn} onPress={()=>{navigate("SearchScreen")}}>
+        <TouchableOpacity style={styles.subscribeBtn}
+        //  onPress={()=>{navigate("SearchScreen")}}
+         onPress={()=>navigate("PlaceofferCheckoutScreen")}
+         >
           <Bold
             label={subscribeText}
             fontSize={mvs(15)}

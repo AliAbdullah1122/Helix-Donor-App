@@ -315,6 +315,7 @@ elevation: 4,
   },
   scrollView: {
     flex: 1,
+        paddingVertical:mvs(15)
   },
   scrollContent: {
     // paddingHorizontal: mvs(20),

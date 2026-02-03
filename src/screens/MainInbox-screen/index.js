@@ -13,6 +13,7 @@ import {
   Image,
   Linking,
   Alert,
+  Keyboard,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import DocumentPicker from 'react-native-document-picker';
@@ -38,11 +39,13 @@ const MainInboxScreen = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showPlusMenu, setShowPlusMenu] = useState(false);
   const [replyTo, setReplyTo] = useState(null);
+  const [editingMessageId, setEditingMessageId] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [recordingTimer, setRecordingTimer] = useState(null);
   const flatListRef = useRef(null);
+  const inputRef = useRef(null);
   const isPickerOpenRef = useRef(false);
 
 
@@ -165,6 +168,21 @@ const MainInboxScreen = () => {
   // Chat functionality
   const handleSendMessage = () => {
     if (!messageText.trim()) return;
+
+    if (editingMessageId) {
+      setChatMessages(prev =>
+        prev.map(msg =>
+          msg.id === editingMessageId
+            ? { ...msg, text: messageText.trim(), isEdited: true }
+            : msg
+        )
+      );
+      setEditingMessageId(null);
+      setMessageText('');
+      setInputHeight(mvs(40));
+      return;
+    }
+
     const newMessage = {
       id: Date.now().toString(),
       text: messageText.trim(),
@@ -173,7 +191,7 @@ const MainInboxScreen = () => {
       status: 'Sent', // Will be updated to 'Delivered' then 'Read'
       replyTo: replyTo,
     };
-    setChatMessages(prev => [...prev, newMessage]);
+    setChatMessages(prev => [newMessage, ...prev]);
     setMessageText('');
     setInputHeight(mvs(40));
     setReplyTo(null);
@@ -196,27 +214,29 @@ const MainInboxScreen = () => {
       );
     }, 2000);
 
-    // Simulate receiving a reply after 3 seconds
+    // Simulate receiving two replies after 3 seconds
     setTimeout(() => {
-      // Liam replies to the message the user just sent
-      const replyMessage = {
+      // Liam replies with the first message
+      const firstReply = {
         id: (Date.now() + 1).toString(),
         text: 'Hi Jessica, thanks for reaching out. It\'s nice to hear from you.',
         sent: false,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        replyTo: newMessage, // Liam replies to the message user just sent
+        replyTo: newMessage,
       };
-      setChatMessages(prev => [...prev, replyMessage]);
+
+      // Liam sends a second follow-up message
+      const secondReply = {
+        id: (Date.now() + 2).toString(),
+        text: 'I\'m looking forward to our chat!',
+        sent: false,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+
+      setChatMessages(prev => [secondReply, firstReply, ...prev]);
     }, 3000);
   };
 
-  useEffect(() => {
-    if (flatListRef.current && chatMessages.length > 0) {
-      setTimeout(() => {
-        flatListRef.current?.scrollToEnd({ animated: true });
-      }, 100);
-    }
-  }, [chatMessages]);
 
   const handleLongPressMessage = (message) => {
     setSelectedMessage(message);
@@ -231,8 +251,9 @@ const MainInboxScreen = () => {
 
   const handleEdit = () => {
     if (selectedMessage) {
+      setEditingMessageId(selectedMessage.id);
       setMessageText(selectedMessage.text);
-      setChatMessages(prev => prev.filter(msg => msg.id !== selectedMessage.id));
+      // setChatMessages(prev => prev.filter(msg => msg.id !== selectedMessage.id));
     }
     setShowMessageModal(false);
     setSelectedMessage(null);
@@ -315,7 +336,7 @@ const MainInboxScreen = () => {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         status: 'Read',
       };
-      setChatMessages(prev => [...prev, voiceMessage]);
+      setChatMessages(prev => [voiceMessage, ...prev]);
 
       // Reset recording
       handleCancelRecording();
@@ -329,7 +350,7 @@ const MainInboxScreen = () => {
           sent: false,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
-        setChatMessages(prev => [...prev, receivedVoiceMessage]);
+        setChatMessages(prev => [receivedVoiceMessage, ...prev]);
       }, 2000);
     }
   };
@@ -457,15 +478,17 @@ const MainInboxScreen = () => {
       if (!image) return;
 
       setChatMessages(prev => [
-        ...prev,
         {
           id: Date.now().toString(),
           type: image.mime?.startsWith('video/') ? 'video' : 'image',
           uri: image.path,
+          width: image.width,
+          height: image.height,
           sent: true,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           status: 'Read',
         },
+        ...prev,
       ]);
     } catch (error) {
       if (error?.code !== 'E_PICKER_CANCELLED') {
@@ -496,27 +519,31 @@ const MainInboxScreen = () => {
 
       if (image.mime?.startsWith('video/')) {
         setChatMessages(prev => [
-          ...prev,
           {
             id: Date.now().toString(),
             type: 'video',
             uri: image.path,
+            width: image.width,
+            height: image.height,
             sent: true,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             status: 'Read',
           },
+          ...prev,
         ]);
       } else {
         setChatMessages(prev => [
-          ...prev,
           {
             id: Date.now().toString(),
             type: 'image',
             uri: image.path,
+            width: image.width,
+            height: image.height,
             sent: true,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             status: 'Read',
           },
+          ...prev,
         ]);
       }
     } catch (error) {
@@ -556,7 +583,7 @@ const MainInboxScreen = () => {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         status: 'Read',
       };
-      setChatMessages(prev => [...prev, fileMessage]);
+      setChatMessages(prev => [fileMessage, ...prev]);
 
       // Simulate receiving a file after 2 seconds
       setTimeout(() => {
@@ -571,7 +598,7 @@ const MainInboxScreen = () => {
           sent: false,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
-        setChatMessages(prev => [...prev, receivedFileMessage]);
+        setChatMessages(prev => [receivedFileMessage, ...prev]);
       }, 2000);
     } catch (error) {
       if (DocumentPicker.isCancel(error)) {
@@ -609,7 +636,7 @@ const MainInboxScreen = () => {
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: 'Read',
     };
-    setChatMessages(prev => [...prev, callMessage]);
+    setChatMessages(prev => [callMessage, ...prev]);
 
     // Simulate receiving a completed video call from other user after 2 seconds
     setTimeout(() => {
@@ -622,7 +649,7 @@ const MainInboxScreen = () => {
         sent: false,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setChatMessages(prev => [...prev, receivedCallMessage]);
+      setChatMessages(prev => [receivedCallMessage, ...prev]);
     }, 2000);
   };
 
@@ -638,7 +665,7 @@ const MainInboxScreen = () => {
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: 'Read',
     };
-    setChatMessages(prev => [...prev, callMessage]);
+    setChatMessages(prev => [callMessage, ...prev]);
 
     // Simulate receiving a voice call from other user after 2 seconds
     setTimeout(() => {
@@ -651,7 +678,7 @@ const MainInboxScreen = () => {
         sent: false,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setChatMessages(prev => [...prev, receivedCallMessage]);
+      setChatMessages(prev => [receivedCallMessage, ...prev]);
     }, 2000);
   };
 
@@ -747,6 +774,10 @@ const MainInboxScreen = () => {
 
     // Render image message
     if (item.type === 'image') {
+      const maxWidth = mvs(250);
+      const ratio = item.width && item.height ? item.height / item.width : 1;
+      const dynamicHeight = item.width && item.height ? maxWidth * ratio : mvs(200);
+
       return (
         <TouchableOpacity
           activeOpacity={1}
@@ -761,27 +792,27 @@ const MainInboxScreen = () => {
               isSent ? styles.chatBubbleSent : styles.chatBubbleReceived,
               styles.mediaBubble,
             ]}>
-            <View style={styles.mediaImageContainer}>
+            <View style={[styles.mediaImageContainer, { height: dynamicHeight }]}>
               <Image source={{ uri: item.uri }} style={styles.mediaImage} />
-              <View style={styles.mediaFooterContainer}>
-                <Row style={styles.chatMessageFooter}>
-                  <Regular
-                    label={item.time}
-                    numberOfLines={10}
-                    fontSize={mvs(11)}
-                    color={isSent ? '#FFFFFF' : '#FFFFFF'}
-                    style={styles.mediaTimestamp}
+            </View>
+            <View style={styles.mediaFooterContainerOutside}>
+              <Row style={styles.chatMessageFooter}>
+                <Regular
+                  label={item.time}
+                  numberOfLines={10}
+                  fontSize={mvs(11)}
+                  color={'#8C8C8C'}
+                  style={styles.mediaTimestampOutside}
+                />
+                {isSent && (
+                  <Icon
+                    name="checkmark-done"
+                    size={mvs(14)}
+                    color={isRead ? '#4FC3F7' : '#8C8C8C'}
+                    style={{ marginLeft: mvs(4) }}
                   />
-                  {isSent && (
-                    <Icon
-                      name="checkmark-done"
-                      size={mvs(14)}
-                      color={isRead ? '#4FC3F7' : '#FFFFFF'}
-                      style={{ marginLeft: mvs(4) }}
-                    />
-                  )}
-                </Row>
-              </View>
+                )}
+              </Row>
             </View>
           </View>
         </TouchableOpacity>
@@ -790,6 +821,10 @@ const MainInboxScreen = () => {
 
     // Render video message
     if (item.type === 'video') {
+      const maxWidth = mvs(250);
+      const ratio = item.width && item.height ? item.height / item.width : 1;
+      const dynamicHeight = item.width && item.height ? maxWidth * ratio : mvs(200);
+
       return (
         <TouchableOpacity
           activeOpacity={1}
@@ -804,7 +839,7 @@ const MainInboxScreen = () => {
               isSent ? styles.chatBubbleSent : styles.chatBubbleReceived,
               styles.mediaBubble,
             ]}>
-            <View style={styles.mediaImageContainer}>
+            <View style={[styles.mediaImageContainer, { height: dynamicHeight }]}>
               <View style={styles.videoContainer}>
                 <Image source={{ uri: item.uri }} style={styles.mediaImage} />
                 <View style={styles.videoPlayButton}>
@@ -831,20 +866,20 @@ const MainInboxScreen = () => {
                 </Row>
               </View>
             )}
-            <View style={styles.mediaFooterContainer}>
+            <View style={styles.mediaFooterContainerOutside}>
               <Row style={styles.chatMessageFooter}>
                 <Regular
                   label={item.time}
                   numberOfLines={10}
                   fontSize={mvs(11)}
-                  color={isSent ? '#FFFFFF' : '#FFFFFF'}
-                  style={styles.mediaTimestamp}
+                  color={'#8C8C8C'}
+                  style={styles.mediaTimestampOutside}
                 />
                 {isSent && (
                   <Icon
                     name="checkmark-done"
                     size={mvs(14)}
-                    color={isRead ? '#4FC3F7' : '#FFFFFF'}
+                    color={isRead ? '#4FC3F7' : '#8C8C8C'}
                     style={{ marginLeft: mvs(4) }}
                   />
                 )}
@@ -949,52 +984,45 @@ const MainInboxScreen = () => {
               styles.voiceBubble,
             ]}>
             <Row style={styles.voiceMessageRow}>
-              <TouchableOpacity
-                onPress={() => {
-                  setChatMessages(prev => prev.map(msg =>
-                    msg.id === item.id ? { ...msg, isPlaying: !isPlayingVoice } : { ...msg, isPlaying: false }
-                  ));
-                }}
-                style={styles.voicePlayButton}>
-                {isPlayingVoice ? (
-                  <IMG.inboxPause width={mvs(20)} height={mvs(20)} />
-                ) : (
-                  <Icon name="play" size={mvs(20)} color={isSent ? "#404040" : "#404040"} />
-                )}
-              </TouchableOpacity>
+              {(isSent || isPlayingVoice) && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setChatMessages(prev => prev.map(msg =>
+                      msg.id === item.id ? { ...msg, isPlaying: !isPlayingVoice } : { ...msg, isPlaying: false }
+                    ));
+                  }}
+                  style={styles.voicePlayButton}>
+                  {isPlayingVoice ? (
+                    <IMG.PauseSvg width={mvs(24)} height={mvs(24)} />
+                  ) : (
+                    <Icon name="play" size={mvs(24)} color={isSent ? "#404040" : "#404040"} />
+                  )}
+                </TouchableOpacity>
+              )}
               <Regular
                 label={formatTime(item.duration)}
-                fontSize={mvs(14)}
+                fontSize={mvs(12)}
                 color={isSent ? "#404040" : "#404040"}
-                style={{ marginLeft: mvs(8), marginRight: mvs(8), minWidth: mvs(50) }}
+                style={{ marginLeft: (isSent || isPlayingVoice) ? mvs(4) : 0, minWidth: mvs(40) }}
               />
               <View style={styles.voiceWaveformContainer}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((bar, index) => {
-                  const heights = [8, 12, 18, 25, 30, 28, 22, 15, 10, 8, 12, 20, 28, 32, 30, 25, 18, 12, 8, 10];
-                  const isPlayed = isPlayingVoice && index < 10;
-                  return (
-                    <View
-                      key={index}
-                      style={[
-                        styles.voiceWaveformBar,
-                        {
-                          height: mvs(heights[index % heights.length]),
-                          backgroundColor: isPlayed
-                            ? (isSent ? colors.primary : colors.primary)
-                            : (isSent ? '#D1D5DB' : '#D1D5DB'),
-                        },
-                      ]}
-                    />
-                  );
-                })}
+                {isPlayingVoice ? (
+                  <IMG.voicePlaysvg width="100%" height={mvs(32)} />
+                ) : (
+                  <IMG.voicenormal width="100%" height={mvs(32)} />
+                )}
               </View>
-              {!isSent && (
+              {!isSent && !isPlayingVoice && (
                 <TouchableOpacity
                   onPress={() => handleDownloadFile(item)}
                   style={styles.voiceDownloadButton}>
-                  <Icon name="arrow-down" size={mvs(16)} color="#8C8C8C" />
+
+                  <IMG.VoiceDownsvg width={mvs(20)} height={mvs(20)} />
                 </TouchableOpacity>
               )}
+              {/* {(isSent || isPlayingVoice) && (
+                <View style={{ width: mvs(24), marginRight: mvs(4) }} />
+              )} */}
             </Row>
             <Row style={styles.chatMessageFooter}>
               <Regular
@@ -1083,7 +1111,7 @@ const MainInboxScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
 
       {!hasChatStarted ? (
@@ -1135,37 +1163,52 @@ const MainInboxScreen = () => {
           </View>
 
           {/* Input Bar */}
-          <View style={styles.chatInputContainer}>
-            <TouchableOpacity
-              style={styles.chatInputIcon}
-              onPress={() => setShowPlusMenu(!showPlusMenu)}>
-              <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.chatInputIcon}>
-              <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
-            </TouchableOpacity>
-            <TextInput
-              style={[styles.chatInput, { height: inputHeight }]}
-              placeholder="Type Here"
-              placeholderTextColor="#D9D9D9"
-              value={messageText}
-              onChangeText={setMessageText}
-              multiline
-              onContentSizeChange={(e) => {
-                const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
-                setInputHeight(height);
-              }}
-            />
-            <TouchableOpacity
-              onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
-              style={styles.chatInputIcon}>
-              {messageText.trim() ? (
-                <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
-              ) : (
-                <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
-              )}
-            </TouchableOpacity>
-          </View>
+          {!isRecording && (
+            <View style={styles.chatInputContainer}>
+              <TouchableOpacity
+                style={styles.chatInputIcon}
+                onPress={() => {
+                  if (showPlusMenu) {
+                    setShowPlusMenu(false);
+                    inputRef.current?.focus();
+                  } else {
+                    setShowPlusMenu(true);
+                    Keyboard.dismiss();
+                  }
+                }}>
+                {showPlusMenu ? (
+                  <IMG.keyboard width={mvs(24)} height={mvs(24)} />
+                ) : (
+                  <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.chatInputIcon}>
+                <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
+              </TouchableOpacity>
+              <TextInput
+                ref={inputRef}
+                style={[styles.chatInput, { height: inputHeight }]}
+                placeholder="Type Here"
+                placeholderTextColor="#D9D9D9"
+                value={messageText}
+                onChangeText={setMessageText}
+                multiline
+                onContentSizeChange={(e) => {
+                  const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
+                  setInputHeight(height);
+                }}
+              />
+              <TouchableOpacity
+                onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
+                style={styles.chatInputIcon}>
+                {messageText.trim() ? (
+                  <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
+                ) : (
+                  <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
+                )}
+              </TouchableOpacity>
+            </View>
+          )}
 
           {/* Recording Bottom View */}
           {isRecording && (
@@ -1288,6 +1331,7 @@ const MainInboxScreen = () => {
             <FlatList
               ref={flatListRef}
               data={chatMessages}
+              inverted
               keyExtractor={item => item.id.toString()}
               renderItem={renderChatMessage}
               contentContainerStyle={styles.chatMessagesList}
@@ -1322,37 +1366,52 @@ const MainInboxScreen = () => {
           )}
 
           {/* Input Bar */}
-          <View style={styles.chatInputContainer}>
-            <TouchableOpacity
-              style={styles.chatInputIcon}
-              onPress={() => setShowPlusMenu(!showPlusMenu)}>
-              <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.chatInputIcon}>
-              <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
-            </TouchableOpacity>
-            <TextInput
-              style={[styles.chatInput, { height: inputHeight }]}
-              placeholder="Type Here"
-              placeholderTextColor="#8C8C8C"
-              value={messageText}
-              onChangeText={setMessageText}
-              multiline
-              onContentSizeChange={(e) => {
-                const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
-                setInputHeight(height);
-              }}
-            />
-            <TouchableOpacity
-              onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
-              style={styles.chatInputIcon}>
-              {messageText.trim() ? (
-                <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
-              ) : (
-                <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
-              )}
-            </TouchableOpacity>
-          </View>
+          {!isRecording && (
+            <View style={styles.chatInputContainer}>
+              <TouchableOpacity
+                style={styles.chatInputIcon}
+                onPress={() => {
+                  if (showPlusMenu) {
+                    setShowPlusMenu(false);
+                    inputRef.current?.focus();
+                  } else {
+                    setShowPlusMenu(true);
+                    Keyboard.dismiss();
+                  }
+                }}>
+                {showPlusMenu ? (
+                  <IMG.keyboard width={mvs(24)} height={mvs(24)} />
+                ) : (
+                  <IMG.InboxPlus width={mvs(24)} height={mvs(24)} />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.chatInputIcon}>
+                <IMG.InboxSmile width={mvs(24)} height={mvs(24)} />
+              </TouchableOpacity>
+              <TextInput
+                ref={inputRef}
+                style={[styles.chatInput, { height: inputHeight }]}
+                placeholder="Type Here"
+                placeholderTextColor="#8C8C8C"
+                value={messageText}
+                onChangeText={setMessageText}
+                multiline
+                onContentSizeChange={(e) => {
+                  const height = Math.min(Math.max(mvs(40), e.nativeEvent.contentSize.height), mvs(100));
+                  setInputHeight(height);
+                }}
+              />
+              <TouchableOpacity
+                onPress={messageText.trim() ? handleSendMessage : handleStartRecording}
+                style={styles.chatInputIcon}>
+                {messageText.trim() ? (
+                  <IMG.ChatSend width={mvs(22)} height={mvs(22)} />
+                ) : (
+                  <IMG.InboxVoice width={mvs(24)} height={mvs(24)} />
+                )}
+              </TouchableOpacity>
+            </View>
+          )}
 
           {/* Recording Bottom View */}
           {isRecording && (
@@ -1471,14 +1530,16 @@ const MainInboxScreen = () => {
                       <IMG.InboxBackIcon height={mvs(16)} width={mvs(16)} />
                     </Row>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.messageModalOption}
-                    onPress={handleEdit}>
-                    <Row style={styles.messageModalOptionRow}>
-                      <Regular label="Edit Message" fontSize={mvs(14)} color={colors.black} />
-                      <IMG.InboxEditicon width={mvs(18)} height={mvs(18)} />
-                    </Row>
-                  </TouchableOpacity>
+                  {!selectedMessage?.isEdited && (
+                    <TouchableOpacity
+                      style={styles.messageModalOption}
+                      onPress={handleEdit}>
+                      <Row style={styles.messageModalOptionRow}>
+                        <Regular label="Edit Message" fontSize={mvs(14)} color={colors.black} />
+                        <IMG.InboxEditicon width={mvs(18)} height={mvs(18)} />
+                      </Row>
+                    </TouchableOpacity>
+                  )}
                   <TouchableOpacity
                     style={[styles.messageModalOption, styles.messageModalOptionDelete]}
                     onPress={handleDelete}>
@@ -1972,8 +2033,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(16),
     borderWidth: 2,
     borderColor: "#F5F5F9",
-    paddingVertical: mvs(8),
+    paddingTop: Platform.OS === 'ios' ? mvs(9) : 0,
+    paddingBottom: Platform.OS === 'ios' ? mvs(8) : 0,
+    textAlignVertical: 'center',
     fontSize: mvs(14),
+
     color: colors.inputText,
     maxHeight: mvs(100),
     marginHorizontal: mvs(4),
@@ -2169,7 +2233,7 @@ const styles = StyleSheet.create({
   mediaImageContainer: {
     position: 'relative',
     width: mvs(250),
-    height: mvs(200),
+    // height: mvs(200),
   },
   mediaImage: {
     width: '100%',
@@ -2183,10 +2247,19 @@ const styles = StyleSheet.create({
     right: mvs(12),
     backgroundColor: 'transparent',
   },
+  mediaFooterContainerOutside: {
+    alignItems: 'flex-end',
+    // paddingHorizontal: mvs(8),
+    // paddingBottom: mvs(4),
+    marginTop: mvs(6),
+  },
   mediaTimestamp: {
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
+  },
+  mediaTimestampOutside: {
+    // No specific style needed currently
   },
   videoContainer: {
     position: 'relative',
@@ -2265,7 +2338,8 @@ const styles = StyleSheet.create({
   },
   recordingControlsRow: {
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    gap: mvs(30),
   },
   recordingCancelButton: {
     padding: mvs(8),
@@ -2294,18 +2368,18 @@ const styles = StyleSheet.create({
   },
   // Voice Message Styles
   voiceBubble: {
-    padding: mvs(12),
-    // backgroundColor:'red',
-    maxWidth: "80%",
-    minWidth: "80%",
+    paddingHorizontal: mvs(12),
+    paddingTop: mvs(12),
+    paddingBottom: mvs(8),
+    width: mvs(250),
   },
   voiceMessageRow: {
     alignItems: 'center',
     marginBottom: mvs(8),
   },
   voicePlayButton: {
-    padding: mvs(4),
-    marginRight: mvs(8),
+    // padding: mvs(4),
+    marginRight: mvs(2),
   },
   voiceWaveformContainer: {
     flex: 1,
@@ -2313,16 +2387,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: mvs(32),
-    marginHorizontal: mvs(8),
+    // marginHorizontal: mvs(8),
+
+
   },
   voiceWaveformBar: {
-    width: mvs(2),
-    marginHorizontal: mvs(1),
+    width: mvs(1.5),
+    marginHorizontal: mvs(0.7),
     borderRadius: mvs(1),
     minHeight: mvs(4),
   },
   voiceDownloadButton: {
     padding: mvs(4),
-    marginLeft: mvs(8),
+    // marginLeft: mvs(8),
+
   },
 });

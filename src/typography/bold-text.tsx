@@ -1,5 +1,5 @@
 import React from 'react';
-import {ColorValue, StyleProp, StyleSheet, Text, TextStyle} from 'react-native';
+import {ColorValue, Platform, StyleProp, StyleSheet, Text, TextStyle} from 'react-native';
 import fonts from '../assets/fonts';
 import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
@@ -37,7 +37,7 @@ export default Bold;
 const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.bold,
-    fontWeight: '500',
+    fontWeight: Platform.OS==='ios'? '600' : '700',
     fontSize: mvs(15),
     color: colors.black, //default color
   },

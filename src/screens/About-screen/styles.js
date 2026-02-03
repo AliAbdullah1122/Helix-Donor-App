@@ -315,6 +315,7 @@ elevation: 4,
   },
   scrollView: {
     flex: 1,
+    
   },
   scrollContent: {
     // paddingHorizontal: mvs(20),
@@ -322,6 +323,7 @@ elevation: 4,
   },
   section: {
     marginBottom: mvs(24),
+        paddingVertical:mvs(15)
   },
   sectionTitle: {
     marginBottom: mvs(3),

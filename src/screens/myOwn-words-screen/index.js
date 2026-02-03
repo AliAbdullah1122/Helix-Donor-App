@@ -90,7 +90,7 @@ const MyOwnWordsScreen = props => {
   const Nationality = [{ id: 'Pakistan' }, { id: 'United Kingdom' }, { id: 'France' }, { id: 'America' }];
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <KeyboardAvoidScrollview contentContainerStyle={styles.keyboradscrollcontent}>
@@ -118,7 +118,7 @@ const MyOwnWordsScreen = props => {
             fontSize={mvs(18)}
           />
           <Regular
-            label={'Write a short bio to introduce yourself. What are your passions? What are you loking for this journey? '}
+            label={'Write a short bio to introduce yourself. What are your passions? What are you looking for this journey? '}
             color={"#8C8C8C"}
             numberOfLines={3}
             fontSize={mvs(14)}

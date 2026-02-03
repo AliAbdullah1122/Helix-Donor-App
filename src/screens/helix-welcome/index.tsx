@@ -16,7 +16,7 @@ const HelixWelcomeScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('Login');
-    }, 3000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
   const [color, setColor] = useState("#121679");
@@ -24,7 +24,7 @@ const HelixWelcomeScreen = () => {
     useEffect(() => {
     const timer = setTimeout(() => {
       setColor("#3A3E90");
-    }, 1500); // 3 seconds
+    }, 3000); // 3 seconds
 
     return () => clearTimeout(timer);
   }, []);
@@ -38,11 +38,12 @@ const HelixWelcomeScreen = () => {
       </View>
       <View style={styles.middle}>
         <View style={[styles.logoBlock, { backgroundColor: color }]}>
-          <Image
+          {/* <Image
             source={IMG.HelixLogoSplash}
             resizeMode="contain"
             style={styles.helixLogo}
-          />
+          /> */}
+          <IMG.HelixLogoSplashSvg width={mvs(259)} height={mvs(64)}/>
         </View>
       </View>
       <View style={styles.bottom}>

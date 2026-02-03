@@ -115,7 +115,7 @@ const ReproductiveHistoryScreen = props => {
   return (
     <View style={styles.container}>
       {/* <Header1x2x title={'Driver Registration'} /> */}
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+         <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>

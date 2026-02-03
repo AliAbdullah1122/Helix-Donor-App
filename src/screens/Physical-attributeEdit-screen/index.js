@@ -35,15 +35,59 @@ const PhysicalAttributeEditScreen = props => {
   const [loading, setLoading] = React.useState(false);
 
   // Static data for dropdowns
-  const heightOptions = ['5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"'];
-  const bodyBuildOptions = ['Slim', 'Athletic', 'Average', 'Muscular', 'Curvy', 'Plus Size'];
-  const hairColorOptions = ['Black', 'Brown', 'Blonde', 'Red', 'Auburn', 'Grey', 'White', 'Other'];
-  const eyeColorOptions = ['Brown', 'Blue', 'Green', 'Hazel', 'Grey', 'Amber', 'Other'];
-  const raceOptions = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other', 'Prefer not to say'];
-  const ethnicityOptions = ['Hispanic or Latino', 'Not Hispanic or Latino', 'Prefer not to say'];
+  // const heightOptions = ['5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"'];
+  // const bodyBuildOptions = ['Slim', 'Athletic', 'Average', 'Muscular', 'Curvy', 'Plus Size'];
+  // const hairColorOptions = ['Black', 'Brown', 'Blonde', 'Red', 'Auburn', 'Grey', 'White', 'Other'];
+  // const eyeColorOptions = ['Brown', 'Blue', 'Green', 'Hazel', 'Grey', 'Amber', 'Other'];
+  // const raceOptions = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other', 'Prefer not to say'];
+  // const ethnicityOptions = ['Hispanic or Latino', 'Not Hispanic or Latino', 'Prefer not to say'];
+ const heightOptions = [
+    { id: '4ft', title: '4ft' },
+    { id: '5ft', title: '5ft' },
+    { id: '6ft', title: '6ft' },
+  ];
 
+  const bodyBuildOptions = [
+    { id: 'slim', title: 'Slim' },
+    { id: 'athletic', title: 'Athletic' },
+    { id: 'average', title: 'Average' },
+    { id: 'curvy', title: 'Curvy' },
+    { id: 'large', title: 'Large' },
+  ];
+
+  const hairColorOptions = [
+    { id: 'auburn', title: 'Auburn' },
+    { id: 'black', title: 'Black' },
+    { id: 'blonde', title: 'Blonde' },
+    { id: 'brown', title: 'Brown' },
+    { id: 'red', title: 'Red' },
+  ];
+
+  const eyeColorOptions = [
+    { id: 'blue', title: 'Blue' },
+    { id: 'black', title: 'Black' },
+    { id: 'green', title: 'Green' },
+    { id: 'brown', title: 'Brown' },
+    { id: 'hazel', title: 'Hazel' },
+  ];
+
+  const raceOptions = [
+    { id: 'asian', title: 'Asian' },
+    { id: 'black', title: 'Black' },
+    { id: 'white', title: 'White' },
+    { id: 'hispanic', title: 'Hispanic' },
+    { id: 'other', title: 'Other' },
+  ];
+
+  const ethnicityOptions = [
+    { id: 'straight', title: 'Straight' },
+    { id: 'gay', title: 'Gay' },
+    { id: 'lesbian', title: 'Lesbian' },
+    { id: 'bisexual', title: 'Bisexual' },
+    { id: 'other', title: 'Other' },
+  ];
   // State for each physical attribute
-  const [height, setHeight] = React.useState('');
+  const [height, setHeight] = React.useState(null);
   const [heightVisible, setHeightVisible] = React.useState(false);
 
   const [weight, setWeight] = React.useState('');
@@ -78,7 +122,7 @@ const PhysicalAttributeEditScreen = props => {
   };
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
       {/* Header */}
@@ -106,12 +150,16 @@ const PhysicalAttributeEditScreen = props => {
           <Row style={styles.attributeRow}>
             <TouchableOpacity
               style={{ flex: 1 }}
-              onPress={() => setHeightModalVisible(true)}>
+              // onPress={() => setHeightModalVisible(true)}
+              >
               <InputWithIcon
                 placeholder="Select One"
-                value={height}
+                // value={height}
                 editable={false}
+                items={heightOptions}
+                id={height}
                 containerStyle={styles.attributeInput}
+            onChangeText={(id) => setHeight(id)}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
             </TouchableOpacity>
@@ -180,13 +228,26 @@ const PhysicalAttributeEditScreen = props => {
             <TouchableOpacity
               style={{ flex: 1 }}
               onPress={() => setHeightModalVisible(true)}>
-              <InputWithIcon
+              {/* <InputWithIcon
                 placeholder="Select One"
                 value={height}
                 editable={false}
+                  items={weight}
                 containerStyle={styles.attributeInput}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
-              />
+              /> */}
+               <PrimaryInput
+                                    // isFulName
+                                    // error={touched?.firstName ? errors.firstName : ''}
+                                    placeholder={'Enter Weight'}
+                                    // onChangeText={handleChange('firstName')}
+                                    // onBlur={handleBlur('firstName')}
+                                    // label='Weight'
+                                    // isRequired
+                                    // value={values.firstName}
+                                    containerStyle={{ backgroundColor: colors.white }}
+                                  // containerStyle={styles.input}
+                                  />
             </TouchableOpacity>
             {/* <ToggleSwitch
               isOn={heightVisible}
@@ -220,11 +281,15 @@ const PhysicalAttributeEditScreen = props => {
           <Row style={styles.attributeRow}>
             <TouchableOpacity
               style={{ flex: 1 }}
-              onPress={() => setBodyBuildModalVisible(true)}>
+              // onPress={() => setBodyBuildModalVisible(true)}
+              >
               <InputWithIcon
                 placeholder="Select One"
-                value={bodyBuild}
+                // value={bodyBuild}
                 editable={false}
+                items={bodyBuildOptions}
+                  onChangeText={(id) => setBodyBuild(id)}
+                  id={bodyBuild}
                 containerStyle={styles.attributeInput}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
@@ -264,8 +329,11 @@ const PhysicalAttributeEditScreen = props => {
               onPress={() => setHairColorModalVisible(true)}>
               <InputWithIcon
                 placeholder="Select One"
-                value={hairColor}
+                // value={hairColor}
+                  onChangeText={(id) => setHairColor(id)}
+                  id={hairColor}
                 editable={false}
+                 items={hairColorOptions}
                 containerStyle={styles.attributeInput}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
@@ -305,8 +373,11 @@ const PhysicalAttributeEditScreen = props => {
               onPress={() => setEyeColorModalVisible(true)}>
               <InputWithIcon
                 placeholder="Select One"
-                value={eyeColor}
+                // value={eyeColor}
+                  onChangeText={(id) => setEyeColor(id)}
+                  id={eyeColor}
                 editable={false}
+                 items={eyeColorOptions}
                 containerStyle={styles.attributeInput}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
@@ -345,8 +416,11 @@ const PhysicalAttributeEditScreen = props => {
               onPress={() => setRaceModalVisible(true)}>
               <InputWithIcon
                 placeholder="Select One"
-                value={race}
+                // value={race}
+                  onChangeText={(id) => setRace(id)}
+                  id={race}
                 editable={false}
+                 items={raceOptions}
                 containerStyle={styles.attributeInput}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}
               />
@@ -383,10 +457,14 @@ const PhysicalAttributeEditScreen = props => {
           <Row style={styles.attributeRow}>
             <TouchableOpacity
               style={{ flex: 1 }}
-              onPress={() => setEthnicityModalVisible(true)}>
+              onPress={() => setEthnicityModalVisible(true)}
+              >
               <InputWithIcon
                 placeholder="Select One"
-                value={ethnicity}
+                // value={ethnicity}
+                  onChangeText={(id) => setEthnicity(id)}
+                  id={ethnicity}
+                 items={ethnicityOptions}
                 editable={false}
                 containerStyle={styles.attributeInput}
                 rightIcon={() => <Feather name="chevron-down" size={mvs(20)} color={colors.textColorSecondary} />}

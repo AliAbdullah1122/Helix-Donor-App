@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     // backgroundColor: colors.white,
     paddingBottom: mvs(30),
+     paddingVertical:mvs(15),
   },
   headerContainer: {
     flexDirection: 'row',

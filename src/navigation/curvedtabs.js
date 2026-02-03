@@ -1,8 +1,8 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {colors} from 'config/colors';
-import {mvs} from 'config/metrices';
-import {useAppSelector} from 'hooks/use-store';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { colors } from 'config/colors';
+import { mvs } from 'config/metrices';
+import { useAppSelector } from 'hooks/use-store';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import HomeTab from 'screens/home-tab';
 import CustomAlertScreen from 'screens/custom-alert';
 import JobsScreen from 'screens/jobs-screen';
@@ -17,12 +17,15 @@ import DriverProfileScreen from 'screens/driver-profile';
 import SearchScreen from 'screens/search-screen';
 import ChatMainScreen from 'screens/chatMain-screen';
 import MainProfileScreen from 'screens/MainProfile-screen';
+import SearchResultFilterScreen from 'screens/search-ResultFilterscreen';
+import SearchStackNavigator from './searcStack';
+import { CommonActions, StackActions } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-function MyTabBar({state, descriptors, navigation}) {
+function MyTabBar({ state, descriptors, navigation }) {
   return (
-    <View style={{backgroundColor: colors.primary}}>
+    <View style={{ backgroundColor: colors.primary }}>
       <View
         style={{
           flexDirection: 'row',
@@ -34,27 +37,67 @@ function MyTabBar({state, descriptors, navigation}) {
           // borderTopRightRadius: mvs(25),
         }}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
+          const { options } = descriptors[route.key];
           const isFocused = state.index === index;
 
           // Map routes to new icons
           const Icon =
             route.name === 'Home'
               ? IMG.HelixBottomTab
-              : route.name === 'SearchScreen'
-              ? IMG.searchBootmTab
-              : route.name === 'ChatMainScreen'
-              ? IMG.messagesBootmTab
-              : route.name === 'MainProfileScreen'
-              ? IMG.userBootmTab
-              : null;
+              : route.name === 'Search'
+                // : route.name === 'SearchScreen'
+                ? IMG.searchBootmTab
+                : route.name === 'ChatMainScreen'
+                  ? IMG.messagesBootmTab
+                  : route.name === 'MainProfileScreen'
+                    ? IMG.userBootmTab
+                    : null;
 
+          // const onPress = () => {
+          //   if (!isFocused) {
+          //     navigation.navigate(route.name);
+          //   }
+          // };
+          //           const onPress = () => {
+          //   const event = navigation.emit({
+          //     type: 'tabPress',
+          //     target: route.key,
+          //     canPreventDefault: true,
+          //   });
+
+          //   if (!event.defaultPrevented) {
+          //     navigation.navigate(route.name);
+
+          //     // 🔥 If Search tab is pressed AGAIN → go back to SearchScreen
+          //     if (route.name === 'Search' && isFocused) {
+          //       navigation.dispatch(StackActions.popToTop());
+          //     }
+          //   }
+          // };
           const onPress = () => {
-            if (!isFocused) {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (!event.defaultPrevented) {
               navigation.navigate(route.name);
+
+              if (route.name === 'Search' && isFocused) {
+                // Get the current nested stack state
+                const stack = navigation.getState().routes.find(r => r.name === 'Search');
+
+                if (stack && stack.state && stack.state.index > 0) {
+                  // If we are not on the root screen of Search stack → pop to top
+                  navigation.dispatch(StackActions.popToTop());
+                } else {
+                  // Already at root → do nothing
+                  console.log('Already at root screen, do nothing');
+                }
+              }
             }
           };
-
           return (
             <TouchableOpacity
               key={index}
@@ -85,33 +128,43 @@ function MyTabBar({state, descriptors, navigation}) {
 }
 
 export const TabBar = () => {
-  const {user} = useAppSelector(s => s);
+  const { user } = useAppSelector(s => s);
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen
         name="Home"
         component={HomeTab}
-        options={{tabBarLabel: 'Orders'}}
+        options={{ tabBarLabel: 'Orders' }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="SearchScreen"
         component={SearchScreen}
         options={{tabBarLabel: 'Overview'}}
+      /> */}
+      <Tab.Screen
+        name="Search"
+        component={SearchStackNavigator}
       />
       <Tab.Screen
         name="ChatMainScreen"
         component={ChatMainScreen}
-        options={{tabBarLabel: 'Chat'}}
+        options={{ tabBarLabel: 'Chat' }}
       />
-      
+
       <Tab.Screen
         name="MainProfileScreen"
         component={MainProfileScreen}
-        options={{tabBarLabel: 'Profile'}}
+        options={{ tabBarLabel: 'Profile' }}
       />
+      {/* <Tab.Screen
+  name="SearchResultFilterScreen"
+  component={SearchResultFilterScreen}
+  options={{ tabBarLabel: 'Search' }}
+/> */}
+
     </Tab.Navigator>
   );
 };

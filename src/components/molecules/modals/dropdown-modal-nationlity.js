@@ -130,21 +130,25 @@ const styles = StyleSheet.create({
     position: 'relative',
     zIndex: 1000,
     marginTop: mvs(4),
+    // backgroundColor:'red'
   },
   simpleContainer: {
     backgroundColor: colors.white,
-    borderRadius: mvs(12),
+    borderRadius: mvs(24),
     maxHeight: mvs(500),
     width: '100%',
+    borderWidth:1,
+    borderColor: colors.borderColor,
+    // borderColor:"#18181B0F",
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   simpleScrollContent: {
     paddingVertical: mvs(8),
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
   simpleDropdownItem: {
     paddingHorizontal: mvs(20),
     paddingVertical: mvs(14),
-    borderBottomWidth: 0.5,
+    // borderBottomWidth: 0.5,
     borderBottomColor: '#E5E5E5',
   },
   simpleLastItem: {

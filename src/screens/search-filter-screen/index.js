@@ -185,7 +185,7 @@ const SearchFilterScreen = () => {
   return (
     <View style={styles.container}>
 
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* Header */}
@@ -202,7 +202,7 @@ const SearchFilterScreen = () => {
 
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={{ paddingBottom: mvs(120), marginTop: mvs(10) }}>
+        contentContainerStyle={{ paddingBottom: mvs(20), marginTop: mvs(10) }}>
         {/* Intent & Goals card */}
         <View style={styles.card}>
           <TouchableOpacity
@@ -396,8 +396,8 @@ const SearchFilterScreen = () => {
                 {
                   console.log('educationUnlocked', educationUnlocked)
                 }
-                { !educationUnlocked ?
-                <IMG.FilterLock width={mvs(18)} height={mvs(18)} style={{ marginLeft: mvs(8) }} /> : null}
+                {!educationUnlocked ?
+                  <IMG.FilterLock width={mvs(18)} height={mvs(18)} style={{ marginLeft: mvs(8) }} /> : null}
                 {/* <View style={styles.lockDot} /> */}
               </Row>
               <View style={styles.chipRow}>
@@ -1073,7 +1073,13 @@ const SearchFilterScreen = () => {
             color={colors.primary}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigate("SearchResultFilterScreen")} style={styles.applyButton}>
+        <TouchableOpacity
+        //  onPress={() => navigate("SearchResultFilterScreen")}
+        onPress={()=>navigation.navigate('Search', {
+  screen: 'SearchResultFilterScreen',
+})
+}
+          style={styles.applyButton}>
           <Medium label="Show 12" fontSize={mvs(14)} color={colors.white} />
         </TouchableOpacity>
       </Row>
@@ -1142,7 +1148,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: '#F2F2F7',
-    backgroundColor:colors.helixBackground
+    backgroundColor: colors.helixBackground
   },
   headerRow: {
     paddingHorizontal: mvs(20),
@@ -1154,6 +1160,7 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
     paddingHorizontal: mvs(12),
+     paddingVertical:mvs(15),
   },
   card: {
     backgroundColor: colors.white,
@@ -1227,7 +1234,7 @@ const styles = StyleSheet.create({
     height: mvs(30),
     borderColor: '#D4D4D8',
     backgroundColor: colors.primary,
-            justifyContent: 'center'
+    justifyContent: 'center'
   },
   chipSelectedLocked: {
     // backgroundColor: '#8C8C8C',
@@ -1282,18 +1289,21 @@ const styles = StyleSheet.create({
     top: mvs(2),
   },
   bottomButtonsRow: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: mvs(40),
+    // position: 'absolute',
+    // left: 0,
+    // right: 0,
+    // bottom: mvs(40),
     paddingHorizontal: mvs(16),
+    paddingTop: mvs(10),
+    paddingBottom: mvs(35),
     justifyContent: 'space-between',
     alignItems: 'center',
     columnGap: mvs(12),
+    backgroundColor: colors.helixBackground,
   },
   clearButton: {
     flex: 1,
-    height: mvs(48),
+    height: mvs(43),
     borderRadius: mvs(24),
     borderWidth: 1.8,
     borderColor: colors.primary,
@@ -1304,7 +1314,7 @@ const styles = StyleSheet.create({
   },
   applyButton: {
     flex: 1,
-    height: mvs(48),
+    height: mvs(43),
     borderRadius: mvs(24),
     justifyContent: 'center',
     alignItems: 'center',
@@ -1325,14 +1335,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: mvs(16),
-            height: mvs(43)
+    height: mvs(43)
   },
   navigationRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: mvs(8),
-            marginTop: mvs(10),
+    marginTop: mvs(10),
   },
   checkboxRow: {
     marginTop: mvs(12),
@@ -1341,6 +1351,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: mvs(12),
+    borderRadius:mvs(4)
   },
   checkboxBox: {
     width: mvs(20),

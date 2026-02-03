@@ -200,7 +200,7 @@ const AccountRoleScreen = props => {
   };
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
       {/* Header */}
@@ -257,11 +257,15 @@ const AccountRoleScreen = props => {
                 />
                 <PrimaryInput
                   label="Date of Birth"
+                  labelStyle={{color:"#D9D9D9"}}
                   placeholder="Enter date of birth"
+                  placeholderColor={{color:"#D9D9D9"}}
                   onChangeText={handleChange('dateOfBirth')}
                   onBlur={handleBlur('dateOfBirth')}
                   value={values.dateOfBirth}
-                  containerStyle={styles.inputContainer}
+                  editable={false}
+                  style={{color:"#D9D9D9"}}
+                  containerStyle={{...styles.inputContainer,color:"#D9D9D9"}}
                   mainContainer={{ marginTop: mvs(-12) }}
 
                 />
@@ -341,13 +345,16 @@ const AccountRoleScreen = props => {
                 />
                 <View style={styles.dropdownContainer}>
                   <InputWithIcon
+                  editable={true}
                     label="Gender Identity"
-                    labelStyles={{ color: colors.placeholder }}
-                    placeholder="Select Gender Identity"
+                    // labelStyles={{ color: colors.placeholder }}
+                    stylelable={{color:"#D9D9D9"}}
+                    placeholder="Woman"
+                    placeholderColor='#D9D9D9'
                     items={genderIdentityOptions}
                     value={values.genderIdentity}
                     onChangeText={id => setFieldValue('genderIdentity', id)}
-                    iconColor={colors.placeholder}
+                    iconColor={"#D9D9D9"}
                   />
                   <View style={styles.pinkDot} />
                 </View>

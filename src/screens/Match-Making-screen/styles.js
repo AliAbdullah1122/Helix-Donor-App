@@ -1,16 +1,18 @@
-import {Platform, StyleSheet} from 'react-native';
-import {colors} from 'config/colors';
-import {mvs, width} from 'config/metrices';
+import { Platform, StyleSheet } from 'react-native';
+import { colors } from 'config/colors';
+import { mvs, width } from 'config/metrices';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#3b3e90",
+    backgroundColor: "#3A3E90",
+    // backgroundColor: "#3b3e90",
     paddingHorizontal: mvs(20),
   },
   scrollContainer: {
     flexGrow: 1,
-    backgroundColor: "#3b3e90",
+    backgroundColor: "#3A3E90",
+    // backgroundColor: "#3b3e90",
     paddingBottom: mvs(30),
   },
   closeButton: {
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     borderColor: colors.helixPrimary || colors.primary, // dark blue border
     overflow: 'hidden',
     shadowColor: '#FFFFFF',
-    shadowOffset: {width: 0, height: 4}, // control shadow height
+    shadowOffset: { width: 0, height: 4 }, // control shadow height
     shadowOpacity: 0.9,
     shadowRadius: 6, // smaller spread for a tighter glow
     elevation: 8,
@@ -60,9 +62,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   heartContainer: {
-    marginHorizontal: mvs(-20), // pull heart in so edges touch both images
+    marginHorizontal: mvs(-20),
     zIndex: 10,
-  
+    // Heart-shaped neon glow using shadows
+    shadowColor: '#FFFFFF',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 15,
+    elevation: 20,
   },
   connectedTextContainer: {
     marginTop: mvs(44),
@@ -71,8 +78,8 @@ const styles = StyleSheet.create({
   messagingText: {
     // marginTop: mvs(40),
     // textAlign: 'center',
-    marginLeft:mvs(10),
-    textAlign:"left"
+    marginLeft: mvs(10),
+    textAlign: "left"
   },
   messageBar: {
     marginTop: mvs(20),
@@ -164,7 +171,7 @@ const styles = StyleSheet.create({
     width: '70%',
     height: mvs(43),
     marginTop: mvs(0),
-    alignSelf:"center",
+    alignSelf: "center",
     backgroundColor: colors.helixPrimary,
   },
 });

@@ -90,7 +90,7 @@ const ContactInformationScreen = props => {
   const Nationality = [{ id: 'Pakistan' }, { id: 'United Kingdom' }, { id: 'France' }, { id: 'America' }];
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-40) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <KeyboardAvoidScrollview contentContainerStyle={styles.keyboradscrollcontent}>
@@ -181,7 +181,7 @@ const ContactInformationScreen = props => {
                     onBlur={handleBlur('firstName')}
                     value={values.firstName}
                     // containerStyle={[styles.inputContainer, {height: mvs(100), alignItems: 'flex-start'}]}
-                    containerStyle={[styles.inputContainer, { borderRadius: mvs(24), height: mvs(100), alignItems: 'flex-start', paddingTop: mvs(10) }]}
+                    containerStyle={[styles.inputContainer, { borderRadius: mvs(24), height: mvs(100), alignItems: 'flex-start', paddingTop: mvs(15) }]}
                   />
 
 

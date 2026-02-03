@@ -101,7 +101,7 @@ import MatchMakingScreen from 'screens/Match-Making-screen';
 import ProfileDetailsHomeScreen from 'screens/profile-detailshome-screen';
 import SearchScreen from 'screens/search-screen';
 import SearchFilterScreen from 'screens/search-filter-screen';
-import SearchResultFilterScreen from 'screens/search-ResultFilterscreen';
+// import SearchResultFilterScreen from 'screens/search-ResultFilterscreen';
 import ChatMainScreen from 'screens/chatMain-screen';
 import MainProfileScreen from 'screens/MainProfile-screen';
 import PremiumUnlockChatScreen from 'screens/PremeuM-Unlock-chat-screen';
@@ -114,7 +114,7 @@ import PlacePrivateOfferScreen from 'screens/PlacePrivate-Offer-screen';
 import PlaceNormalOfferScreen from 'screens/PlaceNormal-Offer-screen copy';
 import PlaceIncreaseOfferScreen from 'screens/PlaceIncrease-Offer-screen';
 import PlaceofferCheckoutScreen from 'screens/PlaceOffer-checkout-screen';
-import SearchScreenTap from 'screens/search-screen-tap';
+// import SearchScreenTap from 'screens/search-screen-tap';
 import SearchOccupationScreen from 'screens/search-Occupation-screen';
 import SearchEthnicityScreen from 'screens/search-Ethnicity-screen';
 import SearchReligionScreen from 'screens/search-Religion-screen';
@@ -136,6 +136,11 @@ import MainNotificationScreen from 'screens/MainNotification-screen';
 import MainInboxScreen from 'screens/MainInbox-screen';
 import ArchiveChatScreen from 'screens/Archive-caht-screen';
 import { TabBar } from './curvedtabs';
+import SearchStackNavigator from './searcStack';
+import GeneticProfileSalesFlowScreen from 'screens/genetic-profile-SaleFlow--screen';
+import CGTScreen from 'screens/CGT-Screen';
+import GeneticScreeingScreen from 'screens/Genetic-screening-screen';
+import GeneticCheckoutScreen from 'screens/Geneti-screen-checkout';
 
 
 
@@ -151,12 +156,12 @@ export const RootNavigator = () => {
         barStyle={'dark-content'}
       />
       <Stack.Navigator
-        //  initialRouteName="Splash"
          initialRouteName="Splash"
+        //  initialRouteName="Splash"
         //  initialRouteName="Splash"
         //  initialRouteName="ReviewFromAdminScreen"
         // initialRouteName="Drawer"
-        // initialRouteName="UserTab"
+        // initialRouteName="TabBar"
         screenOptions={horizontalAnimation}>
         <Stack.Group>
           <Stack.Screen name="Splash" component={Splash} />
@@ -171,6 +176,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="AuthenticationCode" component={AuthenticationCodeScreen} />
           <Stack.Screen name="SignUpAuthenticationCode" component={SignUpAuthenticationCodeScreen} />
           <Stack.Screen name="AuthValidation" component={AuthValidationScreen} />
+          <Stack.Screen name="GeneticProfileSalesFlowScreen" component={GeneticProfileSalesFlowScreen} />
 
           <Stack.Screen name="CustomAlert" component={CustomAlertScreen} />
           <Stack.Screen name="Subscription" component={SubscriptionScreen} />
@@ -255,7 +261,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="ProfileDetailsHomeScreen" component={ProfileDetailsHomeScreen} />
           <Stack.Screen name="SearchScreen" component={SearchScreen} />
           <Stack.Screen name="SearchFilterScreen" component={SearchFilterScreen} />
-          <Stack.Screen name="SearchResultFilterScreen" component={SearchResultFilterScreen} />
+          {/* <Stack.Screen name="SearchResultFilterScreen" component={SearchResultFilterScreen} /> */}
           <Stack.Screen name="ChatMainScreen" component={ChatMainScreen} />
           <Stack.Screen name="MainProfileScreen" component={MainProfileScreen} />
           <Stack.Screen name="PremiumUnlockChatScreen" component={PremiumUnlockChatScreen} />
@@ -268,7 +274,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="PlaceNormalOfferScreen" component={PlaceNormalOfferScreen} />
           <Stack.Screen name="PlaceIncreaseOfferScreen" component={PlaceIncreaseOfferScreen} />
           <Stack.Screen name="PlaceofferCheckoutScreen" component={PlaceofferCheckoutScreen} />
-          <Stack.Screen name="SearchScreenTap" component={SearchScreenTap} />
+          {/* <Stack.Screen name="SearchScreenTap" component={SearchScreenTap} /> */}
           <Stack.Screen name="SearchOccupationScreen" component={SearchOccupationScreen} />
           <Stack.Screen name="SearchEthnicityScreen" component={SearchEthnicityScreen} />
           <Stack.Screen name="SearchReligionScreen" component={SearchReligionScreen} />
@@ -289,6 +295,13 @@ export const RootNavigator = () => {
           <Stack.Screen name="MainNotificationScreen" component={MainNotificationScreen} />
           <Stack.Screen name="MainInboxScreen" component={MainInboxScreen} />
           <Stack.Screen name="ArchiveChatScreen" component={ArchiveChatScreen} />
+          <Stack.Screen name="CGTScreen" component={CGTScreen} />
+          <Stack.Screen name="GeneticScreeingScreen" component={GeneticScreeingScreen} />
+          <Stack.Screen name="GeneticCheckoutScreen" component={GeneticCheckoutScreen} />
+          {/* <Stack.Screen
+  name="Search"
+  component={SearchStackNavigator}
+/> */}
 
         </Stack.Group>
         <Stack.Group>

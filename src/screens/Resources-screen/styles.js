@@ -1,6 +1,6 @@
-import {Platform, StyleSheet} from 'react-native';
-import {colors} from 'config/colors';
-import {mvs, width} from 'config/metrices';
+import { Platform, StyleSheet } from 'react-native';
+import { colors } from 'config/colors';
+import { mvs, width } from 'config/metrices';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
   resourcesContainer: {
     marginTop: mvs(10),
     paddingBottom: mvs(20),
-    borderRadius:mvs(24),
+    borderRadius: mvs(24),
     gap: mvs(16),
 
   },
   resourceCard: {
     borderRadius: mvs(24),
     padding: mvs(10),
-        minHeight:mvs(140),
+    minHeight: mvs(140),
     // backgroundColor: '#f4f4f4ff', // outer light grey container
     // shadowColor: '#000',
     // shadowOffset: {width: 0, height: 4},
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
   resourceInnerCard: {
     // paddingVertical: mvs(25),
     // paddingHorizontal: mvs(18),
-    padding:mvs(20),
+    padding: mvs(20),
     borderRadius: mvs(14),
-    minHeight:mvs(120),
+    minHeight: mvs(120),
     backgroundColor: colors.white,
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   resourceHeaderRow: {
     flexDirection: 'row',
@@ -81,28 +81,49 @@ const styles = StyleSheet.create({
   },
   expandedText: {
     marginBottom: mvs(16),
-   lineHeight: mvs(16.8),
-    fontWeight:"400"
+    lineHeight: mvs(20),
+    fontWeight: "400",
+    color: '#404040',
   },
   keyFactsTitle: {
-    marginTop: mvs(8),
+    marginTop: mvs(12),
     marginBottom: mvs(12),
-    fontWeight:"500"
+    fontWeight: '500',
+    color: '#404040',
+  },
+  bulletItemContainer: {
+    marginBottom: mvs(12),
+  },
+  bulletLabelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: mvs(4),
+  },
+  bulletValueRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    paddingLeft: mvs(20),
+    paddingRight: mvs(10),
+  },
+  bulletDot: {
+    marginRight: mvs(8),
+    fontSize: mvs(14),
   },
   keyFactItem: {
-    // flexDirection: 'row',
-    marginBottom: mvs(8),
-    flexWrap: 'wrap',
+    marginBottom: mvs(12),
   },
   searchButton: {
     borderRadius: mvs(40),
     marginTop: mvs(24),
     marginBottom: mvs(16),
     backgroundColor: colors.primary,
+    height: mvs(50),
   },
   sourceText: {
     marginTop: mvs(8),
-    fontWeight:"400"
+    fontWeight: '400',
+    fontSize: mvs(12),
+    color: '#8C8C8C',
   },
   modalContainer: {
     width: '90%',
@@ -173,7 +194,7 @@ const styles = StyleSheet.create({
     width: '70%',
     height: mvs(43),
     marginTop: mvs(0),
-    alignSelf:"center",
+    alignSelf: "center",
     backgroundColor: colors.helixPrimary,
   },
 });

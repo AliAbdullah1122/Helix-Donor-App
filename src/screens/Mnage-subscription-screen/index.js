@@ -1,21 +1,21 @@
 import * as IMG from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {Formik} from 'formik';
-import {navigate} from 'navigation/navigation-ref';
+import { PrimaryButton } from 'components/atoms/buttons';
+import { mvs } from 'config/metrices';
+import { Formik } from 'formik';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Platform} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Platform } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview/index';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview/index';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 // import {signupDetailsFormValidation} from 'validations'; // We will create this
 import styles from './styles';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {FacBookIcon, GoogleIcon} from 'assets/icons';
+import { colors } from 'config/colors';
+import { Row } from 'components/atoms/row';
+import { FacBookIcon, GoogleIcon } from 'assets/icons';
 import Regular from 'typography/regular-text';
 import DropdownModal from 'components/molecules/modals/dropdown-modal';
 import ResendOtpModal from 'components/molecules/modals/ResendOtp-modal';
@@ -23,8 +23,8 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { SignupSchema } from 'validations';
 import { signUpForm, verifyOtp } from 'services/api/auth-api-actions';
 import Header1x2x from 'components/atoms/headers/header-1x-2x';
-import {useNavigation} from '@react-navigation/native';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import { useNavigation } from '@react-navigation/native';
+import { ModalWrapper } from 'components/atoms/modal-wrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -46,23 +46,23 @@ const ManageSusbcriptionScreen = props => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-              <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
-      
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
+      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+
       {/* Header */}
       <Row style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={mvs(24)} color={colors.textColorSecondary} />
         </TouchableOpacity>
         <Medium label="Manage Subscription" fontSize={mvs(18)} color={colors.textColor} />
-        <View style={{width: mvs(24)}} />
+        <View style={{ width: mvs(24) }} />
       </Row>
 
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        
+
         {/* YOUR CURRENT PLAN Section */}
         <Bold
           label="YOUR CURRENT PLAN"
@@ -76,7 +76,7 @@ const ManageSusbcriptionScreen = props => {
           color={colors.textColorSecondary}
           style={styles.sectionValue}
         />
-       <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
+        <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
 
         {/* STATUS Section */}
         <Bold
@@ -91,7 +91,7 @@ const ManageSusbcriptionScreen = props => {
           color={colors.textColorSecondary}
           style={styles.sectionValue}
         />
-       <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
+        <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
 
         {/* NEXT BILLING DATE Section */}
         <Bold
@@ -106,7 +106,7 @@ const ManageSusbcriptionScreen = props => {
           color={colors.textColorSecondary}
           style={styles.sectionValue}
         />
-       <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
+        <View style={{ marginBottom: mvs(20), borderWidth: 1, borderColor: colors.placeholder, width: "100%", alignSelf: 'center', justifyContent: "center", alignItems: 'center', }}></View>
 
         {/* GENETIC SCREENING PARTNER Section */}
         <Bold
@@ -118,13 +118,13 @@ const ManageSusbcriptionScreen = props => {
 
         {/* Igenomix Logo */}
         <View style={styles.logoContainer}>
-          <IMG.geneticImage width={mvs(200)} height={mvs(60)} />
-          <Regular
+          <Image source={IMG.geneticImage} style={{ width: mvs(166), height: mvs(36), resizeMode: 'contain' }} />
+          {/* <Regular
             label="PART OF VITROLIFE GROUP"
             fontSize={mvs(10)}
             color={colors.textColorSecondary}
             style={styles.logoSubtext}
-          />
+          /> */}
         </View>
 
         {/* Description */}

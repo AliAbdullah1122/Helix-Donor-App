@@ -39,7 +39,8 @@ const OtpScreen = props => {
   const [showModal, setShowModal] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const navigation = useNavigation();
-  const email = props?.route?.params?.email || 'jessica@mail.com';
+  const emailLogin = props?.route?.params?.emailLogin || 'jessica@mail.com';
+  console.log(emailLogin)
 
   const ref = useBlurOnFulfill({ value: otpValue, cellCount: CELL_COUNT });
   const [propsCodeField, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -102,7 +103,7 @@ const OtpScreen = props => {
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" /> */}
-            <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+             <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar
         backgroundColor={showModal ? "rgba(152, 151, 152, 0.9)" : colors.helixBackground}
         barStyle="dark-content"
@@ -138,7 +139,7 @@ const OtpScreen = props => {
 
 
           <Regular
-            label={`We have sent the verification code to ${email}`}
+            label={`We have sent the verification code to ${emailLogin}`}
             fontSize={mvs(14)}
             color={"#404040"}
             numberOfLines={10}
@@ -194,7 +195,8 @@ const OtpScreen = props => {
             <View style={styles.errorContainer}>
               <View style={styles.errorIconContainer}>
                 {/* <Icon name="alert-circle" size={mvs(14)} color="#FFFFFF" /> */}
-                <Image source={IMG.alertcircle} resizeMode='contain' style={{ height: mvs(16), width: mvs(16) }} />
+                {/* <Image source={IMG.alertcircle} resizeMode='contain' style={{ height: mvs(16), width: mvs(16) }} /> */}
+                   <IMG.AlertSvg width={mvs(16)} height={mvs(16)}/>
               </View>
               <Regular
                 label={error}
@@ -271,11 +273,13 @@ const OtpScreen = props => {
 
           {/* Donate Icon */}
           <View style={styles.modalIconContainer}>
-            <Image
+            {/* <Image
               source={IMG.Donate}
               resizeMode="contain"
               style={styles.modalIcon}
-            />
+            /> */}
+
+            <IMG.MissionSvg width={mvs(60)} height={mvs(60)}/>
           </View>
 
           {/* Mission Section */}

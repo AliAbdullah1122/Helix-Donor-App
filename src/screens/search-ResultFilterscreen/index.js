@@ -354,7 +354,7 @@ const getBadgeIcon = (badge) => {
             onChangeText={setSearchText}
           />
           <View style={styles.searchDivider} />
-          <TouchableOpacity onPress={() => navigate('SearchFilter')}>
+          <TouchableOpacity onPress={() => navigate('SearchFilterScreen')}>
             <IMG.HomeFilter width={mvs(20)} height={mvs(20)} />
           </TouchableOpacity>
         </View>
@@ -476,7 +476,7 @@ const getBadgeIcon = (badge) => {
       {/* Floating Show Map button */}
 {/* {hasResults && ( */}
   <View style={styles.showMapWrapper}>
-    <TouchableOpacity onPress={()=> navigate("SearchScreen")} activeOpacity={0.9} style={styles.showMapButton}>
+    <TouchableOpacity onPress={()=> navigate("SearchScreenResult")} activeOpacity={0.9} style={styles.showMapButton}>
       <Row style={{alignItems: 'center', justifyContent: 'center'}}>
         <IMG.Showmap width={mvs(18)} height={mvs(18)} />
         <Medium
@@ -499,10 +499,11 @@ const getBadgeIcon = (badge) => {
         style={styles.infoModalWrapper}>
         <View style={styles.infoModalCard}>
           <Row style={styles.infoModalHeader}>
-            <Icon name="flask-outline" size={mvs(20)} color={colors.primary} />
+            {/* <Icon name="flask-outline" size={mvs(20)} color={colors.primary} /> */}
+            <IMG.CGTTestTube width={mvs(18)} height={mvs(18)}/>
             <Medium
               label="CGT Screened"
-              fontSize={mvs(16)}
+              fontSize={mvs(14)}
               color={colors.textColor || colors.black}
               style={{marginLeft: mvs(8)}}
             />
@@ -534,10 +535,12 @@ const getBadgeIcon = (badge) => {
         style={styles.infoModalWrapper}>
         <View style={styles.infoModalCard}>
           <Row style={styles.infoModalHeader}>
-            <Icon name="camera-outline" size={mvs(20)} color={colors.primary} />
+            {/* <Icon name="camera-outline" size={mvs(20)} color={colors.primary} />
+             */}
+             <IMG.CameraModal width={mvs(18)} height={mvs(18)}/>
             <Medium
               label="Future Contact"
-              fontSize={mvs(16)}
+              fontSize={mvs(14)}
               color={colors.textColor || colors.black}
               style={{marginLeft: mvs(8)}}
             />
@@ -569,16 +572,17 @@ const getBadgeIcon = (badge) => {
         style={styles.infoModalWrapper}>
         <View style={styles.infoModalCard}>
           <Row style={styles.infoModalHeader}>
-            <Icon name="leaf-outline" size={mvs(20)} color={colors.primary} />
+            {/* <Icon name="leaf-outline" size={mvs(20)} color={colors.primary} /> */}
+             <IMG.BiologicalModal width={mvs(18)} height={mvs(18)}/>
             <Medium
               label="Biological Offspring"
-              fontSize={mvs(16)}
+              fontSize={mvs(14)}
               color={colors.textColor || colors.black}
               style={{marginLeft: mvs(8)}}
             />
           </Row>
           <Regular
-            label="Indicates the donor has biological offspring or that one or more clients has reported a pregnancy and/or birth."
+            label="Indicates the donor has biological    offspring or that one or more     clients has reported a pregnancy            and/or birth."
             fontSize={mvs(14)}
             numberOfLines={10}
             color={colors.textColorSecondary || '#8C8C8C'}
@@ -772,9 +776,11 @@ const styles = StyleSheet.create({
   infoModalWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius:mvs(24)
   },
   infoModalCard: {
-    width: SCREEN_WIDTH - mvs(40),
+    // width: SCREEN_WIDTH - mvs(40),
+    width:mvs(273),
     backgroundColor: colors.white,
     borderRadius: mvs(24),
     paddingVertical: mvs(24),
@@ -789,13 +795,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: mvs(8),
     marginBottom: mvs(24),
+    lineHeight:mvs(16.8),
   },
   infoModalButton: {
     alignSelf: 'center',
     paddingHorizontal: mvs(32),
     paddingVertical: mvs(12),
     borderRadius: mvs(24),
-    borderWidth: 1,
+    borderWidth: 1.8,
     borderColor: colors.primary,
     backgroundColor: colors.white,
   },

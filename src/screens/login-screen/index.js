@@ -41,35 +41,47 @@ const LoginScreen = props => {
   };
 
 
-  const handleFormSubmit = async (values, { resetForm }) => {
-    try {
-      setLoading(true);
-      setError('');
+  // const handleFormSubmit = async (values, { resetForm }) => {
+  //   try {
+  //     setLoading(true);
+  //     setError('');
 
-      const apiBody = {
-        email: values.email,
-        password: values.password,
-      };
+  //     const apiBody = {
+  //       email: values.email,
+  //       password: values.password,
+  //     };
 
-      const response = await dispatch(onLogin(apiBody, setLoading));
+  //     const response = await dispatch(onLogin(apiBody, setLoading));
 
-      console.log("LOGIN RESPONSE:", response);
+  //     console.log("LOGIN RESPONSE:", response);
 
-      if (response?.status === true) {
-        resetForm();
-        navigate("TabBar");
-        return;
-      }
+  //     if (response?.status === true) {
+  //       resetForm();
+  //       navigate("OtpScreen");
+  //       return;
+  //     }
 
-      setError(response?.message || "Incorrect email please try again");
+  //     setError(response?.message || "Incorrect email please try again");
 
-    } catch (error) {
-      console.error("Login error:", error);
-      setError("Incorrect email please try again");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   } catch (error) {
+  //     console.error("Login error:", error);
+  //     setError("Incorrect email please try again");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+// const handleFormSubmit = (values, { resetForm }) => {
+//   resetForm();
+//   navigate("OtpScreen",{
+//     emailLogin:email
+//   });
+// };
+const handleFormSubmit = (values, { resetForm }) => {
+  navigate("OtpScreen", {
+    emailLogin: values.email,
+  });
+  resetForm();
+};
 
 
   return (
@@ -143,8 +155,7 @@ const LoginScreen = props => {
                       <PrimaryButton
                         containerStyle={styles.continueButton}
                         loading={loading}
-                        // onPress={handleSubmit}
-                        onPress={() => navigate("OtpScreen")}
+                        onPress={handleSubmit}
                         title={'Continue'}
                       />
 
@@ -170,19 +181,21 @@ const LoginScreen = props => {
 
           <Row style={styles.socialRow}>
             <TouchableOpacity style={styles.socialButton}>
-              <Image
+              {/* <Image
                 source={IMG.google}
                 resizeMode="contain"
                 style={styles.socialIcon}
-              />
+              /> */}
+              <IMG.GoogleSvg width={mvs(18)} height={mvs(18)}/>
               <Medium label={'Google'} color={colors.vibrantColor} fontSize={mvs(16)} style={{ marginLeft: mvs(8) }} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton}>
-              <Image
+              {/* <Image
                 source={IMG.apple}
                 resizeMode="contain"
                 style={styles.socialIcon}
-              />
+              /> */}
+               <IMG.AppleSvg width={mvs(18)} height={mvs(18)}/>
               <Medium label={'Apple'} color={colors.vibrantColor} fontSize={mvs(16)} style={{ marginLeft: mvs(8) }} />
             </TouchableOpacity>
           </Row>

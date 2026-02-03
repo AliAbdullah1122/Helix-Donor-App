@@ -15,7 +15,10 @@ import { Row } from 'components/atoms/row';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ServiceTypeScreen = props => {
+const ServiceTypeScreen = ({ route }) => {
+  const { gender } = route.params || {};
+
+  console.log('Gender from previous screen:', gender);
   const [selectedServices, setSelectedServices] = useState([]);
   const navigation = useNavigation();
 
@@ -24,8 +27,8 @@ const ServiceTypeScreen = props => {
       id: 'donor',
       title: 'Donor Services',
       description: 'Find a sperm or egg donor, or become a donor yourself',
-      icon: IMG.EggSperm,
-      iconType: 'image',
+      icon: IMG.EggSpermSvg,
+      iconType: 'svg',
       iconPosition: 'left',
     },
     {
@@ -55,7 +58,7 @@ const ServiceTypeScreen = props => {
 
   return (
     <View style={styles.container}>
-                  <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+                   <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 
@@ -181,7 +184,8 @@ const ServiceTypeScreen = props => {
           containerStyle={styles.continueButton}
           onPress={() => {
             const selectedService = selectedServices[0]; // Get first selected service
-            navigate("RoleSelectionScreen", { serviceType: selectedService });
+            navigate("RoleSelectionScreen", { serviceType: selectedService,
+              genderNew:gender });
           }}
           title={'Continue'}
         />

@@ -103,7 +103,7 @@ const Notifications = () => {
 
   return (
     <View style={{flex:1,backgroundColor:colors.white}}>
-        <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+         <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
         <Header1x2x title='Notifications'/>
     <View style={styles.container}>
 

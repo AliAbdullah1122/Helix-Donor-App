@@ -17,9 +17,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
 
 const RoleSelectionScreen = props => {
+
   const [selectedRoles, setSelectedRoles] = useState([]);
   const navigation = useNavigation();
   const serviceType = props?.route?.params?.serviceType || 'donor';
+     const  genderNew  = props?.route?.params?.genderNew || "";
+
+  console.log('Gender :', genderNew);
 
   // Donor service options
   const donorOptions = [
@@ -55,11 +59,13 @@ const RoleSelectionScreen = props => {
       id: 'am-surrogate',
       title: 'I am a Surrogate',
       description: 'Offer the gift of life by carrying a child for intended parents.',
-      icon: IMG.feter,
+      icon: genderNew ==='man' ?IMG.feterSvg: IMG.feter,
       iconType: 'svg',
       iconPosition: 'right',
     },
   ];
+
+
 
   const serviceOptions = serviceType === 'surrogacy' ? surrogacyOptions : donorOptions;
 
@@ -91,7 +97,7 @@ const RoleSelectionScreen = props => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+       <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
       
       <ScrollView 
@@ -126,6 +132,9 @@ const RoleSelectionScreen = props => {
         <View style={styles.optionsContainer}>
           {serviceOptions.map((option) => {
             const isSelected = selectedRoles.includes(option.id);
+            const isSurrogateMan =
+  option.id === 'am-surrogate' && genderNew === 'man';
+
             return (
               <LinearGradient
                 key={option.id}
@@ -137,13 +146,14 @@ const RoleSelectionScreen = props => {
                                 end={{ x: 1, y: 0.6 }}
                 style={styles.serviceCardGradient}>
                 <TouchableOpacity
+                disabled={isSurrogateMan}
                   onPress={() => handleRoleToggle(option.id)}
                   activeOpacity={0.7}
                   style={[
                     styles.serviceCardOuter,
                     isSelected && styles.serviceCardOuterSelected,
                   ]}>
-                  <View style={styles.serviceCardInner}>
+                  <View style={{...styles.serviceCardInner,backgroundColor:isSurrogateMan? "#E9E9E9":colors.white}}>
                     <View style={[
                       styles.serviceCardContent,
                       option.iconPosition === 'right' && styles.serviceCardContentReverse
@@ -181,17 +191,39 @@ const RoleSelectionScreen = props => {
                         </View>
                       )}
                       <View style={styles.serviceTextContainer}>
-                        <Medium
+                        <Regular
                           label={option.title}
                           fontSize={mvs(16)}
-                          color={isSelected ? colors.helixPrimary : colors.textColor}
-                          style={styles.serviceTitle}
+                          // color={isSelected ? colors.helixPrimary : colors.textColor}
+  //                         color={
+  //   isSurrogateMan
+  //     ? '#A8A8A8'
+  //     : isSelected
+  //     ? colors.helixPrimary
+  //     : colors.textColor
+  // }
+                          // style={styles.serviceTitle}
+                          style={[
+    styles.serviceTitle,
+    {
+      color: isSurrogateMan
+        ? '#A8A8A8'
+        : isSelected
+        ? colors.textColor
+        : colors.textColor,
+    },
+  ]}
                         />
                         <Regular
                           label={option.description}
                           fontSize={mvs(14)}
-                          color="#8C8C8C"
-                          style={styles.serviceDescription}
+                          // color="#8C8C8C"
+                          //  color={isSurrogateMan ? '#A8A8A8' : '#8C8C8C'}
+                          // style={styles.serviceDescription}
+                           style={[
+    styles.serviceDescription,
+    { color: isSurrogateMan ? '#A8A8A8' : '#8C8C8C' },
+  ]}
                           numberOfLines={2}
                         />
                       </View>

@@ -106,7 +106,7 @@ const navigation = useNavigation();
   };
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
+       <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
                {/* <Header1x2x title={'Driver Registration'} /> */}
 
       <ScrollView>
@@ -145,7 +145,7 @@ const navigation = useNavigation();
           style={{marginTop:mvs(8)}}
         />
         <Regular
-          label={'Accepted: Driver License, Passport'}
+      label={"Accepted: Driver’s License, Passport"}
           color={"#8C8C8C"}
           numberOfLines={3}
           fontSize={mvs(14)}

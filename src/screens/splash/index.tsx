@@ -42,7 +42,7 @@ const Splash = (props: props) => {
     <View style={styles.container}>
       <StatusBar
         backgroundColor={styles.container.backgroundColor}
-        barStyle="light-content"
+        barStyle="dark-content"
       />
       <Video
         source={IMG.SplashVideo}

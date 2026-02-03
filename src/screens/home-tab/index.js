@@ -41,7 +41,8 @@ const HomeTab = () => {
         price: "$800.00 USD",
         mutualMatch: false,
         Subscription: false,
-        hidebutton:false,
+        hidebutton: false,
+        userstatus:"free"
       },
       {
         id: 2,
@@ -56,7 +57,8 @@ const HomeTab = () => {
         price: "$800.00 USD",
         mutualMatch: false,
         Subscription: true,
-        hidebutton:true
+        hidebutton: true,
+          userstatus:"paid"
       },
       {
         id: 3,
@@ -70,8 +72,57 @@ const HomeTab = () => {
         badge: 'New',
         price: "$800.00 USD",
         mutualMatch: true,
-        hidebutton:false,
+        hidebutton: false,
         Subscription: true,
+          userstatus:"free"
+      },
+      {
+        id: 4,
+        name: 'Lyon',
+        age: 29,
+        location: 'New York, New York',
+        flag: '🇺🇸',
+        donorType: 'Donor (Offering: Sperm)',
+        options: 'Private Donor',
+        image: IMG.HomeImagethree,
+        badge: 'New',
+        price: "$800.00 USD",
+        mutualMatch: true,
+        hidebutton: false,
+        Subscription: true,
+          userstatus:"paid"
+      },
+      {
+        id: 5,
+        name: 'Nathan',
+        age: 32,
+        location: 'Denver, Colorado',
+        flag: '🇺🇸',
+        donorType: 'Donor (Offering: Sperm)',
+        options: 'Private Donor, Donor + Co-Parenting',
+        image: IMG.HomeImageOng,
+        badge: 'Xytex',
+        price: "$800.00 USD",
+        mutualMatch: false,
+        Subscription: false,
+        hidebutton: false,
+          userstatus:"free"
+      },
+      {
+        id: 6,
+        name: 'Sarah',
+        age: 28,
+        location: 'New York, New York',
+        flag: '🇺🇸',
+        donorType: 'Donor (Offering: Eggs)',
+        options: 'Private Donor',
+        image: IMG.HomeImagetwo,
+        badge: 'New',
+        price: "$800.00 USD",
+        mutualMatch: false,
+        Subscription: true,
+        hidebutton: true,
+          userstatus:"paid"
       },
     ],
     [],
@@ -79,6 +130,7 @@ const HomeTab = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showEmptyState, setShowEmptyState] = useState(false);
+  const [swipeCount, setSwipeCount] = useState(0);
 
   // Animation values
   const translateX = useRef(new Animated.Value(0)).current;
@@ -148,36 +200,77 @@ const HomeTab = () => {
         useNativeDriver: true,
       })
     ]).start(() => {
-      // Navigate to MatchMakingScreen on LEFT swipe
-      navigate("MatchMakingScreen");
+      const nextSwipeCount = swipeCount + 1;
+      setSwipeCount(nextSwipeCount);
+
+      if (nextSwipeCount >= 5) {
+        navigate("ResourcesScreen");
+        setShowEmptyState(true);
+      } else {
+        // Move to next card or show empty state on LEFT swipe
+        if (currentIndex < profiles.length - 1) {
+          setCurrentIndex(currentIndex + 1);
+          resetCard();
+        } else {
+          setShowEmptyState(true);
+        }
+      }
       // Reset for next time
       resetCard();
     });
   };
 
   // Updated: Right swipe now shows next card
-  const swipeRight = () => {
-    Animated.parallel([
-      Animated.timing(translateX, {
-        toValue: SCREEN_WIDTH,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      })
-    ]).start(() => {
-      // Move to next card or show empty state on RIGHT swipe
-      if (currentIndex < profiles.length - 1) {
-        setCurrentIndex(currentIndex + 1);
-        resetCard();
-      } else {
-        setShowEmptyState(true);
-      }
-    });
-  };
+  // const swipeRight = () => {
+  //   Animated.parallel([
+  //     Animated.timing(translateX, {
+  //       toValue: SCREEN_WIDTH,
+  //       duration: 300,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(opacity, {
+  //       toValue: 0,
+  //       duration: 300,
+  //       useNativeDriver: true,
+  //     })
+  //   ]).start(() => {
+  //     const nextSwipeCount = swipeCount + 1;
+  //     setSwipeCount(nextSwipeCount);
+
+  //     if (nextSwipeCount >= 5) {
+  //       navigate("ResourcesScreen");
+  //       setShowEmptyState(true);
+  //     } else {
+  //       // Move to next card or show empty state on RIGHT swipe
+  //       if (currentIndex < profiles.length - 1) {
+  //         setCurrentIndex(currentIndex + 1);
+  //         resetCard();
+  //       } else {
+  //         setShowEmptyState(true);
+  //       }
+  //     }
+  //   });
+  // };
+const swipeRight = () => {
+  Animated.parallel([
+    Animated.timing(translateX, {
+      toValue: SCREEN_WIDTH,
+      duration: 300,
+      useNativeDriver: true,
+    }),
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }),
+  ]).start(() => {
+    // reset animation so card doesn’t stay off-screen
+    resetCard();
+
+    // navigate directly on right swipe
+    navigate('MatchMakingScreen');
+  });
+};
 
   const resetCard = () => {
     Animated.parallel([
@@ -204,6 +297,13 @@ const HomeTab = () => {
 
   const handleManualSwipeRight = () => {
     swipeRight();
+  };
+
+  const handleSecondLook = () => {
+    setCurrentIndex(0);
+    setSwipeCount(0);
+    setShowEmptyState(false);
+    resetCard();
   };
 
   const renderProfileCard = useCallback((item) => {
@@ -250,46 +350,46 @@ const HomeTab = () => {
               <LinearGradient
                 colors={['transparent', 'rgba(0,0,0,0.7)', 'rgba(0,0,0,0.9)']}
                 style={styles.profileInfoOverlay}>
-                  <TouchableOpacity   onPress={() => navigate("ProfileDetailsHomeScreen", { item })}>
-                    <Row style={{alignItems:"center",}}>
-                <Bold
-                  label={`${item.name}, ${item.age}`}
-                  fontSize={mvs(28)}
-                  color={colors.white}
-                />
-                {item.badge && (
-                  <View style={styles.badgeContainer}>
-                    <IMG.HomeBankCard width={mvs(12)} height={mvs(12)} />
-                    <Regular
-                      label={item?.badge}
-                      fontSize={mvs(12)}
+                <TouchableOpacity onPress={() => navigate("ProfileDetailsHomeScreen", { item })}>
+                  <Row style={{ alignItems: "center", }}>
+                    <Bold
+                      label={`${item.name}, ${item.age}`}
+                      fontSize={mvs(28)}
                       color={colors.white}
-                      style={{ marginLeft: mvs(6) }}
                     />
-                  </View>
-                )}
-                </Row>
-                <Row style={{ alignItems: 'center', justifyContent: "flex-start", marginTop: mvs(4) }}>
-                  <IMG.HomeFlags width={mvs(20)} height={mvs(20)} />
+                    {item.badge && (
+                      <View style={styles.badgeContainer}>
+                        <IMG.HomeBankCard width={mvs(12)} height={mvs(12)} />
+                        <Regular
+                          label={item?.badge}
+                          fontSize={mvs(12)}
+                          color={colors.white}
+                          style={{ marginLeft: mvs(6) }}
+                        />
+                      </View>
+                    )}
+                  </Row>
+                  <Row style={{ alignItems: 'center', justifyContent: "flex-start", marginTop: mvs(4) }}>
+                    <IMG.HomeFlags width={mvs(20)} height={mvs(20)} />
+                    <Medium
+                      label={` ${item.location}`}
+                      fontSize={mvs(24)}
+                      color={colors.white}
+                      style={{ marginLeft: mvs(4) }}
+                    />
+                  </Row>
                   <Medium
-                    label={` ${item.location}`}
-                    fontSize={mvs(24)}
+                    label={item.donorType}
+                    fontSize={mvs(16)}
                     color={colors.white}
-                    style={{ marginLeft: mvs(4) }}
+                    style={{ marginTop: mvs(4) }}
                   />
-                </Row>
-                <Medium
-                  label={item.donorType}
-                  fontSize={mvs(16)}
-                  color={colors.white}
-                  style={{ marginTop: mvs(4) }}
-                />
-                <Regular
-                  label={item.options}
-                  fontSize={mvs(14)}
-                  color={colors.white}
-                  style={{ marginTop: mvs(2) }}
-                />
+                  <Regular
+                    label={item.options}
+                    fontSize={mvs(14)}
+                    color={colors.white}
+                    style={{ marginTop: mvs(2) }}
+                  />
                 </TouchableOpacity>
 
                 <Row style={{ marginTop: mvs(10), justifyContent: 'space-between', width: '100%' }}>
@@ -401,7 +501,9 @@ const HomeTab = () => {
           />
         </View>
 
-        <TouchableOpacity style={styles.primaryEmptyButton}>
+        <TouchableOpacity
+          style={styles.primaryEmptyButton}
+          onPress={handleSecondLook}>
           <Medium
             label="Take a Second Look"
             fontSize={mvs(16)}
@@ -415,7 +517,7 @@ const HomeTab = () => {
           style={{ marginTop: mvs(6) }}
         />
 
-        <TouchableOpacity style={styles.secondaryEmptyButton}>
+        <TouchableOpacity onPress={() => navigate("SearchFilterScreen")} style={styles.secondaryEmptyButton}>
           <Medium
             label="Adjust Your Filters"
             fontSize={mvs(16)}
@@ -433,9 +535,9 @@ const HomeTab = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor:colors.helixBackground }}>
-    <SafeAreaView style={{ marginBottom:Platform.OS==='ios'? mvs(-40): 0}} />
-         <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
+    <View style={{ flex: 1, backgroundColor: colors.helixBackground }}>
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
+      <StatusBar backgroundColor={colors.helixBackground} barStyle="dark-content" />
 
       {/* HEADER */}
       <View style={styles.headerContainer}>
@@ -472,7 +574,7 @@ const styles = StyleSheet.create({
     paddingTop: mvs(20),
     paddingBottom: mvs(10),
     // backgroundColor: "#f4f4ff",
-    backgroundColor:colors.helixBackground
+    backgroundColor: colors.helixBackground
   },
   headerRow: {
     justifyContent: 'space-between',
@@ -529,7 +631,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#34862E',
     borderRadius: mvs(8),
     paddingHorizontal: mvs(10),
-    height:mvs(30),
+    height: mvs(30),
     paddingVertical: mvs(6),
     // marginTop:mvs(5),
     zIndex: 10,
@@ -546,7 +648,7 @@ const styles = StyleSheet.create({
   },
   actionButtonsContainer: {
     position: 'absolute',
-    bottom:Platform.OS==='ios'? mvs(-55):mvs(-65),
+    bottom: Platform.OS === 'ios' ? mvs(-55) : mvs(-65),
     left: 0,
     right: 0,
     justifyContent: 'center',

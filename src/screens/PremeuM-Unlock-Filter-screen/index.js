@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { setSubscribed } from 'store/reducers/user-reducer';
 import fonts from 'assets/fonts';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { navigate } from 'navigation/navigation-ref';
 const plans = [
   {
     id: '1',
@@ -264,10 +265,13 @@ const PremiumUnlockFilterScreen = () => {
         {/* Subscribe Button */}
         {/* <TouchableOpacity 
         style={styles.subscribeBtn}> */}
-        <TouchableOpacity style={styles.subscribeBtn} onPress={() => {
-          dispatch(setSubscribed(true));
-          navigation.goBack()
-        }}>
+        <TouchableOpacity style={styles.subscribeBtn}
+        // onPress={() => {
+        //   dispatch(setSubscribed(true));
+        //   navigation.goBack()
+        // }}
+        onPress={()=>navigate("PlaceofferCheckoutScreen")}
+        >
           <Bold
             label={subscribeText}
             fontSize={mvs(15)}

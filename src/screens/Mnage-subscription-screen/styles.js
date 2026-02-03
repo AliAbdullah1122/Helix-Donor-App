@@ -305,6 +305,7 @@ elevation: 4,
   },
   scrollView: {
     flex: 1,
+        paddingVertical:mvs(15)
   },
   scrollContent: {
     // paddingHorizontal: mvs(20),
@@ -487,7 +488,10 @@ elevation: 4,
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: mvs(12),
+
+    marginBottom: mvs(18),
+    // backgroundColor:"red"
+    marginVertical:mvs(10)
   },
   logoSubtext: {
     marginTop: mvs(4),

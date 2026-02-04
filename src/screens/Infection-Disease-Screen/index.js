@@ -414,7 +414,8 @@ const navigation = useNavigation();
                       }}
                       loading={loading}
                       // onPress={handleSubmit}
-                      onPress={()=>navigate("GeneticGatewayScreen")}
+                      onPress={()=>navigate("GeneticProfileSalesFlowScreen")}
+                      // onPress={()=>navigate("GeneticGatewayScreen")}
                       title={'Continue'}
                     />
                     </Row>

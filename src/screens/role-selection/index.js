@@ -90,6 +90,10 @@ const RoleSelectionScreen = props => {
       navigate('GameteSelectionScreen');
       return;
     }
+    if (serviceType !== 'surrogacy' && selectedRoles.includes('am-donor')) {
+      navigate('GameteSelectionScreen');
+      return;
+    }
 
     // default: just log selection (existing logic)
     console.log('Selected roles:', selectedRoles);

@@ -266,7 +266,7 @@ const PremiumUnlockChatScreen = () => {
         {/* Subscribe Button */}
         {/* <TouchableOpacity style={styles.subscribeBtn}> */}
         <TouchableOpacity
-          onPress={() => navigate('MainInboxScreen')}
+          onPress={() => navigate('ChatCheckoutScreen')}
           style={styles.subscribeBtn}>
           <Bold label={subscribeText} fontSize={mvs(15)} color={colors.white} />
         </TouchableOpacity>

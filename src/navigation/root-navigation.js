@@ -137,10 +137,12 @@ import MainInboxScreen from 'screens/MainInbox-screen';
 import ArchiveChatScreen from 'screens/Archive-caht-screen';
 import { TabBar } from './curvedtabs';
 import SearchStackNavigator from './searcStack';
-import GeneticProfileSalesFlowScreen from 'screens/genetic-profile-SaleFlow--screen';
+// import GeneticProfileSalesFlowScreen from 'screens/genetic-profile-SaleFlow-screen';
 import CGTScreen from 'screens/CGT-Screen';
 import GeneticScreeingScreen from 'screens/Genetic-screening-screen';
 import GeneticCheckoutScreen from 'screens/Geneti-screen-checkout';
+import GeneticProfileSalesFlowScreen from 'screens/genetic-profile-SaleFlow-screen';
+import ChatCheckoutScreen from 'screens/chat-checkout-screen';
 
 
 
@@ -177,6 +179,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="SignUpAuthenticationCode" component={SignUpAuthenticationCodeScreen} />
           <Stack.Screen name="AuthValidation" component={AuthValidationScreen} />
           <Stack.Screen name="GeneticProfileSalesFlowScreen" component={GeneticProfileSalesFlowScreen} />
+          <Stack.Screen name="ChatCheckoutScreen" component={ChatCheckoutScreen} />
+          {/* <Stack.Screen name="GeneticProfileSalesFlowScreen" component={GeneticProfileSalesFlowScreen} /> */}
 
           <Stack.Screen name="CustomAlert" component={CustomAlertScreen} />
           <Stack.Screen name="Subscription" component={SubscriptionScreen} />

@@ -576,7 +576,7 @@
 				CODE_SIGN_ENTITLEMENTS = LuggageMovers/LuggageMovers.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 63M5ZJS8V5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LuggageMovers/Info.plist;
@@ -610,7 +610,7 @@
 				CODE_SIGN_ENTITLEMENTS = LuggageMovers/LuggageMovers.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 63M5ZJS8V5;
 				INFOPLIST_FILE = LuggageMovers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

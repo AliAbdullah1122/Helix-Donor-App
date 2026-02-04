@@ -41,7 +41,7 @@ const GeneticCheckoutScreen = props => {
 
   const handlePlaceOffer = () => {
     // Show payment failed modal (change to setShowPaymentSuccessModal for success)
-    setShowPaymentFailedModal(true);
+    setShowPaymentSuccessModal(true);
 
     // Uncomment below to also dispatch and navigate after modal is closed
     // dispatch(setSubscribed(true));
@@ -171,7 +171,7 @@ const GeneticCheckoutScreen = props => {
           </Row>
 
           {/* Credit Card Button */}
-          <TouchableOpacity style={{ ...styles.creditCardButton, marginTop: mvs(20) }}>
+          <TouchableOpacity onPress={() => setShowPaymentFailedModal(true)} style={{ ...styles.creditCardButton, marginTop: mvs(20) }}>
             <Row style={styles.creditCardRow}>
               <Medium
                 label="Credit Card (Ending in 4242)"
@@ -402,20 +402,20 @@ const GeneticCheckoutScreen = props => {
               label="We couldn't process your payment."
               fontSize={mvs(14)}
               color={colors.textColor}
-              style={{...styles.paymentModalText,fontWeight:"500"}}
+              style={{ ...styles.paymentModalText, fontWeight: "500" }}
             />
             <Light
               label="Please check your card details or try a different payment method."
               fontSize={mvs(14)}
               numberOfLines={2}
               color={colors.textColor || '#8C8C8C'}
-  style={{...styles.paymentModalText,fontWeight:"300"}}
+              style={{ ...styles.paymentModalText, fontWeight: "300" }}
             />
             <Light
               label="Credit Card ending in 4242 [Declined]"
               fontSize={mvs(14)}
               color={'#FF383C'}
-              style={{...styles.paymentModalText,fontWeight:"300"}}
+              style={{ ...styles.paymentModalText, fontWeight: "300" }}
             />
           </View>
 

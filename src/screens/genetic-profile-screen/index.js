@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
 // import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar } from 'react-native';
-import {TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Platform} from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, Alert, TextInput, StatusBar, Platform } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import PrimaryInput, { InputWithIcon } from 'components/atoms/inputs';
 import Feather from 'react-native-vector-icons/Feather';
@@ -59,7 +59,7 @@ const GeneticProfileScreen = props => {
 
   return (
     <View style={styles.container}>
-         <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
+      <SafeAreaView style={{ marginBottom: Platform.OS === 'ios' ? mvs(-34) : 0 }} />
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
       {/* Header */}
@@ -114,7 +114,7 @@ const GeneticProfileScreen = props => {
         {/* Search Bar */}
         <View style={styles.searchContainer}>
           {/* <Feather name="search" size={mvs(20)} color={colors.textColorSecondary} style={styles.searchIcon} /> */}
-          <IMG.SearchNew style={styles.searchIcon} width={mvs(18)} height={mvs(18)}/>
+          <IMG.SearchNew style={styles.searchIcon} width={mvs(18)} height={mvs(18)} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search for a condition or gene (e.g. CFTR)"
@@ -141,7 +141,7 @@ const GeneticProfileScreen = props => {
                   label={condition}
                   fontSize={mvs(12)}
                   color={colors.white}
-                  style={{fontWeight: '400'}}
+                  style={{ fontWeight: '400' }}
                 />
                 <TouchableOpacity
                   onPress={() => handleRemoveCondition(index)}
@@ -164,7 +164,14 @@ const GeneticProfileScreen = props => {
           />
           <View style={styles.dividerLine} />
         </View>
+ <View style={styles.statusRow}>
+          <Regular label="STATUS:" fontSize={mvs(16)} color={colors.primary} />
+          <Regular label="Physician Requisition Required" fontSize={mvs(16)} style={styles.statusRequisition} />
+        </View>
 
+        <TouchableOpacity style={styles.requestButton} activeOpacity={0.8}>
+          <Medium label="Request Physician Requisition" fontSize={mvs(16)} style={styles.requestButtonText} />
+        </TouchableOpacity>
         {/* Upload Full Genetic Report Button */}
         <TouchableOpacity
           style={styles.uploadButton}
@@ -191,6 +198,8 @@ const GeneticProfileScreen = props => {
           <View style={styles.dividerLine} />
         </View>
 
+        {/* Physician Requisition Section */}
+       
         {/* GENETIC SCREENING PARTNER Section */}
         <Bold
           label="GENETIC SCREENING PARTNER"
@@ -201,7 +210,8 @@ const GeneticProfileScreen = props => {
 
         {/* Igenomix Logo */}
         <View style={styles.logoContainer}>
-          <IMG.geneticImage width={mvs(200)} height={mvs(60)} />
+          {/* <IMG.geneticImage width={mvs(200)} height={mvs(60)} /> */}
+          <Image source={IMG.geneticImage} style={{ width: mvs(200), height: mvs(60) }} resizeMode="contain" />
           {/* <Regular
             label="PART OF VITROLIFE GROUP"
             fontSize={mvs(10)}

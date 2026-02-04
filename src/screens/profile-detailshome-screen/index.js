@@ -1730,7 +1730,7 @@ const ProfileDetailsHomeScreen = ({ route }) => {
                     <Regular
                       label="This donor is a carrier of one or more genetic conditions."
                       fontSize={mvs(14)}
-                      color={'#2B3467'}
+                      color={'#3A3E90'}
                       numberOfLines={10}
                       style={{ marginBottom: mvs(10) }}
                     />
@@ -1749,7 +1749,7 @@ const ProfileDetailsHomeScreen = ({ route }) => {
                     <Medium
                       label="Expanded Carrier Screen (283 Genes)"
                       fontSize={mvs(14)}
-                      color={'#2B3467'}
+                      color={'#3A3E90'}
                       style={{
                         alignSelf: 'center',
                         marginBottom: mvs(16),
@@ -1759,32 +1759,32 @@ const ProfileDetailsHomeScreen = ({ route }) => {
                     <Medium
                       label="POSITIVE CARRIER STATUS"
                       fontSize={mvs(14)}
-                      color={'#2B3467'}
+                      color={'#3A3E90'}
                       style={{ marginBottom: mvs(8) }}
                     />
                     <Regular
                       label="Limb-Girdle Muscular Dystrophy, Type 2A (CAPN3): Carrier"
                       fontSize={mvs(14)}
-                      color={'#2B3467'}
+                      color={'#3A3E90'}
                       numberOfLines={10}
                       style={{ marginBottom: mvs(4) }}
                     />
                     <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(2) }}>
-                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular label="• " fontSize={mvs(14)} color={'#3A3E90'} />
                       <Regular
                         label="One pathogenic variant, c.1465C>T, p.R489W, was detected."
                         fontSize={mvs(14)}
-                        color={'#2B3467'}
+                        color={'#3A3E90'}
                         numberOfLines={10}
                         style={{ flex: 1 }}
                       />
                     </Row>
                     <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(16) }}>
-                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular label="• " fontSize={mvs(14)} color={'#3A3E90'} />
                       <Regular
                         label="Carriers are not expected to show symptoms."
                         fontSize={mvs(14)}
-                        color={'#2B3467'}
+                        color={'#3A3E90'}
                         numberOfLines={10}
                         style={{ flex: 1 }}
                       />
@@ -1793,45 +1793,45 @@ const ProfileDetailsHomeScreen = ({ route }) => {
                     <Medium
                       label="NEGATIVE RESULTS"
                       fontSize={mvs(14)}
-                      color={'#2B3467'}
+                      color={'#3A3E90'}
                       style={{ marginBottom: mvs(8) }}
                     />
                     <Row style={{ alignItems: 'flex-start',  paddingLeft: mvs(8),marginBottom: mvs(4) }}>
-                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular label="• " fontSize={mvs(14)} color={'#3A3E90'} />
                       <Regular
                         label="Cystic Fibrosis (CFTR): Reduced Risk"
                         fontSize={mvs(14)}
-                        color={'#2B3467'}
+                        color={'#3A3E90'}
                         numberOfLines={10}
                         style={{ flex: 1 }}
                       />
                     </Row>
                     <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(4) }}>
-                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular label="• " fontSize={mvs(14)} color={'#3A3E90'} />
                       <Regular
                         label="Spinal Muscular Atrophy (SMN1): Reduced Risk (2 copies of SMN1 detected)"
                         fontSize={mvs(14)}
-                        color={'#2B3467'}
+                        color={'#3A3E90'}
                         numberOfLines={10}
                         style={{ flex: 1 }}
                       />
                     </Row>
                     <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(4) }}>
-                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular label="• " fontSize={mvs(14)} color={'#3A3E90'} />
                       <Regular
                         label="Tay-Sachs Disease (HEXA): Reduced Risk (Normal enzyme analysis)"
                         fontSize={mvs(14)}
-                        color={'#2B3467'}
+                        color={'#3A3E90'}
                         numberOfLines={10}
                         style={{ flex: 1 }}
                       />
                     </Row>
                     <Row style={{ alignItems: 'flex-start', paddingLeft: mvs(8), marginBottom: mvs(16) }}>
-                      <Regular label="• " fontSize={mvs(14)} color={'#2B3467'} />
+                      <Regular label="• " fontSize={mvs(14)} color={'#3A3E90'} />
                       <Regular
                         label="Sickle Cell Disease (HBB): Reduced Risk"
                         fontSize={mvs(14)}
-                        color={'#2B3467'}
+                        color={'#3A3E90'}
                         numberOfLines={10}
                         style={{ flex: 1 }}
                       />

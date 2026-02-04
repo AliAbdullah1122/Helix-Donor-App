@@ -40,8 +40,9 @@ const GeneticScreeingScreen = props => {
   // const navigation = useNavigation();
   const handlePlaceOffer = () => {
 
-    dispatch(setSubscribed(true));
-    navigation.goBack()
+    // dispatch(setSubscribed(true));
+    // navigation.goBack()
+    navigate("GeneticCheckoutScreen")
 
 
     // navigate("ResourcesScreen")
@@ -106,7 +107,8 @@ const GeneticScreeingScreen = props => {
 
         {/* ORDER SUMMARY Section */}
         <View style={styles.logoContainer}>
-          <IMG.geneticImage width={mvs(200)} height={mvs(60)} />
+          {/* <IMG.geneticImage width={mvs(200)} height={mvs(60)} /> */}
+            <Image source={IMG.geneticImage} style={{ width: mvs(200), height: mvs(60) }} resizeMode="contain" />
           {/* <Regular
             label="PART OF VITROLIFE GROUP"
             fontSize={mvs(10)}

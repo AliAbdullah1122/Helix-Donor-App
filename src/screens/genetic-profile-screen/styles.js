@@ -1,31 +1,31 @@
-import {Platform, StyleSheet} from 'react-native';
-import {colors} from 'config/colors';
-import {mvs, width} from 'config/metrices';
+import { Platform, StyleSheet } from 'react-native';
+import { colors } from 'config/colors';
+import { mvs, width } from 'config/metrices';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.helixBackground,    
-    paddingHorizontal:mvs(12)
+    backgroundColor: colors.helixBackground,
+    paddingHorizontal: mvs(12)
 
   },
-  imglogo:{
+  imglogo: {
     width: '80%',
     height: mvs(40),
     alignSelf: 'center',
     // marginTop: mvs(25),
   },
-  waveimg:{
+  waveimg: {
     width: mvs(30),
     height: mvs(30),
   },
-  titleview:{
+  titleview: {
     width: '70%',
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
     marginTop: mvs(20),
     gap: mvs(10),
     paddingHorizontal: mvs(20),
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   contentContainerStyle: {
     // marginTop: mvs(10),
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     borderRadius: mvs(6),
   },
-  input:{
+  input: {
     borderRadius: mvs(40),
     borderColor: colors.borderColor,
     height: mvs(50),
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     height: mvs(52),
     // marginTop: mvs(12),
   },
-  txt: {marginBottom: mvs(10), fontSize: mvs(20)},
+  txt: { marginBottom: mvs(10), fontSize: mvs(20) },
   button: {
     width: '100%',
     paddingHorizontal: mvs(20),
@@ -67,15 +67,15 @@ const styles = StyleSheet.create({
     borderRadius: mvs(10),
     alignItems: 'center',
     justifyContent: 'center',
-shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 2,
-},
-shadowOpacity: 0.23,
-shadowRadius: 2.62,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
 
-elevation: 4,
+    elevation: 4,
   },
   imagebackground: {
     height: mvs(400),
@@ -117,7 +117,7 @@ elevation: 4,
     alignItems: 'center',
     gap: mvs(10),
   },
-  loginview:{
+  loginview: {
     justifyContent: 'center',
     alignItems: 'center',
     gap: mvs(10),
@@ -246,7 +246,7 @@ elevation: 4,
     maxHeight: mvs(200),
     zIndex: 1001,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 5,
@@ -270,7 +270,7 @@ elevation: 4,
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: '#E6E8FF',
-    backgroundColor:colors.primary,
+    backgroundColor: colors.primary,
     borderRadius: mvs(20),
     paddingHorizontal: mvs(12),
     paddingVertical: mvs(6),
@@ -335,7 +335,7 @@ elevation: 4,
   },
   toggleRow: {
     flexDirection: 'row',
-    justifyContent:"flex-start",
+    justifyContent: "flex-start",
     alignItems: 'center',
     marginBottom: mvs(20),
   },
@@ -350,7 +350,7 @@ elevation: 4,
     height: mvs(50),
     backgroundColor: colors.primary || '#3A3E90',
     width: '60%',
-    alignSelf:"center"
+    alignSelf: "center"
   },
   attributeSection: {
     marginBottom: mvs(20),
@@ -448,7 +448,7 @@ elevation: 4,
   conditionTagSelected: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     backgroundColor: colors.primary || '#3A3E90',
     borderRadius: mvs(20),
     paddingLeft: mvs(12),
@@ -510,6 +510,28 @@ elevation: 4,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: mvs(20),
+  },
+  statusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: mvs(20),
+  },
+  statusRequisition: {
+    color: '#FF383C',
+    marginLeft: Platform.OS==='ios'? mvs(4):mvs(2),
+  },
+  requestButton: {
+    borderRadius: mvs(25),
+    borderWidth: mvs(1.8),
+    borderColor: colors.primary || '#3A3E90',
+    height: mvs(50),
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: mvs(30),
+  },
+  requestButtonText: {
+    color: colors.primary || '#3A3E90',
   },
 });
 export default styles;

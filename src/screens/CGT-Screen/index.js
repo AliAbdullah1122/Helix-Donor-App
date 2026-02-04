@@ -35,14 +35,14 @@ const CGTScreen = props => {
   const isOfferValid = numericOffer >= minOffer;
   const isButtonEnabled = offerValue.trim() !== '' && isOfferValid;
 
-  const handlePlaceOffer = () => {
+  // const handlePlaceOffer = () => {
 
-              dispatch(setSubscribed(true));
-              navigation.goBack()
+  //             dispatch(setSubscribed(true));
+  //             navigation.goBack()
 
    
-    // navigate("ResourcesScreen")
-  };
+  //   // navigate("ResourcesScreen")
+  // };
 
   const handleBuyNow = () => {
     // Add your buy now logic here
@@ -87,7 +87,8 @@ const CGTScreen = props => {
       <View style={{...styles.actionButtonsContainer,width:"90%",alignSelf:'center'}}>
         <TouchableOpacity 
           style={styles.payButton}
-          onPress={handlePlaceOffer}
+          onPress={()=>navigate("GeneticScreeingScreen")}
+          // onPress={handlePlaceOffer}
           >
           <Medium
             label="Proceed"

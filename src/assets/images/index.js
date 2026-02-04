@@ -421,3 +421,5 @@ export { default as WhiteheartPng } from './WhiteheartPng.png';
 export { default as ShowmAPlIST } from './ShowmAPlIST.svg';
 export { default as SearchBaby } from './SearchBaby.svg';
 export { default as SeacxrhBbayPng } from './SeacxrhBbayPng.png';
+export { default as geneticimagesvg } from './geneticimagesvg.svg';
+export { default as EditIconBlueSvg } from './EditIconBlueSvg.svg';
